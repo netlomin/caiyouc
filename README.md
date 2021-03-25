@@ -1,37 +1,102 @@
-# vant-vue移动端脚手架
+<!--
+ * @Author: your name
+ * @Date: 2021-03-25 18:34:32
+ * @LastEditTime: 2021-03-25 21:05:57
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vant-vue-mobile-scaffold\README.md
+-->
+#### 开发说明
 
-#### 介绍
-基于vant的vue移动端脚手架
+---
 
-#### 软件架构
-软件架构说明
+##### 项目目录
+
+```
+├── public  ------------------------------ 静态文件夹
+|  ├── images  --------------------------- 静态图片
+|  ├── lib  ------------------------------ 工具库
+|  ├── static  --------------------------- 第三方页面
+|  ├── extraConfig.json  ----------------- 部署配置项
+|  └── index.html  ----------------------- index.html
+├── node_modules  ------------------------ 依赖
+├── src  --------------------------------- 开发目录
+|  ├── assets  --------------------------- 资源目录
+|  |  ├── config  ------------------------ 项目插件配置
+|  |  ├── images  ------------------------ 图片(无需动态替换)
+|  |  └── css  --------------------------- 共用样式
+|  ├── components  ----------------------- 组件库
+|  |  ├── layouts  ----------------------- 布局
+|  |  |  ├── index.vue  ------------------ 整体布局
+|  |  └── xxx.vue  ----------------------- 其他组件
+|  ├── store  ---------------------------- vuex配置
+|  ├── utils  ---------------------------- 公共方法
+|  ├── plugins  -------------------------- vant插件按需全局引入
+|  ├── filers  --------------------------- filers
+|  ├── router  --------------------------- vue-router
+|  |  └── modules
+|  |  └── index.js
+|  ├── services  ------------------------- 接口
+|  |  ├── Callback.js  ------------------- 统一接口回调
+|  |  ├── xx.js  ------------------------- 各种api
+|  ├── views  ---------------------------- 业务视图(按模块命名)
+|  ├── App.vue
+|  └── main.js
+├── .env  -------------------------------- 本地环境变量配置
+├── .eslintrc.js  ------------------------ eslint配置
+├── .eslintignore  ----------------------- eslint忽略文件
+├── .gitgnore  --------------------------- git忽略文件
+├── .postcssrc.js  ----------------------- rem适配配置
+├── .prettierrc  ------------------------- pettier规则
+├── .babel.config.js  -------------------- babel配置
+├── yarn.lock  --------------------------- yarn依赖版本锁定文件
+├── package-lock.json  ------------------- npm依赖版本锁定文件
+├── package.json
+├── vue.config.js  ----------------------- webpack配置
+└── README.md
+```
+
+##### 环境变量配置说明
 
 
-#### 安装教程
+```
+VUE_APP_DEBUG=true // 调试模式配置，生产环境设为false
+VUE_APP_API_SERVER= // 接口地址
+...
+```
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+_注意：环境变量配置的增删改由前端团队评审确定之后方可使用，切勿私自添加，通过之后同步至运维团队，避免部署因环境变量信息不对称发生问题_
 
-#### 使用说明
+##### extraconfig 部署配置
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+```
+// json format
+{
+  "VUE_APP_SERVER":""
+}
+```
 
-#### 参与贡献
+_注意：检查运维部署至现场的配置文件格式，避免因格式问题造成低级错误_
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+#### 开始开发
+
+##### git 拉取
 
 
-#### 特技
+1. 开发分支： dev
+2. 自己的分支： 例如 yourname/dev
+3. 合并流程： 获取主开发分支 dev、将 主开发分支 dev 合并到自己的 dev
+4. 提交流程：提交自己的 dev、到 git 网页提交合并申请
+5. 注意：每次改自己代码之前，先将 主分支 dev 拉取合并，不然冲突太多
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+##### 本地项目启动
+
+```
+1. yarn install
+2. yarn serve:dev
+```
+
+##### vuex
+
+默认使用 vuex-persistedstate 进行持久化存储
+
