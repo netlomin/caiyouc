@@ -16,25 +16,33 @@ const externals = {
   'vue-router': 'VueRouter',
   dayjs: 'dayjs'
 }
-// CDN外链，会插入到index.html中
-// const cdn = {
-//   // 开发环境
-//   dev: {
-//     css: [],
-//     js: []
-//   },
-//   // 生产环境
-//   build: {
-//     css: ['https://cdn.jsdelivr.net/npm/vant@2.4.7/lib/index.css'],
-//     js: [
-//       'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js',
-//       'https://cdn.jsdelivr.net/npm/vue-router@3.1.5/dist/vue-router.min.js',
-//       'https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js',
-//       'https://cdn.jsdelivr.net/npm/vuex@3.1.2/dist/vuex.min.js',
-//       'https://cdn.jsdelivr.net/npm/vant@2.4.7/lib/index.min.js'
-//     ]
-//   }
-// }
+// CDN外链， 会插入到index.html中
+const cdn = {
+  // 开发环境
+  dev: {
+    css: [],
+    js: [
+      'lib/vue.runtime.' + process.env.NODE_ENV + '.js',
+      'lib/vuex.min.js',
+      'lib/vue-router.min.js',
+      'lib/axios.min.js',
+      'lib/lodash.min.js',
+      'lib/localforage.min.js',
+      'lib/dayjs.min.js'
+    ]
+  },
+  // 生产环境
+  build: {
+    css: ['https://cdn.jsdelivr.net/npm/vant@2.4.7/lib/index.css'],
+    js: [
+      'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js',
+      'https://cdn.jsdelivr.net/npm/vue-router@3.1.5/dist/vue-router.min.js',
+      'https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js',
+      'https://cdn.jsdelivr.net/npm/vuex@3.1.2/dist/vuex.min.js',
+      'https://cdn.jsdelivr.net/npm/vant@2.4.7/lib/index.min.js'
+    ]
+  }
+}
 
 module.exports = {
   publicPath: './', // 署应用包时的基本 URL。 vue-router hash 模式使用
@@ -50,18 +58,18 @@ module.exports = {
       //  当出现编译器错误或警告时，在浏览器中显示全屏覆盖层
       warnings: false,
       errors: true
+    },
+    proxy: {
+      //配置跨域
+      '/api': {
+        target: "https://test.xxx.com",
+        ws: true,
+        changOrigin: true,
+        pathRewrite: {
+          '^/api': '/'
+        }
+      }
     }
-    // proxy: {
-    //   //配置跨域
-    //   '/api': {
-    //       target: "https://test.xxx.com",
-    //       // ws:true,
-    //       changOrigin:true,
-    //       pathRewrite:{
-    //           '^/api':'/'
-    //       }
-    //   }
-    // }
   },
   css: {
     extract: IS_PROD, // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中 (而不是动态注入到 JavaScript 中的 inline 代码)。
@@ -75,11 +83,7 @@ module.exports = {
     }
   },
   configureWebpack: config => {
-    // 为生产环境修改配置...
-    // if (IS_PROD) {
-    //   // externals
     config.externals = externals
-    // }
   },
 
   chainWebpack: config => {
@@ -97,14 +101,14 @@ module.exports = {
     /**
      * 添加CDN参数到htmlWebpackPlugin配置中
      */
-    // config.plugin('html').tap(args => {
-    //   if (IS_PROD) {
-    //     args[0].cdn = cdn.build
-    //   } else {
-    //     args[0].cdn = cdn.dev
-    //   }
-    //   return args
-    //  })
+    config.plugin('html').tap(args => {
+      if (IS_PROD) {
+        args[0].cdn = cdn.build
+      } else {
+        args[0].cdn = cdn.dev
+      }
+      return args
+    })
 
     /**
      * 设置保留空格
