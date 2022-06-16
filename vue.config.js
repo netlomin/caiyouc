@@ -70,7 +70,7 @@ module.exports = {
       scss: {
         // 向全局sass样式传入共享的全局变量, $src可以配置图片cdn前缀
         // 详情: https://cli.vuejs.org/guide/css.html#passing-options-to-pre-processor-loaders
-        prependData: '@import "assets/css/mixin.scss";@import "assets/css/variables.scss";'
+        additionalData: '@import "assets/css/mixin.scss";@import "assets/css/variables.scss";'
       }
     }
   },
@@ -122,11 +122,9 @@ module.exports = {
      * 打包分析
      */
     if (IS_PROD) {
-      config.plugin('webpack-report').use(BundleAnalyzerPlugin, [
-        {
-          analyzerMode: 'static'
-        }
-      ])
+      config.plugin('webpack-report').use(BundleAnalyzerPlugin, [{
+        analyzerMode: 'static'
+      }])
     }
     config
       // https://webpack.js.org/configuration/devtool/#development
@@ -136,12 +134,10 @@ module.exports = {
       config
         .plugin('ScriptExtHtmlWebpackPlugin')
         .after('html')
-        .use('script-ext-html-webpack-plugin', [
-          {
-            // 将 runtime 作为内联引入不单独存在
-            inline: /runtime\..*\.js$/
-          }
-        ])
+        .use('script-ext-html-webpack-plugin', [{
+          // 将 runtime 作为内联引入不单独存在
+          inline: /runtime\..*\.js$/
+        }])
         .end()
       config.optimization.splitChunks({
         chunks: 'all',

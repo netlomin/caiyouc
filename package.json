@@ -1,8 +1,7 @@
 {
-  "name": "vue-h5-template",
-  "version": "2.1.0",
-  "description": "A vue h5 template with Vant UI",
-  "author": "Sunnie <sunniejs@163.com>",
+  "name": "caiyou-m",
+  "version": "0.0.1",
+  "description": "彩友圈-实体店合买工具版",
   "private": true,
   "scripts": {
     "serve:dev": "vue-cli-service serve --open",
@@ -32,9 +31,9 @@
     "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "node-sass": "^4.14.1",
     "postcss-pxtorem": "^5.1.1",
-    "sass-loader": "^8.0.2",
+    "node-sass": "^6.0.1",
+    "sass-loader": "^10.0.2",
     "script-ext-html-webpack-plugin": "^2.1.4",
     "vue-template-compiler": "^2.6.11",
     "webpack-bundle-analyzer": "^3.8.0"

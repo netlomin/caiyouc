@@ -1,14 +1,10 @@
-<!--
- * @Author: your name
- * @Date: 2021-03-25 18:34:32
- * @LastEditTime: 2021-03-25 21:05:57
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vant-vue-mobile-scaffold\README.md
--->
+
 #### 开发说明
 
----
+--- 
+##### 环境安装
+- nodejs:  v16.15.0
+- npm: v8.5.5
 
 ##### 项目目录
 
@@ -92,11 +88,10 @@ _注意：检查运维部署至现场的配置文件格式，避免因格式问�
 ##### 本地项目启动
 
 ```
-1. yarn install
-2. yarn serve:dev
+1. npm install
+2. npm serve:dev
 ```
 
 ##### vuex
 
 默认使用 vuex-persistedstate 进行持久化存储
-
