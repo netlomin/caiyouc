@@ -1,4 +1,5 @@
 'use strict'
+const pkg = require('./package.json')
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
@@ -22,7 +23,7 @@ const cdn = {
   dev: {
     css: [],
     js: [
-      'lib/vue.runtime.' + process.env.NODE_ENV + '.js,
+      'lib/vue.runtime.' + process.env.NODE_ENV + '.js',
       'lib/vuex.min.js',
       'lib/vue-router.min.js',
       'lib/axios.min.js',
@@ -58,7 +59,7 @@ module.exports = {
       //  当出现编译器错误或警告时，在浏览器中显示全屏覆盖层
       warnings: false,
       errors: true
-    }
+    },
     proxy: {
       //配置跨域
       '/api': {
@@ -83,7 +84,7 @@ module.exports = {
     }
   },
   configureWebpack: config => {
-    // 为生产环境修改配置...
+    config.name = pkg.description
     config.externals = externals
   },
 
