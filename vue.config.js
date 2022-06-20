@@ -1,4 +1,5 @@
 'use strict'
+const pkg = require('./package.json')
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
@@ -16,7 +17,7 @@ const externals = {
   'vue-router': 'VueRouter',
   dayjs: 'dayjs'
 }
-// CDN外链， 会插入到index.html中
+// CDN外链，会插入到index.html中
 const cdn = {
   // 开发环境
   dev: {
@@ -83,6 +84,7 @@ module.exports = {
     }
   },
   configureWebpack: config => {
+    config.name = pkg.description
     config.externals = externals
   },
 

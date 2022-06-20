@@ -12,7 +12,7 @@ import dayjs from 'dayjs'
 import eruda from 'eruda'
 import fnMixin from './utils/fnMixins'
 // 全局引入按需引入UI库 vant
-import '@/plugins/vant'
+import '@/plugin/vant'
 // 引入全局样式
 import '@/assets/css/index.scss'
 // 移动端适配
