@@ -7,10 +7,7 @@
       <router-view v-else></router-view>
     </div>
     <div class="layout-footer">
-      <tab-bar
-        :data="tabbars"
-        @change="handleChange"
-      />
+      <tab-bar :data="tabbars" @change="handleChange" />
     </div>
   </div>
 </template>
