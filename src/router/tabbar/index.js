@@ -5,7 +5,7 @@ export default [{
   component: Layout,
   redirect: '/home',
   meta: {
-    title: '--',
+    title: '-',
     keepAlive: false
   },
   children: [{
@@ -14,6 +14,14 @@ export default [{
     component: () => import('@/views/home/'),
     meta: {
       title: '首页',
+      keepAlive: false
+    }
+  }, {
+    path: '/user',
+    name: 'User',
+    component: () => import('@/views/user/'),
+    meta: {
+      title: '用户',
       keepAlive: false
     }
   }]

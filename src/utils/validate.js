@@ -1,8 +1,4 @@
 /**
- * Created by Sunnie on 19/06/04.
- */
-
-/**
  * @param {string} path
  * @returns {Boolean}
  */

@@ -7,39 +7,37 @@
       <router-view v-else></router-view>
     </div>
     <div class="layout-footer">
-      <tab-bar :data="tabbars" @change="handleChange" />
+      <van-tabbar fixed route v-model="active" @change="changeTab">
+        <van-tabbar-item v-for="(tab, index) in tabs" :to="tab.to" :icon="tab.icon" :key="index">
+          {{ tab.title }}
+        </van-tabbar-item>
+      </van-tabbar>
     </div>
   </div>
 </template>
 
 <script>
-  import TabBar from '@/components/TabBar'
   export default {
     name: 'AppLayout',
-    components: {
-      TabBar
-    },
+    components: {},
     data() {
       return {
-        tabbars: [{
+        active: 0,
+        tabs: [{
             title: '首页',
-            to: {
-              name: 'Home'
-            },
+            to: { name: 'Home' },
             icon: 'home-o'
           },
           {
-            title: '关于我',
-            to: {
-              name: 'About'
-            },
+            title: '用户',
+            to: { name: 'User' },
             icon: 'user-o'
           }
         ]
       }
     },
     methods: {
-      handleChange(v) {
+      changeTab(v) {
         console.log('tab value:', v)
       }
     }

@@ -11,6 +11,7 @@ import _ from 'lodash'
 import dayjs from 'dayjs'
 import eruda from 'eruda'
 import fnMixin from './utils/fnMixins'
+
 // 全局引入按需引入UI库 vant
 import '@/plugin/vant'
 // 引入全局样式

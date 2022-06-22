@@ -330,9 +330,9 @@ const fnMixin = {
     return (
       head +
       s
-        .replace(/(零.)*零元/, '元')
-        .replace(/(零.)+/g, '零')
-        .replace(/^整$/, '零元整')
+      .replace(/(零.)*零元/, '元')
+      .replace(/(零.)+/g, '零')
+      .replace(/^整$/, '零元整')
     )
   },
 

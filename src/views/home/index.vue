@@ -1,10 +1,17 @@
 <!-- home -->
 <template>
   <div class="index-container">
+    <div class="warpper lg">
+      123456789
+    </div>
     <div class="warpper">
-      <h2 class="demo-home__desc">
-        home
-      </h2>
+      123456789
+    </div>
+    <div class="warpper sm">
+      123456789
+    </div>
+    <div class="warpper xs">
+      123456789
     </div>
   </div>
 </template>
