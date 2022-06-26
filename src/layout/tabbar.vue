@@ -24,7 +24,7 @@
       return {
         active: 0,
         tabs: [{
-            title: '首页',
+            title: '大厅',
             to: { name: 'Home' },
             icon: 'home-o'
           },

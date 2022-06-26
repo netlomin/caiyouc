@@ -1,15 +1,14 @@
 @import './variables.scss';
 @import './mixin.scss';
 
-html, body, #app {
+html, body,#app  {
   color: $color;
-  background: $bg-color;
   font-family: Avenir, Kefa, monospace, Courier, Courier New, Menlo, Mono;
   font-size: $font-md;
+  background: $bg-color;
 }
 
 .app-container {
-  padding-bottom: 50px;
 }
 
 .lg{
