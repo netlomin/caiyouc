@@ -3,7 +3,10 @@ $color: #888;
 $bg-color: #f8f8f8;
 $theme-color: #FF8888;
 
-$font-lg: .5rem;
-$font-md: .4rem;
-$font-sm: .36rem;
-$font-xs: .28rem;
+$sizes: lg md sm xs;
+$font-sizes: .5rem .4rem .3rem .2rem;
+
+$font-lg: nth($font-sizes, 1);
+$font-md: nth($font-sizes, 2);
+$font-sm: nth($font-sizes, 3);
+$font-xs: nth($font-sizes, 4);

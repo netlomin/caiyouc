@@ -3,12 +3,12 @@ const IS_PROD = ['production', 'prod'].includes(process.env.VUE_APP_ENV)
 const plugins = [
   [
     'import',
-    {
-      libraryName: 'vant',
-      libraryDirectory: 'es',
-      style: true
-    },
+    { libraryName: 'vant', libraryDirectory: 'es', style: true },
     'vant'
+  ],
+  [
+    "import",
+    { libraryName: "ant-design-vue", libraryDirectory: "es", style: true }
   ]
 ]
 // 去除 console.log

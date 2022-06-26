@@ -8,18 +8,17 @@ html, body,#app  {
   background: $bg-color;
 }
 
-.app-container {
+@each $size in $sizes {
+  $i: index($sizes, $size);
+  .#{$size} {
+    font-size: nth($font-sizes, $i) !important;
+  }
 }
 
-.lg{
-  font-size: $font-lg !important;
-}
-.md{
-  font-size: $font-md !important;
-}
-.sm{
-  font-size: $font-sm !important;
-}
-.xs{
-  font-size: $font-xs !important;
+@for $i from 1 through 20{
+  .m-#{$i} {margin: 1px*$i;}
+  .m-t-#{$i} {margin: 1px*$i 0 0 0;}
+  .m-r-#{$i} {margin: 0 1px*$i 0 0;}
+  .m-b-#{$i} {margin: 0 0 1px*$i 0;}
+  .m-l-#{$i} {margin: 0 0 0 1px*$i;}
 }

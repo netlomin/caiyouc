@@ -2,21 +2,27 @@
 <template>
   <van-pull-refresh v-model="refreshing" @refresh="refresh">
     <van-list v-if="list&&list.length" v-model="loading" :finished="finished" @load="load" :style="css.list">
-      <!-- <van-cell v-for="item in list" :key="item" :title="item">
-      </van-cell> -->
-      <van-cell-group inset>
+      <van-cell-group v-for="item in list" :key="item" inset>
         <van-cell>
-          <div class="cell-title" slot="title">
-            <van-icon name="gold-coin-o"></van-icon>
+          <div class="cell-head" slot="title">
+            <van-icon name="gold-coin" :color="conf.themeColor" />
             <strong class="m-l-10">双色球</strong>
             <span style="float: right;">
               截止剩余：
               <van-count-down :time="time" class="inline" />
             </span>
           </div>
-          <div class="cell-body" slot="label">
-            <span class="custom-title">单元格111111111111111111111111111111111111111</span>
-          </div>
+          <template #label>
+            <div class="cell-body">
+              <a-progress width="1.6rem" :percent="60" :success-percent="30" type="circle" />
+              <span class="inline m-l-10">
+                <strong class="md">天上水</strong>
+                <p class="sm">今晚必中</p>
+              </span>
+            </div>
+            <div class="cell-foot">
+            </div>
+          </template>
         </van-cell>
       </van-cell-group>
       <van-divider>没有更多订单了</van-divider>
@@ -35,6 +41,7 @@
           list: { margin: '20px 0' }
         },
         time: 30.65 * 60 * 60 * 1000,
+        rate: 0,
         list: [],
         loading: false,
         refreshing: false,
@@ -75,16 +82,18 @@
     display: inline-block !important;
   }
 
-  .cell-title {
+  .cell-head,
+  .cell-body,
+  .cell-foot {
     padding: 6px 0;
+  }
+
+  .cell-head,
+  .cell-body {
     border-bottom: 1px solid #EEE;
   }
 
-  .cell-body {
-    padding: 6px 0;
-  }
-
-  .m-l-10 {
-    margin-left: 10px;
+  .cell-body span {
+    line-height: 100%;
   }
 </style>

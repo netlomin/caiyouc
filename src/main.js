@@ -4,6 +4,7 @@ import 'regenerator-runtime/runtime'
 
 import Vue from 'vue'
 import App from './App.vue'
+import conf from '@/config'
 import router from './router'
 import store from './store'
 import axios from 'axios'
@@ -14,6 +15,8 @@ import fnMixin from './utils/fnMixins'
 
 // 全局引入按需引入UI库 vant
 import '@/plugin/vant'
+// 全局引入按需引入UI库 ant-design-vue
+import '@/plugin/ant-design-vue'
 // 引入全局样式
 import '@/assets/css/index.scss'
 // 移动端适配
@@ -45,6 +48,7 @@ const init = () => {
   apiInstance.defaults.baseURL = currentEnv.VUE_APP_API_SERVER
   eascInstance.defaults.baseURL = currentEnv.VUE_APP_EASC_SERVER
   _.assign(window, {
+    conf,
     _,
     axios,
     apiInstance,
@@ -54,6 +58,7 @@ const init = () => {
     store
   })
   _.assign(Vue.prototype, {
+    conf,
     _,
     dayjs,
     currentEnv

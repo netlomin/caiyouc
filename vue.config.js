@@ -80,6 +80,13 @@ module.exports = {
         // 向全局sass样式传入共享的全局变量, $src可以配置图片cdn前缀
         // 详情: https://cli.vuejs.org/guide/css.html#passing-options-to-pre-processor-loaders
         additionalData: '@import "assets/css/mixin.scss";@import "assets/css/variables.scss";'
+      },
+      less: {
+        lessOptions: {
+          // If you are using less-loader@5 please spread the lessOptions to options directly
+          modifyVars: { 'primary-color': '#1DA57A', 'link-color': '#1DA57A', 'border-radius-base': '2px' },
+          javascriptEnabled: true
+        }
       }
     }
   },
