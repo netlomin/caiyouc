@@ -15,9 +15,9 @@
           <template #label>
             <div class="cell-body">
               <a-progress width="1.6rem" :percent="60" :success-percent="30" type="circle" />
-              <span class="inline m-l-10">
-                <strong class="md">天上水</strong>
-                <p class="sm">今晚必中</p>
+              <span class="m-l-10">
+                <h6 class="md">天上水</h6>
+                <span class="sm inline w-6 van-ellipsis">今晚必中今晚必中今晚必中今晚必中今晚必中今晚必中今晚必中今晚必中今晚必中今晚必中</span>
               </span>
             </div>
             <div class="cell-foot">
@@ -38,7 +38,9 @@
     data() {
       return {
         css: {
-          list: { margin: '20px 0' }
+          list: {
+            margin: '20px 0'
+          }
         },
         time: 30.65 * 60 * 60 * 1000,
         rate: 0,
@@ -93,7 +95,13 @@
     border-bottom: 1px solid #EEE;
   }
 
-  .cell-body span {
-    line-height: 100%;
+  .cell-body {
+    /* height: 100vh; 表示全屏高度 */
+    width: 100%;
+    display: flex;
+    /* 垂直居中 */
+    align-items: center;
+    /* 横向居中 */
+    /* justify-content: center;*/
   }
 </style>

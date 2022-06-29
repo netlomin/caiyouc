@@ -22,3 +22,7 @@ html, body,#app  {
   .m-b-#{$i} {margin: 0 0 1px*$i 0;}
   .m-l-#{$i} {margin: 0 0 0 1px*$i;}
 }
+
+@for $i from 1 through 10{
+  .w-#{$i} {width: 1rem*$i;}
+}
