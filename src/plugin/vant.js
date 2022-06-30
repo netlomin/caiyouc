@@ -4,6 +4,7 @@ import {
   Button,
   Cell,
   CellGroup,
+  Col,
   CountDown,
   Divider,
   Empty,
@@ -11,6 +12,7 @@ import {
   List,
   NavBar,
   PullRefresh,
+  Row,
   Tabbar,
   TabbarItem
 } from 'vant'
@@ -18,6 +20,7 @@ import {
 Vue.use(Button)
 Vue.use(Cell).use(CellGroup)
 Vue.use(CountDown)
+Vue.use(Col).use(Row)
 Vue.use(Divider)
 Vue.use(Empty)
 Vue.use(Icon)

@@ -21,6 +21,24 @@
               </span>
             </div>
             <div class="cell-foot">
+              <van-row>
+                <van-col span="6" class="center">
+                  <h6 class="sm red">16000</h6>
+                  <span class="sm grey">总金额</span>
+                </van-col>
+                <van-col span="6" class="center">
+                  <h6 class="sm red">1.6</h6>
+                  <span class="sm grey">每份金额</span>
+                </van-col>
+                <van-col span="6" class="center">
+                  <h6 class="sm red">10000</h6>
+                  <span class="sm grey">总份数</span>
+                </van-col>
+                <van-col span="6" class="center">
+                  <h6 class="sm red">4000</h6>
+                  <span class="sm grey">剩余份数</span>
+                </van-col>
+              </van-row>
             </div>
           </template>
         </van-cell>

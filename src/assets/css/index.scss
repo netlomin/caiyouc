@@ -26,3 +26,19 @@ html, body,#app  {
 @for $i from 1 through 10{
   .w-#{$i} {width: 1rem*$i;}
 }
+
+.red {
+  color: nth($colors, 1) !important;
+}
+
+.grey {
+  color: nth($colors, 10) !important;
+}
+
+.light-grey {
+  color: nth($colors, 11) !important;
+}
+
+.center{
+  text-align: center !important;
+}
