@@ -1,3 +1,27 @@
 {
-  "list": []
+  "list": [{
+    "id": 1,
+    "cp": "SSQ",
+    "cpName": "双色球",
+    "stopTime": "2022-07-03 20:00:00",
+    "title": "第一组",
+    "subtitle": "今晚打老虎",
+    "totalAmt": 16000,
+    "amt": 1.6,
+    "totalCnt": 10000,
+    "soldCnt": 6000,
+    "guardCnt": 2000
+  }, {
+    "id": 2,
+    "cp": "SSQ",
+    "cpName": "双色球",
+    "stopTime": "2022-07-03 20:00:00",
+    "title": "第二组",
+    "subtitle": "今晚打老虎",
+    "totalAmt": 160,
+    "amt": 2,
+    "totalCnt": 80,
+    "soldCnt": 39,
+    "guardCnt": 60
+  }]
 }

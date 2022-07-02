@@ -41,8 +41,11 @@ new Vue({
     return h(App)
   }
 }).$mount('#app')
+
 const apiInstance = axios.create()
 const eascInstance = axios.create()
+const rem = screen.width / 10
+const px = 10 / screen.width
 
 const init = () => {
   apiInstance.defaults.baseURL = currentEnv.VUE_APP_API_SERVER
@@ -55,13 +58,17 @@ const init = () => {
     eascInstance,
     dayjs,
     currentEnv,
-    store
+    store,
+    rem,
+    px
   })
   _.assign(Vue.prototype, {
     conf,
     _,
     dayjs,
-    currentEnv
+    currentEnv,
+    rem,
+    px
   })
   const app = new Vue({
     router,

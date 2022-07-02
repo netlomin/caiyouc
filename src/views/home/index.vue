@@ -1,12 +1,12 @@
 <!-- home -->
 <template>
   <van-pull-refresh v-model="refreshing" @refresh="refresh">
-    <van-list v-if="list&&list.length" v-model="loading" :finished="finished" @load="load" :style="css.list">
-      <van-cell-group v-for="item in list" :key="item" inset>
-        <van-cell>
+    <van-list v-if="list&&list.length" v-model="loading" :finished="finished" @load="load">
+      <van-cell-group v-for="item in list" :key="item.id" :border="false" inset>
+        <van-cell :to="{ name: 'About', params: { id: item.id }}">
           <div class="cell-head" slot="title">
             <van-icon name="gold-coin" :color="conf.themeColor" />
-            <strong class="m-l-10">双色球</strong>
+            <strong class="m-l-10">{{item.cpName}}</strong>
             <span style="float: right;">
               截止剩余：
               <van-count-down :time="time" class="inline" />
@@ -14,28 +14,33 @@
           </div>
           <template #label>
             <div class="cell-body">
-              <a-progress width="1.6rem" :percent="60" :success-percent="30" type="circle" />
+              <a-progress :width="1.6*rem" :percent="item.percent" :success-percent="item.soldPercent" type="circle">
+                <template #format="percent">
+                  <div class="sm bold">{{item.soldPercent}}%</div>
+                  <div class="xs grey">保底{{item.guardPercent}}%</div>
+                </template>
+              </a-progress>
               <span class="m-l-10">
-                <h6 class="md">天上水</h6>
-                <span class="sm inline w-6 van-ellipsis">今晚必中今晚必中今晚必中今晚必中今晚必中今晚必中今晚必中今晚必中今晚必中今晚必中</span>
+                <h6 class="md">{{item.title}}</h6>
+                <span class="sm inline w-6 van-ellipsis">{{item.subtitle}}</span>
               </span>
             </div>
             <div class="cell-foot">
               <van-row>
                 <van-col span="6" class="center">
-                  <h6 class="sm red">16000</h6>
+                  <h6 class="sm red">{{item.totalAmt}}</h6>
                   <span class="sm grey">总金额</span>
                 </van-col>
                 <van-col span="6" class="center">
-                  <h6 class="sm red">1.6</h6>
-                  <span class="sm grey">每份金额</span>
+                  <h6 class="sm red">{{item.amt}}</h6>
+                  <span class="sm grey">单份金额</span>
                 </van-col>
                 <van-col span="6" class="center">
-                  <h6 class="sm red">10000</h6>
+                  <h6 class="sm red">{{item.totalCnt}}</h6>
                   <span class="sm grey">总份数</span>
                 </van-col>
                 <van-col span="6" class="center">
-                  <h6 class="sm red">4000</h6>
+                  <h6 class="sm red">{{item.totalCnt-item.soldCnt}}</h6>
                   <span class="sm grey">剩余份数</span>
                 </van-col>
               </van-row>
@@ -55,11 +60,7 @@
   export default {
     data() {
       return {
-        css: {
-          list: {
-            margin: '20px 0'
-          }
-        },
+        css: {},
         time: 30.65 * 60 * 60 * 1000,
         rate: 0,
         list: [],
@@ -77,11 +78,16 @@
       load() {
         setTimeout(() => {
           if (this.refreshing) {
-            this.list = [1]
+            this.list = []
             this.refreshing = false
           }
           let list = mock.list.filter(e => this.list.filter(l => e.id === l.id).length == 0)
-          list.forEach(e => this.list.push(e))
+          list.forEach(e => {
+            e.percent = Math.round((e.guardCnt + e.soldCnt) / e.totalCnt * 100)
+            e.guardPercent = Math.round(e.guardCnt / e.totalCnt * 100)
+            e.soldPercent = Math.round(e.soldCnt / e.totalCnt * 100)
+            this.list.push(e)
+          })
           this.finished = list.length == 0
           this.loading = false
         }, 200)
@@ -98,28 +104,30 @@
   }
 </script>
 <style lang="scss" scoped>
-  .inline {
-    display: inline-block !important;
+  .van-pull-refresh {
+    min-height: 100vh;
   }
 
-  .cell-head,
-  .cell-body,
-  .cell-foot {
-    padding: 6px 0;
+  .van-cell-group {
+    margin-top: 10px;
+  }
+
+  .van-cell__label {
+    margin-top: 0;
   }
 
   .cell-head,
   .cell-body {
+    padding: 0.2rem 0;
     border-bottom: 1px solid #EEE;
   }
 
+  .cell-foot {
+    padding-top: 0.2rem;
+  }
+
   .cell-body {
-    /* height: 100vh; 表示全屏高度 */
-    width: 100%;
     display: flex;
-    /* 垂直居中 */
     align-items: center;
-    /* 横向居中 */
-    /* justify-content: center;*/
   }
 </style>

@@ -8,6 +8,10 @@ html, body,#app  {
   background: $bg-color;
 }
 
+.app-container {
+  padding-bottom: 2rem;
+}
+
 @each $size in $sizes {
   $i: index($sizes, $size);
   .#{$size} {
@@ -37,6 +41,14 @@ html, body,#app  {
 
 .light-grey {
   color: nth($colors, 11) !important;
+}
+
+.inline {
+  display: inline-block !important;
+}
+
+.bold {
+  font-weight: bold !important;
 }
 
 .center{
