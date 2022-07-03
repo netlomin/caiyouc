@@ -34,14 +34,6 @@ if (currentEnv.DEBUG) {
 Vue.config.devtools = currentEnv.DEBUG
 Vue.config.productionTip = !currentEnv.DEBUG
 
-new Vue({
-  router,
-  store,
-  render: h => {
-    return h(App)
-  }
-}).$mount('#app')
-
 const apiInstance = axios.create()
 const eascInstance = axios.create()
 const rem = screen.width / 10

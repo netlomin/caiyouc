@@ -12,9 +12,9 @@
     },
     computed: {},
     watch: {},
-    methods: {},
     created() {},
-    mounted() {}
+    mounted() {},
+    methods: {}
   }
 </script>
 <style lang="scss" scoped>

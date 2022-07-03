@@ -3,7 +3,7 @@
   <van-pull-refresh v-model="refreshing" @refresh="refresh">
     <van-list v-if="list&&list.length" v-model="loading" :finished="finished" @load="load">
       <van-cell-group v-for="item in list" :key="item.id" :border="false" inset>
-        <van-cell :to="{ name: 'About', params: { id: item.id }}">
+        <van-cell :to="{ name: 'CombinOrder', params: { id: item.id }}">
           <div class="cell-head" slot="title">
             <van-icon name="gold-coin" :color="conf.themeColor" />
             <strong class="m-l-10">{{item.cpName}}</strong>
@@ -48,9 +48,9 @@
           </template>
         </van-cell>
       </van-cell-group>
-      <van-divider>没有更多订单了</van-divider>
+      <van-divider>没有更多合买了</van-divider>
     </van-list>
-    <van-empty v-else description="暂无合买订单" />
+    <van-empty v-else description="暂无合买方案" />
   </van-pull-refresh>
 </template>
 
@@ -71,7 +71,9 @@
     },
     computed: {},
     watch: {},
-    created() {},
+    created() {
+      this.load()
+    },
     mounted() {},
     destroyed() {},
     methods: {

@@ -8,6 +8,8 @@ import {
   CountDown,
   Divider,
   Empty,
+  Grid,
+  GridItem,
   Icon,
   List,
   NavBar,
@@ -23,6 +25,7 @@ Vue.use(CountDown)
 Vue.use(Col).use(Row)
 Vue.use(Divider)
 Vue.use(Empty)
+Vue.use(Grid).use(GridItem)
 Vue.use(Icon)
 Vue.use(List)
 Vue.use(PullRefresh)
