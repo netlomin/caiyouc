@@ -15,6 +15,8 @@ import {
   NavBar,
   PullRefresh,
   Row,
+  Stepper,
+  SubmitBar,
   Tabbar,
   TabbarItem
 } from 'vant'
@@ -30,4 +32,6 @@ Vue.use(Icon)
 Vue.use(List)
 Vue.use(PullRefresh)
 Vue.use(NavBar)
+Vue.use(Stepper)
+Vue.use(SubmitBar)
 Vue.use(Tabbar).use(TabbarItem)

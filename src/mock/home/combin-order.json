@@ -1,0 +1,26 @@
+{
+  "id": 1,
+  "cp": "SSQ",
+  "issue": 2022079,
+  "cpName": "双色球",
+  "stopTime": "2022-07-10 20:00:00",
+  "title": "第一组",
+  "subtitle": "今晚打老虎",
+  "totalAmt": 16000,
+  "amt": 1.6,
+  "totalCnt": 10000,
+  "soldCnt": 9000,
+  "guardCnt": 2000,
+  "visible": 2,
+  "pick": {
+    "id": 1,
+    "cp": "SSQ",
+    "code": "01,08,12^09,11,25,26,30|01,02,08,11&01,08,09,11,12,25,26,30|01,02,08,11,14"
+  },
+  "buys": [
+    { "id": 1, "actId": 3, "actName": "小跟班", "cnt": 400, "amt": 640, "createTime": "2022-07-09 16:16:00" },
+    { "id": 2, "actId": 2, "actName": "跟单玩家超级赢", "cnt": 100, "amt": 160, "createTime": "2022-07-09 16:13:00" },
+    { "id": 3, "actId": 1, "actName": "大赢家", "cnt": 500, "amt": 800, "createTime": "2022-07-09 16:01:00" },
+    { "id": 4, "actId": 1, "actName": "大赢家", "cnt": 8000, "amt": 12800, "createTime": "2022-07-09 16:00:00" }
+  ]
+}

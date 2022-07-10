@@ -88,26 +88,20 @@ class CpSet {
 }
 
 const enhance = (o) => {
-  if (o.enhance) return
+  if (!o || o.enhance) return
   o.enhance = true
 
   Object.defineProperties(o, {
     "sets": {
       get: function() {
-        return this._sets || this._sets =
-          (this.code ? this.code.split(SIGN.and).map(c => new CpSet(o.cp, c)) : [])
-      },
-      set: function(val) {
-        console.log('sets', val)
+        return this._sets || (this._sets = (this.code ? this.code.split(SIGN.and).map(c => new CpSet(o.cp, c)) :
+          []))
       }
     },
     "set": {
       get: function() {
         let sets = this.sets
         return sets && sets.length ? sets[0] : null
-      },
-      set: function(val) {
-        console.log('set', val)
       }
     }
   })
