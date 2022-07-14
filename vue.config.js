@@ -34,13 +34,15 @@ const cdn = {
   },
   // 生产环境
   build: {
-    css: ['https://cdn.jsdelivr.net/npm/vant@2.4.7/lib/index.css'],
+    css: [],
     js: [
-      'https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js',
-      'https://cdn.jsdelivr.net/npm/vue-router@3.1.5/dist/vue-router.min.js',
-      'https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js',
-      'https://cdn.jsdelivr.net/npm/vuex@3.1.2/dist/vuex.min.js',
-      'https://cdn.jsdelivr.net/npm/vant@2.4.7/lib/index.min.js'
+      'lib/vue.runtime.' + process.env.NODE_ENV + '.js',
+      'lib/vuex.min.js',
+      'lib/vue-router.min.js',
+      'lib/axios.min.js',
+      'lib/lodash.min.js',
+      'lib/localforage.min.js',
+      'lib/dayjs.min.js'
     ]
   }
 }
@@ -84,7 +86,11 @@ module.exports = {
       less: {
         lessOptions: {
           // If you are using less-loader@5 please spread the lessOptions to options directly
-          modifyVars: { 'primary-color': '#1DA57A', 'link-color': '#1DA57A', 'border-radius-base': '2px' },
+          modifyVars: {
+            'primary-color': '#1DA57A',
+            'link-color': '#1DA57A',
+            'border-radius-base': '2px'
+          },
           javascriptEnabled: true
         }
       }
