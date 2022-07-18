@@ -47,9 +47,9 @@
             <div v-if="order.visible!=2" class="tips"> {{order.tips}}</div>
             <div v-else class="pick-sets">
               <van-row v-for="(set, i) in order.pick.sets" class="pick-set">
-                <van-col span="3">{{i}}</van-col>
-                <van-col span="21">
-                  <c-balls :areas="set.areas" size="xs"></c-balls>
+                <van-col span="2">{{i}}</van-col>
+                <van-col span="22">
+                  <c-balls :areas="set.areas" size="sm"></c-balls>
                 </van-col>
               </van-row>
             </div>
@@ -66,10 +66,10 @@
             <div class="cell-body">
               <a-table :columns="columns" :data-source="order.buys" size="small" :rowClassName="()=>'sm'"
                 :pagination="false">
-                <b slot="t1" class="sm">昵称</b>
-                <b slot="t2" class="sm">份额</b>
-                <b slot="t3" class="sm">金额</b>
-                <b slot="t4" class="sm">时间</b>
+                <b slot="t1" class="sm grey">昵称</b>
+                <b slot="t2" class="sm grey">份额</b>
+                <b slot="t3" class="sm grey">金额</b>
+                <b slot="t4" class="sm grey">时间</b>
                 <span slot="time" slot-scope="text">{{dayjs(text).format('MM-DD HH:mm')}}</span>
               </a-table>
             </div>
@@ -78,13 +78,14 @@
       </van-cell-group>
     </div>
 
-    <van-submit-bar tip="申购后联系店主付款,店主确认购买成功!">
-      <div>
+    <van-submit-bar :price="_amt" tip="申购后需联系店主购买，30分钟未购买则申购失效！">
+      <div class="flex">
         <span>申购份数</span>
-        <van-stepper v-model="cnt" theme="round" button-size="22" disable-input />
+        <van-stepper v-model="cnt" min="0" :max="_max" theme="round" :button-size=".5*rem" integer
+          class="inline m-l-6" />
       </div>
       <template #button>
-        <van-button :color="conf.themeColor" size="small">申购</van-button>
+        <a-button :disabled="_disabledBuy" type="danger" size="small" @click="buy">申购</a-button>
       </template>
     </van-submit-bar>
   </div>
@@ -109,7 +110,17 @@
         cnt: 0
       }
     },
-    computed: {},
+    computed: {
+      _amt() {
+        return this.order ? this.order.amt * 100 * this.cnt : 0
+      },
+      _max() {
+        return this.order ? this.order.totalCnt - this.order.soldCnt : 0
+      },
+      _disabledBuy() {
+        return this.cnt == 0
+      }
+    },
     watch: {},
     created() {
       console.log(this.$route.params.id)
@@ -129,7 +140,12 @@
       this.order = mock
     },
     mounted() {},
-    methods: {}
+    methods: {
+      buy() {
+        console.log(this.order.id, this.order.amt, this.cnt)
+        this.$router.push({ name: "CombinResult", params: { id: 2 } })
+      }
+    }
   }
 </script>
 <style lang="scss" scoped>

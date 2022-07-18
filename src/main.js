@@ -11,7 +11,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import dayjs from 'dayjs'
 import eruda from 'eruda'
-import fnMixin from './utils/fnMixins'
+import mixin from './utils/mixin'
 
 // 全局引入按需引入UI库 vant
 import '@/plugin/vant'
@@ -26,7 +26,7 @@ import 'lib-flexible/flexible.js'
 import './filters'
 
 const currentEnv = _.cloneDeep(process.env)
-currentEnv.DEBUG = currentEnv.VUE_APP_DEBUG === 'true' || fnMixin.methods.urlParam('DEBUG')
+currentEnv.DEBUG = currentEnv.VUE_APP_DEBUG === 'true' || mixin.methods.urlParam('DEBUG')
 // 开发环境配置调试
 if (currentEnv.DEBUG) {
   eruda.init()
@@ -54,6 +54,7 @@ const init = () => {
     rem,
     px
   })
+
   _.assign(Vue.prototype, {
     conf,
     _,
@@ -62,6 +63,7 @@ const init = () => {
     rem,
     px
   })
+
   const app = new Vue({
     router,
     store,
@@ -70,9 +72,9 @@ const init = () => {
     }
   }).$mount('#app')
 
-  _.assign(window, {
-    app
-  })
+  _.assign(window, { app })
+
+  Vue.mixin(mixin)
 }
 
 const url = './static/extraConfig.json'

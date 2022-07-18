@@ -12,6 +12,14 @@ export default [{
       keepAlive: false
     }
   }, {
+    path: '/home/combin-buy-result/:id',
+    name: 'CombinResult',
+    component: () => import('@/views/home/combin-buy-result'),
+    meta: {
+      title: '申购结果',
+      keepAlive: false
+    }
+  }, {
     path: '/about',
     name: 'About',
     component: () => import('@/views/user/about'),

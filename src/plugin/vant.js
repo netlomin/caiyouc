@@ -1,7 +1,6 @@
 // 按需全局引入 vant组件
 import Vue from 'vue'
 import {
-  Button,
   Cell,
   CellGroup,
   Col,
@@ -18,10 +17,10 @@ import {
   Stepper,
   SubmitBar,
   Tabbar,
-  TabbarItem
+  TabbarItem,
+  Toast
 } from 'vant'
 
-Vue.use(Button)
 Vue.use(Cell).use(CellGroup)
 Vue.use(CountDown)
 Vue.use(Col).use(Row)
@@ -35,3 +34,4 @@ Vue.use(NavBar)
 Vue.use(Stepper)
 Vue.use(SubmitBar)
 Vue.use(Tabbar).use(TabbarItem)
+Vue.use(Toast)

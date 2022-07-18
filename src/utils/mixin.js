@@ -1,14 +1,12 @@
 /**
  * This provides mixins used for common functions in the Vue components.
  * Before you begin to used it , plz inject this mixins in the components
- * like mixins: [FnMixin]
- *
- * @mixin
+ * like mixins: [mixin]
  */
 import _ from 'lodash'
 import dayjs from 'dayjs'
 
-const fnMixin = {
+const mixin = {
   sumArr(arr) {
     return _.reduce(
       arr,
@@ -335,12 +333,36 @@ const fnMixin = {
       .replace(/^整$/, '零元整')
     )
   },
-
   // 表格未审批显示红色
   fnTableRowClassName({ row }) {
     return row.flowStatus === 0 ? 'warning-row' : ''
+  },
+  copyText(text) {
+    if (navigator.clipboard) {
+      // clipboard api 复制
+      navigator.clipboard.writeText(text)
+    } else {
+      let dom = document.createElement('div')
+      copyDom.innerText = text
+      dom.style = 'position:absolute;top:0px;right:-9999px'
+      document.body.appendChild(dom);
+      //创建选中范围
+      var range = document.createRange();
+      range.selectNode(dom);
+      //移除剪切板中内容
+      window.getSelection().removeAllRanges();
+      //添加新的内容到剪切板
+      window.getSelection().addRange(range);
+      try {
+        //复制
+        document.execCommand('copy');
+      } catch (err) {
+        console.error('copyText:', err)
+      }
+      dom.parentNode.removeChild(dom);
+    }
   }
 }
 export default {
-  methods: fnMixin
+  methods: mixin
 }

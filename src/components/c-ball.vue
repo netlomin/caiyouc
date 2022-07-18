@@ -51,10 +51,10 @@
     .#{$size}_solid,
     .#{$size}_plain {
       font-size: nth($font-sizes, $i);
-      width: nth($font-sizes, $i) * 2 + 0.2rem;
-      height: nth($font-sizes, $i) * 2 + 0.2rem;
-      line-height: nth($font-sizes, $i) * 2 + 0.2rem;
-      border-radius: nth($font-sizes, $i) * 2 + 0.2rem;
+      width: nth($font-sizes, $i) * 2 + 0.1rem;
+      height: nth($font-sizes, $i) * 2 + 0.1rem;
+      line-height: nth($font-sizes, $i) * 2 + 0.1rem;
+      border-radius: nth($font-sizes, $i) * 2 + 0.1rem;
       border: 1px solid #FFF;
     }
   }
