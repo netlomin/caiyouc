@@ -15,9 +15,7 @@
     <title><%= webpackConfig.name %></title>
   </head>
   <body>
-    <noscript>
-      <strong><%= webpackConfig.name %> 需要JavaScript才能打开</strong>
-    </noscript>
+    <noscript><%= webpackConfig.name %> 需要JavaScript才能打开</noscript>
     <div id="app"></div>
     <!-- 使用CDN加速的JS文件，配置在vue.config.js下 -->
     <% for (var i in htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>

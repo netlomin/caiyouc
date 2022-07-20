@@ -110,8 +110,8 @@
     min-height: 100vh;
   }
 
-  .van-cell-group {
-    margin-top: 10px;
+  .van-cell-group--inset {
+    margin: .2rem;
   }
 
   .van-cell__label {

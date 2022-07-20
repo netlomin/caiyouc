@@ -361,6 +361,9 @@ const mixin = {
       }
       dom.parentNode.removeChild(dom);
     }
+  },
+  firstChar(s) {
+    return s && s.length ? s.charAt(0) : ''
   }
 }
 export default {

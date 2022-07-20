@@ -20,11 +20,11 @@ export default [{
       keepAlive: false
     }
   }, {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/views/user/about'),
+    path: '/user/settings',
+    name: 'Settings',
+    component: () => import('@/views/user/settings'),
     meta: {
-      title: '关于我',
+      title: '系统',
       keepAlive: false
     }
   }]

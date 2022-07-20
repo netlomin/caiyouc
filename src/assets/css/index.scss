@@ -43,6 +43,10 @@ html, body,#app  {
   color: nth($colors, 11) !important;
 }
 
+.white{
+  color: #FFF;
+}
+
 .inline {
   display: inline-block !important;
 }
@@ -55,7 +59,7 @@ html, body,#app  {
   text-align: center !important;
 }
 
-.flex {
+.flex-center {
   display: flex;
   align-items: center;
 }

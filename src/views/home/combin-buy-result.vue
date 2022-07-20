@@ -2,7 +2,7 @@
 <template>
   <div>
     <div v-if="order" class="app-container">
-      <a-result status="success" title="申购完成" sub-title="30分钟内有效，请尽快联系店主购买！">
+      <a-result status="success" title="申购成功" sub-title="30分钟内有效，请尽快联系店主购买！">
         <template #extra>
           <a-button key="homeBtn" class="md" @click="clickHomeBtn">首页</a-button>
           <a-button key="buyBtn" type="danger" class="md" @click="clickBuyBtn">联系店主</a-button>

@@ -1,7 +1,7 @@
 {
   "name": "caiyou-m",
   "version": "0.0.1",
-  "description": "彩友圈-实体店合买工具版",
+  "description": "彩友圈合买版",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve --open",
