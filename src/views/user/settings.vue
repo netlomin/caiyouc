@@ -5,7 +5,7 @@
       <van-cell title="关于" :value="pkg.description+' v'+pkg.version" icon="home-o" size="large" />
     </div>
 
-    <div class="van-submit-bar">
+    <div class="fixed-bottom p_2">
       <a-button type="primary" block>退出登录</a-button>
     </div>
   </div>
@@ -26,8 +26,4 @@
   }
 </script>
 <style lang="scss" scoped>
-  .van-submit-bar {
-    padding: .2rem;
-    background-color: #FFF;
-  }
 </style>

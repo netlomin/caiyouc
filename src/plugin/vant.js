@@ -16,6 +16,8 @@ import {
   Row,
   Stepper,
   SubmitBar,
+  Tab,
+  Tabs,
   Tabbar,
   TabbarItem,
   Toast
@@ -33,5 +35,6 @@ Vue.use(PullRefresh)
 Vue.use(NavBar)
 Vue.use(Stepper)
 Vue.use(SubmitBar)
+Vue.use(Tabs).use(Tab)
 Vue.use(Tabbar).use(TabbarItem)
 Vue.use(Toast)

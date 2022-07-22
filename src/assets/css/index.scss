@@ -31,6 +31,16 @@ html, body,#app  {
   .w-#{$i} {width: 1rem*$i;}
 }
 
+@for $i from 1 through 10{
+  .p_#{$i} {padding: .1rem*$i;}
+  .p-t_#{$i} {padding: .1rem*$i 0 0 0;}
+  .p-r_#{$i} {padding: 0 .1rem*$i 0 0;}
+  .p-b_#{$i} {padding: 0 0 .1rem*$i 0;}
+  .p-l_#{$i} {padding: 0 0 0 .1rem*$i;}
+  .p-tb_#{$i} {padding: .1rem*$i 0;}
+  .p-lr_#{$i} {padding: 0 .1rem*$i;}
+}
+
 .red {
   color: nth($colors, 1) !important;
 }
@@ -62,4 +72,13 @@ html, body,#app  {
 .flex-center {
   display: flex;
   align-items: center;
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: #FFF;
 }

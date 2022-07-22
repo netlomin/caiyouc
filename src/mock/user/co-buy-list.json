@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "code": "0",
+  "msg": "成功",
+  "data": [{
+    "id": 1,
+    "nickName": "186****8001",
+    "mobile": "186****8001",
+    "idCard": null,
+    "realName": null,
+    "avatar": null,
+    "createTime": 11111111111,
+    "updateTime": 11111111
+  }]
+}

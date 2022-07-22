@@ -20,6 +20,14 @@ export default [{
       keepAlive: false
     }
   }, {
+    path: '/user/co-buy-list',
+    name: 'CoBuyList',
+    component: () => import('@/views/user/co-buy-list'),
+    meta: {
+      title: '我的合买',
+      keepAlive: false
+    }
+  }, {
     path: '/user/settings',
     name: 'Settings',
     component: () => import('@/views/user/settings'),
