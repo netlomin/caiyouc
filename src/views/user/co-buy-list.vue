@@ -7,7 +7,23 @@
     </van-tabs>
     <van-pull-refresh v-model="refreshing" @refresh="refresh">
       <van-list v-if="list.length" v-model="loading" :finished="finished" finished-text="已经到底了～" @load="load">
-        <van-cell>11</van-cell>
+        <van-cell v-for="buy in list" :to="{name:'CombinOrder',params:{id:buy.projectId}}" is-link>
+          <div slot="icon" class=" flex-center m-r-10">
+            <van-icon :size="rem" name="gold-coin" :color="conf.themeColor" />
+          </div>
+          <template #title>
+            <b class="">{{buy.project.cpName}}</b>
+          </template>
+          <template #label>
+            <span class="grey">{{buy.createTime}}</span>
+          </template>
+          <template #right-icon>
+          </template>
+          <div>
+            <div>待开奖</div>
+            <div>{{buy.cnt+' 份'}}</div>
+          </div>
+        </van-cell>
       </van-list>
       <van-empty v-else description="暂无合买" />
     </van-pull-refresh>
@@ -28,8 +44,14 @@
       }
     },
     computed: {},
-    watch: {},
-    created() {},
+    watch: {
+      activeTab(newVal, oldVal) {
+        this.refresh()
+      }
+    },
+    created() {
+      this.refresh()
+    },
     mounted() {},
     methods: {
       load() {
@@ -41,12 +63,9 @@
           let coBuyList = coBuyListRet.data
           let list = coBuyList.filter(e => !this.list.filter(l => e.id === l.id).length)
           list.forEach(e => {
-            e.percent = Math.round((e.guardCnt + e.soldCnt) / e.totalCnt * 100)
-            e.guardPercent = Math.round(e.guardCnt / e.totalCnt * 100)
-            e.soldPercent = Math.round(e.soldCnt / e.totalCnt * 100)
             this.list.push(e)
           })
-          this.finished = list.length == 0
+          this.finished = true
           this.loading = false
         }, 200)
       },
