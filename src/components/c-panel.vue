@@ -8,8 +8,8 @@
   export default {
     name: 'c-panel',
     props: {
-      padding: { type: [Number, String], default: '0.2' },
-      margin: { type: [Number, String], default: '0' },
+      padding: { type: [Number, String], default: 0.2 },
+      margin: { type: [Number, String], default: 0 },
       bg: { type: String, default: '#FFF' }
     },
     data() { return {} },
@@ -17,8 +17,8 @@
       _style() {
         let style = {}
         style.backgroundColor = this.bg
-        style.padding = this.padding + 'rem'
-        style.margin = this.margin + 'rem'
+        style.padding = typeof this.padding == 'number' ? this.padding + 'rem' : this.padding
+        style.margin = typeof this.margin == 'number' ? this.margin + 'rem' : this.margin
         return style
       }
     },

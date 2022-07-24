@@ -1,7 +1,8 @@
 <template>
   <div>
-    <van-tabs v-model="activeTab" :line-width="1.6*rem">
+    <van-tabs v-model="activeTab" :line-width="2.5*rem">
       <van-tab title="所有" name=""></van-tab>
+      <van-tab title="我发起" name="0"></van-tab>
       <van-tab title="待开奖" name="0"></van-tab>
       <van-tab title="已中奖" name="1"></van-tab>
     </van-tabs>

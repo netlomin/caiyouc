@@ -29,7 +29,6 @@
   import userRet from '@/mock/user/user.json'
   import cPanel from 'components/c-panel'
 
-
   export default {
     components: { cPanel },
     data() {

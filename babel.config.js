@@ -3,7 +3,7 @@ const IS_PROD = ['production', 'prod'].includes(process.env.VUE_APP_ENV)
 const plugins = [
   [
     'import',
-    { libraryName: 'vant', libraryDirectory: 'es', style: true },
+    { libraryName: 'vant', libraryDirectory: 'es', style: (name) => `${name}/style/less` },
     'vant'
   ],
   [
