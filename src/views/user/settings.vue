@@ -2,7 +2,7 @@
   <div>
     <div class="m-t-8">
       <van-cell title="意见反馈" icon="service-o" size="large" is-link />
-      <van-cell title="设置密码" icon="lock" size="large" is-link />
+      <van-cell title="设置密码" :to="{name:'Password'}" icon="lock" size="large" is-link />
       <van-cell title="关于" :value="pkg.description+' v'+pkg.version" icon="home-o" size="large" />
     </div>
 
@@ -17,7 +17,9 @@
 
   export default {
     data() {
-      return { pkg: pkg }
+      return {
+        pkg: pkg
+      }
     },
     computed: {},
     watch: {},

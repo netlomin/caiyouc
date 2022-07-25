@@ -35,5 +35,13 @@ export default [{
       title: '系统',
       keepAlive: false
     }
+  }, {
+    path: '/user/password',
+    name: 'Password',
+    component: () => import('@/views/user/password'),
+    meta: {
+      title: '设置密码',
+      keepAlive: false
+    }
   }]
 }]
