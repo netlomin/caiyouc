@@ -18,7 +18,7 @@
     </c-panel>
 
     <div class="m-t-8">
-      <van-cell title="发起合买" icon="add-o" size="large" is-link />
+      <van-cell title="发起合买" :to="{name:'Pick'}" icon="add-o" size="large" is-link />
       <van-cell title="我的合买" :to="{name:'CoBuyList'}" icon="orders-o" size="large" is-link />
       <van-cell title="系统" :to="{name:'Settings'}" icon="setting-o" size="large" is-link />
     </div>
