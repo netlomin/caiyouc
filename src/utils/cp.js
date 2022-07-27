@@ -94,8 +94,8 @@ const enhance = (o) => {
   Object.defineProperties(o, {
     "sets": {
       get: function() {
-        return this._sets || (this._sets = (this.code ? this.code.split(SIGN.and).map(c => new CpSet(o.cp, c)) :
-          []))
+        return this._sets || (this._sets = (this.code ? this.code.split(SIGN.and).map(c => new CpSet(o.cp,
+          c)) : []))
       }
     },
     "set": {

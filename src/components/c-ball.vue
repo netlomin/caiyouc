@@ -45,7 +45,7 @@
 
     .#{$size}_none {
       font-size: nth($font-sizes, $i);
-      width: nth($font-sizes, $i) * 1.6;
+      width: nth($font-sizes, $i) * 1.2;
     }
 
     .#{$size}_solid,

@@ -1,10 +1,10 @@
 <template>
   <div>
     <van-nav-bar :title="$route.meta.title" left-arrow fixed placeholder safe-area-inset-top @click-left="_back" />
-    <keep-alive v-if="$route.meta.keepAlive">
-      <router-view ref="routerView"></router-view>
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive" ref="routerView" />
     </keep-alive>
-    <router-view v-else ref="routerView"></router-view>
+    <router-view v-if="!$route.meta.keepAlive" ref="routerView" />
   </div>
 </template>
 

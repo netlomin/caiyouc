@@ -69,6 +69,10 @@ html, body,#app  {
   color: #FFF;
 }
 
+.bg_white {
+  background-color: white; 
+}
+
 .inline {
   display: inline-block !important;
 }
@@ -84,6 +88,14 @@ html, body,#app  {
 .flex-center {
   display: flex;
   align-items: center;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
 }
 
 .fixed-bottom {

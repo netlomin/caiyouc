@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <div class="layout-content">
-      <keep-alive v-if="$route.meta.keepAlive">
-        <router-view></router-view>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive" />
       </keep-alive>
-      <router-view v-else></router-view>
+      <router-view v-if="!$route.meta.keepAlive" />
     </div>
     <div class="layout-footer">
       <van-tabbar fixed route v-model="active" @change="changeTab">
