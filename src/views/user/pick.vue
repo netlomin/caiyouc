@@ -3,7 +3,7 @@
     <van-nav-bar fixed placeholder safe-area-inset-top left-arrow @click-left="back">
       <div slot="title" class="flex-center">
         <a-button @click="popup=!popup">
-          <b class="red m-r-6">{{title}}</b>
+          <b class="m-r-6">{{title}}</b>
           <van-icon :name="'arrow-'+(popup?'up':'down')" />
         </a-button>
       </div>
@@ -44,16 +44,37 @@
         </a-table>
       </van-collapse-item>
     </van-collapse>
+
+    <van-cell class="m-t-8">
+      <div slot="title" class="cell-title">
+        <b class="md red">红球</b>
+        <span class="sm grey">(请选至少6个号码)</span>
+        <div class="cell-title__right">
+          <span class="grey">机选</span>
+          <van-stepper v-model="redCnt" disable-input :button-size=".5*rem" class="inline m-l-6" />
+        </div>
+      </div>
+      <template #label>
+        <van-grid :column-num="6" :border="false">
+          <van-grid-item v-for="value in 6" :key="value">
+            <template #icon>
+              <c-ball :code="value"></c-ball>
+            </template>
+          </van-grid-item>
+        </van-grid>
+      </template>
+    </van-cell>
   </div>
 </template>
 
 <script>
+  import cBall from 'components/c-ball'
   import cBalls from 'components/c-balls'
   import $cp from '@/utils/cp.js'
   import r5Ret from '@/mock/user/r5.json'
 
   export default {
-    components: { cBalls },
+    components: { cBall, cBalls },
     data() {
       return {
         title: '双色球-普通',
@@ -66,7 +87,8 @@
         ],
         collapseActives: ['0'],
         draws: [],
-        r5: null
+        r5: null,
+        redCnt: 5
       }
     },
     computed: {},
@@ -112,17 +134,17 @@
     font-size: .3rem;
   }
 
-  /deep/ .van-cell {
+  /deep/ .van-collapse-item .van-cell {
     padding: .2rem .1rem 0 .1rem;
     font-size: .3rem;
     line-height: 1.5;
   }
 
-  /deep/ .van-cell__title {
+  /deep/ .van-collapse-item .van-cell__title {
     flex: 2.5;
   }
 
-  /deep/ .van-cell__right-icon {
+  /deep/ .van-collapse-item .van-cell__right-icon {
     font-size: .3rem;
     line-height: 1.5;
   }
@@ -149,5 +171,15 @@
   .balls {
     display: inline-block;
     width: 4.68rem;
+  }
+
+  .cell-title {
+    border-bottom: 1px solid #EEE;
+
+    &__right {
+      display: flex;
+      justify-content: center;
+      float: right;
+    }
   }
 </style>
