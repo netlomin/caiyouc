@@ -21,25 +21,18 @@ const SIGN = {
   percent: '%'
 }
 
-const AREA_COLOR = [
+const AREA = [
   ['#880000', '#FF8888'],
   ['#000088', '#8888FF']
 ]
 
+const AREA_FC3D = [AREA[0], AREA[0], AREA[0]]
+
 const CP = {
-  SSQ: { ico: 'ssq', col: 7, color: '#FF8888', areaColor: AREA_COLOR },
-  KL8: { ico: 'ssq', col: 7, color: '#FF6666', areaColor: AREA_COLOR },
-  QLC: { ico: 'ssq', col: 7, color: '#8888FF', areaColor: AREA_COLOR },
-  FC3D: {
-    ico: 'ssq',
-    col: 5,
-    color: '#FF88FF',
-    areaColor: [
-      ['#880000', '#FF8888'],
-      ['#880000', '#FF8888'],
-      ['#880000', '#FF8888']
-    ]
-  }
+  SSQ: { ico: 'ssq', col: 7, color: '#FF8888', area: AREA },
+  KL8: { ico: 'ssq', col: 7, color: '#FF6666', area: AREA },
+  QLC: { ico: 'ssq', col: 7, color: '#8888FF', area: AREA },
+  FC3D: { ico: 'ssq', col: 5, color: '#FF88FF', area: AREA_FC3D }
 }
 
 class CpSetArea {
@@ -66,7 +59,7 @@ class CpSetArea {
   }
 
   color(j) {
-    return CP[this.cp].areaColor[this.index][j]
+    return CP[this.cp].area[this.index][j]
   }
 }
 
@@ -116,27 +109,28 @@ const enhance = (o) => {
 
 const resolvePlay = (play) => {
   play.areas = []
-  play.code && play.code.split(separator.area).forEach(code => {
+  let conf = CP[play.cp]
+  play.code && play.code.split(SIGN.bar).forEach(code => {
     let area = {}
     play.areas.push(area)
     // 选号区显示列
-    area.col = $c.cp[play.cp].col
+    area.col = conf.col
     // 选号区编号
-    let arr = code.split(separator.id)
+    let arr = code.split(SIGN.hash)
     area.no = arr.length == 2 ? parseInt(arr[1]) : 1
-    let o = $c.cp.areas[area.no - 1]
-    area.colors = o.colors
+    let o = conf.area
+    area.colors = o[area.no - 1]
     // 选号区标题
-    arr = arr[0].split(separator.desc)
+    arr = arr[0].split(SIGN.tilde)
     area.desc = arr.length == 2 ? arr[1] : '选号'
     // 选号数
-    arr = arr[0].split(separator.fetch)
+    arr = arr[0].split(SIGN.exclamation)
     area.cnt = arr.length == 2 ? parseInt(arr[1]) : 1
     area.minCnt = area.cnt
     // 是否支持胆拖
     area.gallEnabled = area.cnt >= 2
     // 号码
-    area.codes = arr[0].split(separator.code)
+    area.codes = arr[0].split(SIGN.comma)
     area.maxCnt = area.codes.length
   })
 }

@@ -45,36 +45,20 @@
       </van-collapse-item>
     </van-collapse>
 
-    <van-cell class="m-t-8">
-      <div slot="title" class="cell-title">
-        <b class="md red">红球</b>
-        <span class="sm grey">(请选至少6个号码)</span>
-        <div class="cell-title__right">
-          <span class="grey">机选</span>
-          <van-stepper v-model="redCnt" disable-input :button-size=".5*rem" class="inline m-l-6" />
-        </div>
-      </div>
-      <template #label>
-        <van-grid :column-num="6" :border="false">
-          <van-grid-item v-for="value in 6" :key="value">
-            <template #icon>
-              <c-ball :code="value"></c-ball>
-            </template>
-          </van-grid-item>
-        </van-grid>
-      </template>
-    </van-cell>
+    <c-pick :area="play.areas[0]" class="m-t-8"></c-pick>
   </div>
 </template>
 
 <script>
   import cBall from 'components/c-ball'
   import cBalls from 'components/c-balls'
+  import cPick from 'components/c-pick'
   import $cp from '@/utils/cp.js'
   import r5Ret from '@/mock/user/r5.json'
+  import playRet from '@/mock/user/play.json'
 
   export default {
-    components: { cBall, cBalls },
+    components: { cBall, cBalls, cPick },
     data() {
       return {
         title: '双色球-普通',
@@ -88,7 +72,8 @@
         collapseActives: ['0'],
         draws: [],
         r5: null,
-        redCnt: 5
+        redCnt: 5,
+        play: null
       }
     },
     computed: {},
@@ -111,6 +96,11 @@
         r5.datas[i] = obj
       })
       this.r5 = r5
+
+      let play = _.cloneDeep(playRet.data[0])
+      $cp.resolvePlay(play)
+      console.log(play)
+      this.play = play
     },
     mounted() {},
     methods: {
@@ -171,15 +161,5 @@
   .balls {
     display: inline-block;
     width: 4.68rem;
-  }
-
-  .cell-title {
-    border-bottom: 1px solid #EEE;
-
-    &__right {
-      display: flex;
-      justify-content: center;
-      float: right;
-    }
   }
 </style>
