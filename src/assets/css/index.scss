@@ -70,7 +70,7 @@ html, body,#app  {
 }
 
 .bg_white {
-  background-color: white; 
+  background-color: white;
 }
 
 .inline {
@@ -89,8 +89,14 @@ html, body,#app  {
   text-align: right !important;
 }
 
+.flex-middle {
+  display: flex;
+  align-items: center;
+}
+
 .flex-center {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 

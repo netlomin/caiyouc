@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <van-nav-bar :title="$route.meta.title" fixed placeholder safe-area-inset-top @click-left="back">
-      <div slot="left" class="flex-center">
+      <div slot="left" class="flex-middle">
         <van-icon name="home-o" class="lg" />
       </div>
     </van-nav-bar>

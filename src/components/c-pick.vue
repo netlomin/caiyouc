@@ -2,7 +2,7 @@
   <div v-if="area" class="c-pick">
     <van-cell>
       <div slot="title" class="cell-title">
-        <b class="md red">{{area.desc}}</b>
+        <b class="md" :style="{color:area.colors[1]}">{{area.desc}}</b>
         <span class="sm grey">(请选至少{{area.cnt}}个号码)</span>
         <div class="cell-title__right">
           <span class="grey">机选</span>
@@ -12,13 +12,12 @@
       </div>
       <template #label>
         <van-grid :column-num="area.col" :border="false">
-          <van-grid-item v-for="code in area.codes" :key="code">
+          <van-grid-item v-for="(code, i) in area.codes" :key="code" @click="clickBall(i)">
             <template #icon>
-              <c-ball :code="code" type="plain" size="md"></c-ball>
+              <c-ball :code="code" :type="ballType(i)" :color="ballColor(i)" size="md"></c-ball>
             </template>
             <div slot="text" class="sm center">
-              <div class="light-grey">11</div>
-              <div class="red">8</div>
+              <div class="light-grey">{{area.omits[i]}}</div>
             </div>
           </van-grid-item>
         </van-grid>
@@ -39,6 +38,36 @@
     },
     data() {
       return {}
+    },
+    created() {
+      if (!this.area.picks) {
+        this.$set(this.area, 'picks', Array(this.area.codes.length).fill(0))
+      }
+      if (!this.area.omits) {
+        this.$set(this.area, 'omits', Array(this.area.codes.length).fill('?'))
+      }
+    },
+    methods: {
+      ballType(i) {
+        let picks = this.area.picks
+        return picks[i] == 0 ? 'plain' : 'solid'
+      },
+      ballColor(i) {
+        let picks = this.area.picks
+        return this.area.colors[picks[i] == 0 ? 1 : 2 - picks[i]]
+      },
+      gallEnabled() {
+        return this.area.gallEnabled && this.area.picks.filter(p => p == 2).length <= this.area.cnt - 2
+      },
+      clickBall(i) {
+        let picks = _.cloneDeep(this.area.picks)
+        if (this.gallEnabled()) {
+          picks[i] = picks[i] >= 2 ? 0 : picks[i] + 1
+        } else {
+          picks[i] = 1 - picks[i]
+        }
+        this.$set(this.area, 'picks', picks)
+      }
     }
   }
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="app-container">
     <van-nav-bar fixed placeholder safe-area-inset-top left-arrow @click-left="back">
-      <div slot="title" class="flex-center">
+      <div slot="title" class="flex-middle">
         <a-button @click="popup=!popup">
           <b class="m-r-6">{{title}}</b>
           <van-icon :name="'arrow-'+(popup?'up':'down')" />
@@ -24,7 +24,7 @@
 
     <van-collapse v-if="r5" v-model="collapseActives">
       <van-collapse-item name="1">
-        <div slot="title" class="flex-center">
+        <div slot="title" class="flex-middle">
           <span class="light-grey">上期开奖：</span>
           <div class="balls">
             <c-balls :areas="r5.datas[0].set.areas" size="sm" type="none"></c-balls>
@@ -45,7 +45,39 @@
       </van-collapse-item>
     </van-collapse>
 
-    <c-pick :area="play.areas[0]" class="m-t-8"></c-pick>
+    <c-pick v-for="(area, index) in play.areas" :area="area" class="m-t-8"></c-pick>
+
+    <div class="fixed-bottom p_2">
+      <van-row>
+        <van-col span="8">
+          <van-grid :column-num="2" :border="false">
+            <van-grid-item>
+              <template #icon>
+                <van-icon name="add-o" />
+              </template>
+              <div slot="text" class="sm">机选</div>
+            </van-grid-item>
+            <van-grid-item @click="clickCartItem">
+              <template #icon>
+                <van-icon name="cart-o" />
+              </template>
+              <div slot="text" class="sm">选号蓝</div>
+            </van-grid-item>
+          </van-grid>
+        </van-col>
+        <van-col span="8" class="sm flex-center">
+          <div class="box">
+            <div class="grey">0注</div>
+            <div class="red">0元</div>
+          </div>
+        </van-col>
+        <van-col span="8" class="flex-center">
+          <div class="box">
+            <a-button type="primary" block>加入选号篮</a-button>
+          </div>
+        </van-col>
+      </van-row>
+    </div>
   </div>
 </template>
 
@@ -110,6 +142,9 @@
       clickItem(item) {
         this.title = this.items[this.activeIndex].text + '-' + item.text
         this.popup = false
+      },
+      clickCartItem() {
+        this.$router.push({ name: 'Cart' })
       }
     }
   }
@@ -152,6 +187,10 @@
     padding: .1rem 0 !important;
   }
 
+  /deep/ .van-grid-item__content {
+    padding: 0;
+  }
+
   .bar-right {
     display: inline-block;
     position: absolute;
@@ -161,5 +200,13 @@
   .balls {
     display: inline-block;
     width: 4.68rem;
+  }
+
+  .fixed-bottom {
+    border-top: 1px solid #DDD;
+  }
+
+  .flex-center {
+    height: 1.1rem;
   }
 </style>

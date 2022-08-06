@@ -28,6 +28,14 @@ export default [{
       keepAlive: false
     }
   }, {
+    path: '/user/cart',
+    name: 'Cart',
+    component: () => import('@/views/user/cart'),
+    meta: {
+      title: '选号篮',
+      keepAlive: false
+    }
+  }, {
     path: '/user/settings',
     name: 'Settings',
     component: () => import('@/views/user/settings'),

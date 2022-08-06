@@ -20,19 +20,16 @@ const SIGN = {
   equal: '=',
   percent: '%'
 }
-
-const AREA = [
+const COLORS = [
   ['#880000', '#FF8888'],
   ['#000088', '#8888FF']
 ]
-
-const AREA_FC3D = [AREA[0], AREA[0], AREA[0]]
-
+const COLOR_FC3D = [COLORS[0], COLORS[0], COLORS[0]]
 const CP = {
-  SSQ: { ico: 'ssq', col: 7, color: '#FF8888', area: AREA },
-  KL8: { ico: 'ssq', col: 7, color: '#FF6666', area: AREA },
-  QLC: { ico: 'ssq', col: 7, color: '#8888FF', area: AREA },
-  FC3D: { ico: 'ssq', col: 5, color: '#FF88FF', area: AREA_FC3D }
+  SSQ: { ico: 'ssq', col: 7, color: '#FF8888', colors: COLORS },
+  KL8: { ico: 'ssq', col: 7, color: '#FF6666', colors: COLORS },
+  QLC: { ico: 'ssq', col: 7, color: '#8888FF', colors: COLORS },
+  FC3D: { ico: 'ssq', col: 5, color: '#FF88FF', colors: COLOR_FC3D }
 }
 
 class CpSetArea {
@@ -59,7 +56,7 @@ class CpSetArea {
   }
 
   color(j) {
-    return CP[this.cp].area[this.index][j]
+    return CP[this.cp].colors[this.index][j]
   }
 }
 
@@ -118,8 +115,7 @@ const resolvePlay = (play) => {
     // 选号区编号
     let arr = code.split(SIGN.hash)
     area.no = arr.length == 2 ? parseInt(arr[1]) : 1
-    let o = conf.area
-    area.colors = o[area.no - 1]
+    area.colors = conf.colors[area.no - 1]
     // 选号区标题
     arr = arr[0].split(SIGN.tilde)
     area.desc = arr.length == 2 ? arr[1] : '选号'

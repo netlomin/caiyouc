@@ -79,7 +79,7 @@
     </div>
 
     <van-submit-bar :price="_amt" tip="申购后需联系店主购买，30分钟未购买则申购失效！">
-      <div class="flex-center">
+      <div class="flex-middle">
         <span>申购份数</span>
         <van-stepper v-model="cnt" min="0" :max="_max" theme="round" :button-size=".5*rem" integer
           class="inline m-l-6" />
