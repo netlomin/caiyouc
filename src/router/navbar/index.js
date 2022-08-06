@@ -20,6 +20,22 @@ export default [{
       keepAlive: false
     }
   }, {
+    path: '/user/co-buy',
+    name: 'CoBuy',
+    component: () => import('@/views/user/co-buy'),
+    meta: {
+      title: '发起合买',
+      keepAlive: false
+    }
+  }, {
+    path: '/home/co-buy-result/:id',
+    name: 'CoBuyResult',
+    component: () => import('@/views/user/co-buy-result'),
+    meta: {
+      title: '提交合买结果',
+      keepAlive: false
+    }
+  }, {
     path: '/user/co-buy-list',
     name: 'CoBuyList',
     component: () => import('@/views/user/co-buy-list'),

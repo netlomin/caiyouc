@@ -66,13 +66,13 @@
           </van-grid>
         </van-col>
         <van-col span="8" class="sm flex-center">
-          <div class="box">
+          <div>
             <div class="grey">0注</div>
             <div class="red">0元</div>
           </div>
         </van-col>
         <van-col span="8" class="flex-center">
-          <div class="box">
+          <div>
             <a-button type="primary" block>加入选号篮</a-button>
           </div>
         </van-col>

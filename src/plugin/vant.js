@@ -20,6 +20,8 @@ import {
   NavBar,
   Popup,
   PullRefresh,
+  Radio,
+  RadioGroup,
   Row,
   Stepper,
   SubmitBar,
@@ -45,6 +47,7 @@ Vue.use(List)
 Vue.use(Popup)
 Vue.use(PullRefresh)
 Vue.use(NavBar)
+Vue.use(RadioGroup).use(Radio)
 Vue.use(Stepper)
 Vue.use(SubmitBar)
 Vue.use(Tabs).use(Tab)
