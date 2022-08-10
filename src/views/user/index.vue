@@ -7,7 +7,7 @@
       <van-row class="m-t-18">
         <van-col span="12" class="white center">
           <b>10000.00</b>
-          <div>累计合买(元)</div>
+          <div>账户余额(元)</div>
         </van-col>
         <van-col span="12" class="white center">
           <b>18000.00</b>
