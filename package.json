@@ -40,6 +40,6 @@
     "vue-template-compiler": "^2.6.11",
     "webpack-bundle-analyzer": "^3.8.0",
     "compression-webpack-plugin": "5.0.1",
-    "webpack-obfuscator": "3.5.0"
+    "webpack-obfuscator": "2.6.0"
   }
 }
