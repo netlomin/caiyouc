@@ -2,7 +2,7 @@
 const pkg = require('./package.json')
 const path = require('path')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
+// const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 const resolve = dir => path.join(__dirname, dir)
 // page title
@@ -191,13 +191,13 @@ module.exports = {
     })
 
     // 压缩
-    if (IS_PROD) {
-      config.plugin('compressionWebpackPlugin').use(new CompressionWebpackPlugin({
-        test: /\.(js|css|less)$/, // 匹配文件名
-        threshold: 20480, // 对超过20k的数据压缩
-        minRatio: 0.8,
-        deleteOriginalAssets: true // 删除源文件
-      }))
-    }
+    // if (IS_PROD) {
+    //   config.plugin('compressionWebpackPlugin').use(new CompressionWebpackPlugin({
+    //     test: /\.(js|css|less)$/, // 匹配文件名
+    //     threshold: 20480, // 对超过20k的数据压缩
+    //     minRatio: 0.8,
+    //     deleteOriginalAssets: true // 删除源文件
+    //   }))
+    // }
   }
 }
