@@ -188,8 +188,15 @@ module.exports = {
       })
       config.optimization.runtimeChunk('single')
     })
-    
+
     // 压缩
-    
+    if (IS_PROD) {
+      config.plugin('compressionPlugin').use(new CompressionPlugin({
+        test: /\.(js|css|less)$/, // 匹配文件名
+        threshold: 20480, // 对超过20k的数据压缩
+        minRatio: 0.8,
+        deleteOriginalAssets: true // 删除源文件
+      }))
+    }
   }
 }
