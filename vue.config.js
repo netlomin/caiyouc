@@ -188,5 +188,8 @@ module.exports = {
       })
       config.optimization.runtimeChunk('single')
     })
+    
+    // 压缩
+    
   }
 }
