@@ -10,7 +10,7 @@ import store from './store'
 import axios from 'axios'
 import _ from 'lodash'
 import dayjs from 'dayjs'
-import eruda from 'eruda'
+// import eruda from 'eruda'
 import mixin from './utils/mixin'
 
 // 全局引入按需引入UI库 vant
@@ -29,7 +29,7 @@ const currentEnv = _.cloneDeep(process.env)
 currentEnv.DEBUG = currentEnv.VUE_APP_DEBUG === 'true' || mixin.methods.urlParam('DEBUG')
 // 开发环境配置调试
 if (currentEnv.DEBUG) {
-  eruda.init()
+  // eruda.init()
 }
 Vue.config.devtools = currentEnv.DEBUG
 Vue.config.productionTip = !currentEnv.DEBUG
