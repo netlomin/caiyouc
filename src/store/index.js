@@ -7,9 +7,7 @@ import app from './modules/app'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  modules: {
-    app
-  },
+  modules: { app },
   getters,
   plugins: [createPersistedState()]
 })
