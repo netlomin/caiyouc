@@ -7,11 +7,11 @@ import App from './App.vue'
 import conf from '@/config'
 import router from './router'
 import store from './store'
-import axios from 'axios'
 import _ from 'lodash'
 import dayjs from 'dayjs'
 // import eruda from 'eruda'
 import mixin from './utils/mixin'
+import api from '@/service/api'
 
 // 全局引入按需引入UI库 vant
 import '@/plugin/vant'
@@ -34,20 +34,13 @@ if (currentEnv.DEBUG) {
 Vue.config.devtools = currentEnv.DEBUG
 Vue.config.productionTip = !currentEnv.DEBUG
 
-const apiInstance = axios.create()
-const eascInstance = axios.create()
 const rem = screen.width / 10
 const px = 10 / screen.width
 
 const init = () => {
-  apiInstance.defaults.baseURL = currentEnv.VUE_APP_API_SERVER
-  eascInstance.defaults.baseURL = currentEnv.VUE_APP_EASC_SERVER
   _.assign(window, {
     conf,
     _,
-    axios,
-    apiInstance,
-    eascInstance,
     dayjs,
     currentEnv,
     store,
@@ -61,7 +54,8 @@ const init = () => {
     dayjs,
     currentEnv,
     rem,
-    px
+    px,
+    api
   })
 
   const app = new Vue({
@@ -72,7 +66,9 @@ const init = () => {
     }
   }).$mount('#app')
 
-  _.assign(window, { app })
+  _.assign(window, {
+    app
+  })
 
   Vue.mixin(mixin)
 }

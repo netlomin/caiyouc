@@ -72,6 +72,11 @@
     computed: {},
     watch: {},
     created() {
+      this.api.time().then(vo => {
+        console.log('vo', vo)
+      }).catch(err => {
+        console.log('err', err)
+      })
       this.load()
     },
     mounted() {},
