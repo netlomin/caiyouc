@@ -45,7 +45,8 @@ const init = () => {
     currentEnv,
     store,
     rem,
-    px
+    px,
+    api
   })
 
   _.assign(Vue.prototype, {

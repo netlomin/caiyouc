@@ -26,7 +26,6 @@
 </template>
 
 <script>
-  import userRet from '@/mock/user/user.json'
   import cPanel from 'components/c-panel'
 
   export default {
@@ -40,7 +39,10 @@
       }
     },
     created() {
-      this.user = userRet.data
+      this.api.user.info({}).then(vo => {
+        vo.nickName = _.defaultTo(vo.nickName, vo.mobile)
+        this.user = vo
+      }).catch(this.caught)
     },
     mounted() {},
     computed: {},

@@ -5,6 +5,9 @@
  */
 import _ from 'lodash'
 import dayjs from 'dayjs'
+import {
+  Toast
+} from 'vant'
 
 const mixin = {
   sumArr(arr) {
@@ -364,6 +367,17 @@ const mixin = {
   },
   firstChar(s) {
     return s && s.length ? s.charAt(0) : ''
+  },
+  caught(error) {
+    if (!error.code) {
+      Toast.fail('程序出错！')
+      return true
+    }
+    if (!/^\d+$/.test(error.code) || parseInt(error.code) >= 200) {
+      Toast.fail(error.error.msg)
+      return true
+    }
+    return false
   }
 }
 export default {

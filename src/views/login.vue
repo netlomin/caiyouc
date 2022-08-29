@@ -8,7 +8,7 @@
 
     <c-panel margin="2rem 1rem">
       <van-tabs v-model="active" :line-width="4*rem">
-        <van-tab title="账号登录">
+        <van-tab title="登录">
           <van-form @submit="login" class="m-t_8">
             <van-field v-model="userName" name="userName" placeholder="用户名"
               :rules="[{ required: true, message: '请填写用户名' }]" />
@@ -28,7 +28,7 @@
             </van-field>
           </van-form>
         </van-tab>
-        <van-tab title="短信登录">
+        <van-tab title="注册">
           <van-form @submit="login" class="m-t_8">
             <van-field v-model="userName" name="userName" placeholder="用户名"
               :rules="[{ required: true, message: '请填写用户名' }]" />
