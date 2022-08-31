@@ -1,33 +1,45 @@
 import router from '@/router'
+import md5 from 'md5'
 
 const state = {
-  token: ''
+  token: '',
+  passportId: '',
+  userId: '',
+  shopId: ''
 }
 const mutations = {
   LOGIN(state, token) {
     state.token = token
+  },
+  SET_USER(state, user) {
+    state.passportId = user.passportId
+    state.userId = user.userId
+    state.shopId = user.shopId
   },
   LOGOUT(state, token) {
     state.token = ''
   }
 }
 const actions = {
-  login({ commit }, params) {
-    return new Promise((resolve, reject) => {
-      Vue.prototype.$api[params.passWord ? 'login' : 'codeLogin'](params).then(obj => {
-        commit('login', obj.token)
-        resolve(obj)
-      }).catch(err => {
-        reject(err)
-      })
-    })
-  },
-  logout({ commit, dispatch }) {
-    dispatch('toLogin')
-  },
   toLogin({ commit, dispatch }, params) {
     commit('LOGOUT')
     router.push({ name: "Login" })
+  },
+  login({ commit }, params) {
+    let method = 'login'
+    if (params.code) {
+      method = 'codeLogin'
+    } else {
+      params.passWord = md5(params.passWord)
+    }
+    return api.ps[method](params)
+      .then(vo => commit('LOGIN', vo.token))
+  },
+  user({ commit }, user) {
+    commit('SET_USER', user)
+  },
+  logout({ commit, dispatch }) {
+    dispatch('toLogin')
   }
 }
 export default {

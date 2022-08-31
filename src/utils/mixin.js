@@ -369,15 +369,21 @@ const mixin = {
     return s && s.length ? s.charAt(0) : ''
   },
   caught(error) {
+    console.error(error)
+
     if (!error.code) {
       Toast.fail('程序出错！')
       return true
     }
-    if (!/^\d+$/.test(error.code) || parseInt(error.code) >= 200) {
-      Toast.fail(error.error.msg)
+    if (!/^\d+$/.test(error.code) ||
+      parseInt(error.code) < 200) {
+      Toast.fail(error.msg)
       return true
     }
     return false
+  },
+  localeNum(i) {
+    return typeof(i) !== 'number' ? i : i.toLocaleString()
   }
 }
 export default {

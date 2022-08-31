@@ -23,14 +23,17 @@
         passWord2: ''
       }
     },
-    computed: {},
-    watch: {},
-    created() {},
-    mounted() {},
     methods: {
-      submitPassWord() {}
+      submitPassWord(params) {
+        if (this.passWord != this.passWord2) {
+          this.$notify('两次输入的密码不一致！')
+          return
+        }
+        api.ps.setPassword(params).then(vo => {
+            this.$notify({ message: '设置密码成功！', background: '#11FF11' })
+          })
+          .catch(this.caught)
+      }
     }
   }
 </script>
-<style lang="scss" scoped>
-</style>

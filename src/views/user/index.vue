@@ -6,11 +6,11 @@
       <b class="white m-l-6">{{user.nickName}}</b>
       <van-row class="m-t-18">
         <van-col span="12" class="white center">
-          <b>10000.00</b>
+          <b>{{localeNum(cashAct.amt)}}</b>
           <div>账户余额(元)</div>
         </van-col>
         <van-col span="12" class="white center">
-          <b>18000.00</b>
+          <b>{{localeNum(prizeAct.amt)}}</b>
           <div>累计中奖(元)</div>
         </van-col>
       </van-row>
@@ -35,13 +35,22 @@
         css: {
           avatar: { backgroundColor: conf.colors.blue }
         },
-        user: {}
+        user: {},
+        cashAct: {},
+        prizeAct: {}
       }
     },
     created() {
-      this.api.user.info({}).then(vo => {
+      let userId = this.$store.getters.userId
+      this.api.user.info({ id: userId }).then(vo => {
         vo.nickName = _.defaultTo(vo.nickName, vo.mobile)
         this.user = vo
+      }).catch(this.caught)
+      this.api.user.act({ userId, actType: 'CASH' }).then(vo => {
+        this.cashAct = vo
+      }).catch(this.caught)
+      this.api.user.act({ userId, actType: 'PRIZE' }).then(vo => {
+        this.prizeAct = vo
       }).catch(this.caught)
     },
     mounted() {},

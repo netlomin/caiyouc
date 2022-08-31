@@ -18,6 +18,7 @@ import {
   Icon,
   List,
   NavBar,
+  Notify,
   Popup,
   PullRefresh,
   Radio,
@@ -47,6 +48,7 @@ Vue.use(List)
 Vue.use(Popup)
 Vue.use(PullRefresh)
 Vue.use(NavBar)
+Vue.use(Notify)
 Vue.use(RadioGroup).use(Radio)
 Vue.use(Stepper)
 Vue.use(SubmitBar)

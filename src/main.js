@@ -34,6 +34,7 @@ if (currentEnv.DEBUG) {
 Vue.config.devtools = currentEnv.DEBUG
 Vue.config.productionTip = !currentEnv.DEBUG
 
+Vue.prototype.$notify.setDefaultOptions({ color: '#FFF', background: conf.themeColor })
 const rem = screen.width / 10
 const px = 10 / screen.width
 
