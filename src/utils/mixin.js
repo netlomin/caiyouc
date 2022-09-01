@@ -372,12 +372,20 @@ const mixin = {
     console.error(error)
 
     if (!error.code) {
-      Toast.fail('程序出错！')
+      Toast.fail('程序出错')
       return true
     }
     if (!/^\d+$/.test(error.code) ||
       parseInt(error.code) < 200) {
-      Toast.fail(error.msg)
+      if (!error.msg) {
+        return false
+      }
+      if (error.msg.length <= 4) {
+        Toast.fail(error.msg)
+      } else {
+        Toast({ message: error.msg, position: 'top' })
+      }
+
       return true
     }
     return false

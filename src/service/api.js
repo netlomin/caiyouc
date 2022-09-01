@@ -48,7 +48,7 @@ apiInstance.interceptors.response.use(
     console.log('response:', response)
     let { status, data } = response
     if (status != 200) {
-      let err = { ok: false, msg: '程序/网络故障！' }
+      let err = { ok: false, msg: '网络故障' }
       err.code = 'HTTP_' + status
       return Promise.reject(error)
     }
@@ -65,7 +65,7 @@ apiInstance.interceptors.response.use(
   error => {
     console.log('response:error', error)
     error.ok = false
-    error.msg = "程序/网络故障！"
+    error.msg = "网络故障"
     return Promise.reject(error)
   })
 
