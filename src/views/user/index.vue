@@ -6,11 +6,11 @@
       <b class="white m-l-6">{{user.nickName}}</b>
       <van-row class="m-t-18">
         <van-col span="12" class="white center">
-          <b>{{localeNum(cashAct.amt)}}</b>
+          <b>{{fmtAmt(cashAct.amt)}}</b>
           <div>账户余额(元)</div>
         </van-col>
         <van-col span="12" class="white center">
-          <b>{{localeNum(prizeAct.amt)}}</b>
+          <b>{{fmtAmt(prizeAct.amt)}}</b>
           <div>累计中奖(元)</div>
         </van-col>
       </van-row>

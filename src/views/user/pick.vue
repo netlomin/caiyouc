@@ -13,12 +13,12 @@
         @click-item="clickItem" />
     </van-popup>
 
-    <div class="p_1 sm light-grey bg_white">
-      <span>第2022001期</span>
-      <span class="m-l_2 red">奖池20.00亿</span>
+    <div v-if="issue&&draw" class="p_1 sm light-grey bg_white">
+      <span>第{{issue.issue}}期</span>
+      <span class="m-l_2 red">奖池{{simNum(draw.poolAmt)}}</span>
       <div class="bar-right">
         <span>投注截止：</span>
-        <van-count-down :time="12.5*3600*1000" format="DD天HH时mm分ss秒" />
+        <van-count-down :time="issue.remainTime" format="DD天HH时mm分ss秒" />
       </div>
     </div>
 
@@ -27,7 +27,7 @@
         <div slot="title" class="flex-middle">
           <span class="light-grey">上期开奖：</span>
           <div class="balls">
-            <c-balls :areas="r5.datas[0].set.areas" size="sm" type="none"></c-balls>
+            <c-balls :areas="r5.datas[4].set.areas" size="sm" type="none"></c-balls>
           </div>
         </div>
         <template #value>点击展开历史开奖</template>
@@ -45,7 +45,9 @@
       </van-collapse-item>
     </van-collapse>
 
-    <c-pick v-for="(area, index) in play.areas" :area="area" class="m-t-8"></c-pick>
+    <div v-if="play">
+      <c-pick v-for="(area, index) in play.areas" :area="area" class="m-t-8"></c-pick>
+    </div>
 
     <div class="fixed-bottom p_2">
       <van-row>
@@ -98,53 +100,101 @@
         activeIndex: 0,
         activeId: 1,
         items: [
-          { text: '双色球', children: [{ id: 1, text: '普通' }] },
-          { text: '快乐8', children: [{ id: 2, text: '选十' }] }
+          { cp: 'SSQ', text: '双色球', children: [{ id: 1, text: '普通' }] },
+          { cp: 'KL8', text: '快乐8', children: [{ id: 2, text: '选十' }] }
         ],
+        issue: null,
+        draw: null,
         collapseActives: ['0'],
-        draws: [],
         r5: null,
         redCnt: 5,
         play: null
       }
     },
-    computed: {},
-    watch: {},
     created() {
-      let r5 = _.cloneDeep(r5Ret.data)
-      let heads = ['issue', 'code', 'odd', 'zone', 'ac']
-      r5.heads.forEach((head, i) => {
-        head.name = heads[i]
+      this.items.forEach(item => {
+        api.lot.issue(item.cp).then(vo => {
+          console.log(vo)
+          let { cp, issue } = vo
+          api.lot.plays({ cp, issue }).then(vo1 => {
+            console.log(vo1)
+            vo1.forEach(v1 => { v1.text = v1.name })
+            item.children = vo1
+            vo1.filter(v1 => this.activeId == v1.id).forEach(v1 => {
+              this.reload()
+            })
+          }).catch(this.caught)
+        }).catch(this.caught)
       })
-      r5.datas.forEach((data, i) => {
-        let obj = {}
-        obj.key = data[0]
-        r5.heads.forEach((head, j) => {
-          obj[head.name] = data[j]
-          this.$set(obj, head.name, data[j])
-        })
-        obj.cp = 'SSQ'
-        $cp.enhance(obj)
-        r5.datas[i] = obj
-      })
-      this.r5 = r5
-
-      let play = _.cloneDeep(playRet.data[0])
-      $cp.resolvePlay(play)
-      console.log(play)
-      this.play = play
     },
-    mounted() {},
     methods: {
       back() {
         this.$router.back()
       },
       clickItem(item) {
-        this.title = this.items[this.activeIndex].text + '-' + item.text
         this.popup = false
+        this.reload()
       },
       clickCartItem() {
         this.$router.push({ name: 'Cart' })
+      },
+      reload() {
+        let item = this.items[this.activeIndex]
+        let subItem = item.children.filter(i => this.activeId == i.id)[0]
+
+        this.title = item.text + '-' + subItem.text
+
+        api.lot.issue(item.cp).then(vo => {
+          vo.remainTime = dayjs(vo.stopTime).diff(dayjs())
+          this.issue = vo
+        }).catch(this.caught)
+        api.lot.draws({ cp: item.cp, size: 1 }).then(vo => {
+          this.draw = vo[0]
+        }).catch(this.caught)
+
+        api.lot.trend({ cp: item.cp, issues: 5 }).then(vo => {
+          vo.datas.forEach((data, i) => {
+            let obj = {}
+            obj.key = data[0]
+            vo.heads.forEach((head, j) => {
+              obj[head.name] = data[j]
+              this.$set(obj, head.name, data[j])
+            })
+            obj.cp = 'SSQ'
+            $cp.enhance(obj)
+            vo.datas[i] = obj
+          })
+          this.r5 = vo
+        }).catch(this.caught)
+
+        let play = _.cloneDeep(subItem)
+        $cp.resolvePlay(play)
+        console.log(play)
+        this.play = play
+      },
+      test() {
+        let r5 = _.cloneDeep(r5Ret.data)
+        let heads = ['issue', 'code', 'odd', 'zone', 'ac']
+        r5.heads.forEach((head, i) => {
+          head.name = heads[i]
+        })
+        r5.datas.forEach((data, i) => {
+          let obj = {}
+          obj.key = data[0]
+          r5.heads.forEach((head, j) => {
+            obj[head.name] = data[j]
+            this.$set(obj, head.name, data[j])
+          })
+          obj.cp = 'SSQ'
+          $cp.enhance(obj)
+          r5.datas[i] = obj
+        })
+        this.r5 = r5
+
+        let play = _.cloneDeep(playRet.data[0])
+        $cp.resolvePlay(play)
+        console.log(play)
+        this.play = play
       }
     }
   }

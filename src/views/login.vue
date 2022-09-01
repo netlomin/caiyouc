@@ -70,10 +70,6 @@
         disabled: false
       }
     },
-    computed: {},
-    watch: {},
-    created() {},
-    mounted() {},
     methods: {
       login(params) {
         this.$store.dispatch('login', params).then(vo => {

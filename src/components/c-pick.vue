@@ -40,14 +40,27 @@
       return {}
     },
     created() {
-      if (!this.area.picks) {
-        this.$set(this.area, 'picks', Array(this.area.codes.length).fill(0))
-      }
-      if (!this.area.omits) {
-        this.$set(this.area, 'omits', Array(this.area.codes.length).fill('?'))
+      console.log('created', this.area)
+      this.init()
+    },
+    watch: {
+      area(newData, oldData) {
+        console.log(newData, oldData)
+        if (!this.area.picks) {
+          this.init()
+        }
       }
     },
     methods: {
+      init() {
+        console.log('init', this.area)
+        if (!this.area.picks) {
+          this.$set(this.area, 'picks', Array(this.area.codes.length).fill(0))
+        }
+        if (!this.area.omits) {
+          this.$set(this.area, 'omits', Array(this.area.codes.length).fill('?'))
+        }
+      },
       ballType(i) {
         let picks = this.area.picks
         return picks[i] == 0 ? 'plain' : 'solid'

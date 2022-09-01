@@ -390,8 +390,14 @@ const mixin = {
     }
     return false
   },
-  localeNum(i) {
+  fmtAmt(i) {
     return typeof(i) !== 'number' ? i : i.toLocaleString()
+  },
+  simNum(i) {
+    if (typeof(i) != 'number') return '-.--'
+    if (i < 1E4) return prettifyNum(i)
+    if (i < 1E8) return _.floor(i / 1E4, 2) + '万'
+    return _.floor(i / 1E8, 2) + '亿'
   }
 }
 export default {

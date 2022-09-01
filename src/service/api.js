@@ -86,6 +86,15 @@ export default {
     user() {
       return apiInstance.post(`ps/user`)
     },
+    shops() {
+      return apiInstance.post(`ps/shops`, params)
+    },
+    joinShop(params) {
+      return apiInstance.post(`ps/join-shop`, params)
+    },
+    selectShop(params) {
+      return apiInstance.post(`ps/select-shop`, params)
+    },
     setPassword(params) {
       return apiInstance.post(`ps/set-password`, params)
     },
@@ -100,5 +109,25 @@ export default {
     act(params) {
       return apiInstance.post(`user/act`, params)
     },
+    allAct(params) {
+      return apiInstance.post(`user/all-act`, params)
+    },
+    save(params) {
+      return apiInstance.post(`user/save`, params)
+    }
+  },
+  lot: {
+    issue(cp) {
+      return apiInstance.post('lot/issue', { cp })
+    },
+    plays(params) {
+      return apiInstance.post('lot/plays', params)
+    },
+    trend(params) {
+      return apiInstance.post('lot/trend', params)
+    },
+    draws(params) {
+      return apiInstance.post('lot/draws', params)
+    }
   }
 }
