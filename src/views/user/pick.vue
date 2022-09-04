@@ -158,7 +158,6 @@
             obj.key = data[0]
             vo.heads.forEach((head, j) => {
               obj[head.name] = data[j]
-              this.$set(obj, head.name, data[j])
             })
             obj.cp = 'SSQ'
             $cp.enhance(obj)
@@ -169,32 +168,14 @@
 
         let play = _.cloneDeep(subItem)
         $cp.resolvePlay(play)
-        console.log(play)
         this.play = play
-      },
-      test() {
-        let r5 = _.cloneDeep(r5Ret.data)
-        let heads = ['issue', 'code', 'odd', 'zone', 'ac']
-        r5.heads.forEach((head, i) => {
-          head.name = heads[i]
-        })
-        r5.datas.forEach((data, i) => {
-          let obj = {}
-          obj.key = data[0]
-          r5.heads.forEach((head, j) => {
-            obj[head.name] = data[j]
-            this.$set(obj, head.name, data[j])
-          })
-          obj.cp = 'SSQ'
-          $cp.enhance(obj)
-          r5.datas[i] = obj
-        })
-        this.r5 = r5
 
-        let play = _.cloneDeep(playRet.data[0])
-        $cp.resolvePlay(play)
-        console.log(play)
-        this.play = play
+        api.lot.stat({ cp: item.cp, stat: 'OMIT' }).then(vo => {
+          vo = this.listTable(vo)[0]
+          this.play.areas.forEach((area, i) => {
+            this.$set(area, 'omits', vo[i].datas[0])
+          })
+        }).catch(this.caught)
       }
     }
   }

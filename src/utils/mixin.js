@@ -398,6 +398,17 @@ const mixin = {
     if (i < 1E4) return prettifyNum(i)
     if (i < 1E8) return _.floor(i / 1E4, 2) + '万'
     return _.floor(i / 1E8, 2) + '亿'
+  },
+  listTable(t) {
+    let list = []
+    t.datas.forEach((data, row) => {
+      let obj = {}
+      t.heads.forEach((head, col) => {
+        obj[head.name] = data[col]
+      })
+      list.push(obj)
+    })
+    return list
   }
 }
 export default {
