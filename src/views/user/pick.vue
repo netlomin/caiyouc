@@ -14,7 +14,7 @@
     </van-popup>
 
     <div v-if="issue&&draw" class="p_1 sm light-grey bg_white">
-      <span>第{{issue.issue}}期</span>
+      <span>第{{issue.issue}}期1</span>
       <span class="m-l_2 red">奖池{{simNum(draw.poolAmt)}}</span>
       <div class="bar-right">
         <span>投注截止：</span>
