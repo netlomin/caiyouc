@@ -129,7 +129,7 @@ export default {
     draws(params) {
       return apiInstance.post('lot/draws', params)
     },
-    stat(params) {
+    stat(params) {  
       return apiInstance.post('lot/stat', params)
     }
   }
