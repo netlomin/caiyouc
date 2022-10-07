@@ -7,7 +7,7 @@
       <van-tabs v-model="active" :line-width="4*rem">
         <van-tab title="登录">
           <van-form @submit="login" class="m-t_8">
-            <van-field v-model="mobile" name="mobile" placeholder="手机号码"
+            <van-field v-model="mobile" name="mobile" type="digit" maxlength="11" placeholder="手机号码"
               :rules="[{ required: true, message: '请输入手机号码' }]" />
             <van-field v-model="passWord" name="passWord" type="password" placeholder="密码"
               :rules="[{ required: true, message: '请输入密码' }]" />
@@ -30,7 +30,7 @@
           <van-form @submit="login" class="m-t_8">
             <van-field v-model="mobile" name="mobile" placeholder="用户名"
               :rules="[{ required: true, message: '请填写用户名' }]" />
-            <van-field v-model="code" name="code" center clearable placeholder="验证码">
+            <van-field v-model="code" name="code" maxlength="6" center clearable placeholder="验证码">
               <template #button>
                 <a-button type="primary" size="small" @click="sendSms" :disabled="disabled">{{sendBtnTxt}}</a-button>
               </template>
