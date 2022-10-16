@@ -47,7 +47,7 @@ apiInstance.interceptors.response.use(
   response => {
     console.log('response:', response)
     let { status, data } = response
-    if (status != 200) {
+    if (!(status == 200 || (data && data.code))) {
       let err = { ok: false, msg: '网络故障' }
       err.code = 'HTTP_' + status
       return Promise.reject(error)
@@ -129,7 +129,7 @@ export default {
     draws(params) {
       return apiInstance.post('lot/draws', params)
     },
-    stat(params) {  
+    stat(params) {
       return apiInstance.post('lot/stat', params)
     }
   }
