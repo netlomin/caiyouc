@@ -50,7 +50,7 @@ apiInstance.interceptors.response.use(
     if (!(status == 200 || (data && data.code))) {
       let err = { ok: false, msg: '网络故障' }
       err.code = 'HTTP_' + status
-      return Promise.reject(error)
+      return Promise.reject(err)
     }
 
     if (data.ok) {
@@ -64,9 +64,17 @@ apiInstance.interceptors.response.use(
   },
   error => {
     console.log('response:error', error)
-    error.ok = false
-    error.msg = "网络故障"
-    return Promise.reject(error)
+    let { status, data } = error.response
+    if (!(data && data.code)) {
+      let err = { ok: false, msg: '网络故障' }
+      err.code = 'HTTP_' + status
+      return Promise.reject(err)
+    }
+
+    if (data.code == 1) {
+      store.dispatch('toLogin')
+    }
+    return Promise.reject(data)
   })
 
 export default {
