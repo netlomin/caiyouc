@@ -1,50 +1,111 @@
 <template>
   <div class="app-container">
-    <van-nav-bar :title="$route.meta.title" fixed placeholder safe-area-inset-top>
+    <van-nav-bar
+      :title="$route.meta.title"
+      fixed
+      placeholder
+      safe-area-inset-top
+    >
     </van-nav-bar>
 
     <c-panel margin="2rem 1rem">
-      <van-tabs v-model="active" :line-width="4*rem">
+      <van-tabs
+        v-model="active"
+        :line-width="4*rem"
+      >
         <van-tab title="登录">
-          <van-form @submit="login" class="m-t_8">
-            <van-field v-model="mobile" name="mobile" type="digit" maxlength="11" placeholder="手机号码"
-              :rules="[{ required: true, message: '请输入手机号码' }]" />
-            <van-field v-model="passWord" name="passWord" type="password" placeholder="密码"
-              :rules="[{ required: true, message: '请输入密码' }]" />
-            <van-field name="check" :rules="[{ required: true, message: '请勾选同意《用户协议》' }]">
+          <van-form
+            @submit="login"
+            class="m-t_8"
+          >
+            <van-field
+              v-model="mobile"
+              name="mobile"
+              type="digit"
+              maxlength="11"
+              placeholder="手机号码"
+              :rules="[{ required: true, message: '请输入手机号码' }]"
+            />
+            <van-field
+              v-model="passWord"
+              name="passWord"
+              type="password"
+              placeholder="密码"
+              :rules="[{ required: true, message: '请输入密码' }]"
+            />
+            <van-field
+              name="check"
+              :rules="[{ required: true, message: '请勾选同意《用户协议》' }]"
+            >
               <template #input>
-                <van-checkbox v-model="check" shape="square">
+                <van-checkbox
+                  v-model="check"
+                  shape="square"
+                >
                   <span class="grey">请勾选同意<a>《用户协议》</a></span>
                 </van-checkbox>
               </template>
             </van-field>
             <van-field>
               <template #input>
-                <a-button block type="primary" htmlType="submit">登录</a-button>
+                <a-button
+                  block
+                  type="primary"
+                  htmlType="submit"
+                >登录</a-button>
               </template>
             </van-field>
           </van-form>
         </van-tab>
 
         <van-tab title="注册">
-          <van-form @submit="login" class="m-t_8">
-            <van-field v-model="mobile" name="mobile" placeholder="用户名"
-              :rules="[{ required: true, message: '请填写用户名' }]" />
-            <van-field v-model="code" name="code" maxlength="6" center clearable placeholder="验证码">
+          <van-form
+            @submit="login"
+            class="m-t_8"
+          >
+            <van-field
+              v-model="mobile"
+              name="mobile"
+              placeholder="用户名"
+              :rules="[{ required: true, message: '请填写用户名' }]"
+            />
+            <van-field
+              v-model="code"
+              name="code"
+              maxlength="6"
+              center
+              clearable
+              placeholder="验证码"
+            >
               <template #button>
-                <a-button type="primary" size="small" @click="sendSms" :disabled="disabled">{{sendBtnTxt}}</a-button>
+                <a-button
+                  type="primary"
+                  size="small"
+                  @click="sendSms"
+                  :disabled="disabled"
+                >{{sendBtnTxt}}</a-button>
               </template>
             </van-field>
-            <van-field name="check" :rules="[{ required: true, message: '请勾选同意《用户协议》' }]">
+            <van-field
+              name="check"
+              :rules="[{ required: true, message: '请勾选同意《用户协议》' }]"
+            >
               <template #input>
-                <van-checkbox v-model="check" shape="square">
+                <van-checkbox
+                  v-model="check"
+                  shape="square"
+                >
                   <span class="grey">请勾选同意<a>《用户协议》</a></span>
                 </van-checkbox>
               </template>
             </van-field>
             <van-field>
               <template #input>
-                <a-button type="primary" htmlType="submit" block>注册 / 登录</a-button>
+                <a-button
+                  type="primary"
+                  htmlType="submit"
+                  block
+                >注册 / 登录</a-button>
               </template>
             </van-field>
           </van-form>
@@ -74,7 +135,17 @@
       login(params) {
         this.$store.dispatch('login', params).then(vo => {
           api.ps.user().then(user => {
+            let passportId = this.$store.getters.passportId
+            let shopId = this.$store.getters.shopId
+            if (user.passportId == passportId && shopId) {
+              this.$router.replace({ name: 'Home' })
+              return
+            }
             this.$store.dispatch('user', user)
+            if (!user.userId) {
+              this.$router.push({ name: 'SelectShop' })
+              return
+            }
             this.$router.replace({ name: 'Home' })
           })
         }).catch(error => {

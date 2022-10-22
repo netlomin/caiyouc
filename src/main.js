@@ -34,6 +34,8 @@ if (currentEnv.DEBUG) {
 Vue.config.devtools = currentEnv.DEBUG
 Vue.config.productionTip = !currentEnv.DEBUG
 
+let JSONbig = require('json-bigint')({ storeAsString: true })
+window.JSON = JSONbig
 Vue.prototype.$notify.setDefaultOptions({ color: '#FFF', background: conf.themeColor })
 const rem = screen.width / 10
 const px = 10 / screen.width
@@ -60,6 +62,8 @@ const init = () => {
     api
   })
 
+  Vue.mixin(mixin)
+
   const app = new Vue({
     router,
     store,
@@ -71,8 +75,6 @@ const init = () => {
   _.assign(window, {
     app
   })
-
-  Vue.mixin(mixin)
 }
 
 const url = './static/extraConfig.json'

@@ -14,4 +14,12 @@ export default [{
     title: '选号',
     keepAlive: false
   }
+}, {
+  path: '/user/select-shop',
+  name: 'SelectShop',
+  component: () => import('@/views/user/select-shop'),
+  meta: {
+    title: '切换彩店',
+    keepAlive: false
+  }
 }]

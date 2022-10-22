@@ -2,14 +2,24 @@
 <template>
   <div>
     <c-panel :bg="conf.themeColor">
-      <a-avatar :src="user.avatar" :size="rem" :style="css.avatar">{{firstChar(user.nickName)}}</a-avatar>
+      <a-avatar
+        :src="user.avatarUrl"
+        :size="rem"
+        :style="css.avatar"
+      >{{firstChar(user.nickName)}}</a-avatar>
       <b class="white m-l-6">{{user.nickName}}</b>
       <van-row class="m-t-18">
-        <van-col span="12" class="white center">
+        <van-col
+          span="12"
+          class="white center"
+        >
           <b>{{fmtAmt(cashAct.amt)}}</b>
           <div>账户余额(元)</div>
         </van-col>
-        <van-col span="12" class="white center">
+        <van-col
+          span="12"
+          class="white center"
+        >
           <b>{{fmtAmt(prizeAct.amt)}}</b>
           <div>累计中奖(元)</div>
         </van-col>
@@ -18,9 +28,27 @@
     </c-panel>
 
     <div class="m-t-8">
-      <van-cell title="发起合买" :to="{name:'Pick'}" icon="add-o" size="large" is-link />
-      <van-cell title="我的合买" :to="{name:'CoBuyList'}" icon="orders-o" size="large" is-link />
-      <van-cell title="系统" :to="{name:'Settings'}" icon="setting-o" size="large" is-link />
+      <van-cell
+        title="发起合买"
+        :to="{name:'Pick'}"
+        icon="add-o"
+        size="large"
+        is-link
+      />
+      <van-cell
+        title="我的合买"
+        :to="{name:'CoBuyList'}"
+        icon="orders-o"
+        size="large"
+        is-link
+      />
+      <van-cell
+        title="系统"
+        :to="{name:'Settings'}"
+        icon="setting-o"
+        size="large"
+        is-link
+      />
     </div>
   </div>
 </template>
@@ -59,5 +87,9 @@
     methods: {}
   }
 </script>
-<style lang="scss" scoped>
+
+<style
+  lang="scss"
+  scoped
+>
 </style>

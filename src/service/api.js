@@ -94,7 +94,7 @@ export default {
     user() {
       return apiInstance.post(`ps/user`)
     },
-    shops() {
+    shops(params) {
       return apiInstance.post(`ps/shops`, params)
     },
     joinShop(params) {
