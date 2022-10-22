@@ -368,27 +368,24 @@ const mixin = {
   firstChar(s) {
     return s && s.length ? s.charAt(0) : ''
   },
-  caught(error) {
-    console.error(error)
-
-    if (!error.code) {
-      Toast.fail('程序出错')
-      return true
-    }
-    if (!/^\d+$/.test(error.code) ||
-      parseInt(error.code) < 200) {
-      if (!error.msg) {
-        return false
+  caught(obj) {
+    let type = typeof obj
+    let handler = (err) => {
+      if (type === 'function' && obj(err)) {
+        return
       }
-      if (error.msg.length <= 4) {
-        Toast.fail(error.msg)
-      } else {
-        Toast({ message: error.msg, position: 'top' })
+      if (typeof err.msg == 'string') {
+        if (err.msg.length <= 4) {
+          Toast.fail(err.msg)
+        } else {
+          Toast({ message: err.msg, position: 'top' })
+        }
+        return
       }
-
-      return true
+      console.log('未知错误', err)
+      Toast.fail('未知错误')
     }
-    return false
+    return type === 'undefined' || type === 'function' ? handler : handler(obj)
   },
   fmtAmt(i) {
     return typeof(i) !== 'number' ? i : i.toLocaleString()

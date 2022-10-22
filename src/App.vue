@@ -23,7 +23,7 @@
             this.$router.push({ name: 'SelectShop' })
             return
           }
-        }).catch(this.caught)
+        }).catch(this.caught(err => err.code == 1))
       }
     }
   }

@@ -1,13 +1,5 @@
 <template>
   <div class="app-container">
-    <van-nav-bar
-      :title="$route.meta.title"
-      fixed
-      placeholder
-      safe-area-inset-top
-    >
-    </van-nav-bar>
-
     <c-panel margin="2rem 1rem">
       <van-tabs
         v-model="active"
