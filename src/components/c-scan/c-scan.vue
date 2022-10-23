@@ -3,7 +3,7 @@
     <van-overlay
       :show="show"
       z-index="99999"
-      @click="show = false"
+      @click="cancel"
     >
       <canvas
         ref="canvas"
@@ -24,16 +24,17 @@
         show: false,
         audio: null,
         video: null,
+        facingMode: "environment",
         canvas: null,
         canvas2d: null,
         animation: true,
-        imgUrl: null,
+        mediaStream: null,
         timer: null,
         result: null
       }
     },
     mounted() {
-      this.audio = new Audio("tone.mp3")
+      this.audio = new Audio("static/tone.mp3")
       this.video = document.createElement("video")
       this.canvas = this.$refs.canvas
       this.canvas2d = this.canvas.getContext("2d")
@@ -47,13 +48,7 @@
         this.canvas2d.strokeStyle = "red"
         this.canvas2d.stroke()
       },
-      cancel() {
-        this.animation = false
-        cancelAnimationFrame(this.timer)
-        setTimeout(() => this.canvas.style.display = "none", 1000)
-        this.show = false
-      },
-      sweep() {
+      scan() {
         if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
           const { videoWidth, videoHeight } = this.video
           this.canvas.width = videoWidth
@@ -61,73 +56,67 @@
           this.canvas2d.drawImage(this.video, 0, 0, videoWidth, videoHeight)
           try {
             const img = this.canvas2d.getImageData(0, 0, videoWidth, videoHeight)
-            this.imgUrl = img
-            const obj = jsQR(img.data, img.width, img.height, { inversionAttempts: "dontInvert" })
-            if (obj) {
-              const loc = obj.location
+            const qr = jsQR(img.data, img.width, img.height, { inversionAttempts: "dontInvert" })
+            if (qr) {
+              const loc = qr.location
               this.draw(loc.topLeftCorner, loc.topRightCorner)
               this.draw(loc.topRightCorner, loc.bottomRightCorner)
               this.draw(loc.bottomRightCorner, loc.bottomLeftCorner)
               this.draw(loc.bottomLeftCorner, loc.topLeftCorner)
-              if (this.result != obj.data) {
+              if (this.result != qr.data) {
                 this.audio.play()
-                this.result = obj.data
                 this.cancel()
-                console.info("识别结果：", obj.data)
+                this.result = qr.data
+                console.info("识别结果：", qr.data)
               }
             } else {
-              console.error("识别失败，请检查二维码是否正确！")
+              console.error("无法识别二维码！")
             }
           } catch (err) {
-            console.error("识别失败，请检查二维码是否正确！", err)
+            console.error("无法识别二维码！", err)
           }
         }
         if (this.animation) {
-          this.timer = requestAnimationFrame(() => this.sweep())
+          this.timer = requestAnimationFrame(this.scan)
         }
       },
       media() {
         this.show = true
         this.animation = true
         this.canvas.style.display = "block"
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
-          navigator.msGetUserMedia
-        if (navigator.mediaDevices) {
-          navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } }).then((stream) => {
-            this.video.srcObject = stream
-            this.video.setAttribute("playsinline", true)
-            this.video.setAttribute("webkit-playsinline", true)
-            this.video.addEventListener("loadedmetadata", () => {
-              this.video.play()
-              this.sweep()
-            })
-          }).catch((error) => {
-            this.cancel()
-            alert('对不起：未识别到扫描设备!')
-            console.log(error.code + "：" + error.name + "，" + error.message)
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
+          navigator.mozGetUserMedia || navigator.msGetUserMedia
+        let scan = (stream) => {
+          this.video.srcObject = stream
+          this.video.setAttribute("playsinline", true)
+          this.video.setAttribute("webkit-playsinline", true)
+          this.video.addEventListener("loadedmetadata", () => {
+            this.video.play()
+            this.scan()
           })
-        } else if (navigator.getUserMedia) {
-          navigator.getUserMedia({ video: { facingMode: "environment" } }, (stream) => {
-            this.video.srcObject = stream
-            this.video.setAttribute("playsinline", true)
-            this.video.setAttribute("webkit-playsinline", true)
-            this.video.addEventListener("loadedmetadata", () => {
-              this.video.play()
-              this.sweep()
-            })
-          }, (error) => {
-            this.cancel()
-            alert('对不起：未识别到扫描设备!')
-            console.log(error.code + "：" + error.name + "，" + error.message)
-          })
-        } else {
-          if (navigator.userAgent.toLowerCase().match(/chrome/) && location.origin.indexOf("https://") < 0) {
-            console.log("获取浏览器录音功能，因安全性问题，需要在localhost 或 127.0.0.1 或 https 下才能获取权限！")
-          } else {
-            this.cancel()
-            alert("对不起：未识别到扫描设备!")
-          }
+          this.mediaStream = typeof stream.stop === 'function' ? stream : stream.getTracks()[0]
         }
+        let fail = (error) => {
+          console.log(error)
+          this.cancel()
+          this.$notify('未识别到扫描设备！')
+        }
+        if (navigator.mediaDevices) {
+          navigator.mediaDevices.getUserMedia({ video: { facingMode: this.facingMode } })
+            .then(scan).catch(fail)
+        } else if (navigator.getUserMedia) {
+          navigator.getUserMedia({ video: { facingMode: this.facingMode } }, scan, fail)
+        } else {
+          this.cancel()
+          this.$notify('未识别到扫描设备！')
+        }
+      },
+      cancel() {
+        this.show = false
+        this.mediaStream && this.mediaStream.stop()
+        this.animation = false
+        cancelAnimationFrame(this.timer)
+        setTimeout(() => this.canvas.style.display = "none", 500)
       }
     }
   }
