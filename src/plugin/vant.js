@@ -19,6 +19,7 @@ import {
   List,
   NavBar,
   Notify,
+  Overlay,
   Popup,
   PullRefresh,
   Radio,
@@ -45,10 +46,11 @@ Vue.use(Form).use(Field)
 Vue.use(Grid).use(GridItem)
 Vue.use(Icon)
 Vue.use(List)
-Vue.use(Popup)
-Vue.use(PullRefresh)
 Vue.use(NavBar)
 Vue.use(Notify)
+Vue.use(Overlay)
+Vue.use(Popup)
+Vue.use(PullRefresh)
 Vue.use(RadioGroup).use(Radio)
 Vue.use(Stepper)
 Vue.use(SubmitBar)

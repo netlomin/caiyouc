@@ -1,9 +1,15 @@
 <template>
   <div>
-    <canvas
-      ref="canvas"
-      class="canvas"
-    ></canvas>
+    <van-overlay
+      :show="show"
+      z-index="99999"
+      @click="show = false"
+    >
+      <canvas
+        ref="canvas"
+        class="canvas"
+      ></canvas>
+    </van-overlay>
   </div>
 </template>
 
@@ -15,6 +21,7 @@
     name: "c-scan",
     data() {
       return {
+        show: false,
         audio: null,
         video: null,
         canvas: null,
@@ -44,6 +51,7 @@
         this.animation = false
         cancelAnimationFrame(this.timer)
         setTimeout(() => this.canvas.style.display = "none", 1000)
+        this.show = false
       },
       sweep() {
         if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
@@ -79,6 +87,7 @@
         }
       },
       media() {
+        this.show = true
         this.animation = true
         this.canvas.style.display = "block"
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia ||
@@ -128,6 +137,17 @@
   lang="scss"
   scoped
 >
+  .scanner {
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
   .canvas {
     display: none;
     box-sizing: border-box;
