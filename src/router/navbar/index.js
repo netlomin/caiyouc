@@ -67,5 +67,13 @@ export default [{
       title: '设置密码',
       keepAlive: false
     }
+  }, {
+    path: '/user/join-shop',
+    name: 'JoinShop',
+    component: () => import('@/views/user/join-shop'),
+    meta: {
+      title: '扫码添加彩店',
+      keepAlive: false
+    }
   }]
 }]

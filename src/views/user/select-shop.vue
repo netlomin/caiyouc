@@ -54,7 +54,7 @@
         <a-button
           type="primary"
           block
-          @click="$router.push({ name: 'Cart' })"
+          @click="$router.push({ name: 'JoinShop' })"
         >前往添加彩店</a-button>
       </van-empty>
     </van-pull-refresh>
@@ -95,7 +95,7 @@
         this.$router.back()
       },
       clickRight() {
-        this.$router.push({ name: 'Cart' })
+        this.$router.push({ name: 'JoinShop' })
       },
       clickCheckbox(index) {
         this.index = index
