@@ -15,7 +15,6 @@
 
 <script>
   import jsqr from "jsqr"
-  import qs from "qs"
 
   export default {
     name: "c-scan",

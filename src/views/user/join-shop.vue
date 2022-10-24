@@ -69,6 +69,7 @@
 
 <script>
   import cScan from 'components/c-scan/c-scan'
+  import qs from "qs"
 
   export default {
     components: { cScan },
