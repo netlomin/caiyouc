@@ -114,14 +114,17 @@ export default {
     info(params) {
       return apiInstance.post(`user/info`, params)
     },
+    save(params) {
+      return apiInstance.post(`user/save`, params)
+    },
     act(params) {
       return apiInstance.post(`user/act`, params)
     },
     allAct(params) {
       return apiInstance.post(`user/all-act`, params)
     },
-    save(params) {
-      return apiInstance.post(`user/save`, params)
+    shop(params) {
+      return apiInstance.post(`user/shop`, params)
     }
   },
   lot: {

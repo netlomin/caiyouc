@@ -95,7 +95,7 @@
         }
         api.user.shop({ id: shopId }).then(vo => {
           this.shop = vo
-        }).catch(this.$u.errorHandler)
+        }).catch(this.caught)
       },
       submit() {}
     }
