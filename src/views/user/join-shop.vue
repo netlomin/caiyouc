@@ -97,7 +97,13 @@
           this.shop = vo
         }).catch(this.caught)
       },
-      submit() {}
+      submit() {
+        if (this.shop.id) {
+          api.ps.joinShop({ shopId: this.shop.id }).then(vo => {
+            this.$notify({ message: '加入彩店成功！', background: '#11FF11' })
+          }).catch(this.caught)
+        }
+      }
     }
   }
 </script>
