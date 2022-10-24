@@ -1,20 +1,47 @@
 <!-- home -->
 <template>
-  <van-pull-refresh v-model="refreshing" @refresh="refresh">
-    <van-list v-if="list&&list.length" v-model="loading" :finished="finished" @load="load">
-      <van-cell-group v-for="item in list" :key="item.id" :border="false" inset>
+  <van-pull-refresh
+    v-model="refreshing"
+    @refresh="refresh"
+  >
+    <van-list
+      v-if="list&&list.length"
+      v-model="loading"
+      :finished="finished"
+      @load="load"
+    >
+      <van-cell-group
+        v-for="item in list"
+        :key="item.id"
+        :border="false"
+        inset
+      >
         <van-cell :to="{ name: 'CombinOrder', params: { id: item.id }}">
-          <div class="cell-head" slot="title">
-            <van-icon name="gold-coin" :color="conf.themeColor" />
+          <div
+            class="cell-head"
+            slot="title"
+          >
+            <van-icon
+              name="gold-coin"
+              :color="$c.themeColor"
+            />
             <strong class="m-l-10">{{item.cpName}}</strong>
             <span style="float: right;">
               截止剩余：
-              <van-count-down :time="time" class="inline" />
+              <van-count-down
+                :time="time"
+                class="inline"
+              />
             </span>
           </div>
           <template #label>
             <div class="cell-body">
-              <a-progress :width="1.6*rem" :percent="item.percent" :success-percent="item.soldPercent" type="circle">
+              <a-progress
+                :width="1.6*rem"
+                :percent="item.percent"
+                :success-percent="item.soldPercent"
+                type="circle"
+              >
                 <template #format="percent">
                   <div class="sm bold">{{item.soldPercent}}%</div>
                   <div class="xs grey">保底{{item.guardPercent}}%</div>
@@ -27,19 +54,31 @@
             </div>
             <div class="cell-foot">
               <van-row>
-                <van-col span="6" class="center">
+                <van-col
+                  span="6"
+                  class="center"
+                >
                   <h6 class="sm red">{{item.totalAmt}}</h6>
                   <span class="sm grey">总金额</span>
                 </van-col>
-                <van-col span="6" class="center">
+                <van-col
+                  span="6"
+                  class="center"
+                >
                   <h6 class="sm red">{{item.amt}}</h6>
                   <span class="sm grey">单份金额</span>
                 </van-col>
-                <van-col span="6" class="center">
+                <van-col
+                  span="6"
+                  class="center"
+                >
                   <h6 class="sm red">{{item.totalCnt}}</h6>
                   <span class="sm grey">总份数</span>
                 </van-col>
-                <van-col span="6" class="center">
+                <van-col
+                  span="6"
+                  class="center"
+                >
                   <h6 class="sm red">{{item.totalCnt-item.soldCnt}}</h6>
                   <span class="sm grey">剩余份数</span>
                 </van-col>
@@ -50,7 +89,10 @@
       </van-cell-group>
       <van-divider>没有更多合买了</van-divider>
     </van-list>
-    <van-empty v-else description="暂无合买方案" />
+    <van-empty
+      v-else
+      description="暂无合买方案"
+    />
   </van-pull-refresh>
 </template>
 
@@ -110,7 +152,10 @@
     }
   }
 </script>
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
   .van-pull-refresh {
     min-height: 100vh;
   }

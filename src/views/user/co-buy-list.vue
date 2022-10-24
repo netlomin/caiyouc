@@ -10,7 +10,7 @@
       <van-list v-if="list.length" v-model="loading" :finished="finished" finished-text="已经到底了～" @load="load">
         <van-cell v-for="buy in list" :to="{name:'CombinOrder',params:{id:buy.projectId}}" is-link>
           <div slot="icon" class=" flex-middle m-r-10">
-            <van-icon :size="rem" name="gold-coin" :color="conf.themeColor" />
+            <van-icon :size="rem" name="gold-coin" :color="$c.themeColor" />
           </div>
           <template #title>
             <b class="">{{buy.project.cpName}}</b>

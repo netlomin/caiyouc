@@ -1,7 +1,7 @@
 <!-- home -->
 <template>
   <div>
-    <c-panel :bg="conf.themeColor">
+    <c-panel :bg="$c.themeColor">
       <a-avatar
         :src="user.avatarUrl"
         :size="rem"
@@ -61,7 +61,7 @@
     data() {
       return {
         css: {
-          avatar: { backgroundColor: conf.colors.blue }
+          avatar: { backgroundColor: $c.colors.blue }
         },
         user: {},
         cashAct: {},

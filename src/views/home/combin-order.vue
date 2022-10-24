@@ -1,21 +1,38 @@
 <!-- home -->
 <template>
   <div>
-    <div v-if="order" class="app-container">
+    <div
+      v-if="order"
+      class="app-container"
+    >
       <van-cell-group :border="false">
         <van-cell>
-          <div class="cell-head" slot="title">
-            <van-icon name="gold-coin" :color="conf.themeColor" />
+          <div
+            class="cell-head"
+            slot="title"
+          >
+            <van-icon
+              name="gold-coin"
+              :color="$c.themeColor"
+            />
             <strong class="m-l-10">{{order.cpName}}</strong>
             <span class="sm grey">第{{order.issue}}期</span>
             <span style="float: right">
               <label>截止剩余：</label>
-              <van-count-down :time="order.remainTime" class="inline" />
+              <van-count-down
+                :time="order.remainTime"
+                class="inline"
+              />
             </span>
           </div>
           <template #label>
             <div class="cell-body">
-              <a-progress :width="1.6*rem" :percent="order.percent" :success-percent="order.soldPercent" type="circle">
+              <a-progress
+                :width="1.6*rem"
+                :percent="order.percent"
+                :success-percent="order.soldPercent"
+                type="circle"
+              >
                 <template #format="percent">
                   <div class="sm bold">{{order.soldPercent}}%</div>
                   <div class="xs grey">保底{{order.guardPercent}}%</div>
@@ -28,7 +45,11 @@
             </div>
             <div class="cell-foot">
               <van-row>
-                <van-col v-for="data in order.datas" span="6" class="center">
+                <van-col
+                  v-for="data in order.datas"
+                  span="6"
+                  class="center"
+                >
                   <h6 class="sm red">{{data.val}}</h6>
                   <span class="sm grey">{{data.text}}</span>
                 </van-col>
@@ -40,16 +61,31 @@
 
       <van-cell-group :border="false">
         <van-cell>
-          <div class="cell-head" slot="title">
+          <div
+            class="cell-head"
+            slot="title"
+          >
             <span class="grey">方案信息</span>
           </div>
           <template #label>
-            <div v-if="order.visible!=2" class="tips"> {{order.tips}}</div>
-            <div v-else class="pick-sets">
-              <van-row v-for="(set, i) in order.pick.sets" class="pick-set">
+            <div
+              v-if="order.visible!=2"
+              class="tips"
+            > {{order.tips}}</div>
+            <div
+              v-else
+              class="pick-sets"
+            >
+              <van-row
+                v-for="(set, i) in order.pick.sets"
+                class="pick-set"
+              >
                 <van-col span="2">{{i}}</van-col>
                 <van-col span="22">
-                  <c-balls :areas="set.areas" size="sm"></c-balls>
+                  <c-balls
+                    :areas="set.areas"
+                    size="sm"
+                  ></c-balls>
                 </van-col>
               </van-row>
             </div>
@@ -59,18 +95,41 @@
 
       <van-cell-group :border="false">
         <van-cell>
-          <div class="cell-head" slot="title">
+          <div
+            class="cell-head"
+            slot="title"
+          >
             <span class="grey">购买信息</span>
           </div>
           <template #label>
             <div class="cell-body">
-              <a-table :columns="columns" :data-source="order.buys" size="small" :rowClassName="()=>'sm'"
-                :pagination="false">
-                <b slot="t1" class="sm grey">昵称</b>
-                <b slot="t2" class="sm grey">份额</b>
-                <b slot="t3" class="sm grey">金额</b>
-                <b slot="t4" class="sm grey">时间</b>
-                <span slot="time" slot-scope="text">{{dayjs(text).format('MM-DD HH:mm')}}</span>
+              <a-table
+                :columns="columns"
+                :data-source="order.buys"
+                size="small"
+                :rowClassName="()=>'sm'"
+                :pagination="false"
+              >
+                <b
+                  slot="t1"
+                  class="sm grey"
+                >昵称</b>
+                <b
+                  slot="t2"
+                  class="sm grey"
+                >份额</b>
+                <b
+                  slot="t3"
+                  class="sm grey"
+                >金额</b>
+                <b
+                  slot="t4"
+                  class="sm grey"
+                >时间</b>
+                <span
+                  slot="time"
+                  slot-scope="text"
+                >{{dayjs(text).format('MM-DD HH:mm')}}</span>
               </a-table>
             </div>
           </template>
@@ -78,14 +137,29 @@
       </van-cell-group>
     </div>
 
-    <van-submit-bar :price="_amt" tip="申购后需联系店主购买，30分钟未购买则申购失效！">
+    <van-submit-bar
+      :price="_amt"
+      tip="申购后需联系店主购买，30分钟未购买则申购失效！"
+    >
       <div class="flex-middle">
         <span>申购份数</span>
-        <van-stepper v-model="cnt" min="0" :max="_max" theme="round" :button-size=".5*rem" integer
-          class="inline m-l-6" />
+        <van-stepper
+          v-model="cnt"
+          min="0"
+          :max="_max"
+          theme="round"
+          :button-size=".5*rem"
+          integer
+          class="inline m-l-6"
+        />
       </div>
       <template #button>
-        <a-button :disabled="_disabledBuy" type="primary" size="small" @click="buy">申购</a-button>
+        <a-button
+          :disabled="_disabledBuy"
+          type="primary"
+          size="small"
+          @click="buy"
+        >申购</a-button>
       </template>
     </van-submit-bar>
   </div>
@@ -148,7 +222,10 @@
     }
   }
 </script>
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
   .van-cell-group {
     margin-top: .2rem;
   }
