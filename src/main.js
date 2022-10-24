@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime'
 
 import Vue from 'vue'
 import App from './App.vue'
-import conf from '@/config'
+import $c from '@/config'
 import router from './router'
 import store from './store'
 import _ from 'lodash'
@@ -36,13 +36,13 @@ Vue.config.productionTip = !currentEnv.DEBUG
 
 let JSONbig = require('json-bigint')({ storeAsString: true })
 window.JSON = JSONbig
-Vue.prototype.$notify.setDefaultOptions({ color: '#FFF', background: conf.themeColor })
+Vue.prototype.$notify.setDefaultOptions({ color: '#FFF', background: $c.themeColor })
 const rem = screen.width / 10
 const px = 10 / screen.width
 
 const init = () => {
   _.assign(window, {
-    conf,
+    $c,
     _,
     dayjs,
     currentEnv,
@@ -53,7 +53,7 @@ const init = () => {
   })
 
   _.assign(Vue.prototype, {
-    conf,
+    $c,
     _,
     dayjs,
     currentEnv,

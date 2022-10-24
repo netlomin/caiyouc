@@ -52,7 +52,10 @@
       </van-form>
     </div>
 
-    <c-scan ref="scaner"></c-scan>
+    <c-scan
+      ref="scaner"
+      @result="onScanResult"
+    ></c-scan>
 
     <div class="fixed-bottom p_2">
       <a-button
@@ -72,7 +75,7 @@
     data() {
       return {
         css: {
-          avatar: { backgroundColor: conf.themeColor }
+          avatar: { backgroundColor: $c.themeColor }
         },
         shop: {}
       }
@@ -80,6 +83,18 @@
     methods: {
       scan() {
         this.$refs.scaner.media()
+      },
+      onScanResult(ret) {
+        if (!ret.includes('?')) {
+          this.$notify('未知二维码！')
+        }
+        let { shopId } = qs.parse(ret.split('?')[1], { ignoreQueryPrefix: true })
+        if (!shopId) {
+          this.$notify('未知二维码！')
+        }
+        api.user.shop({ id: shopId }).then(vo => {
+          this.shop = vo
+        }).catch(this.$u.errorHandler)
       },
       submit() {}
     }

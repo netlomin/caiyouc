@@ -14,8 +14,8 @@
 </template>
 
 <script>
-  import jsQR from "jsqr"
-  import Jimp from "jimp"
+  import jsqr from "jsqr"
+  import qs from "qs"
 
   export default {
     name: "c-scan",
@@ -29,8 +29,7 @@
         canvas2d: null,
         animation: true,
         mediaStream: null,
-        timer: null,
-        result: null
+        timer: null
       }
     },
     mounted() {
@@ -55,20 +54,17 @@
           this.canvas.height = videoHeight
           this.canvas2d.drawImage(this.video, 0, 0, videoWidth, videoHeight)
           try {
-            const img = this.canvas2d.getImageData(0, 0, videoWidth, videoHeight)
-            const qr = jsQR(img.data, img.width, img.height, { inversionAttempts: "dontInvert" })
+            let img = this.canvas2d.getImageData(0, 0, videoWidth, videoHeight)
+            let qr = jsqr(img.data, img.width, img.height, { inversionAttempts: "dontInvert" })
             if (qr) {
-              const loc = qr.location
+              let loc = qr.location
               this.draw(loc.topLeftCorner, loc.topRightCorner)
               this.draw(loc.topRightCorner, loc.bottomRightCorner)
               this.draw(loc.bottomRightCorner, loc.bottomLeftCorner)
               this.draw(loc.bottomLeftCorner, loc.topLeftCorner)
-              if (this.result != qr.data) {
-                this.audio.play()
-                this.cancel()
-                this.result = qr.data
-                console.info("识别结果：", qr.data)
-              }
+              this.audio.play()
+              this.cancel()
+              this.$emit('result', qr.data)
             } else {
               console.error("无法识别二维码！")
             }
@@ -116,7 +112,7 @@
         this.mediaStream && this.mediaStream.stop()
         this.animation = false
         cancelAnimationFrame(this.timer)
-        setTimeout(() => this.canvas.style.display = "none", 500)
+        setTimeout(() => this.canvas.style.display = "none", 1000)
       }
     }
   }
