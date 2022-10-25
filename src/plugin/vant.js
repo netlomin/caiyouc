@@ -9,6 +9,7 @@ import {
   Collapse,
   CollapseItem,
   CountDown,
+  Dialog,
   Divider,
   Empty,
   Field,
@@ -40,6 +41,7 @@ Vue.use(Checkbox).use(CheckboxGroup)
 Vue.use(Collapse).use(CollapseItem)
 Vue.use(CountDown)
 Vue.use(Col).use(Row)
+Vue.use(Dialog)
 Vue.use(Divider)
 Vue.use(Empty)
 Vue.use(Form).use(Field)

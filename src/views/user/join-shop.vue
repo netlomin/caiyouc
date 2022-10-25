@@ -88,10 +88,12 @@
       onScanResult(ret) {
         if (!ret.includes('?')) {
           this.$notify('未知二维码！')
+          return
         }
         let { shopId } = qs.parse(ret.split('?')[1], { ignoreQueryPrefix: true })
         if (!shopId) {
           this.$notify('未知二维码！')
+          return
         }
         api.user.shop({ id: shopId }).then(vo => {
           this.shop = vo
@@ -100,8 +102,15 @@
       submit() {
         if (this.shop.id) {
           api.ps.joinShop({ shopId: this.shop.id }).then(vo => {
-            this.$notify({ message: '加入彩店成功！', background: '#11FF11' })
-          }).catch(this.caught)
+            this.$notify({ message: '添加彩店成功！', background: '#11FF11' })
+          }).catch(this.caught(e => {
+            if (e.code != '606') {
+              return false
+            }
+
+            this.$dialog.alert({ title: '提示', message: '你已添加过该彩店！' })
+            return true
+          }))
         }
       }
     }
