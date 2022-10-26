@@ -9,18 +9,18 @@
     name: 'App',
     mounted() {
 
-      // api.ps.user().then(vo => {
-      //   let passportId = this.$store.getters.passportId
-      //   let shopId = this.$store.getters.shopId
-      //   if (vo.passportId == passportId && shopId) {
-      //     return
-      //   }
-      //   this.$store.dispatch('user', vo)
-      //   if (!vo.userId) {
-      //     this.$router.push({ name: 'SelectShop' })
-      //     return
-      //   }
-      // }).catch(this.caught(err => err.code == 1))
+      api.ps.user().then(vo => {
+        let passportId = this.$store.getters.passportId
+        let shopId = this.$store.getters.shopId
+        if (vo.passportId == passportId && shopId) {
+          return
+        }
+        this.$store.dispatch('user', vo)
+        if (!vo.userId) {
+          this.$router.push({ name: 'SelectShop' })
+          return
+        }
+      }).catch(this.caught(err => err.code == 1))
     },
     methods: {}
   }
