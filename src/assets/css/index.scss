@@ -44,6 +44,16 @@ html, body,#app  {
 }
 
 @for $i from 1 through 20{
+  .p-#{$i} {margin: 1px*$i;}
+  .p-t-#{$i} {margin: 1px*$i 0 0 0;}
+  .p-r-#{$i} {margin: 0 1px*$i 0 0;}
+  .p-b-#{$i} {margin: 0 0 1px*$i 0;}
+  .p-l-#{$i} {margin: 0 0 0 1px*$i;}
+  .p-tb-#{$i} {margin: 1px*$i 0;}
+  .p-lr-#{$i} {margin: 0 1px*$i;}
+}
+
+@for $i from 1 through 20{
   .p_#{$i} {padding: .1rem*$i;}
   .p-t_#{$i} {padding: .1rem*$i 0 0 0;}
   .p-r_#{$i} {padding: 0 .1rem*$i 0 0;}
@@ -55,6 +65,18 @@ html, body,#app  {
 
 .red {
   color: nth($colors, 1) !important;
+}
+
+.dark-red {
+  color: nth($colors, 7) !important;
+}
+
+.green{
+  color: nth($colors, 5) !important;
+}
+
+.dark-green{
+  color: nth($colors, 8) !important;
 }
 
 .grey {

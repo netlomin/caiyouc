@@ -33,19 +33,16 @@ const spost = (url, s, params) => {
 
 apiInstance.interceptors.request.use(
   config => {
-    console.log('config:', config)
     config.headers['X-token'] = store.getters.token
     config.headers['X-client'] = client
     return config
   },
   error => {
-    console.log('request:error', error)
     return Promise.reject(error)
   })
 
 apiInstance.interceptors.response.use(
   response => {
-    console.log('response:', response)
     let { status, data } = response
     if (!(status == 200 || (data && data.code))) {
       let err = { ok: false, msg: '网络故障' }
@@ -63,7 +60,6 @@ apiInstance.interceptors.response.use(
     return Promise.reject(data)
   },
   error => {
-    console.log('response:error', error)
     let { status, data } = error.response
     if (!(data && data.code)) {
       let err = { ok: false, msg: '网络故障' }

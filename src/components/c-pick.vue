@@ -1,22 +1,52 @@
 <template>
-  <div v-if="area" class="c-pick">
+  <div
+    v-if="area"
+    class="c-pick"
+  >
     <van-cell>
-      <div slot="title" class="cell-title">
-        <b class="md" :style="{color:area.colors[1]}">{{area.desc}}</b>
+      <div
+        slot="title"
+        class="cell-title"
+      >
+        <b
+          class="md"
+          :style="{color:area.colors[1]}"
+        >{{area.desc}}</b>
         <span class="sm grey">(请选至少{{area.cnt}}个号码)</span>
         <div class="cell-title__right">
           <span class="grey">机选</span>
-          <van-stepper v-model="area.rndCnt" :min="area.cnt" :max="area.codes.length" disable-input
-            :button-size=".5*rem" class="inline m-l-6" />
+          <van-stepper
+            v-model="area.rndCnt"
+            :min="area.cnt"
+            :max="area.codes.length"
+            disable-input
+            :button-size=".5*rem"
+            class="inline m-l-6"
+          />
         </div>
       </div>
       <template #label>
-        <van-grid :column-num="area.col" :border="false">
-          <van-grid-item v-for="(code, i) in area.codes" :key="code" @click="clickBall(i)">
+        <van-grid
+          :column-num="area.col"
+          :border="false"
+        >
+          <van-grid-item
+            v-for="(code, i) in area.codes"
+            :key="code"
+            @click="clickBall(i)"
+          >
             <template #icon>
-              <c-ball :code="code" :type="ballType(i)" :color="ballColor(i)" size="md"></c-ball>
+              <c-ball
+                :code="code"
+                :type="ballType(i)"
+                :color="ballColor(i)"
+                size="md"
+              ></c-ball>
             </template>
-            <div slot="text" class="sm center">
+            <div
+              slot="text"
+              class="sm center"
+            >
               <div class="light-grey">{{area.omits[i]}}</div>
             </div>
           </van-grid-item>
@@ -40,12 +70,10 @@
       return {}
     },
     created() {
-      console.log('created', this.area)
       this.init()
     },
     watch: {
       area(newData, oldData) {
-        console.log(newData, oldData)
         if (!this.area.picks) {
           this.init()
         }
@@ -53,7 +81,6 @@
     },
     methods: {
       init() {
-        console.log('init', this.area)
         if (!this.area.picks) {
           this.$set(this.area, 'picks', Array(this.area.codes.length).fill(0))
         }
@@ -85,7 +112,10 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
   .c-pick {}
 
   /deep/ .van-grid-item__content {

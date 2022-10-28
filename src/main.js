@@ -8,6 +8,7 @@ import $c from '@/config'
 import router from './router'
 import store from './store'
 import _ from 'lodash'
+import util from './utils/util'
 import dayjs from 'dayjs'
 // import eruda from 'eruda'
 import mixin from './utils/mixin'
@@ -44,6 +45,7 @@ const init = () => {
   _.assign(window, {
     $c,
     _,
+    util,
     dayjs,
     currentEnv,
     store,
@@ -55,6 +57,7 @@ const init = () => {
   _.assign(Vue.prototype, {
     $c,
     _,
+    util,
     dayjs,
     currentEnv,
     rem,

@@ -3,28 +3,36 @@
   <div>
     <c-panel :bg="$c.themeColor">
       <a-avatar
+        class="m-6"
         :src="user.avatarUrl"
-        :size="rem"
+        :size="1.6*rem"
         :style="css.avatar"
       >{{firstChar(user.nickName)}}</a-avatar>
-      <b class="white m-l-6">{{user.nickName}}</b>
-      <van-row class="m-t-18">
-        <van-col
-          span="12"
-          class="white center"
-        >
-          <b>{{fmtAmt(cashAct.amt)}}</b>
-          <div>账户余额(元)</div>
+      <div class="user-bar inline white">
+        <b>{{user.nickName}}</b>
+        <div class="shop-bar sm">
+          <van-icon
+            name="home-o"
+            class="green"
+          />
+          <span class="m-l-5">{{shop.name}}</span>
+        </div>
+      </div>
+
+      <van-row class="white center m-t-8">
+        <van-col span="12">
+          <div class="p-tb-10">
+            <b>{{fmtAmt(cashAct.amt)}}</b>
+            <div>账户余额(元)</div>
+          </div>
         </van-col>
-        <van-col
-          span="12"
-          class="white center"
-        >
-          <b>{{fmtAmt(prizeAct.amt)}}</b>
-          <div>累计中奖(元)</div>
+        <van-col span="12">
+          <div class="p-tb-10">
+            <b>{{fmtAmt(prizeAct.amt)}}</b>
+            <div>累计中奖(元)</div>
+          </div>
         </van-col>
       </van-row>
-      <div class="m-t-8"></div>
     </c-panel>
 
     <div class="m-t-8">
@@ -64,15 +72,19 @@
           avatar: { backgroundColor: $c.colors.blue }
         },
         user: {},
+        shop: {},
         cashAct: {},
         prizeAct: {}
       }
     },
-    created() {
+    mounted() {
       let userId = this.$store.getters.userId
       this.api.user.info({ id: userId }).then(vo => {
         vo.nickName = _.defaultTo(vo.nickName, vo.mobile)
         this.user = vo
+      }).catch(this.caught)
+      this.api.user.shop({}).then(vo => {
+        this.shop = vo
       }).catch(this.caught)
       this.api.user.act({ userId, actType: 'CASH' }).then(vo => {
         this.cashAct = vo
@@ -80,11 +92,7 @@
       this.api.user.act({ userId, actType: 'PRIZE' }).then(vo => {
         this.prizeAct = vo
       }).catch(this.caught)
-    },
-    mounted() {},
-    computed: {},
-    watch: {},
-    methods: {}
+    }
   }
 </script>
 
@@ -92,4 +100,15 @@
   lang="scss"
   scoped
 >
+  .user-bar {
+    vertical-align: middle;
+  }
+
+  .shop-bar {
+    height: .6rem;
+    line-height: .6rem;
+    padding: 0 .38rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: .6rem;
+  }
 </style>

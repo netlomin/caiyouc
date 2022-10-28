@@ -8,7 +8,6 @@
   export default {
     name: 'App',
     mounted() {
-      // 登录检查
       api.ps.user().then(vo => {
         let passportId = this.$store.getters.passportId
         let shopId = this.$store.getters.shopId
@@ -21,8 +20,7 @@
           return
         }
       }).catch(this.caught(err => err.code == 1))
-    },
-    methods: {}
+    }
   }
 </script>
 

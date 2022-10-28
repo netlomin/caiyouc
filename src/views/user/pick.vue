@@ -1,44 +1,99 @@
 <template>
   <div class="app-container">
-    <van-nav-bar fixed placeholder safe-area-inset-top left-arrow @click-left="back">
-      <div slot="title" class="flex-middle">
+    <van-nav-bar
+      fixed
+      placeholder
+      safe-area-inset-top
+      left-arrow
+      @click-left="back"
+    >
+      <div
+        slot="title"
+        class="flex-middle"
+      >
         <a-button @click="popup=!popup">
           <b class="m-r-6">{{title}}</b>
           <van-icon :name="'arrow-'+(popup?'up':'down')" />
         </a-button>
       </div>
     </van-nav-bar>
-    <van-popup v-model="popup" position="top" duration="0" :overlay="false">
-      <van-tree-select :items="items" :main-active-index.sync="activeIndex" :active-id.sync="activeId"
-        @click-item="clickItem" />
+    <van-popup
+      v-model="popup"
+      position="top"
+      duration="0"
+      :overlay="false"
+    >
+      <van-tree-select
+        :items="items"
+        :main-active-index.sync="activeIndex"
+        :active-id.sync="activeId"
+        @click-item="clickTreeSelect"
+      />
     </van-popup>
 
-    <div v-if="issue&&draw" class="p_1 sm light-grey bg_white">
+    <div
+      v-if="issue&&draw"
+      class="p_1 sm light-grey bg_white"
+    >
       <span>第{{issue.issue}}期</span>
       <span class="m-l_2 red">奖池{{simNum(draw.poolAmt)}}</span>
       <div class="bar-right">
         <span>投注截止：</span>
-        <van-count-down :time="issue.remainTime" format="DD天HH时mm分ss秒" />
+        <van-count-down
+          :time="issue.remainTime"
+          format="DD天HH时mm分ss秒"
+        />
       </div>
     </div>
 
-    <van-collapse v-if="r5" v-model="collapseActives">
+    <van-collapse
+      v-if="r5"
+      v-model="collapseActives"
+    >
       <van-collapse-item name="1">
-        <div slot="title" class="flex-middle">
+        <div
+          slot="title"
+          class="flex-middle"
+        >
           <span class="light-grey">上期开奖：</span>
           <div class="balls">
-            <c-balls :areas="r5.datas[4].set.areas" size="sm" type="none"></c-balls>
+            <c-balls
+              :areas="r5.datas[4].set.areas"
+              size="sm"
+              type="none"
+            ></c-balls>
           </div>
         </div>
         <template #value>点击展开历史开奖</template>
-        <a-table :data-source="r5.datas" size="small" :pagination="false">
-          <a-table-column v-for="(head, index) in r5.heads" :key="head.name" :data-index="head.name">
-            <span slot="title" :class="'sm '+(index==0?'p-l_1':'')">{{head.desc}}</span>
+        <a-table
+          :data-source="r5.datas"
+          size="small"
+          :pagination="false"
+        >
+          <a-table-column
+            v-for="(head, index) in r5.heads"
+            :key="head.name"
+            :data-index="head.name"
+          >
+            <span
+              slot="title"
+              :class="'sm '+(index==0?'p-l_1':'')"
+            >{{head.desc}}</span>
             <template slot-scope="text, record">
-              <div v-if="head.view=='code'" class="balls">
-                <c-balls :areas="record.set.areas" size="sm" type="none"></c-balls>
+              <div
+                v-if="head.view=='code'"
+                class="balls"
+              >
+                <c-balls
+                  :areas="record.set.areas"
+                  size="sm"
+                  type="none"
+                ></c-balls>
               </div>
-              <span v-else :class="'sm '+(index==0?'p-l_1':'')">{{text}}</span>
+              <span
+                v-else
+                :class="'sm '+(index==0?'p-l_1':'')"
+              >{{text}}</span>
             </template>
           </a-table-column>
         </a-table>
@@ -46,36 +101,59 @@
     </van-collapse>
 
     <div v-if="play">
-      <c-pick v-for="(area, index) in play.areas" :area="area" class="m-t-8"></c-pick>
+      <c-pick
+        v-for="(area, index) in play.areas"
+        :area="area"
+        class="m-t-8"
+      ></c-pick>
     </div>
 
     <div class="fixed-bottom p_2">
       <van-row>
         <van-col span="8">
-          <van-grid :column-num="2" :border="false">
-            <van-grid-item>
+          <van-grid
+            :column-num="2"
+            :border="false"
+          >
+            <van-grid-item @click="clickRandItem">
               <template #icon>
                 <van-icon name="add-o" />
               </template>
-              <div slot="text" class="sm">机选</div>
+              <div
+                slot="text"
+                class="sm"
+              >机选</div>
             </van-grid-item>
             <van-grid-item @click="clickCartItem">
               <template #icon>
                 <van-icon name="cart-o" />
               </template>
-              <div slot="text" class="sm">选号蓝</div>
+              <div
+                slot="text"
+                class="sm"
+              >选号蓝</div>
             </van-grid-item>
           </van-grid>
         </van-col>
-        <van-col span="8" class="sm flex-center">
+        <van-col
+          span="8"
+          class="sm flex-center"
+        >
           <div>
-            <div class="grey">0注</div>
-            <div class="red">0元</div>
+            <div class="grey">{{_cnt}}注</div>
+            <div class="red">{{_cnt*2}}元</div>
           </div>
         </van-col>
-        <van-col span="8" class="flex-center">
+        <van-col
+          span="8"
+          class="flex-center"
+        >
           <div>
-            <a-button type="primary" block>加入选号篮</a-button>
+            <a-button
+              type="primary"
+              block
+              @click="clickAddBtn"
+            >加入选号篮</a-button>
           </div>
         </van-col>
       </van-row>
@@ -107,41 +185,69 @@
         draw: null,
         collapseActives: ['0'],
         r5: null,
-        redCnt: 5,
         play: null
       }
     },
     created() {
-      this.items.forEach(item => {
-        api.lot.issue(item.cp).then(vo => {
-          console.log(vo)
-          let { cp, issue } = vo
-          api.lot.plays({ cp, issue }).then(vo1 => {
-            console.log(vo1)
-            vo1.forEach(v1 => { v1.text = v1.name })
-            item.children = vo1
-            vo1.filter(v1 => this.activeId == v1.id).forEach(v1 => {
-              this.reload()
-            })
-          }).catch(this.caught)
-        }).catch(this.caught)
-      })
+      this.loadPlays()
+    },
+    mounted() {
+
+    },
+    computed: {
+      _cnt() {
+        if (!(this.play)) return 0
+        let cnt = 1
+        this.play.areas.forEach(area => {
+          if (!area.picks) {
+            cnt *= 0
+            return
+          }
+          let size = area.picks.filter(i => i == 1).length
+          let gallSize = area.picks.filter(i => i == 2).length
+          cnt *= util.comb(size, area.cnt - gallSize)
+        })
+        return Math.trunc(cnt)
+      }
     },
     methods: {
       back() {
         this.$router.back()
       },
-      clickItem(item) {
+      clickTreeSelect(item) {
         this.popup = false
         this.reload()
       },
       clickCartItem() {
         this.$router.push({ name: 'Cart' })
       },
+      clickRandItem() {
+        this.play.areas.forEach(area => {
+          let gallCnt = 0
+          area.picks.forEach((pick, i) => {
+            if (pick == 1) {
+              this.$set(area.picks, i, 0)
+            }
+            if (pick == 2) {
+              gallCnt++
+            }
+          })
+          let max = area.picks.length - 1
+          for (let i = area.rndCnt - gallCnt; i >= 1;) {
+            let r = _.random(0, max)
+            if (area.picks[r] == 0) {
+              this.$set(area.picks, r, 1)
+              i--
+            }
+          }
+        })
+      },
+      clickAddBtn() {
+
+      },
       reload() {
         let item = this.items[this.activeIndex]
         let subItem = item.children.filter(i => this.activeId == i.id)[0]
-
         this.title = item.text + '-' + subItem.text
 
         api.lot.issue(item.cp).then(vo => {
@@ -156,9 +262,7 @@
           vo.datas.forEach((data, i) => {
             let obj = {}
             obj.key = data[0]
-            vo.heads.forEach((head, j) => {
-              obj[head.name] = data[j]
-            })
+            vo.heads.forEach((head, j) => obj[head.name] = data[j])
             obj.cp = 'SSQ'
             $cp.enhance(obj)
             vo.datas[i] = obj
@@ -172,15 +276,27 @@
 
         api.lot.stat({ cp: item.cp, stat: 'OMIT' }).then(vo => {
           vo = this.listTable(vo)[0]
-          this.play.areas.forEach((area, i) => {
-            this.$set(area, 'omits', vo[i].datas[0])
-          })
+          this.play.areas.forEach((area, i) => this.$set(area, 'omits', vo[i].datas[0]))
         }).catch(this.caught)
+      },
+      loadPlays() {
+        this.items.forEach(item => {
+          api.lot.plays({ cp: item.cp }).then(vo1 => {
+            vo1.forEach(v1 => { v1.text = v1.name })
+            item.children = vo1
+            vo1.filter(v1 => this.activeId == v1.id).forEach(v1 => {
+              this.reload()
+            })
+          }).catch(this.caught)
+        })
       }
     }
   }
 </script>
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
   .van-popup--top {
     top: 46px;
   }
