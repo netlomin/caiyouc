@@ -5,7 +5,7 @@
       <a-avatar
         class="m-6"
         :src="user.avatarUrl"
-        :size="1.6*rem"
+        :size="1.28*rem"
         :style="css.avatar"
       >{{firstChar(user.nickName)}}</a-avatar>
       <div class="user-bar inline white">

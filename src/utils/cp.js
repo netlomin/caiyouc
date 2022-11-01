@@ -131,7 +131,67 @@ const resolvePlay = (play) => {
   })
 }
 
+const randPick = (play, opts) => {
+  let areas = play.areas
+  let arrays = []
+  areas.forEach(area => {
+    let codes = area.codes
+    let picks = area.picks
+    let galls = codes.filter((code, i) => picks[i] == 2)
+    codes = codes.filter((code, i) => picks[i] != 2)
+    codes = _.shuffle(codes).slice(0, area.rndCnt - galls.length).sort()
+    arrays.push([galls, codes])
+  })
+  let codes = arrays.map(array => {
+    let code = '';
+    if (array[0].length) {
+      code += array[0].join(',')
+      code += '^'
+    }
+    code += array[1].join(',')
+    return code
+  })
+  let pick = { cp: play.cp, code: codes.join('|') + '@' + play.play }
+  enhance(pick)
+  return pick
+}
+
+const showPick = (play, pick) => {
+  let areas = play.areas
+  pick.set.areas.forEach((p, i) => {
+    let area = areas[i]
+    let codes = area.codes
+    let picks = area.picks
+    if (picks) {
+      _.fill(picks, 0)
+    } else {
+      area.picks = picks = new Array(area.codes.length).fill(0)
+    }
+    codes.forEach((c, j) => {
+      if (p.codesList[0].includes(c)) {
+        picks.splice(j, 1, 2)
+        return
+      }
+      if (p.codesList[1].includes(c)) {
+        picks.splice(j, 1, 1)
+        return
+      }
+    })
+  })
+}
+
+const cleanPick = (play) => {
+  play.areas.forEach((area, i) => {
+    let picks = area.picks
+    _.fill(picks, 0)
+    picks.splice(0, 1, 0)
+  })
+}
+
 export default {
   enhance,
-  resolvePlay
+  resolvePlay,
+  randPick,
+  showPick,
+  cleanPick
 }

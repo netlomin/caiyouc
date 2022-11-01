@@ -116,19 +116,21 @@
   lang="scss"
   scoped
 >
-  .c-pick {}
+  .c-pick {
 
-  /deep/ .van-grid-item__content {
-    padding: .1rem 0;
-  }
+    /deep/ .van-grid-item__content {
+      padding: .06rem 0;
+    }
 
-  .cell-title {
-    border-bottom: 1px solid #EEE;
+    .cell-title {
+      border-bottom: 1px solid #EEE;
+      padding-bottom: .1rem;
 
-    &__right {
-      display: flex;
-      justify-content: center;
-      float: right;
+      &__right {
+        display: flex;
+        justify-content: center;
+        float: right;
+      }
     }
   }
 </style>

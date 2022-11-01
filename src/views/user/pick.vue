@@ -126,7 +126,10 @@
             </van-grid-item>
             <van-grid-item @click="clickCartItem">
               <template #icon>
-                <van-icon name="cart-o" />
+                <van-icon
+                  name="cart-o"
+                  :badge="cart.length"
+                />
               </template>
               <div
                 slot="text"
@@ -152,8 +155,9 @@
             <a-button
               type="primary"
               block
+              :disabled="!_cnt"
               @click="clickAddBtn"
-            >加入选号篮</a-button>
+            >{{index!=null?'保存选号蓝':'加入选号篮'}}</a-button>
           </div>
         </van-col>
       </van-row>
@@ -173,6 +177,7 @@
     components: { cBall, cBalls, cPick },
     data() {
       return {
+        index: null,
         title: '双色球-普通',
         popup: false,
         activeIndex: 0,
@@ -185,15 +190,30 @@
         draw: null,
         collapseActives: ['0'],
         r5: null,
-        play: null
+        play: null,
+        pick: null,
+        cart: []
       }
     },
     created() {
+      this.cart = this.$store.getters.cart
+      this.cart.forEach(pick => $cp.enhance(pick))
+      if (this.cart.length) {
+        let pick = this.cart[0]
+        this.items.forEach((item, i) => {
+          if (item.cp == pick.cp) {
+            this.activeIndex = i
+          }
+        })
+        this.activeId = pick.set.play
+      }
+      let index = this.$route.query.index
+      if ((index || index == 0) && index < this.cart.length) {
+        this.index = index
+      }
       this.loadPlays()
     },
-    mounted() {
-
-    },
+    mounted() {},
     computed: {
       _cnt() {
         if (!(this.play)) return 0
@@ -210,40 +230,38 @@
         return Math.trunc(cnt)
       }
     },
+    watch: {
+      pick(val, oldVal) {
+        $cp.showPick(this.play, val)
+      }
+    },
     methods: {
       back() {
-        this.$router.back()
+        this.$router.replace({ name: 'User' })
       },
       clickTreeSelect(item) {
         this.popup = false
         this.reload()
+        this.cart = []
+        this.$store.dispatch('setCart', this.cart)
       },
       clickCartItem() {
         this.$router.push({ name: 'Cart' })
       },
       clickRandItem() {
-        this.play.areas.forEach(area => {
-          let gallCnt = 0
-          area.picks.forEach((pick, i) => {
-            if (pick == 1) {
-              this.$set(area.picks, i, 0)
-            }
-            if (pick == 2) {
-              gallCnt++
-            }
-          })
-          let max = area.picks.length - 1
-          for (let i = area.rndCnt - gallCnt; i >= 1;) {
-            let r = _.random(0, max)
-            if (area.picks[r] == 0) {
-              this.$set(area.picks, r, 1)
-              i--
-            }
-          }
-        })
+        this.pick = $cp.randPick(this.play)
       },
       clickAddBtn() {
-
+        if (this.index == null) {
+          this.cart.push(this.pick)
+          this.$store.dispatch('setCart', this.cart)
+          $cp.cleanPick(this.play)
+        } else {
+          this.cart.splice(this.index, 1)
+          this.cart.unshift(this.pick)
+          this.$store.dispatch('setCart', this.cart)
+          this.$router.push({ name: 'Cart' })
+        }
       },
       reload() {
         let item = this.items[this.activeIndex]
@@ -273,19 +291,27 @@
         let play = _.cloneDeep(subItem)
         $cp.resolvePlay(play)
         this.play = play
+        this.$store.dispatch('setPlay', this.play)
 
         api.lot.stat({ cp: item.cp, stat: 'OMIT' }).then(vo => {
           vo = this.listTable(vo)[0]
           this.play.areas.forEach((area, i) => this.$set(area, 'omits', vo[i].datas[0]))
         }).catch(this.caught)
+
+        this.pick = this.index == null ? null : this.cart[this.index]
       },
       loadPlays() {
-        this.items.forEach(item => {
+        this.items.forEach((item, i) => {
           api.lot.plays({ cp: item.cp }).then(vo1 => {
-            vo1.forEach(v1 => { v1.text = v1.name })
+            vo1.forEach(v1 => {
+              v1.text = v1.name
+              v1.id = v1.play
+            })
             item.children = vo1
-            vo1.filter(v1 => this.activeId == v1.id).forEach(v1 => {
-              this.reload()
+            vo1.forEach(v1 => {
+              if (this.activeIndex == i && this.activeId == v1.id) {
+                this.reload()
+              }
             })
           }).catch(this.caught)
         })

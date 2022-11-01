@@ -175,7 +175,8 @@
     }
   }
 </script>
-<style>
+
+<style scoped>
   .van-notify {
     padding: .1rem;
     top: 45px;

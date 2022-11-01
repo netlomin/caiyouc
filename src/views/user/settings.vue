@@ -18,7 +18,7 @@
       <van-cell
         title="关于"
         :value="pkg.description+' v'+pkg.version"
-        icon="home-o"
+        icon="shield-o"
         size="large"
       />
     </div>

@@ -1,17 +1,26 @@
 <template>
-  <div class="app-container">
+  <div
+    class="app-container"
+    id="scroller"
+  >
     <van-row>
       <van-col span="12">
         <div class="m-5">
-          <a-button block>
+          <a-button
+            block
+            @click="clickRandBtn"
+          >
             <van-icon name="add-o" />
-            <span class="m-l-6">继续选号</span>
+            <span class="m-l-6">机选5注</span>
           </a-button>
         </div>
       </van-col>
       <van-col span="12">
         <div class="m-5">
-          <a-button block>
+          <a-button
+            block
+            @click="clickClearBtn"
+          >
             <van-icon name="delete-o" />
             <span class="m-l-6">清空选号</span>
           </a-button>
@@ -19,14 +28,31 @@
       </van-col>
     </van-row>
 
-    <div v-if="_picked">
-      <van-cell v-for="set in _sets" :to="{name:'CombinOrder',params:{id:set.id}}" is-link>
-        <div slot="icon" class="flex-middle m-r-10">
-          <van-icon :size=".6*rem" name="close" color="#CCC" />
+    <div v-if="cart.length">
+      <van-cell
+        v-for="(set, index) in _sets"
+        is-link
+      >
+        <div
+          slot="icon"
+          class="flex-middle m-r-10"
+          @click="removePick(index)"
+        >
+          <van-icon
+            :size=".6*rem"
+            name="close"
+            color="#CCC"
+          />
         </div>
-        <template #title>
-          <c-balls :areas="set.areas" type="none"></c-balls>
-        </template>
+        <div
+          slot="title"
+          @click="editPick(index)"
+        >
+          <c-balls
+            :areas="set.areas"
+            type="none"
+          ></c-balls>
+        </div>
       </van-cell>
     </div>
     <div v-else>
@@ -35,19 +61,37 @@
 
     <div class="fixed-bottom p_2">
       <van-row>
-        <van-col span="8" class="flex-center grey">
+        <van-col
+          span="8"
+          class="flex-center grey"
+        >
           <span>投</span>
-          <van-stepper v-model="value" min="1" max="99" :button-size=".5*rem" />
+          <van-stepper
+            v-model="multiple"
+            min="1"
+            max="99"
+            :button-size=".5*rem"
+          />
           <span>倍</span>
         </van-col>
-        <van-col span="8" class="sm flex-center">
+        <van-col
+          span="8"
+          class="sm flex-center"
+        >
           <div>
             <div class="grey">0注</div>
             <div class="red">0元</div>
           </div>
         </van-col>
-        <van-col span="8" class="flex-center">
-          <a-button type="primary" block @click="clickBuyBtn">发起合买</a-button>
+        <van-col
+          span="8"
+          class="flex-center"
+        >
+          <a-button
+            type="primary"
+            block
+            @click="clickBuyBtn"
+          >发起合买</a-button>
         </van-col>
       </van-row>
     </div>
@@ -56,34 +100,47 @@
 
 <script>
   import cBalls from 'components/c-balls'
-  import pick from '@/mock/user/pick.json'
-  import $cp from '@/utils/cp.js'
+  import $cp from '@/utils/cp'
 
   export default {
     components: { cBalls },
     data() {
       return {
-        pick: null,
-        value: 1
+        cart: [],
+        multiple: 1
       }
     },
     computed: {
-      _picked() {
-        return this.pick && this.pick.sets && this.pick.sets.length
-      },
       _sets() {
-        return this.pick ? this.pick.sets : null
+        return this.cart.map(pick => pick.set)
       }
     },
     created() {
-      this.init()
+      this.cart = this.$store.getters.cart
+      this.cart.forEach(pick => $cp.enhance(pick))
     },
     mounted() {},
     methods: {
-      init() {
-        let p = _.cloneDeep(pick)
-        $cp.enhance(p)
-        this.pick = p
+      customBack() {
+        this.$router.push({ name: 'Pick' })
+      },
+      clickRandBtn() {
+        let play = this.$store.getters.play
+        for (let i = 1; i <= 5; i++) {
+          let pick = $cp.randPick(play)
+          this.cart.unshift(pick)
+        }
+        this.$store.dispatch('setCart', this.cart)
+      },
+      clickClearBtn() {
+        this.cart = []
+        this.$store.dispatch('setCart', this.cart)
+      },
+      removePick(index) {
+        this.$delete(this.cart, index)
+      },
+      editPick(index) {
+        this.$router.push({ name: 'Pick', query: { index } })
       },
       clickBuyBtn() {
         this.$router.push({ name: 'CoBuy' })
@@ -91,7 +148,10 @@
     }
   }
 </script>
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
   .flex-center {
     height: 1.1rem;
   }
