@@ -37,14 +37,14 @@
 
     <div class="m-t-8">
       <van-cell
-        title="发起合买"
+        title="发起购彩"
         :to="{name:'Pick'}"
         icon="add-o"
         size="large"
         is-link
       />
       <van-cell
-        title="我的合买"
+        title="购彩记录"
         :to="{name:'CoBuyList'}"
         icon="orders-o"
         size="large"

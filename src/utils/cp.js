@@ -123,6 +123,7 @@ const resolvePlay = (play) => {
     arr = arr[0].split(SIGN.exclamation)
     area.cnt = arr.length == 2 ? parseInt(arr[1]) : 1
     area.minCnt = area.cnt
+    area.rndCnt = area.cnt
     // 是否支持胆拖
     area.gallEnabled = area.cnt >= 2
     // 号码
@@ -162,11 +163,7 @@ const showPick = (play, pick) => {
     let area = areas[i]
     let codes = area.codes
     let picks = area.picks
-    if (picks) {
-      _.fill(picks, 0)
-    } else {
-      area.picks = picks = new Array(area.codes.length).fill(0)
-    }
+    _.fill(picks, 0)
     codes.forEach((c, j) => {
       if (p.codesList[0].includes(c)) {
         picks.splice(j, 1, 2)
@@ -188,10 +185,35 @@ const cleanPick = (play) => {
   })
 }
 
+const getPick = (play) => {
+  let areas = play.areas
+  let arrays = []
+  areas.forEach(area => {
+    let codes = area.codes
+    let picks = area.picks
+    let galls = codes.filter((code, i) => picks[i] == 2)
+    codes = codes.filter((code, i) => picks[i] == 1)
+    arrays.push([galls, codes])
+  })
+  let codes = arrays.map(array => {
+    let code = '';
+    if (array[0].length) {
+      code += array[0].join(',')
+      code += '^'
+    }
+    code += array[1].join(',')
+    return code
+  })
+  let pick = { cp: play.cp, code: codes.join('|') + '@' + play.play }
+  enhance(pick)
+  return pick
+}
+
 export default {
   enhance,
   resolvePlay,
   randPick,
   showPick,
-  cleanPick
+  cleanPick,
+  getPick
 }

@@ -169,9 +169,7 @@
   import cBall from 'components/c-ball'
   import cBalls from 'components/c-balls'
   import cPick from 'components/c-pick'
-  import $cp from '@/utils/cp.js'
-  import r5Ret from '@/mock/user/r5.json'
-  import playRet from '@/mock/user/play.json'
+  import $cp from '@/utils/cp'
 
   export default {
     components: { cBall, cBalls, cPick },
@@ -205,7 +203,6 @@
             this.activeIndex = i
           }
         })
-        this.activeId = pick.set.play
       }
       let index = this.$route.query.index
       if ((index || index == 0) && index < this.cart.length) {
@@ -231,8 +228,12 @@
       }
     },
     watch: {
-      pick(val, oldVal) {
-        $cp.showPick(this.play, val)
+      pick(val, old) {
+        if (val == null) {
+          $cp.cleanPick(this.play)
+        } else {
+          $cp.showPick(this.play, val)
+        }
       }
     },
     methods: {
@@ -246,6 +247,7 @@
         this.$store.dispatch('setCart', this.cart)
       },
       clickCartItem() {
+        this.$store.dispatch('setPlay', this.play)
         this.$router.push({ name: 'Cart' })
       },
       clickRandItem() {
@@ -257,8 +259,9 @@
           this.$store.dispatch('setCart', this.cart)
           $cp.cleanPick(this.play)
         } else {
+          let pick = $cp.getPick(this.play)
           this.cart.splice(this.index, 1)
-          this.cart.unshift(this.pick)
+          this.cart.unshift(pick)
           this.$store.dispatch('setCart', this.cart)
           this.$router.push({ name: 'Cart' })
         }
@@ -296,20 +299,20 @@
         api.lot.stat({ cp: item.cp, stat: 'OMIT' }).then(vo => {
           vo = this.listTable(vo)[0]
           this.play.areas.forEach((area, i) => this.$set(area, 'omits', vo[i].datas[0]))
+          this.pick = this.index == null ? null : this.cart[this.index]
         }).catch(this.caught)
-
-        this.pick = this.index == null ? null : this.cart[this.index]
       },
       loadPlays() {
+        let play = this.cart.length ? this.cart[0].set.play : null
         this.items.forEach((item, i) => {
           api.lot.plays({ cp: item.cp }).then(vo1 => {
             vo1.forEach(v1 => {
               v1.text = v1.name
-              v1.id = v1.play
             })
             item.children = vo1
             vo1.forEach(v1 => {
-              if (this.activeIndex == i && this.activeId == v1.id) {
+              if (this.activeIndex == i && (play ? v1.play == play : this.activeId == v1.id)) {
+                this.activeId = v1.id
                 this.reload()
               }
             })

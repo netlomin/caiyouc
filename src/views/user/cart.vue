@@ -79,8 +79,8 @@
           class="sm flex-center"
         >
           <div>
-            <div class="grey">0注</div>
-            <div class="red">0元</div>
+            <div class="grey">{{_cnt}}注</div>
+            <div class="red">{{_cnt*2}}元</div>
           </div>
         </van-col>
         <van-col
@@ -113,6 +113,21 @@
     computed: {
       _sets() {
         return this.cart.map(pick => pick.set)
+      },
+      _cnt() {
+        let play = this.$store.getters.play
+        let areas = play.areas
+        let cnt = 0
+        this._sets.forEach(set => {
+          let c = 1
+          set.areas.forEach((a, i) => {
+            let g = a.codesList[0].length
+            let s = a.codesList[1].length
+            c *= util.comb(s, areas[i].cnt - g)
+          })
+          cnt += c
+        })
+        return Math.trunc(cnt)
       }
     },
     created() {
@@ -143,7 +158,7 @@
         this.$router.push({ name: 'Pick', query: { index } })
       },
       clickBuyBtn() {
-        this.$router.push({ name: 'CoBuy' })
+        // this.$router.push({ name: 'CoBuy' })
       }
     }
   }

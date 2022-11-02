@@ -100,13 +100,12 @@
         return this.area.gallEnabled && this.area.picks.filter(p => p == 2).length <= this.area.cnt - 2
       },
       clickBall(i) {
-        let picks = _.cloneDeep(this.area.picks)
+        let picks = this.area.picks
         if (this.gallEnabled()) {
-          picks[i] = picks[i] >= 2 ? 0 : picks[i] + 1
+          this.$set(picks, i, picks[i] >= 2 ? 0 : picks[i] + 1)
         } else {
-          picks[i] = 1 - picks[i]
+          this.$set(picks, i, 1 - picks[i])
         }
-        this.$set(this.area, 'picks', picks)
       }
     }
   }
