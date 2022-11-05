@@ -143,6 +143,15 @@ export default {
   cp: {
     startBuy(params) {
       return apiInstance.post('cp/start-buy', params)
+    },
+    buy(params) {
+      return apiInstance.post('cp/buy', params)
+    },
+    coBuys(params) {
+      return apiInstance.post('cp/co-buys', params)
+    },
+    buySubs(params) {
+      return apiInstance.post('cp/buy-subs', params)
     }
   }
 }

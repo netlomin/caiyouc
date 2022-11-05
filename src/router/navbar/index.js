@@ -4,9 +4,9 @@ export default [{
   path: '/',
   component: Layout,
   children: [{
-    path: '/home/combin-order/:id',
-    name: 'CombinOrder',
-    component: () => import('@/views/home/combin-order'),
+    path: '/home/co-buy-sub/:id',
+    name: 'CoBuySub',
+    component: () => import('@/views/home/co-buy-sub'),
     meta: {
       title: '合买详情',
       keepAlive: false

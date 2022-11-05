@@ -2,7 +2,7 @@
 <template>
   <div>
     <div
-      v-if="order"
+      v-if="coBuy"
       class="app-container"
     >
       <van-cell-group :border="false">
@@ -15,12 +15,12 @@
               name="gold-coin"
               :color="$c.themeColor"
             />
-            <strong class="m-l-10">{{order.cpName}}</strong>
-            <span class="sm grey">第{{order.issue}}期</span>
+            <strong class="m-l-10">{{coBuy.cpName}}</strong>
+            <span class="sm grey">第{{coBuy.issue}}期</span>
             <span style="float: right">
               <label>截止剩余：</label>
               <van-count-down
-                :time="order.remainTime"
+                :time="coBuy.remainTime"
                 class="inline"
               />
             </span>
@@ -29,24 +29,24 @@
             <div class="cell-body">
               <a-progress
                 :width="1.6*rem"
-                :percent="order.percent"
-                :success-percent="order.soldPercent"
+                :percent="coBuy.percent"
+                :success-percent="coBuy.soldPercent"
                 type="circle"
               >
                 <template #format="percent">
-                  <div class="sm bold">{{order.soldPercent}}%</div>
-                  <div class="xs grey">保底{{order.guardPercent}}%</div>
+                  <div class="sm bold">{{coBuy.soldPercent}}%</div>
+                  <div class="xs grey">保底{{coBuy.guardPercent}}%</div>
                 </template>
               </a-progress>
               <span class="m-l-10">
-                <h6 class="md">{{order.title}}</h6>
-                <span class="sm inline w-6 van-ellipsis">{{order.subtitle}}</span>
+                <h6 class="md">{{coBuy.userNickName}}</h6>
+                <span class="sm inline w-6 van-ellipsis">{{coBuy.title}}</span>
               </span>
             </div>
             <div class="cell-foot">
               <van-row>
                 <van-col
-                  v-for="data in order.datas"
+                  v-for="data in coBuy.datas"
                   span="6"
                   class="center"
                 >
@@ -69,15 +69,15 @@
           </div>
           <template #label>
             <div
-              v-if="order.visible!=2"
+              v-if="coBuy.visibility"
               class="tips"
-            > {{order.tips}}</div>
+            > {{coBuy.tips}}</div>
             <div
               v-else
               class="pick-sets"
             >
               <van-row
-                v-for="(set, i) in order.pick.sets"
+                v-for="(set, i) in coBuy.sets"
                 class="pick-set"
               >
                 <van-col span="2">{{i}}</van-col>
@@ -105,7 +105,7 @@
             <div class="cell-body">
               <a-table
                 :columns="columns"
-                :data-source="order.buys"
+                :data-source="coBuy.subs"
                 size="small"
                 :rowClassName="()=>'sm'"
                 :pagination="false"
@@ -137,12 +137,9 @@
       </van-cell-group>
     </div>
 
-    <van-submit-bar
-      :price="_amt"
-      tip="申购后需联系店主购买，30分钟未购买则申购失效！"
-    >
+    <van-submit-bar :price="_amt">
       <div class="flex-middle">
-        <span>申购份数</span>
+        <span>认购份数</span>
         <van-stepper
           v-model="cnt"
           min="0"
@@ -157,9 +154,8 @@
         <a-button
           :disabled="_disabledBuy"
           type="primary"
-          size="small"
           @click="buy"
-        >申购</a-button>
+        >提交</a-button>
       </template>
     </van-submit-bar>
   </div>
@@ -175,45 +171,52 @@
     data() {
       return {
         columns: [
-          { slots: { title: 't1' }, dataIndex: 'actName' },
+          { slots: { title: 't1' }, dataIndex: 'userNickName' },
           { slots: { title: 't2' }, dataIndex: 'cnt' },
           { slots: { title: 't3' }, dataIndex: 'amt' },
           { slots: { title: 't4' }, dataIndex: 'createTime', scopedSlots: { customRender: 'time' } }
         ],
-        order: null,
+        coBuy: null,
         cnt: 0
       }
     },
     computed: {
       _amt() {
-        return this.order ? this.order.amt * 100 * this.cnt : 0
+        return this.coBuy ? this.coBuy.unitAmt * this.cnt * 100 : 0
       },
       _max() {
-        return this.order ? this.order.totalCnt - this.order.soldCnt : 0
+        return this.coBuy ? this.coBuy.totalCnt - this.coBuy.soldCnt : 0
       },
       _disabledBuy() {
         return this.cnt == 0
       }
     },
-    watch: {},
     created() {
-      console.log(this.$route.params.id)
-      mock.remainTime = dayjs(mock.stopTime).diff(dayjs())
-      mock.datas = [
-        { val: mock.totalAmt, text: '总金额' },
-        { val: mock.amt, text: '每份金额' },
-        { val: mock.totalCnt, text: '总份数' },
-        { val: mock.totalCnt - mock.soldCnt, text: '剩余份数' }
-      ]
-      mock.percent = Math.round((mock.guardCnt + mock.soldCnt) / mock.totalCnt * 100)
-      mock.guardPercent = Math.round(mock.guardCnt / mock.totalCnt * 100)
-      mock.soldPercent = Math.round(mock.soldCnt / mock.totalCnt * 100)
-      mock.tips = mock.visible == 0 ? '截止后可见' : mock.visible == 1 ? '参与者可见' : ''
-      mock.buys.forEach(buy => { buy.key = buy.id })
-      $cp.enhance(mock.pick)
-      this.order = mock
+      let id = this.$route.params.id
+      api.cp.buy({ id }).then(vo => {
+        vo.remainTime = dayjs(vo.stopTime).diff(dayjs())
+        vo.percent = Math.round((vo.guardCnt + vo.soldCnt) / vo.totalCnt * 100)
+        vo.guardPercent = Math.round(vo.guardCnt / vo.totalCnt * 100)
+        vo.soldPercent = Math.round(vo.soldCnt / vo.totalCnt * 100)
+        vo.datas = [
+          { val: vo.totalCnt, text: '总金额' },
+          { val: vo.unitAmt, text: '每份金额' },
+          { val: vo.totalCnt, text: '总份数' },
+          { val: vo.totalCnt - vo.soldCnt, text: '剩余份数' }
+        ]
+        vo.tips = vo.visibility == 0 ? '' : vo.visibility == 1 ? '参与者可见' : '停售后可见'
+        $cp.enhance(vo)
+        this.coBuy = vo
+
+        api.cp.buySubs({ buyId: id }).then(vo => {
+          vo.forEach(sub => {
+            sub.key = sub.id
+            sub.amt = sub.cnt
+          })
+          this.$set(this.coBuy, 'subs', vo)
+        }).catch(this.caught)
+      }).catch(this.caught)
     },
-    mounted() {},
     methods: {
       buy() {
         console.log(this.order.id, this.order.amt, this.cnt)

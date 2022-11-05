@@ -16,7 +16,7 @@
         :border="false"
         inset
       >
-        <van-cell :to="{ name: 'CombinOrder', params: { id: item.id }}">
+        <van-cell :to="{ name: 'CoBuySub', params: { id: item.id }}">
           <div
             class="cell-head"
             slot="title"
@@ -29,7 +29,7 @@
             <span style="float: right;">
               截止剩余：
               <van-count-down
-                :time="time"
+                :time="item.remainTime"
                 class="inline"
               />
             </span>
@@ -48,8 +48,8 @@
                 </template>
               </a-progress>
               <span class="m-l-10">
-                <h6 class="md">{{item.title}}</h6>
-                <span class="sm inline w-6 van-ellipsis">{{item.subtitle}}</span>
+                <h6 class="md">{{item.userNickName}}</h6>
+                <span class="sm inline w-6 van-ellipsis">{{item.title}}</span>
               </span>
             </div>
             <div class="cell-foot">
@@ -58,14 +58,14 @@
                   span="6"
                   class="center"
                 >
-                  <h6 class="sm red">{{item.totalAmt}}</h6>
+                  <h6 class="sm red">{{item.totalCnt}}</h6>
                   <span class="sm grey">总金额</span>
                 </van-col>
                 <van-col
                   span="6"
                   class="center"
                 >
-                  <h6 class="sm red">{{item.amt}}</h6>
+                  <h6 class="sm red">{{item.unitAmt}}</h6>
                   <span class="sm grey">单份金额</span>
                 </van-col>
                 <van-col
@@ -97,55 +97,44 @@
 </template>
 
 <script>
-  import mock from '@/mock/home/index.json'
-
   export default {
     data() {
       return {
-        css: {},
-        time: 30.65 * 60 * 60 * 1000,
-        rate: 0,
-        list: [],
         loading: false,
         refreshing: false,
-        finished: false
+        finished: false,
+        cur: 1,
+        size: 10,
+        list: []
       }
     },
-    computed: {},
-    watch: {},
     created() {
-      this.api.time().then(vo => {
-        console.log('vo', vo)
-      }).catch(err => {
-        console.log('err', err)
-      })
       this.load()
     },
-    mounted() {},
-    destroyed() {},
     methods: {
       load() {
-        setTimeout(() => {
+        let { cur, size } = this
+        let shopId = this.$store.getters.shopId
+        api.cp.coBuys({ cur, size, shopId, all: false }).then(vo => {
           if (this.refreshing) {
             this.list = []
             this.refreshing = false
           }
-          let list = mock.list.filter(e => this.list.filter(l => e.id === l.id).length == 0)
-          list.forEach(e => {
+          
+          vo.forEach(e => {
             e.percent = Math.round((e.guardCnt + e.soldCnt) / e.totalCnt * 100)
             e.guardPercent = Math.round(e.guardCnt / e.totalCnt * 100)
             e.soldPercent = Math.round(e.soldCnt / e.totalCnt * 100)
-            this.list.push(e)
+            e.remainTime = dayjs(e.stopTime).diff(dayjs())
           })
-          this.finished = list.length == 0
+          this.list = this.list.concat(vo)
+
+          this.finished = true
           this.loading = false
-        }, 200)
+        }).catch(this.caught)
       },
       refresh() {
-        // 清空列表数据
         this.finished = false
-        // 重新加载数据
-        // 将 loading 设置为 true，表示处于加载状态
         this.loading = true
         this.load()
       }

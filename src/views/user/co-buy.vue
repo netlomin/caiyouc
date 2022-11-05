@@ -62,7 +62,7 @@
               :ellipsis="false"
               :color="$c.themeColor"
             >
-              <van-tab name="1">
+              <van-tab name="0">
                 <div
                   slot="title"
                   class="m-lr_3"
@@ -70,11 +70,11 @@
               </van-tab>
               <van-tab
                 title="参与可见"
-                name="2"
+                name="1"
               ></van-tab>
               <van-tab
                 title="停售可见"
-                name="3"
+                name="2"
               ></van-tab>
             </van-tabs>
           </template>
