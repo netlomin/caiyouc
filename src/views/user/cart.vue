@@ -62,6 +62,13 @@
     <div class="fixed-bottom p_2">
       <van-row>
         <van-col
+          span="16"
+          class="sm flex-center"
+        >
+          <span class="grey m-r-8">{{_cnt}}注 {{multiple}}倍</span>
+          <span class="red">共{{_cnt*multiple*2}}元</span>
+        </van-col>
+        <van-col
           span="8"
           class="flex-center grey"
         >
@@ -74,24 +81,33 @@
           />
           <span>倍</span>
         </van-col>
+      </van-row>
+      <van-row>
         <van-col
           span="8"
-          class="sm flex-center"
+          class="flex-center grey"
         >
-          <div>
-            <div class="grey">{{_cnt}}注</div>
-            <div class="red">{{_cnt*2}}元</div>
-          </div>
+          <a-button
+            block
+            @click="clickCoBuyBtn"
+            :disabled="!_cnt"
+          >发起合买</a-button>
         </van-col>
         <van-col
-          span="8"
+          span="1"
+          class="flex-center grey"
+        >
+        </van-col>
+        <van-col
+          span="15"
           class="flex-center"
         >
           <a-button
             type="primary"
             block
             @click="clickBuyBtn"
-          >发起合买</a-button>
+            :disabled="!_cnt"
+          >提交订单</a-button>
         </van-col>
       </van-row>
     </div>
@@ -107,7 +123,8 @@
     data() {
       return {
         cart: [],
-        multiple: 1
+        multiple: 1,
+        play: null
       }
     },
     computed: {
@@ -115,8 +132,7 @@
         return this.cart.map(pick => pick.set)
       },
       _cnt() {
-        let play = this.$store.getters.play
-        let areas = play.areas
+        let areas = this.play.areas
         let cnt = 0
         this._sets.forEach(set => {
           let c = 1
@@ -133,6 +149,7 @@
     created() {
       this.cart = this.$store.getters.cart
       this.cart.forEach(pick => $cp.enhance(pick))
+      this.play = this.$store.getters.play
     },
     mounted() {},
     methods: {
@@ -157,12 +174,61 @@
       editPick(index) {
         this.$router.push({ name: 'Pick', query: { index } })
       },
+      clickCoBuyBtn() {
+        if (this.cart.length >= 100) {
+          this.$notify({ message: '单次提交最多99组号码！', background: '#FF1111' })
+          return
+        }
+        this.$router.push({ name: 'CoBuy', query: { multiple: this.multiple } })
+      },
       clickBuyBtn() {
-        // this.$router.push({ name: 'CoBuy' })
+        if (this.cart.length >= 100) {
+          this.$notify({ message: '单次提交最多99组号码！', background: '#FF1111' })
+          return
+        }
+
+        let userId = this.$store.getters.userId
+        this.api.user.act({ userId, actType: 'CASH' }).then(vo => {
+          let amt = this._cnt * this.multiple * 2
+          if (vo.amt < amt) {
+            this.$dialog.alert({
+              title: '提示',
+              message: '购彩金额不足，余额：' + vo.amt + '元！',
+            }).then(() => {})
+          } else {
+            this.$dialog.confirm({
+              title: '提示',
+              message: '购彩金额：' + amt + '元，确认提交订单！',
+            }).then((action) => {
+              let cp = this.play.cp
+              api.lot.issue(cp).then(vo => {
+                let params = {
+                  "issue": vo.issue,
+                  "cp": cp,
+                  "type": 0,
+                  "amt": amt,
+                  "cnt": this._cnt,
+                  "code": this.code(),
+                  "multiple": this.multiple
+                }
+                api.cp.startBuy(params).then(vo => {
+                  this.cart = []
+                  this.$store.dispatch('setCart', this.cart)
+                  this.$router.push({ name: 'BuyResult' })
+                }).catch(this.caught)
+              }).catch(this.caught)
+            }).catch(() => {})
+          }
+        }).catch(this.caught)
+      },
+      code() {
+        return this.cart.map(pick => pick.set)
+          .reduce((prev, cur) => (prev.code ? prev.code : prev) + '&' + cur.code)
       }
     }
   }
 </script>
+
 <style
   lang="scss"
   scoped

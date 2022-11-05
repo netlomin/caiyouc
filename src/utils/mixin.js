@@ -378,7 +378,7 @@ const mixin = {
         if (err.msg.length <= 4) {
           Toast.fail(err.msg)
         } else {
-          Toast({ message: err.msg, position: 'top' })
+          Toast({ message: err.msg })
         }
         return
       }

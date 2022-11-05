@@ -28,11 +28,11 @@ export default [{
       keepAlive: false
     }
   }, {
-    path: '/home/co-buy-result/:id',
-    name: 'CoBuyResult',
-    component: () => import('@/views/user/co-buy-result'),
+    path: '/home/buy-result',
+    name: 'BuyResult',
+    component: () => import('@/views/user/buy-result'),
     meta: {
-      title: '提交合买结果',
+      title: '提交结果',
       keepAlive: false
     }
   }, {

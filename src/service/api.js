@@ -139,5 +139,10 @@ export default {
     stat(params) {
       return apiInstance.post('lot/stat', params)
     }
+  },
+  cp: {
+    startBuy(params) {
+      return apiInstance.post('cp/start-buy', params)
+    }
   }
 }
