@@ -45,7 +45,7 @@
       />
       <van-cell
         title="我的代购"
-        :to="{name:'CoBuyList'}"
+        :to="{name:'BuyList'}"
         icon="orders-o"
         size="large"
         is-link

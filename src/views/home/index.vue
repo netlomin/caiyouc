@@ -120,7 +120,7 @@
             this.list = []
             this.refreshing = false
           }
-          
+
           vo.forEach(e => {
             e.percent = Math.round((e.guardCnt + e.soldCnt) / e.totalCnt * 100)
             e.guardPercent = Math.round(e.guardCnt / e.totalCnt * 100)

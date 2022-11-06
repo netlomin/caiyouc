@@ -117,7 +117,7 @@
         soldCnt: 0,
         guardCnt: 0,
         visibility: 1,
-        title: ''
+        title: '大吉大利，今晚吃鸡！'
       }
     },
     computed: {

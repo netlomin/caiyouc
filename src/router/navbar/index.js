@@ -12,11 +12,11 @@ export default [{
       keepAlive: false
     }
   }, {
-    path: '/home/combin-buy-result/:id',
-    name: 'CombinResult',
-    component: () => import('@/views/home/combin-buy-result'),
+    path: '/home/sub-buy-result',
+    name: 'SubBuyResult',
+    component: () => import('@/views/home/sub-buy-result'),
     meta: {
-      title: '申购结果',
+      title: '认购结果',
       keepAlive: false
     }
   }, {
@@ -36,11 +36,11 @@ export default [{
       keepAlive: false
     }
   }, {
-    path: '/user/co-buy-list',
-    name: 'CoBuyList',
-    component: () => import('@/views/user/co-buy-list'),
+    path: '/user/buy-list',
+    name: 'BuyList',
+    component: () => import('@/views/user/buy-list'),
     meta: {
-      title: '我的合买',
+      title: '我的代购',
       keepAlive: false
     }
   }, {

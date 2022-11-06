@@ -154,7 +154,7 @@
         <a-button
           :disabled="_disabledBuy"
           type="primary"
-          @click="buy"
+          @click="subBuy"
         >提交</a-button>
       </template>
     </van-submit-bar>
@@ -218,9 +218,11 @@
       }).catch(this.caught)
     },
     methods: {
-      buy() {
-        console.log(this.order.id, this.order.amt, this.cnt)
-        this.$router.push({ name: "CombinResult", params: { id: 2 } })
+      subBuy() {
+        let amt = this.coBuy.unitAmt * this.cnt
+        api.cp.subBuy({ buyId: this.coBuy.id, cnt: this.cnt, amt }).then(vo => {
+          this.$router.push({ name: "SubBuyResult" })
+        }).catch(this.caught)
       }
     }
   }
