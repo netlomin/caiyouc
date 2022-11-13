@@ -3,8 +3,13 @@
     <template v-for="(area,i) in areas">
       <template v-for="(codes,j) in area.codesList">
         <template v-for="(code,k) in codes">
-          <c-ball :code="code" :size="size" :type="type?type:(area.hit(code)?'solid':'plain')" class="m-2"
-            :color="area.color(j)">
+          <c-ball
+            :code="code"
+            :size="size"
+            :type="type?type:(area.hit(code)?'solid':'plain')"
+            class="m-2"
+            :color="area.color(j)"
+          >
           </c-ball>
         </template>
       </template>
@@ -23,13 +28,18 @@
       size: { type: String, default: 'md' },
       type: { type: String, default: '' }
     },
-    data() {
-      return {}
+    watch: {
+      areas(val, oVal) {
+        console.log(val)
+      }
     }
   }
 </script>
 
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
   .c-balls {
     margin: 0;
     text-align: left;

@@ -162,7 +162,6 @@
 </template>
 
 <script>
-  import mock from '@/mock/home/combin-order.json'
   import $cp from '@/utils/cp.js'
   import cBalls from 'components/c-balls'
 

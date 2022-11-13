@@ -44,6 +44,14 @@ export default [{
       keepAlive: false
     }
   }, {
+    path: '/user/buy-detail/:id',
+    name: 'BuyDetail',
+    component: () => import('@/views/user/buy-detail'),
+    meta: {
+      title: '代购详情',
+      keepAlive: false
+    }
+  }, {
     path: '/user/cart',
     name: 'Cart',
     component: () => import('@/views/user/cart'),

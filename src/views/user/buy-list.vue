@@ -34,7 +34,7 @@
       >
         <van-cell
           v-for="buy in list"
-          :to="{name:'CoBuySub',params:{id:buy.id}}"
+          :to="buy.type?{name:'CoBuySub',params:{id:buy.id}}:{name:'BuyDetail',params:{id:buy.id}}"
           is-link
         >
           <div
