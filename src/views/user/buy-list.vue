@@ -82,7 +82,6 @@
         list: []
       }
     },
-    computed: {},
     watch: {
       activeTab(newVal, oldVal) {
         this.refreshing = true
@@ -93,6 +92,9 @@
       this.refresh()
     },
     methods: {
+      customBack() {
+        this.$router.replace({ name: 'User' })
+      },
       load() {
         let { cur, size } = this
         let params = { cur, size, all: false }
@@ -121,9 +123,3 @@
     }
   }
 </script>
-
-<style
-  lang="scss"
-  scoped
->
-</style>

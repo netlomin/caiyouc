@@ -8,88 +8,154 @@
       <van-cell-group :border="false">
         <van-cell>
           <div
-            class="cell-head"
             slot="title"
+            class="cell-body"
           >
             <van-icon
               name="gold-coin"
               :color="$c.themeColor"
+              :size="rem"
             />
-            <strong class="m-l-10">{{coBuy.cpName}}</strong>
-            <span class="sm grey">第{{coBuy.issue}}期</span>
-            <span style="float: right">
-              <label>截止剩余：</label>
-              <van-count-down
-                :time="coBuy.remainTime"
-                class="inline"
-              />
+            <span class="m-l-8">
+              <b>{{coBuy.cpName}}</b>
+              <span class="m-l-2 sm grey">第{{coBuy.issue}}期</span>
             </span>
           </div>
-          <template #label>
-            <div class="cell-body">
-              <a-progress
-                :width="1.6*rem"
-                :percent="coBuy.percent"
-                :success-percent="coBuy.soldPercent"
-                type="circle"
+          <div
+            slot="right-icon"
+            class="cell-body"
+          >
+            <span class="grey">{{coBuy.statusDesc}}</span>
+          </div>
+        </van-cell>
+        <van-cell>
+          <div class="cell-body">
+            <a-progress
+              :width="1.6*rem"
+              :percent="coBuy.percent"
+              :success-percent="coBuy.soldPercent"
+              type="circle"
+            >
+              <template #format="percent">
+                <div class="sm bold">{{coBuy.soldPercent}}%</div>
+                <div class="xs grey">保底{{coBuy.guardPercent}}%</div>
+              </template>
+            </a-progress>
+            <span class="m-l-8">
+              <h6 class="md">{{coBuy.userNickName}}</h6>
+              <span class="sm inline w-6 van-ellipsis">{{coBuy.title}}</span>
+            </span>
+          </div>
+          <div class="cell-foot">
+            <van-row>
+              <van-col
+                v-for="data in coBuy.datas"
+                span="6"
+                class="center sm"
               >
-                <template #format="percent">
-                  <div class="sm bold">{{coBuy.soldPercent}}%</div>
-                  <div class="xs grey">保底{{coBuy.guardPercent}}%</div>
-                </template>
-              </a-progress>
-              <span class="m-l-10">
-                <h6 class="md">{{coBuy.userNickName}}</h6>
-                <span class="sm inline w-6 van-ellipsis">{{coBuy.title}}</span>
-              </span>
-            </div>
-            <div class="cell-foot">
-              <van-row>
-                <van-col
-                  v-for="data in coBuy.datas"
-                  span="6"
-                  class="center"
-                >
-                  <h6 class="sm red">{{data.val}}</h6>
-                  <span class="sm grey">{{data.text}}</span>
-                </van-col>
-              </van-row>
-            </div>
-          </template>
+                <div class="red">{{data.val}}</div>
+                <span class="grey">{{data.text}}</span>
+              </van-col>
+            </van-row>
+          </div>
         </van-cell>
       </van-cell-group>
 
       <van-cell-group :border="false">
         <van-cell>
           <div
-            class="cell-head"
             slot="title"
+            class="cell-head"
           >
-            <span class="grey">方案信息</span>
+            <span class="grey">基本信息</span>
           </div>
-          <template #label>
-            <div
-              v-if="coBuy.visibility"
-              class="tips"
-            > {{coBuy.tips}}</div>
-            <div
-              v-else
-              class="pick-sets"
-            >
-              <van-row
-                v-for="(set, i) in coBuy.sets"
-                class="pick-set"
+        </van-cell>
+        <van-cell>
+          <div class="cell-head grey">
+            <van-row>
+              <van-col
+                span="2"
+                class="p-tb-4"
+              >单号</van-col>
+              <van-col
+                span="22"
+                class="p-tb-4"
               >
-                <van-col span="2">{{i}}</van-col>
-                <van-col span="22">
-                  <c-balls
-                    :areas="set.areas"
-                    size="sm"
-                  ></c-balls>
-                </van-col>
-              </van-row>
-            </div>
-          </template>
+                <b class="m-l-6">{{coBuy.id}}</b>
+              </van-col>
+            </van-row>
+            <van-row>
+              <van-col
+                span="2"
+                class="p-tb-4"
+              >购票</van-col>
+              <van-col
+                span="22"
+                class="p-tb-4"
+              >
+                <b class="red m-l-6">{{coBuy.cnt}}</b>注
+                <b class="red">x{{coBuy.multiple}}</b>倍
+                共<b class="red">{{coBuy.amt}}</b>元
+              </van-col>
+            </van-row>
+            <van-row v-if="draw">
+              <van-col
+                span="2"
+                class="p-tb-4"
+              >开奖</van-col>
+              <van-col span="22">
+                <c-balls
+                  :areas="draw.set.areas"
+                  size="sm"
+                  type="solid"
+                ></c-balls>
+              </van-col>
+            </van-row>
+          </div>
+        </van-cell>
+      </van-cell-group>
+
+      <van-cell-group :border="false">
+        <van-cell is-link>
+          <div
+            slot="title"
+            class="cell-head"
+          >
+            <span class="grey">选号信息</span>
+          </div>
+          <div
+            slot="right-icon"
+            class="cell-head grey"
+          >
+            <span>查看彩票</span>
+            <van-icon name="arrow" />
+          </div>
+        </van-cell>
+        <van-cell>
+          <div
+            v-if="coBuy.visibility"
+            class="tips"
+          > {{coBuy.tips}}</div>
+          <div
+            v-else
+            class="pick-sets"
+          >
+            <van-row
+              v-for="(set, i) in coBuy.sets"
+              class="pick-set"
+            >
+              <van-col
+                span="2"
+                class="grey p-tb-4"
+              >{{i+1}}</van-col>
+              <van-col span="22">
+                <c-balls
+                  :areas="set.areas"
+                  size="sm"
+                ></c-balls>
+              </van-col>
+            </van-row>
+          </div>
         </van-cell>
       </van-cell-group>
 
@@ -176,6 +242,7 @@
           { slots: { title: 't4' }, dataIndex: 'createTime', scopedSlots: { customRender: 'time' } }
         ],
         coBuy: null,
+        draw: null,
         cnt: 0
       }
     },
@@ -205,14 +272,23 @@
         ]
         vo.tips = vo.visibility == 0 ? '' : vo.visibility == 1 ? '参与者可见' : '停售后可见'
         $cp.enhance(vo)
-        this.coBuy = vo
 
-        api.cp.buySubs({ buyId: id }).then(vo => {
-          vo.forEach(sub => {
+        api.cp.buySubs({ buyId: id }).then(subs => {
+          subs.forEach(sub => {
             sub.key = sub.id
             sub.amt = sub.cnt
           })
-          this.$set(this.coBuy, 'subs', vo)
+          this.$set(vo, 'subs', subs)
+        }).catch(this.caught)
+
+        api.lot.draws({ cp: vo.cp, endIssue: vo.issue, startIssue: vo.issue }).then(draws => {
+          if (draws.length) {
+            let draw = draws[0]
+            $cp.enhance(draw)
+            this.draw = draw
+            vo.draw(draw)
+          }
+          this.coBuy = vo
         }).catch(this.caught)
       }).catch(this.caught)
     },

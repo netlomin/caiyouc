@@ -179,6 +179,7 @@
                 let params = {
                   "issue": vo.issue,
                   "cp": cp,
+                  "play": this.play.play,
                   "type": 1,
                   "cnt": this._cnt,
                   "amt": this._amt,

@@ -15,8 +15,8 @@
             key="pickBtn"
             type="danger"
             class="md"
-            @click="clickPickBtn"
-          >继续选号</a-button>
+            @click="clickBuyListBtn"
+          >我的代购</a-button>
         </template>
       </a-result>
     </div>
@@ -35,8 +35,8 @@
       clickHomeBtn() {
         this.$router.replace({ name: 'Home' })
       },
-      clickPickBtn() {
-        this.$router.replace({ name: 'Pick' })
+      clickBuyListBtn() {
+        this.$router.replace({ name: 'BuyList' })
         // if (!navigator.share) {
         //   this.copyText(text)
         //   this.$toast({ message: '已复制申购信息，请前往微信联系店主！', position: 'top' })

@@ -205,6 +205,7 @@
                 let params = {
                   "issue": vo.issue,
                   "cp": cp,
+                  "play": this.play.play,
                   "type": 0,
                   "amt": amt,
                   "cnt": this._cnt,
