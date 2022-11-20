@@ -72,7 +72,7 @@
     </van-cell-group>
 
     <van-cell-group :border="false">
-      <van-cell is-link>
+      <van-cell :is-link="buy.showTicket">
         <div
           class="cell-head"
           slot="title"
@@ -80,8 +80,10 @@
           <span class="grey">选号信息</span>
         </div>
         <div
+          v-if="buy.showTicket"
           slot="right-icon"
           class="cell-head grey"
+          @click="showTicket"
         >
           <span>查看彩票</span>
           <van-icon name="arrow" />
@@ -163,6 +165,9 @@
             }
           })
         }).catch(this.caught)
+      },
+      showTicket() {
+        this.$router.push({ name: "TicketList", params: { buyId: this.buy.id } })
       }
     }
   }

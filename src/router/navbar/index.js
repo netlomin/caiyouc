@@ -44,6 +44,14 @@ export default [{
       keepAlive: false
     }
   }, {
+    path: '/user/ticket-list/:buyId',
+    name: 'TicketList',
+    component: () => import('@/views/user/ticket-list'),
+    meta: {
+      title: '彩票列表',
+      keepAlive: false
+    }
+  }, {
     path: '/user/buy-detail/:id',
     name: 'BuyDetail',
     component: () => import('@/views/user/buy-detail'),

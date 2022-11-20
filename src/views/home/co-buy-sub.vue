@@ -116,7 +116,7 @@
       </van-cell-group>
 
       <van-cell-group :border="false">
-        <van-cell is-link>
+        <van-cell :is-link="coBuy.showTicket">
           <div
             slot="title"
             class="cell-head"
@@ -124,8 +124,10 @@
             <span class="grey">选号信息</span>
           </div>
           <div
+            v-if="coBuy.showTicket"
             slot="right-icon"
             class="cell-head grey"
+            @click="showTicket"
           >
             <span>查看彩票</span>
             <van-icon name="arrow" />
@@ -203,7 +205,10 @@
       </van-cell-group>
     </div>
 
-    <van-submit-bar :price="_amt">
+    <van-submit-bar
+      v-if="_subable"
+      :price="_amt"
+    >
       <div class="flex-middle">
         <span>认购份数</span>
         <van-stepper
@@ -255,6 +260,9 @@
       },
       _disabledBuy() {
         return this.cnt == 0
+      },
+      _subable() {
+        return this.coBuy && this.coBuy.remainTime > 0 && this.coBuy.totalCnt > this.coBuy.soldCnt
       }
     },
     created() {
@@ -298,10 +306,14 @@
         api.cp.subBuy({ buyId: this.coBuy.id, cnt: this.cnt, amt }).then(vo => {
           this.$router.push({ name: "SubBuyResult" })
         }).catch(this.caught)
+      },
+      showTicket() {
+        this.$router.push({ name: "TicketList", params: { buyId: this.coBuy.id } })
       }
     }
   }
 </script>
+
 <style
   lang="scss"
   scoped
