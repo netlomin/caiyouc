@@ -1,16 +1,15 @@
-<!-- home -->
 <template>
   <div>
     <c-panel :bg="$c.themeColor">
       <a-avatar
-        class="m-6"
+        class="m-8"
         :src="user.avatarUrl"
         :size="1.28*rem"
         :style="css.avatar"
       >{{firstChar(user.nickName)}}</a-avatar>
       <div class="user-bar inline white">
-        <b>{{user.nickName}}</b>
-        <div class="shop-bar sm">
+        <b class="m-6">{{user.nickName}}</b>
+        <div class="shop-bar sm m-tb-2">
           <van-icon
             name="home-o"
             class="green"

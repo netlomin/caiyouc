@@ -17,6 +17,7 @@ import {
   Grid,
   GridItem,
   Icon,
+  Image,
   List,
   NavBar,
   Notify,
@@ -27,6 +28,7 @@ import {
   RadioGroup,
   Row,
   Stepper,
+  Sticky,
   SubmitBar,
   Tab,
   Tabs,
@@ -47,6 +49,7 @@ Vue.use(Empty)
 Vue.use(Form).use(Field)
 Vue.use(Grid).use(GridItem)
 Vue.use(Icon)
+Vue.use(Image)
 Vue.use(List)
 Vue.use(NavBar)
 Vue.use(Notify)
@@ -55,6 +58,7 @@ Vue.use(Popup)
 Vue.use(PullRefresh)
 Vue.use(RadioGroup).use(Radio)
 Vue.use(Stepper)
+Vue.use(Sticky)
 Vue.use(SubmitBar)
 Vue.use(Tabs).use(Tab)
 Vue.use(Tabbar).use(TabbarItem)

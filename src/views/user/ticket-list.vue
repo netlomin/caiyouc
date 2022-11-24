@@ -1,128 +1,161 @@
 <template>
-  <div>
-    <van-tabs
-      v-model="activeTab"
-      :line-width="2.5*rem"
+  <div class="app-container">
+    <van-cell-group
+      v-if="_ticket && buy"
+      :border="false"
     >
-      <van-tab
-        title="所有"
-        name="2"
-      ></van-tab>
-      <van-tab
-        title="单购"
-        name="0"
-      ></van-tab>
-      <van-tab
-        title="合买"
-        name="1"
-      ></van-tab>
-      <van-tab
-        title="我发起"
-        name="3"
-      ></van-tab>
-    </van-tabs>
-    <van-pull-refresh
-      v-model="refreshing"
-      @refresh="refresh"
-    >
-      <van-list
-        v-if="list.length"
-        v-model="loading"
-        :finished="finished"
-        finished-text="已经到底了～"
-        @load="load"
-      >
-        <van-cell
-          v-for="buy in list"
-          :to="typeTo(buy.id, buy.type)"
-          is-link
-        >
-          <div
-            slot="icon"
-            class=" flex-middle m-r-10"
-          >
-            <van-icon
-              :size="rem"
-              name="gold-coin"
-              :color="$c.themeColor"
-            />
-          </div>
-          <template #title>
+      <van-cell>
+        <div slot="title">
+          <span>
             <b>{{buy.cpName}}</b>
-          </template>
-          <template #label>
-            <span class="grey">{{buy.createTime}}</span>
-          </template>
-          <template #right-icon>
-          </template>
-          <div>
-            <div>{{buy.statusDesc}}</div>
-            <div>{{buy.amt+' 元'}}</div>
+            <span class="sm grey m-l-6">第{{buy.issue}}期</span>
+          </span>
+        </div>
+        <div
+          slot="right-icon"
+          class="grey"
+        >
+          （<i class="red">{{this.index+1}}</i>/<i>{{this.list.length}}</i>）
+          <span>{{_ticket.statusDesc}}</span>
+        </div>
+      </van-cell>
+      <van-cell>
+        <div class="grey">
+          <b class="red">{{_ticket.cnt}}</b>注
+          <b class="red">x{{_ticket.multiple}}</b>倍
+        </div>
+      </van-cell>
+      <van-cell>
+        <div class="grey">
+          <van-row
+            v-for="(set,i) in _ticket.sets"
+            class="pick-set"
+          >
+            <van-col
+              span="2"
+              class="grey p-tb-4"
+            >{{i+1}}</van-col>
+            <van-col span="22">
+              <c-balls
+                :areas="set.areas"
+                size="sm"
+              ></c-balls>
+            </van-col>
+          </van-row>
+        </div>
+      </van-cell>
+      <van-cell>
+        <div
+          v-if="_ticket.originalImgUrl"
+          class="flex-center"
+        >
+          <van-image
+            width="10rem"
+            height="8rem"
+            fit="contain"
+            :src="_ticket.originalImgUrl"
+            class="ticket-img"
+          />
+        </div>
+        <van-empty
+          v-else
+          description="待出票"
+        />
+      </van-cell>
+    </van-cell-group>
+
+    <div class="fixed-bottom p_2">
+      <van-row>
+        <van-col span="6">
+          <div class="p-8">
+            <a-button
+              block
+              :disabled="index<=0"
+              @click="index--"
+            >上一张</a-button>
           </div>
-        </van-cell>
-      </van-list>
-      <van-empty
-        v-else
-        description="暂无合买"
-      />
-    </van-pull-refresh>
+        </van-col>
+        <van-col span="6">
+          <div class="p-8">
+            <a-button
+              type="primary"
+              block
+              :disabled="!(_ticket&&_ticket.status==10)"
+              @click="checkTicket(11)"
+            >错票</a-button>
+          </div>
+        </van-col>
+        <van-col span="6">
+          <div class="p-8">
+            <a-button
+              block
+              :disabled="!(_ticket&&_ticket.status==10)"
+              @click="checkTicket(20)"
+            >正确</a-button>
+          </div>
+        </van-col>
+        <van-col span="6">
+          <div class="p-8">
+            <a-button
+              block
+              :disabled="index>=list.length-1"
+              @click="index++"
+            >下一张</a-button>
+          </div>
+        </van-col>
+      </van-row>
+    </div>
   </div>
 </template>
 
 <script>
+  import $cp from '@/utils/cp'
+  import cBalls from 'components/c-balls'
+
   export default {
+    components: { cBalls },
     data() {
       return {
-        activeTab: "2",
-        refreshing: false,
-        loading: false,
-        finished: false,
-        cur: 1,
-        size: 10,
-        list: []
+        buyId: null,
+        buy: null,
+        list: [],
+        index: 0
       }
     },
-    watch: {
-      activeTab(newVal, oldVal) {
-        this.refreshing = true
-        this.refresh()
+    computed: {
+      _ticket() {
+        return this.list.length > this.index ? this.list[this.index] : null
       }
     },
     created() {
+      this.buyId = this.$route.params.buyId
       this.refresh()
     },
     methods: {
-      customBack() {
-        this.$router.replace({ name: 'User' })
-      },
-      load() {
-        let { cur, size } = this
-        let params = { cur, size, all: false }
-        if (this.activeTab == '0' || this.activeTab == '1') {
-          params.type = this.activeTab
-        }
-        if (this.activeTab == '3') {
-          let userId = this.$store.getters.userId
-          params.userIds = [userId]
-        }
-        api.cp.buys(params).then(vo => {
-          if (this.refreshing) {
-            this.list = []
-            this.refreshing = false
-          }
-          this.list = this.list.concat(vo)
-          this.finished = true
-          this.loading = false
+      refresh() {
+        api.cp.buy({ id: this.buyId }).then(vo => {
+          this.buy = vo
+        }).catch(this.caught)
+        api.cp.buyTickets({ buyId: this.buyId }).then(vo => {
+          vo.forEach(i => $cp.enhance(i))
+          this.list = vo
         }).catch(this.caught)
       },
-      refresh() {
-        this.loading = true
-        this.finished = false
-        this.load()
-      },
-      typeTo(id, type) {
-        return { name: type ? 'CoBuySub' : 'BuyDetail', params: { id: id } }
+      checkTicket(status) {
+        api.cp.checkBuyTicket({ id: this._ticket.id, status }).then(vo => {
+          console.log(vo)
+          this.index = Math.min(this.index + 1, this.list.length - 1)
+        }).catch(this.caught)
       }
     }
   }
 </script>
+
+<style
+  lang="scss"
+  scoped
+>
+  .ticket-img {
+    border: 1px solid #EEE;
+  }
+</style>

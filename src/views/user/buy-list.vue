@@ -1,26 +1,28 @@
 <template>
   <div>
-    <van-tabs
-      v-model="activeTab"
-      :line-width="2.5*rem"
-    >
-      <van-tab
-        title="所有"
-        name="2"
-      ></van-tab>
-      <van-tab
-        title="单购"
-        name="0"
-      ></van-tab>
-      <van-tab
-        title="合买"
-        name="1"
-      ></van-tab>
-      <van-tab
-        title="我发起"
-        name="3"
-      ></van-tab>
-    </van-tabs>
+    <van-sticky :offset-top="44">
+      <van-tabs
+        v-model="activeTab"
+        :line-width="2.5*rem"
+      >
+        <van-tab
+          title="所有"
+          name="2"
+        ></van-tab>
+        <van-tab
+          title="单购"
+          name="0"
+        ></van-tab>
+        <van-tab
+          title="合买"
+          name="1"
+        ></van-tab>
+        <van-tab
+          title="我发起"
+          name="3"
+        ></van-tab>
+      </van-tabs>
+    </van-sticky>
     <van-pull-refresh
       v-model="refreshing"
       @refresh="refresh"
@@ -126,3 +128,12 @@
     }
   }
 </script>
+
+<style
+  lang="scss"
+  scoped
+>
+  .fixed-top {
+    top: 44px
+  }
+</style>

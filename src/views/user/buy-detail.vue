@@ -92,7 +92,7 @@
       <van-cell>
         <div class="pick-sets">
           <van-row
-            v-for="(set, i) in buy.sets"
+            v-for="(set,i) in buy.sets"
             class="pick-set"
           >
             <van-col

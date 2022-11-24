@@ -158,6 +158,12 @@ export default {
     },
     buySubs(params) {
       return apiInstance.post('cp/buy-subs', params)
+    },
+    buyTickets(params) {
+      return apiInstance.post('cp/buy-tickets', params)
+    },
+    checkBuyTicket(params) {
+      return apiInstance.post('cp/check-buy-ticket', params)
     }
   }
 }

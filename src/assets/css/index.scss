@@ -146,3 +146,11 @@ html, body,#app  {
   background-color: #FFF;
   border-top: 1px solid #F8F8F8;
 }
+
+.fixed-bottom_1 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+}
