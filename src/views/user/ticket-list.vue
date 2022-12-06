@@ -15,14 +15,19 @@
           slot="right-icon"
           class="grey"
         >
-          （<i class="red">{{this.index+1}}</i>/<i>{{this.list.length}}</i>）
-          <span>{{_ticket.statusDesc}}</span>
+          <b class="red">{{this.index+1}}</b>/<i>{{this.list.length}}</i>
         </div>
       </van-cell>
       <van-cell>
         <div class="grey">
           <b class="red">{{_ticket.cnt}}</b>注
           <b class="red">x{{_ticket.multiple}}</b>倍
+        </div>
+        <div
+          slot="right-icon"
+          class="grey"
+        >
+          <span>{{_ticket.statusDesc}}</span>
         </div>
       </van-cell>
       <van-cell>
@@ -91,7 +96,7 @@
               block
               :disabled="!(_ticket&&_ticket.status==10)"
               @click="checkTicket(20)"
-            >正确</a-button>
+            >对票</a-button>
           </div>
         </van-col>
         <van-col span="6">
