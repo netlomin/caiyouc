@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="css/mui.min.css">
+    <title>下载中心</title>
+  </head>
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    /*顶部标题栏*/
+    .title_box {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      background: #68d686;
+      font-size: 20px;
+      display: flex;
+    }
+
+    .back_page,
+    .back_home {
+      flex: 1;
+    }
+
+    .back_page img,
+    .back_home img {
+      width: 32px;
+      height: 32px;
+      margin-top: 8px;
+    }
+
+    .back_page {
+      text-align: left;
+    }
+
+    .back_home {
+      text-align: right;
+      margin-right: 10px;
+    }
+
+    .title_box p {
+      flex: 3;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    #weixin-tip {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      background: rgba(0, 0, 0, 0.8);
+      filter: alpha(opacity=80);
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+    }
+
+    #weixin-tip p {
+      text-align: center;
+      margin-top: 10%;
+      padding: 0 5%;
+      position: relative;
+    }
+
+    #weixin-tip p img {
+      width: 100%;
+    }
+
+    #weixin-tip .close {
+      position: absolute;
+      width: 50px;
+      top: 0;
+      left: 5%;
+    }
+
+    .app-box {
+      width: 100%;
+      height: 100px;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .app-box .app-left {
+      width: 48%;
+      float: left;
+    }
+
+    .app-box .app-right {
+      margin-left: 2%;
+      width: 48%;
+      float: left;
+    }
+
+    .app-box img {
+      width: 80%;
+    }
+
+    .desc {
+      padding-top: 30px;
+      padding-bottom: 20px;
+      text-align: center;
+    }
+
+    .desc h1 {
+      height: 5rem;
+      line-height: 5rem;
+      font-size: 2.2rem;
+      color: #333;
+    }
+
+    .desc p {
+      height: 4rem;
+      line-height: 1.5rem;
+      font-size: 1rem;
+      color: #8E8F90;
+    }
+  </style>
+  <body>
+    <!--标题-->
+    <div class="title_box">
+      <p>下载中心</p>
+    </div>
+    <div class="desc">
+      <h1 style="color: darkgreen;">下载手机客户端</h1>
+      <p style="color: darkgreen;">本工具由用户上传提供，内容与本站无关</p>
+      <p style="color: green;">用户上传的文件都经过病毒扫描，请放心下载。</p>
+    </div>
+    <div class="app-box">
+      <div class="app-left" id="download_android">
+        <img src="images/android-btn.png" />
+      </div>
+      <div class="app-right" id="download_ios">
+        <img src="images/ios-btn.png" />
+      </div>
+    </div>
+    <div id="weixin-tip">
+      <p>
+        <img src="images/live_weixin.png" />
+      </p>
+    </div>
+    <div style="text-align: center; display: none;">
+      <p>
+        <div id="iosfaq-btn" style="color: #333; line-height: 30px; height: 30px;">IOS安装APP说明&nbsp;&nbsp;<span
+          id="iosfaq-btn-sfx" style="color: #8E8F90;">显示</span></div>
+      </p>
+      <br />
+      <p id="iosfaq-tip" style="display: none;"><img src="images/isofaq.png" /></p>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/mui.min.js"></script>
+    <script type="text/javascript">
+      function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split("=");
+          if (pair[0] == variable) {
+            return pair[1];
+          }
+        }
+        return (false);
+      }
+
+      function getDataForAPI(param, url) {
+        var returnData = "";
+        try {
+          $.ajax({
+            type: "get",
+            url: "http://api.haoyunyxkj.com/api/app",
+            async: false,
+            cache: false,
+            data: param,
+            dataType: "json",
+            success: function(rd) {
+              if (rd.flag == 1) returnData = rd.msg || rd.datas;
+              else {
+                returnData = "";
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              ajaxErrorShow();
+            }
+          });
+        } catch (e) {}
+        return returnData;
+      }
+
+      //判断是不是微信端
+      var is_weixin = (function() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == "micromessenger" || ua.match(/ QQ/i) == " qq") {
+          return true;
+        }
+        return false;
+      })();
+      var tip = document.getElementById('weixin-tip');
+      var close = document.getElementById('close');
+      var tip = document.getElementById('weixin-tip');
+      var android = document.getElementById('download_android');
+      var ios = document.getElementById('download_ios');
+      var winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement
+        .clientHeight; //兼容IOS，不需要的可以去掉
+      window.onload = function() {
+        if (is_weixin) {
+          tip.style.height = winHeight + 'px'; //兼容IOS弹窗整屏
+          tip.style.display = 'block';
+        } else {
+          //判断Android
+          if (/(Android)/i.test(navigator.userAgent)) {
+            //直接下载
+            $("#download_android").click();
+          } else if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+            $("#download_ios").click();
+          }
+        }
+      }
+      $("#download_android").click(function() {
+        if (is_weixin) {
+          tip.style.height = winHeight + 'px'; //兼容IOS弹窗整屏
+          tip.style.display = 'block';
+        } else {
+          tip.style.display = 'none';
+          //判断iPhone|iPad|iPod|iOS
+          //if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+          //	alert("苹果系统不支持安卓软件！");
+          //} else if (/(Android)/i.test(navigator.userAgent)) {
+          var response = getDataForAPI({
+            "key": "900100",
+            "app_type": parseInt("65" + getQueryVariable("code")),
+            "is_apk": "true"
+          });
+          android_url = response[0].download_url;
+          if (android_url != "") {
+            window.location.href = android_url;
+          } else {
+            alert("安卓版本正在开发中，敬请期待！");
+          }
+          //}
+        }
+      });
+      $("#download_ios").click(function() {
+        if (is_weixin) {
+          tip.style.height = winHeight + 'px'; //兼容IOS弹窗整屏
+          tip.style.display = 'block';
+        } else {
+          tip.style.display = 'none';
+          var s1 = 100000,
+            s2 = 1000,
+            s3 = 100;
+          var sc = s1 + parseInt(parseInt(getQueryVariable("code")) % s2 / s3) * s3;
+          var response = getDataForAPI({
+            "key": "900100",
+            "app_type": parseInt("800" + sc),
+            "is_apk": "true"
+          });
+          var ios_url = response[0].download_url;
+          if (ios_url != "") {
+            window.location.href = ios_url;
+          } else {
+            alert("ios版本正在开发中，敬请期待！");
+          }
+        }
+      });
+      $("#iosfaq-btn").click(function() {
+        var faqmsg = document.getElementById('iosfaq-tip');
+        var faqsfx = document.getElementById('iosfaq-btn-sfx');
+        if (faqmsg.style.display == 'none') {
+          faqmsg.style.display = 'block';
+          faqsfx.innerText = "隐藏";
+        } else {
+          faqmsg.style.display = 'none';
+          faqsfx.innerText = "显示";
+        }
+      });
+      $("#close").click(function() {
+        tip.style.display = 'none';
+      });
+    </script>
+  </body>
+</html>
