@@ -21,7 +21,7 @@ import '@/plugin/ant-design-vue'
 // 引入全局样式
 import '@/assets/css/index.scss'
 // 移动端适配
-import 'lib-flexible/flexible.js'
+import 'lib-flexible/flexible'
 
 // filters
 import './filters'
