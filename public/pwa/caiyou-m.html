@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="apple-mobile-web-app-title" content="工具版">
+    <!-- icon -->
+    <link rel="icon" href="favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
     <link rel="stylesheet" href="css/mui.min.css">
     <link rel="stylesheet" href="css/icons-extra.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>xxx</title>
+    <link rel="manifest" href="/pwa/manifest/caiyou-m.webmanifest">
+    <title>工具版</title>
   </head>
   <body>
     <!-- 标题 -->
@@ -23,15 +34,13 @@
           </div>
         </div>
       </div>
-      <div class="mui-content-padded">&nbsp;</div>
-      <!-- 工具版 -->
-      <div class="mui-content-padded">
-        <button type="button"
-          class="mui-btn mui-btn-primary mui-btn-block mui-icon-extra mui-icon-extra-prech">工具版</button>
-      </div>
-      <!-- 管理版 -->
-      <div class="mui-content-padded">
-        <button type="button" class="mui-btn mui-btn-block mui-icon mui-icon-home">管理版</button>
+      <!-- 说明 -->
+      <div class="mui-card">
+        <div class="mui-card-content">
+          <div class="mui-card-content-inner">
+            <img src="/pwa/images/appinstall.png" width="100%" />
+          </div>
+        </div>
       </div>
     </div>
     <div id="weixin-tip">
@@ -58,20 +67,6 @@
         tip.style.height = winHeight + 'px'
         tip.style.display = 'block'
       }
-    })
-
-    mui('.mui-content-padded').on('tap', '.mui-icon-extra-prech', function() {
-      mui.openWindow({
-        url: 'caiyou-m.html',
-        id: 'caiyou-m.html'
-      })
-    })
-
-    mui('.mui-content-padded').on('tap', '.mui-icon-home', function() {
-      mui.openWindow({
-        url: 'caiyou-b.html',
-        id: 'caiyou-b.html'
-      })
     })
   </script>
 </html>

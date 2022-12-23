@@ -1,0 +1,16 @@
+{
+    "name": "工具版",
+    "short_name": "工具版",
+    "description": "工具版",
+    "start_url": "http://106.52.139.138/m/",
+    "scope":"/",
+    "display": "standalone",
+    "theme_color": "#B12A34",
+    "background_color": "#B12A34",
+    "icons": [
+        {
+            "src": "/pwa/favicon.png",
+            "type": "image/png"
+        }
+    ]
+}
