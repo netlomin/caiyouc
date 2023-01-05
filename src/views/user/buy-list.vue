@@ -7,15 +7,15 @@
       >
         <van-tab
           title="所有"
-          name="2"
+          name=""
         ></van-tab>
         <van-tab
           title="单购"
-          name="0"
+          name="1"
         ></van-tab>
         <van-tab
           title="合买"
-          name="1"
+          name="2"
         ></van-tab>
         <van-tab
           title="我发起"
@@ -75,7 +75,7 @@
   export default {
     data() {
       return {
-        activeTab: "2",
+        activeTab: "",
         refreshing: false,
         loading: false,
         finished: false,
@@ -100,7 +100,7 @@
       load() {
         let { cur, size } = this
         let params = { cur, size, all: false }
-        if (this.activeTab == '0' || this.activeTab == '1') {
+        if (this.activeTab == '1' || this.activeTab == '2') {
           params.type = this.activeTab
         }
         if (this.activeTab == '3') {
