@@ -206,7 +206,7 @@
                   "issue": vo.issue,
                   "cp": cp,
                   "play": this.play.play,
-                  "type": 0,
+                  "type": 1,
                   "amt": amt,
                   "cnt": this._cnt,
                   "code": this.code(),

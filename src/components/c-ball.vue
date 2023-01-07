@@ -1,5 +1,8 @@
 <template>
-  <div :class="'c-ball ' + size + '_' + type" :style="_style">{{code}}</div>
+  <div
+    :class="'c-ball '+size+'_'+type"
+    :style="_style"
+  >{{code}}</div>
 </template>
 
 <script>
@@ -34,7 +37,10 @@
   }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
   .c-ball {
     display: inline-block;
     text-align: center;

@@ -180,7 +180,7 @@
                   "issue": vo.issue,
                   "cp": cp,
                   "play": this.play.play,
-                  "type": 1,
+                  "type": 2,
                   "cnt": this._cnt,
                   "amt": this._amt,
                   "code": this.code(),
