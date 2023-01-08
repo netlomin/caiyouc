@@ -123,7 +123,7 @@
         this.load()
       },
       typeTo(id, type) {
-        return { name: type ? 'CoBuySub' : 'BuyDetail', params: { id: id } }
+        return { name: type == 2 ? 'CoBuySub' : 'BuyDetail', params: { id: id } }
       }
     }
   }
