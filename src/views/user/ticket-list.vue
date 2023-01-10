@@ -148,7 +148,6 @@
       },
       checkTicket(status) {
         api.cp.checkBuyTicket({ id: this._ticket.id, status }).then(vo => {
-          console.log(vo)
           this.index = Math.min(this.index + 1, this.list.length - 1)
         }).catch(this.caught)
       }
