@@ -225,7 +225,6 @@
       code() {
         let sets = this.cart.map(pick => pick.set)
         return sets.length == 1 ? sets[0].code : sets.reduce((prev, cur) => {
-          console.log(prev, cur)
           return (prev.code ? prev.code : prev) + '&' + cur.code
         })
       }

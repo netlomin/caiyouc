@@ -203,8 +203,10 @@
         }).catch(this.caught)
       },
       code() {
-        return this.cart.map(pick => pick.set)
-          .reduce((prev, cur) => (prev.code ? prev.code : prev) + '&' + cur.code)
+        let sets = this.cart.map(pick => pick.set)
+        return sets.length == 1 ? sets[0].code : sets.reduce((prev, cur) => {
+          return (prev.code ? prev.code : prev) + '&' + cur.code
+        })
       }
     }
   }
