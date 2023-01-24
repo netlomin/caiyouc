@@ -5,7 +5,7 @@
         v-model="active"
         :line-width="4*rem"
       >
-        <van-tab title="登录">
+        <van-tab title="密码登录">
           <van-form
             @submit="login"
             class="m-t_8"
@@ -50,7 +50,7 @@
           </van-form>
         </van-tab>
 
-        <van-tab title="注册">
+        <van-tab title="短信登录">
           <van-form
             @submit="login"
             class="m-t_8"
@@ -58,8 +58,8 @@
             <van-field
               v-model="mobile"
               name="mobile"
-              placeholder="用户名"
-              :rules="[{ required: true, message: '请填写用户名' }]"
+              placeholder="手机号码"
+              :rules="[{ required: true, message: '请输入手机号码' }]"
             />
             <van-field
               v-model="code"
@@ -126,24 +126,13 @@
     methods: {
       login(params) {
         this.$store.dispatch('login', params).then(vo => {
-          api.ps.user().then(user => {
-            let passportId = this.$store.getters.passportId
-            let shopId = this.$store.getters.shopId
-            if (user.passportId == passportId && shopId) {
-              this.$router.replace({ name: 'Home' })
-              return
-            }
-            this.$store.dispatch('user', user)
-            if (!user.userId) {
-              this.$router.push({ name: 'SelectShop' })
-              return
-            }
-            this.$router.replace({ name: 'Home' })
-          })
-        }).catch(error => {
-          if (this.caught(error)) return
-          this.$notify({ message: error.msg })
-        })
+          this.$store.dispatch('loadUser')
+        }).catch(api.catch(err => {
+          if (err.msg) {
+            this.$notify({ message: err.msg })
+            return true
+          }
+        }))
       },
       sendSms() {
         if (!(this.mobile && this.mobile.length == 11)) {
@@ -151,26 +140,25 @@
           return
         }
         this.disabled = true
-        api.ps.sendMsg({ mobile: this.mobile })
-          .then(vo => {
-            let a = 60
-            let i = setInterval(() => {
-              if (a <= 0) {
-                this.sendBtnTxt = '发送验证码'
-                this.disabled = false
-                clearInterval(i)
-                return
-              }
-              this.sendBtnTxt = a + '秒'
-              a--
-            }, 1000)
-          })
-          .catch(error => {
-            this.disabled = false
-            if (!this.caught(error)) {
-              this.$notify(error.msg)
+        api.ps.sendMsg({ mobile: this.mobile }).then(vo => {
+          let a = 60
+          let i = setInterval(() => {
+            if (a <= 0) {
+              this.sendBtnTxt = '发送验证码'
+              this.disabled = false
+              clearInterval(i)
+              return
             }
-          })
+            this.sendBtnTxt = a + '秒'
+            a--
+          }, 1000)
+        }).catch(api.catch(err => {
+          this.disabled = false
+          if (err.msg) {
+            this.$notify(err.msg)
+            return true
+          }
+        }))
       }
     }
   }

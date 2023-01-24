@@ -84,9 +84,9 @@ export default [{
       keepAlive: false
     }
   }, {
-    path: '/user/join-shop',
+    path: '/user/shop-join',
     name: 'JoinShop',
-    component: () => import('@/views/user/join-shop'),
+    component: () => import('@/views/user/shop-join'),
     meta: {
       title: '扫码添加彩店',
       keepAlive: false

@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <van-nav-bar
-      title="切换彩店"
+      title="选择彩店"
       right-text="前往添加"
       fixed
       placeholder

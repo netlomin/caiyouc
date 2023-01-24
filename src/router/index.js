@@ -7,10 +7,8 @@ import ViewsRouter from './views/'
 Vue.use(Router)
 
 const router = new Router({
-  scrollBehavior: () => ({
-    y: 0
-  }),
-  routes: [...TabBarRouter, ...NavBarRouter, ...ViewsRouter]
+  scrollBehavior: () => ({ y: 0 }),
+  routes: [...ViewsRouter, ...TabBarRouter, ...NavBarRouter]
 })
 
 export default router

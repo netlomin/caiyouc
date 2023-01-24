@@ -1,6 +1,7 @@
 import axios from 'axios'
 import md5 from 'md5'
 import store from '@/store'
+import { Toast } from 'vant'
 
 const currentEnv = _.cloneDeep(process.env)
 const apiInstance = axios.create()
@@ -74,96 +75,60 @@ apiInstance.interceptors.response.use(
   })
 
 export default {
-  time() {
-    return apiInstance.post(`sys/time`)
-  },
+  time: () => apiInstance.post(`sys/time`),
   ps: {
-    sendMsg(params) {
-      return spost('ps/send-msg', params.mobile, params)
-    },
-    login(params) {
-      return apiInstance.post(`ps/login`, params)
-    },
-    codeLogin(params) {
-      return apiInstance.post(`ps/code-login`, params)
-    },
-    user() {
-      return apiInstance.post(`ps/user`)
-    },
-    shops(params) {
-      return apiInstance.post(`ps/shops`, params)
-    },
-    joinShop(params) {
-      return apiInstance.post(`ps/join-shop`, params)
-    },
-    selectShop(params) {
-      return apiInstance.post(`ps/select-shop`, params)
-    },
-    setPassword(params) {
-      return apiInstance.post(`ps/set-password`, params)
-    },
-    logout() {
-      return apiInstance.post(`ps/logout`)
-    }
+    sendMsg: (params) => spost('ps/send-msg', params.mobile, params),
+    checkLogin: () => apiInstance.post(`ps/check-login`),
+    login: (params) => apiInstance.post(`ps/login`, params),
+    codeLogin: (params) => apiInstance.post(`ps/code-login`, params),
+    user: () => apiInstance.post(`ps/user`),
+    shops: (params) => apiInstance.post(`ps/shops`, params),
+    joinShop: (params) => apiInstance.post(`ps/join-shop`, params),
+    selectShop: (params) => apiInstance.post(`ps/select-shop`, params),
+    setPassword: (params) => apiInstance.post(`ps/set-password`, params),
+    logout: () => apiInstance.post(`ps/logout`)
   },
   user: {
-    info(params) {
-      return apiInstance.post(`user/info`, params)
-    },
-    save(params) {
-      return apiInstance.post(`user/save`, params)
-    },
-    act(params) {
-      return apiInstance.post(`user/act`, params)
-    },
-    allAct(params) {
-      return apiInstance.post(`user/all-act`, params)
-    },
-    shop(params) {
-      return apiInstance.post(`user/shop`, params)
-    }
+    info: (params) => apiInstance.post(`user/info`, params),
+    save: (params) => apiInstance.post(`user/save`, params),
+    act: (params) => apiInstance.post(`user/act`, params),
+    allAct: (params) => apiInstance.post(`user/all-act`, params),
+    shop: (params) => apiInstance.post(`user/shop`, params)
   },
   lot: {
-    issue(cp) {
-      return apiInstance.post('lot/issue', { cp })
-    },
-    plays(params) {
-      return apiInstance.post('lot/plays', params)
-    },
-    trend(params) {
-      return apiInstance.post('lot/trend', params)
-    },
-    draws(params) {
-      return apiInstance.post('lot/draws', params)
-    },
-    stat(params) {
-      return apiInstance.post('lot/stat', params)
-    }
+    issue: (cp) => apiInstance.post('lot/issue', { cp }),
+    plays: (params) => apiInstance.post('lot/plays', params),
+    trend: (params) => apiInstance.post('lot/trend', params),
+    draws: (params) => apiInstance.post('lot/draws', params),
+    stat: (params) => apiInstance.post('lot/stat', params)
   },
   cp: {
-    startBuy(params) {
-      return apiInstance.post('cp/start-buy', params)
-    },
-    buy(params) {
-      return apiInstance.post('cp/buy', params)
-    },
-    buys(params) {
-      return apiInstance.post('cp/buys', params)
-    },
-    subBuy(params) {
-      return apiInstance.post('cp/sub-buy', params)
-    },
-    coBuys(params) {
-      return apiInstance.post('cp/co-buys', params)
-    },
-    buySubs(params) {
-      return apiInstance.post('cp/buy-subs', params)
-    },
-    buyTickets(params) {
-      return apiInstance.post('cp/buy-tickets', params)
-    },
-    checkBuyTicket(params) {
-      return apiInstance.post('cp/check-buy-ticket', params)
+    startBuy: (params) => apiInstance.post('cp/start-buy', params),
+    buy: (params) => apiInstance.post('cp/buy', params),
+    buys: (params) => apiInstance.post('cp/buys', params),
+    subBuy: (params) => apiInstance.post('cp/sub-buy', params),
+    coBuys: (params) => apiInstance.post('cp/co-buys', params),
+    buySubs: (params) => apiInstance.post('cp/buy-subs', params),
+    buyTickets: (params) => apiInstance.post('cp/buy-tickets', params),
+    checkBuyTicket: (params) => apiInstance.post('cp/check-buy-ticket', params)
+  },
+  catch: (obj) => {
+    let type = typeof obj
+    let handler = (err) => {
+      if (type === 'function' && obj(err)) {
+        return
+      }
+      if (typeof err.msg == 'string') {
+        if (err.msg.length <= 4) {
+          Toast.fail(err.msg)
+        } else {
+          Toast({ message: err.msg })
+        }
+        return
+      }
+      console.log('未知错误', err)
+      Toast.fail('未知错误')
     }
+    return type === 'undefined' || type === 'function' ? handler : handler(obj)
   }
 }

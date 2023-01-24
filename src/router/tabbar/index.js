@@ -3,7 +3,7 @@ import Layout from '@/layout/tabbar'
 export default [{
   path: '/',
   component: Layout,
-  redirect: '/home',
+  redirect: '/start',
   children: [{
     path: '/home',
     name: 'Home',

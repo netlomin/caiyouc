@@ -5,9 +5,7 @@
  */
 import _ from 'lodash'
 import dayjs from 'dayjs'
-import {
-  Toast
-} from 'vant'
+import { Toast } from 'vant'
 
 const mixin = {
   sumArr(arr) {

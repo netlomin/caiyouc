@@ -1,4 +1,12 @@
 export default [{
+  path: '/start',
+  name: 'Start',
+  component: () => import('@/views/start'),
+  meta: {
+    title: '启动页',
+    keepAlive: false
+  }
+}, {
   path: '/login',
   name: 'Login',
   component: () => import('@/views/login'),
@@ -15,11 +23,11 @@ export default [{
     keepAlive: false
   }
 }, {
-  path: '/user/select-shop',
-  name: 'SelectShop',
-  component: () => import('@/views/user/select-shop'),
+  path: '/user/shop-select',
+  name: 'ShopSelect',
+  component: () => import('@/views/user/shop-select'),
   meta: {
-    title: '切换彩店',
+    title: '选择彩店',
     keepAlive: false
   }
 }]

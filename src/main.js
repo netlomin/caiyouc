@@ -70,14 +70,10 @@ const init = () => {
   const app = new Vue({
     router,
     store,
-    render: h => {
-      return h(App)
-    }
+    render: h => h(App)
   }).$mount('#app')
 
-  _.assign(window, {
-    app
-  })
+  _.assign(window, { app })
 }
 
 const url = './static/extraConfig.json'

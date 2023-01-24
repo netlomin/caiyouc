@@ -7,8 +7,18 @@
       <router-view v-if="!$route.meta.keepAlive" />
     </div>
     <div class="layout-footer">
-      <van-tabbar fixed route v-model="active" @change="changeTab">
-        <van-tabbar-item v-for="(tab, index) in tabs" :to="tab.to" :icon="tab.icon" :key="index">
+      <van-tabbar
+        fixed
+        route
+        v-model="active"
+        @change="changeTab"
+      >
+        <van-tabbar-item
+          v-for="(tab, index) in tabs"
+          :to="tab.to"
+          :icon="tab.icon"
+          :key="index"
+        >
           {{ tab.title }}
         </van-tabbar-item>
       </van-tabbar>

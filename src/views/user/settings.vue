@@ -3,7 +3,7 @@
     <div class="m-t-8">
       <van-cell
         title="切换彩店"
-        :to="{name:'SelectShop'}"
+        :to="{name:'ShopSelect'}"
         icon="home-o"
         size="large"
         is-link

@@ -97,17 +97,16 @@
         }
         api.user.shop({ id: shopId }).then(vo => {
           this.shop = vo
-        }).catch(this.caught)
+        }).catch(api.catch)
       },
       submit() {
         if (this.shop.id) {
           api.ps.joinShop({ shopId: this.shop.id }).then(vo => {
             this.$notify({ message: '添加彩店成功！', background: '#11FF11' })
-          }).catch(this.caught(e => {
+          }).catch(api.catch(e => {
             if (e.code != '606') {
               return false
             }
-
             this.$dialog.alert({ title: '提示', message: '你已添加过该彩店！' })
             return true
           }))
