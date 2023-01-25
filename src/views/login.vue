@@ -4,10 +4,11 @@
 
     <div class="center">
       <van-image
-        width="128"
-        height="128"
+        width="3rem"
+        height="3rem"
         :round="true"
         src="static/img/logo.png"
+        class="logo"
       />
     </div>
 
@@ -177,3 +178,10 @@
     }
   }
 </script>
+
+<style>
+  .logo {
+    background: rgba(256, 118, 118, 1);
+    box-shadow: 0 1px 8px 2px #F88;
+  }
+</style>
