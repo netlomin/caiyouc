@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div>
     <van-nav-bar
       title="选择彩店"
       right-text="前往添加"
@@ -88,7 +88,7 @@
           this.$store.dispatch('logout')
           return
         }
-        if (this.prevPage == 'Login') {
+        if (this.prevPage != 'Settings') {
           this.$router.replace({ name: 'Home' })
           return
         }
@@ -103,11 +103,11 @@
           this.list.forEach((e, i) => e.checked = i == index)
           api.ps.user().then(user => {
             this.$store.dispatch('user', user)
-            if (this.prevPage == 'Login') {
+            if (this.prevPage != 'Settings') {
               this.$router.replace({ name: 'Home' })
             }
-          }).catch(this.caught)
-        }).catch(this.caught)
+          }).catch(api.catch)
+        }).catch(api.catch)
       },
       load() {
         let { cur, size } = this

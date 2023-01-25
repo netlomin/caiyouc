@@ -1,6 +1,33 @@
 <template>
-  <div :style="_style">
-    <slot></slot>
+  <div
+    class="c-panel"
+    :style="{
+  		borderRadius: radius + 'px',
+  		margin: margin,
+  		boxShadow: shadow,
+      backgroundColor: bg
+  	}"
+  >
+    <div
+      v-if="$slots.head"
+      class="c-panel__head"
+      :style="[{padding: padding}, headStyle]"
+    >
+      <slot name="head" />
+    </div>
+    <div
+      class="c-panel__body"
+      :style="[{padding: padding}, bodyStyle]"
+    >
+      <slot />
+    </div>
+    <div
+      v-if="$slots.foot"
+      class="c-panel__foot"
+      :style="[{padding: padding}, footStyle]"
+    >
+      <slot name="foot" />
+    </div>
   </div>
 </template>
 
@@ -8,23 +35,36 @@
   export default {
     name: 'c-panel',
     props: {
-      padding: { type: [Number, String], default: 0.2 },
-      margin: { type: [Number, String], default: 0 },
-      bg: { type: String, default: '#FFF' }
-    },
-    data() { return {} },
-    computed: {
-      _style() {
-        let style = {}
-        style.backgroundColor = this.bg
-        style.padding = typeof this.padding == 'number' ? this.padding + 'rem' : this.padding
-        style.margin = typeof this.margin == 'number' ? this.margin + 'rem' : this.margin
-        return style
-      }
-    },
-    methods: {}
+      padding: { type: String, default: '0.2rem' },
+      margin: { type: String, default: "0" },
+      bg: { type: String, default: '#FFF' },
+      radius: { type: Number, default: 0 },
+      shadow: { type: String, default: 'none' },
+      headStyle: { type: Object, default: () => {} },
+      bodyStyle: { type: Object, default: () => {} },
+      footStyle: { type: Object, default: () => {} }
+    }
   }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss" scoped>
+
+<style
+  lang="scss"
+  scoped
+>
+  .c-panel {
+    position: relative;
+    overflow: hidden;
+    font-size: $font-md;
+    box-sizing: border-box;
+
+    &__head {
+      border-bottom: 1px solid #f8f8f8;
+    }
+
+    &__body {}
+
+    &__foot {
+      border-top: 1px solid #f8f8f8;
+    }
+  }
 </style>

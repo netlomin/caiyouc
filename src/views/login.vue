@@ -1,9 +1,23 @@
 <template>
-  <div class="app-container">
-    <c-panel margin="2rem 1rem">
+  <div>
+    <div class="h-1"></div>
+
+    <div class="center">
+      <van-image
+        width="128"
+        height="128"
+        :round="true"
+        src="static/img/logo.png"
+      />
+    </div>
+
+    <c-panel
+      margin=".8rem 1.2rem"
+      :radius="8"
+    >
       <van-tabs
         v-model="active"
-        :line-width="4*rem"
+        :line-width="2.5*rem"
       >
         <van-tab title="密码登录">
           <van-form
@@ -163,10 +177,3 @@
     }
   }
 </script>
-
-<style scoped>
-  .van-notify {
-    padding: .1rem;
-    top: 45px;
-  }
-</style>

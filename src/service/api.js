@@ -79,6 +79,7 @@ export default {
   ps: {
     sendMsg: (params) => spost('ps/send-msg', params.mobile, params),
     checkLogin: () => apiInstance.post(`ps/check-login`),
+    passport: () => apiInstance.post(`ps/passport`),
     login: (params) => apiInstance.post(`ps/login`, params),
     codeLogin: (params) => apiInstance.post(`ps/code-login`, params),
     user: () => apiInstance.post(`ps/user`),
@@ -86,6 +87,7 @@ export default {
     joinShop: (params) => apiInstance.post(`ps/join-shop`, params),
     selectShop: (params) => apiInstance.post(`ps/select-shop`, params),
     setPassword: (params) => apiInstance.post(`ps/set-password`, params),
+    saveIdentity: (params) => apiInstance.post(`ps/save-identity`, params),
     logout: () => apiInstance.post(`ps/logout`)
   },
   user: {
