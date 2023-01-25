@@ -21,7 +21,9 @@ const externals = {
 const cdn = {
   // 开发环境
   dev: {
-    css: [],
+    css: [
+      'lib/iconfont.css'
+    ],
     js: [
       'lib/vue.runtime.' + process.env.NODE_ENV + '.js',
       'lib/vuex.min.js',
@@ -34,7 +36,9 @@ const cdn = {
   },
   // 生产环境
   build: {
-    css: [],
+    css: [
+      'lib/iconfont.css'
+    ],
     js: [
       'lib/vue.runtime.' + process.env.NODE_ENV + '.js',
       'lib/vuex.min.js',

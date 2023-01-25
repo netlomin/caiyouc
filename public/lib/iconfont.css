@@ -1,0 +1,72 @@
+@font-face {
+  font-family: "cy";
+  src: url('iconfont.woff2?t=1674662999019') format('woff2');
+}
+
+.cy {
+  font-family: "cy" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cy-zhuanqian:before {
+  content: "\e63d";
+}
+
+.cy-jinbi:before {
+  content: "\e6b1";
+}
+
+.cy-jczq:before {
+  content: "\e61d";
+}
+
+.cy-fc3d:before {
+  content: "\e600";
+}
+
+.cy-ticket:before {
+  content: "\e602";
+}
+
+.cy-shops:before {
+  content: "\e603";
+}
+
+.cy-qrcode:before {
+  content: "\e605";
+}
+
+.cy-erweima:before {
+  content: "\e606";
+}
+
+.cy-fucai:before {
+  content: "\e607";
+}
+
+.cy-kl8:before {
+  content: "\e608";
+}
+
+.cy-pl3:before {
+  content: "\e609";
+}
+
+.cy-ticai:before {
+  content: "\e60a";
+}
+
+.cy-dlt:before {
+  content: "\e601";
+}
+
+.cy-ssq:before {
+  content: "\e604";
+}
+
+.cy-qiehuan:before {
+  content: "\e867";
+}

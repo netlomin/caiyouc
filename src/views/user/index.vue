@@ -1,49 +1,59 @@
 <template>
   <div>
-    <c-panel :bg="$c.themeColor">
-      <a-avatar
-        class="m-8"
-        :src="user.avatarUrl"
-        :size="1.28*rem"
-        :style="css.avatar"
-      >{{firstChar(user.nickName)}}</a-avatar>
-      <div class="user-bar inline white">
-        <b class="m-6">{{user.nickName}}</b>
-        <div class="shop-bar sm m-tb-2">
-          <van-icon
-            name="home-o"
-            class="green"
-          />
-          <span class="m-l-5">{{shop.name}}</span>
+    <div class="user-section">
+      <div class="user-box">
+        <a-avatar
+          :src="user.avatarUrl"
+          :size="1.28*rem"
+          :style="css.avatar"
+        >{{firstChar(user.nickName)}}</a-avatar>
+        <div class="white">
+          <b class="m_2 md">{{user.nickName}}</b>
+          <div class="shop-bar xs">
+            <van-icon
+              class-prefix="cy"
+              name="shops"
+              class="green"
+              size=".20rem"
+            />
+            <span class="m-l_2">{{shop.name}}</span>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="cover-container">
+      <img
+        class="arc"
+        src="static/img/arc.png"
+      ></img>
+      <div class="account-section">
+        <div class="integral-box">
+          <van-icon
+            name="balance-o"
+            color="#E88818"
+            size=".5rem"
+          />
+          <span class="m-l_2">{{cashAct.amt}}</span>
+          <span class="m-l_2 light-grey">+</span>
+          <span class="m-l_2 light-grey">{{cashAct.frozenAmt}}</span>
+        </div>
+        <div class="sign-btn">清账</div>
+      </div>
+    </div>
 
-      <van-row class="white center m-t-8">
-        <van-col span="12">
-          <div class="p-tb-10">
-            <b>{{fmtAmt(cashAct.amt)}}</b>
-            <div>账户余额(元)</div>
-          </div>
-        </van-col>
-        <van-col span="12">
-          <div class="p-tb-10">
-            <b>{{fmtAmt(prizeAct.amt)}}</b>
-            <div>累计中奖(元)</div>
-          </div>
-        </van-col>
-      </van-row>
-    </c-panel>
-
-    <div class="m-t-8">
+    <c-panel
+      margin="0 .5rem"
+      :radius="6"
+    >
       <van-cell
-        title="发起代购"
+        title="选号下单"
         :to="{name:'Pick'}"
         icon="add-o"
         size="large"
         is-link
       />
       <van-cell
-        title="我的代购"
+        title="我的彩单"
         :to="{name:'BuyList'}"
         icon="orders-o"
         size="large"
@@ -56,7 +66,7 @@
         size="large"
         is-link
       />
-    </div>
+    </c-panel>
   </div>
 </template>
 
@@ -99,8 +109,61 @@
   lang="scss"
   scoped
 >
-  .user-bar {
-    vertical-align: middle;
+  .user-section {
+    position: relative;
+    height: 3.6rem;
+    padding: .6rem .5rem 0;
+    background-color: $theme-color;
+
+    .user-box {
+      height: 1.8rem;
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  .cover-container {
+    padding: 0 .5rem;
+    position: relative;
+    background: $bg-color;
+
+    .arc {
+      position: absolute;
+      top: -.5rem;
+      left: 0;
+      width: 100%;
+      height: .6rem;
+    }
+  }
+
+  .account-section {
+    display: flex;
+    position: relative;
+    background: #fff;
+    align-items: center;
+    border-radius: .18rem;
+    top: -.88rem;
+    justify-content: space-between;
+    padding: .28rem;
+    color: #888;
+
+    .integral-box {
+      font-size: $font-lg;
+    }
+
+    .sign-btn {
+      width: 1.6rem;
+      height: .6rem;
+      line-height: .6rem;
+      text-align: center;
+      font-size: $font-sm;
+      color: #FFF;
+      border-radius: .3rem;
+      background: linear-gradient(to right, #F8C868, #F8E868);
+      z-index: 1;
+    }
   }
 
   .shop-bar {
