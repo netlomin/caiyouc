@@ -15,6 +15,7 @@
     <c-panel
       margin=".8rem 1.2rem"
       :radius="8"
+      shadow="1px 1px 6px #F88"
     >
       <van-tabs
         v-model="active"
