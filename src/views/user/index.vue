@@ -48,24 +48,40 @@
       <van-cell
         title="选号下单"
         :to="{name:'Pick'}"
-        icon="add-o"
-        size="large"
         is-link
-      />
+      >
+        <div slot="icon">
+          <van-icon
+            name="add-o"
+            class="red m-r_2"
+          />
+        </div>
+      </van-cell>
       <van-cell
         title="我的彩单"
         :to="{name:'BuyList'}"
-        icon="orders-o"
-        size="large"
         is-link
-      />
+      >
+        <div slot="icon">
+          <van-icon
+            name="orders-o"
+            class="red m-r_2"
+          />
+        </div>
+      </van-cell>
       <van-cell
         title="系统"
         :to="{name:'Settings'}"
         icon="setting-o"
-        size="large"
         is-link
-      />
+      >
+        <div slot="icon">
+          <van-icon
+            name="setting-o"
+            class="red m-r_2"
+          />
+        </div>
+      </van-cell>
     </c-panel>
   </div>
 </template>
