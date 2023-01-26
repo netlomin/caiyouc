@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import md5 from 'md5'
 import _ from 'lodash'
 
 /** 阶乘 */
@@ -48,6 +48,27 @@ const sum = (a) => a.reduce((c, v) => c += v, 0)
 /** 跨度 */
 const span = (a) => Math.max.apply(null, a) - Math.min.apply(null, a)
 
+/** 常用 */
+const uuid = () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+  var r = Math.random() * 16 | 0,
+    v = c == 'x' ? r : (r & 0x3 | 0x8)
+  return v.toString(16)
+})
+const client = () => {
+  let id = localStorage.getItem('client.id')
+  if (!id) {
+    localStorage.setItem('client.id', id = uuid())
+  }
+  let val = '::' + id + ':::@::'
+  return { id, val }
+}
+const digest = i => {
+  const time = Math.trunc(Date.now() / 30000)
+  const nonce = Math.trunc(Math.random() * 1000000)
+  const sign = md5($c.key + client().id + nonce + i + time)
+  return { nonce, sign }
+}
+
 export default {
   /** 阶乘 */
   factorial,
@@ -76,5 +97,9 @@ export default {
   /** 数组求和 */
   sum,
   /** 跨度 */
-  span
+  span,
+  /** 常用 */
+  uuid,
+  client,
+  digest
 }

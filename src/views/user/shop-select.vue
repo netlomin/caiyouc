@@ -88,7 +88,7 @@
           this.$store.dispatch('logout')
           return
         }
-        if (this.prevPage != 'Settings') {
+        if (!['Settings', 'User'].includes(this.prevPage)) {
           this.$router.replace({ name: 'Home' })
           return
         }
@@ -103,7 +103,7 @@
           this.list.forEach((e, i) => e.checked = i == index)
           api.ps.user().then(user => {
             this.$store.dispatch('user', user)
-            if (this.prevPage != 'Settings') {
+            if (!['Settings', 'User'].includes(this.prevPage)) {
               this.$router.replace({ name: 'Home' })
             }
           }).catch(api.catch)
@@ -132,9 +132,3 @@
     }
   }
 </script>
-
-<style
-  lang="scss"
-  scoped
->
-</style>

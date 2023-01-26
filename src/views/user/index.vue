@@ -6,10 +6,14 @@
           :src="user.avatarUrl"
           :size="1.28*rem"
           :style="css.avatar"
+          @click="navTo({name:'UserInfo'})"
         >{{firstChar(user.nickName)}}</a-avatar>
         <div class="white">
           <b class="m_2 md">{{user.nickName}}</b>
-          <div class="shop-bar xs">
+          <div
+            class="shop-bar xs"
+            @click="navTo({name:'ShopSelect'})"
+          >
             <van-icon
               class-prefix="cy"
               name="shops"
@@ -102,10 +106,10 @@
         prizeAct: {}
       }
     },
-    mounted() {
+    created() {
       let userId = this.$store.getters.userId
       this.api.user.info({ id: userId }).then(vo => {
-        vo.nickName = _.defaultTo(vo.nickName, vo.mobile)
+        vo.nickName = util.ifnil(vo.nickName, vo.mobile)
         this.user = vo
       }).catch(this.caught)
       this.api.user.shop({}).then(vo => {

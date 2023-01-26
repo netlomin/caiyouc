@@ -5,7 +5,8 @@ import {
   Button,
   Progress,
   Result,
-  Table
+  Table,
+  Upload
 } from 'ant-design-vue'
 
 Vue.use(Avatar)
@@ -13,3 +14,4 @@ Vue.use(Button)
 Vue.use(Progress)
 Vue.use(Result)
 Vue.use(Table)
+Vue.use(Upload)

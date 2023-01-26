@@ -8,22 +8,14 @@ import dayjs from 'dayjs'
 import { Toast } from 'vant'
 
 const mixin = {
-  sumArr(arr) {
-    return _.reduce(
-      arr,
-      (sum, n) => {
-        return sum + n
-      },
-      0
-    )
+  sum(arr) {
+    return _.reduce(arr, (sum, n) => sum + n, 0)
   },
-  downLoadBlob(
-    arg = {
-      name: '下载文件',
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      data: ''
-    }
-  ) {
+  downloadBlob(arg = {
+    name: '下载文件',
+    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    data: ''
+  }) {
     const blob = new Blob([arg.data], { type: arg.type })
     const link = document.createElement('a')
     link.href = window.URL.createObjectURL(blob)
@@ -31,7 +23,7 @@ const mixin = {
     link.click()
     window.URL.revokeObjectURL(link.href)
   },
-  downLoadExcel(fileName = '下载文件', data) {
+  downloadExcel(fileName = '下载文件', data) {
     const blob = new Blob([data], {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     })
@@ -41,46 +33,7 @@ const mixin = {
     link.click()
     window.URL.revokeObjectURL(link.href)
   },
-  translateColor(value) {
-    let res = 'has-text-danger'
-    if (value) {
-      res = 'has-text-success'
-    }
-    return res
-  },
-  translatePlanKey(value) {
-    let res = 'has-text-danger'
-    if (value) {
-      res = 'has-text-success'
-    }
-    return res
-  },
-  translatePlanRemind(value) {
-    let res = null
-    if (value) {
-      switch (value) {
-        case 1:
-          res = 'has-text-grey'
-          break
-        case 2:
-          res = 'has-text-info'
-          break
-        case 3:
-          res = 'has-text-warning'
-          break
-        case 5:
-          res = 'c-purple'
-          break
-        case 6:
-          res = 'has-text-success'
-          break
-        default:
-          res = 'has-text-danger'
-      }
-    }
-    return res
-  },
-  toBase64(file) {
+  fileToBase64(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader()
       reader.readAsDataURL(file)
@@ -107,10 +60,7 @@ const mixin = {
   replaceAll(str, search, replacement) {
     return str.replace(new RegExp(search, 'g'), replacement)
   },
-  goBack() {
-    window.history.back()
-  },
-  LoadStyle(url) {
+  loadStyle(url) {
     try {
       document.createStyleSheet(url)
     } catch (e) {
@@ -334,10 +284,6 @@ const mixin = {
       .replace(/^整$/, '零元整')
     )
   },
-  // 表格未审批显示红色
-  fnTableRowClassName({ row }) {
-    return row.flowStatus === 0 ? 'warning-row' : ''
-  },
   copyText(text) {
     if (navigator.clipboard) {
       // clipboard api 复制
@@ -404,6 +350,9 @@ const mixin = {
       list.push(obj)
     })
     return list
+  },
+  navTo(params) {
+    this.$router.push(params)
   }
 }
 export default {

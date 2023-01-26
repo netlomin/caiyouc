@@ -17,7 +17,7 @@ export default [{
     name: 'User',
     component: () => import('@/views/user/'),
     meta: {
-      title: '用户',
+      title: '我的',
       keepAlive: false
     }
   }]

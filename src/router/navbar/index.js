@@ -4,6 +4,14 @@ export default [{
   path: '/',
   component: Layout,
   children: [{
+    path: '/user/info',
+    name: 'UserInfo',
+    component: () => import('@/views/user/info'),
+    meta: {
+      title: '个人信息',
+      keepAlive: false
+    }
+  }, {
     path: '/home/co-buy-sub/:id',
     name: 'CoBuySub',
     component: () => import('@/views/home/co-buy-sub'),

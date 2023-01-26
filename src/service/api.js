@@ -5,29 +5,10 @@ import { Toast } from 'vant'
 
 const currentEnv = _.cloneDeep(process.env)
 const apiInstance = axios.create()
-const key = '2c4e9851-32ac-40f1-b075-c33fade9acf6'
-const uuid = () => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random() * 16 | 0,
-      v = c == 'x' ? r : (r & 0x3 | 0x8)
-    return v.toString(16)
-  })
-}
-let clientId = localStorage.getItem('client.id')
-if (!clientId) {
-  clientId = uuid()
-  localStorage.setItem('client.id', clientId)
-}
-const client = '::' + clientId + ':::@::'
-const digest = i => {
-  const time = Math.trunc(Date.now() / 30000)
-  const nonce = Math.trunc(Math.random() * 1000000)
-  const sign = md5(key + clientId + nonce + i + time)
-  return { nonce, sign }
-}
+
 apiInstance.defaults.baseURL = currentEnv.VUE_APP_API_SERVER
 const spost = (url, s, params) => {
-  let { nonce, sign } = digest(s)
+  let { nonce, sign } = util.digest(s)
   url = url + '?nonce=' + nonce + '&sign=' + sign
   return apiInstance.post(url, params)
 }
@@ -35,7 +16,7 @@ const spost = (url, s, params) => {
 apiInstance.interceptors.request.use(
   config => {
     config.headers['X-token'] = store.getters.token
-    config.headers['X-client'] = client
+    config.headers['X-client'] = util.client().val
     return config
   },
   error => {
