@@ -12,6 +12,14 @@ export default [{
       keepAlive: false
     }
   }, {
+    path: '/user/act-details',
+    name: 'ActDetails',
+    component: () => import('@/views/user/act-details'),
+    meta: {
+      title: '账单明细',
+      keepAlive: false
+    }
+  }, {
     path: '/home/co-buy-sub/:id',
     name: 'CoBuySub',
     component: () => import('@/views/home/co-buy-sub'),
@@ -48,7 +56,7 @@ export default [{
     name: 'BuyList',
     component: () => import('@/views/user/buy-list'),
     meta: {
-      title: '我的代购',
+      title: '我的彩单',
       keepAlive: false
     }
   }, {
@@ -64,7 +72,7 @@ export default [{
     name: 'BuyDetail',
     component: () => import('@/views/user/buy-detail'),
     meta: {
-      title: '代购详情',
+      title: '单购详情',
       keepAlive: false
     }
   }, {

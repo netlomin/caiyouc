@@ -41,8 +41,13 @@ html, body, #app  {
 }
 
 @for $i from 1 through 10{
-  .w-#{$i} {width: 1rem*$i;}
-  .h-#{$i} {height: 1rem*$i;}
+  .w_#{$i} {width: 1rem*$i;}
+  .h_#{$i} {height: 1rem*$i;}
+}
+
+@for $i from 1 through 10{
+  .w-#{$i} {width: 10%*$i;}
+  .h-#{$i} {height: 10%*$i;}
 }
 
 @for $i from 1 through 20{
@@ -74,11 +79,19 @@ html, body, #app  {
 }
 
 .green{
-  color: nth($colors, 5) !important;
+  color: nth($colors, 2) !important;
 }
 
 .dark-green{
   color: nth($colors, 8) !important;
+}
+
+.blue {
+  color: nth($colors, 3) !important;
+}
+
+.dark-blue {
+  color: nth($colors, 9) !important;
 }
 
 .grey {

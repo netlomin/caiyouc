@@ -76,6 +76,7 @@ export default {
     save: (params) => apiInstance.post(`user/save`, params),
     act: (params) => apiInstance.post(`user/act`, params),
     allAct: (params) => apiInstance.post(`user/all-act`, params),
+    actDetails: (params) => apiInstance.post(`user/act-details`, params),
     shop: (params) => apiInstance.post(`user/shop`, params)
   },
   lot: {

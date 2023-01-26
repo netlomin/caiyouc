@@ -27,7 +27,7 @@
             class="m-t_8"
           >
             <van-field
-              v-model="mobile"
+              v-model.trim="mobile"
               name="mobile"
               type="digit"
               maxlength="11"
@@ -35,7 +35,7 @@
               :rules="[{ required: true, message: '请输入手机号码' }]"
             />
             <van-field
-              v-model="passWord"
+              v-model.trim="passWord"
               name="passWord"
               type="password"
               placeholder="密码"
@@ -72,13 +72,13 @@
             class="m-t_8"
           >
             <van-field
-              v-model="mobile"
+              v-model.trim="mobile"
               name="mobile"
               placeholder="手机号码"
               :rules="[{ required: true, message: '请输入手机号码' }]"
             />
             <van-field
-              v-model="code"
+              v-model.trim="code"
               name="code"
               maxlength="6"
               center

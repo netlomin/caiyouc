@@ -3,14 +3,14 @@
   <div>
     <van-form @submit="submitPassWord">
       <van-field
-        v-model="passWord"
+        v-model.trim="passWord"
         name="passWord"
         type="password"
         placeholder="密码"
         :rules="[{ required: true, message: '请输入密码' }]"
       />
       <van-field
-        v-model="passWord2"
+        v-model.trim="passWord2"
         name="passWord2"
         type="password"
         placeholder="确认密码"

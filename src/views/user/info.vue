@@ -26,14 +26,14 @@
         shadow="1px 1px 6px #F88"
       >
         <van-field
-          v-model="user.nickName"
+          v-model.trim="user.nickName"
           name="nickName"
           label="昵称"
           placeholder="1-16个中英文字符"
           maxlength="16"
         />
         <van-field
-          v-model="user.wechat"
+          v-model.trim="user.wechat"
           name="webchat"
           label="微信"
           placeholder="请输入微信号"
@@ -72,12 +72,10 @@
 </template>
 
 <script>
-  import cScan from 'components/c-scan/c-scan'
   import cPanel from 'components/c-panel'
-  import qs from "qs"
 
   export default {
-    components: { cScan, cPanel },
+    components: { cPanel },
     data() {
       return {
         css: {

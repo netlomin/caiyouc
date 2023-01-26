@@ -74,6 +74,18 @@
         </div>
       </van-cell>
       <van-cell
+        title="账单明细"
+        :to="{name:'ActDetails'}"
+        is-link
+      >
+        <div slot="icon">
+          <van-icon
+            name="gold-coin-o"
+            class="red m-r_2"
+          />
+        </div>
+      </van-cell>
+      <van-cell
         title="系统"
         :to="{name:'Settings'}"
         icon="setting-o"
@@ -102,8 +114,7 @@
         },
         user: {},
         shop: {},
-        cashAct: {},
-        prizeAct: {}
+        cashAct: {}
       }
     },
     created() {
@@ -111,16 +122,13 @@
       this.api.user.info({ id: userId }).then(vo => {
         vo.nickName = util.ifnil(vo.nickName, vo.mobile)
         this.user = vo
-      }).catch(this.caught)
+      }).catch(api.catch)
       this.api.user.shop({}).then(vo => {
         this.shop = vo
-      }).catch(this.caught)
+      }).catch(api.catch)
       this.api.user.act({ userId, actType: 'CASH' }).then(vo => {
         this.cashAct = vo
-      }).catch(this.caught)
-      this.api.user.act({ userId, actType: 'PRIZE' }).then(vo => {
-        this.prizeAct = vo
-      }).catch(this.caught)
+      }).catch(api.catch)
     }
   }
 </script>

@@ -80,7 +80,7 @@
           </template>
         </van-field>
         <van-field
-          v-model="title"
+          v-model.trim="title"
           rows="1"
           label="方案宣言"
           type="textarea"

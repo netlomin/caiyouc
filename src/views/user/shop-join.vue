@@ -68,14 +68,14 @@
           <div class="red p_2">我方信息</div>
         </div>
         <van-field
-          v-model="ps.mobile"
+          v-model.trim="ps.mobile"
           name="ps.mobile"
           label="手机"
           placeholder="本人手机号码"
           readonly
         />
         <van-field
-          v-model="ps.realName"
+          v-model.trim="ps.realName"
           name="realName"
           label="姓名"
           placeholder="请输入本人姓名"
@@ -83,7 +83,7 @@
           :readonly="!canEditIdentity"
         />
         <van-field
-          v-model="ps.idCard"
+          v-model.trim="ps.idCard"
           name="idCard"
           label="身份证"
           placeholder="请输入本人身份证"
