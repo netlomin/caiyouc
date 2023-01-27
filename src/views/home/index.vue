@@ -51,7 +51,7 @@
               </a-progress>
               <span class="m-l-10">
                 <h6 class="md">{{item.userNickName}}</h6>
-                <span class="sm inline w-6 van-ellipsis">{{item.title}}</span>
+                <span class="sm inline w_6 van-ellipsis">{{item.title}}</span>
               </span>
             </div>
             <div class="cell-foot">

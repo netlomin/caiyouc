@@ -45,7 +45,7 @@
             </a-progress>
             <span class="m-l-8">
               <h6 class="md">{{coBuy.userNickName}}</h6>
-              <span class="sm inline w-6 van-ellipsis">{{coBuy.title}}</span>
+              <span class="sm inline grey">{{coBuy.title}}</span>
             </span>
           </div>
           <div class="cell-foot">
