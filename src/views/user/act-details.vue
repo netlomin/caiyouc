@@ -67,7 +67,7 @@
             <van-icon
               :size=".8*rem"
               :name="item.amt>0?'gold-coin':'gold-coin-o'"
-              :color="$c.themeColor"
+              :color="item.keepType>=200?'#66F':'#F66'"
             />
           </div>
           <template #title>
@@ -78,8 +78,8 @@
           </template>
           <div>
             <span :class="{
-              'red':item.amt>0,
-              'green':item.amt<0,
+              'red':item.keepType<200,
+              'blue':item.keepType>=200,
               'm-r_1':true
             }">{{item.amt}}</span>
             <span>元</span>
