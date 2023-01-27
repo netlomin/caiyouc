@@ -131,13 +131,18 @@
           })
           this.list = this.list.concat(vo)
 
-          this.finished = true
+          this.cur++
+          this.finished = vo.length == 0
           this.loading = false
-        }).catch(this.caught)
+        }).catch(api.catch((err) => {
+          this.loading = false
+          return false
+        }))
       },
       refresh() {
         this.finished = false
         this.loading = true
+        this.cur = 1
         this.load()
       }
     }

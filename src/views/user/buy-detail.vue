@@ -3,6 +3,7 @@
     v-if="buy"
     class="app-container"
   >
+    {{void (cp=$c.cp[buy.cp])}}
     <van-cell-group :border="false">
       <van-cell>
         <div
@@ -10,9 +11,10 @@
           class="cell-body"
         >
           <van-icon
-            name="gold-coin"
-            :color="$c.themeColor"
-            :size="1.2*rem"
+            :name="cp.ico"
+            class-prefix="cy"
+            :color="cp.color"
+            :size="rem"
           />
           <span class="m-l-10">
             <b>{{buy.cpName}}</b><br />

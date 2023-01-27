@@ -18,6 +18,7 @@ import {
   GridItem,
   Icon,
   Image,
+  ImagePreview,
   List,
   NavBar,
   Notify,
@@ -50,6 +51,7 @@ Vue.use(Form).use(Field)
 Vue.use(Grid).use(GridItem)
 Vue.use(Icon)
 Vue.use(Image)
+Vue.prototype.ImagePreview = ImagePreview
 Vue.use(List)
 Vue.use(NavBar)
 Vue.use(Notify)

@@ -94,8 +94,7 @@ export default {
     subBuy: (params) => apiInstance.post('cp/sub-buy', params),
     coBuys: (params) => apiInstance.post('cp/co-buys', params),
     buySubs: (params) => apiInstance.post('cp/buy-subs', params),
-    buyTickets: (params) => apiInstance.post('cp/buy-tickets', params),
-    checkBuyTicket: (params) => apiInstance.post('cp/check-buy-ticket', params)
+    buyTickets: (params) => apiInstance.post('cp/buy-tickets', params)
   },
   catch: (obj) => {
     let type = typeof obj

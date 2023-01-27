@@ -53,6 +53,10 @@
         <div
           v-if="_ticket.originalImgUrl"
           class="flex-center"
+          @click="ImagePreview({
+            images: [_ticket.originalImgUrl],
+            showIndex: false
+          })"
         >
           <van-image
             width="10rem"
@@ -68,7 +72,6 @@
         />
       </van-cell>
     </van-cell-group>
-
     <div class="fixed-bottom p_2">
       <van-row>
         <van-col span="6">
@@ -80,25 +83,7 @@
             >上一张</a-button>
           </div>
         </van-col>
-        <van-col span="6">
-          <div class="p-8">
-            <a-button
-              type="primary"
-              block
-              :disabled="!(_ticket&&_ticket.status==10)"
-              @click="checkTicket(11)"
-            >错票</a-button>
-          </div>
-        </van-col>
-        <van-col span="6">
-          <div class="p-8">
-            <a-button
-              block
-              :disabled="!(_ticket&&_ticket.status==10)"
-              @click="checkTicket(20)"
-            >对票</a-button>
-          </div>
-        </van-col>
+        <van-col span="12"></van-col>
         <van-col span="6">
           <div class="p-8">
             <a-button
@@ -140,16 +125,11 @@
       refresh() {
         api.cp.buy({ id: this.buyId }).then(vo => {
           this.buy = vo
-        }).catch(this.caught)
+        }).catch(api.catch)
         api.cp.buyTickets({ buyId: this.buyId }).then(vo => {
           vo.forEach(i => $cp.enhance(i))
           this.list = vo
-        }).catch(this.caught)
-      },
-      checkTicket(status) {
-        api.cp.checkBuyTicket({ id: this._ticket.id, status }).then(vo => {
-          this.index = Math.min(this.index + 1, this.list.length - 1)
-        }).catch(this.caught)
+        }).catch(api.catch)
       }
     }
   }

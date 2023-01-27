@@ -115,27 +115,35 @@
         this.$router.replace({ name: 'User' })
       },
       loadCashAct() {
-        let userId = this.$store.getters.userId
-        this.api.user.act({ userId, actType: 'CASH' }).then(vo => {
+        api.user.act({ actType: 'CASH' }).then(vo => {
           this.cashAct = vo
           this.refresh()
         }).catch(api.catch)
       },
       load() {
         let { cur, size, cashAct } = this
-        api.user.actDetails({ cur, size, actId: cashAct.id }).then(vo => {
+        api.user.actDetails({
+          actId: cashAct.id,
+          cur,
+          size
+        }).then(vo => {
           if (this.refreshing) {
             this.list = []
             this.refreshing = false
           }
           this.list = this.list.concat(vo)
-          this.finished = true
+          this.cur++
+          this.finished = vo.length == 0
           this.loading = false
-        }).catch(api.catch)
+        }).catch(api.catch((err) => {
+          this.loading = false
+          return false
+        }))
       },
       refresh() {
         this.loading = true
         this.finished = false
+        this.cur = 1
         this.load()
       }
     }

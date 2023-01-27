@@ -119,9 +119,13 @@
           let shopId = this.$store.getters.shopId
           vo.forEach(e => e.checked = e.id == shopId)
           this.list = this.list.concat(vo)
-          this.finished = true
+          this.cur++
+          this.finished = vo.length == 0
           this.loading = false
-        }).catch(this.caught)
+        }).catch(api.catch((err) => {
+          this.loading = false
+          return false
+        }))
       },
       refresh() {
         this.loading = true

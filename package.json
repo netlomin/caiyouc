@@ -18,7 +18,7 @@
     "md5": "2.3.0",
     "json-bigint": "1.0.0",
     "regenerator-runtime": "^0.13.5",
-    "vant": "^2.12.48",
+    "vant": "^2.12.53",
     "vue": "^2.6.11",
     "vuex-persistedstate": "3.0.1",
     "jimp": "^0.16.1",

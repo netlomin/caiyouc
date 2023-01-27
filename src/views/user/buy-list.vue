@@ -116,13 +116,18 @@
             this.refreshing = false
           }
           this.list = this.list.concat(vo)
-          this.finished = true
+          this.cur++
+          this.finished = vo.length == 0
           this.loading = false
-        }).catch(this.caught)
+        }).catch(api.catch((err) => {
+          this.loading = false
+          return false
+        }))
       },
       refresh() {
         this.loading = true
         this.finished = false
+        this.cur = 1
         this.load()
       },
       typeTo(id, type) {

@@ -9,9 +9,9 @@
           @click="navTo({name:'UserInfo'})"
         >{{firstChar(user.nickName)}}</a-avatar>
         <div class="white">
-          <b class="m_2 md">{{user.nickName}}</b>
+          <b class="m-l_5 md">{{user.nickName}}</b>
           <div
-            class="shop-bar xs"
+            class="shop-bar xs m-t_1 m-l_2"
             @click="navTo({name:'ShopSelect'})"
           >
             <van-icon
@@ -37,9 +37,9 @@
             color="#E88818"
             size=".5rem"
           />
-          <span class="m-l_2">{{cashAct.amt}}</span>
-          <span class="m-l_2 light-grey">+</span>
-          <span class="m-l_2 light-grey">{{cashAct.frozenAmt}}</span>
+          <span class="m-l_2 red">{{cashAct.amt}}</span>
+          <span class="m-l_2 blue">+</span>
+          <span class="m-l_2 blue">{{cashAct.frozenAmt}}</span>
         </div>
         <div
           class="btn"
@@ -122,14 +122,14 @@
     },
     created() {
       let userId = this.$store.getters.userId
-      this.api.user.info({ id: userId }).then(vo => {
+      api.user.info({ id: userId }).then(vo => {
         vo.nickName = util.ifnil(vo.nickName, vo.mobile)
         this.user = vo
       }).catch(api.catch)
-      this.api.user.shop({}).then(vo => {
+      api.user.shop({}).then(vo => {
         this.shop = vo
       }).catch(api.catch)
-      this.api.user.act({ userId, actType: 'CASH' }).then(vo => {
+      api.user.act({ actType: 'CASH' }).then(vo => {
         this.cashAct = vo
       }).catch(api.catch)
     }
