@@ -36,7 +36,7 @@
     methods: {}
   }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style
   lang="scss"
   scoped
@@ -51,7 +51,7 @@
 
     .#{$size}_none {
       font-size: nth($font-sizes, $i);
-      width: nth($font-sizes, $i) * 1.2;
+      width: nth($font-sizes, $i) * 2;
     }
 
     .#{$size}_solid,
