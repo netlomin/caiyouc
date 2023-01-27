@@ -16,7 +16,7 @@
             type="danger"
             class="md"
             @click="clickBuyListBtn"
-          >我的代购</a-button>
+          >我的彩单</a-button>
         </template>
       </a-result>
     </div>

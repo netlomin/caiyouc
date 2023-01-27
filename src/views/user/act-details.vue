@@ -2,7 +2,7 @@
   <div>
     <van-sticky :offset-top="44">
       <c-panel
-        margin=".1rem 0 .28rem"
+        margin="1px 0 .28rem"
         shadow="0 0 6px #F88"
       >
         <van-row
@@ -51,7 +51,6 @@
     <van-pull-refresh
       v-model="refreshing"
       @refresh="refresh"
-      class="h_10"
     >
       <van-list
         v-if="list.length"

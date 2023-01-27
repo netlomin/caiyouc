@@ -11,7 +11,7 @@
             key="buyBtn"
             class="md"
             @click="clickSubBtn"
-          >我的代购</a-button>
+          >我的彩单</a-button>
           <a-button
             key="homeBtn"
             type="primary"

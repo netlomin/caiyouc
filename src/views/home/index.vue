@@ -16,14 +16,16 @@
         :border="false"
         inset
       >
+        {{void (cp=$c.cp[item.cp])}}
         <van-cell :to="{ name: 'CoBuySub', params: { id: item.id }}">
           <div
             class="cell-head"
             slot="title"
           >
             <van-icon
-              name="gold-coin"
-              :color="$c.themeColor"
+              :name="cp.ico"
+              class-prefix="cy"
+              :color="cp.color"
             />
             <strong class="m-l-10">{{item.cpName}}</strong>
             <span style="float: right;">

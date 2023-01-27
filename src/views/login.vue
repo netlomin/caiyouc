@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="h-1"></div>
+    <div class="h_1"></div>
 
     <div class="center">
       <van-image

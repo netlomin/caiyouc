@@ -77,7 +77,8 @@ export default {
     act: (params) => apiInstance.post(`user/act`, params),
     allAct: (params) => apiInstance.post(`user/all-act`, params),
     actDetails: (params) => apiInstance.post(`user/act-details`, params),
-    shop: (params) => apiInstance.post(`user/shop`, params)
+    shop: (params) => apiInstance.post(`user/shop`, params),
+    submitAudit: (params) => apiInstance.post(`user/submit-audit`, params)
   },
   lot: {
     issue: (cp) => apiInstance.post('lot/issue', { cp }),

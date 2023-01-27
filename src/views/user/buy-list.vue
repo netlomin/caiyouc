@@ -4,6 +4,7 @@
       <van-tabs
         v-model="activeTab"
         :line-width="2.5*rem"
+        class="m-b-1"
       >
         <van-tab
           title="所有"
@@ -39,14 +40,16 @@
           :to="typeTo(buy.id, buy.type)"
           is-link
         >
+          {{void (cp=$c.cp[buy.cp])}}
           <div
             slot="icon"
             class=" flex-middle m-r-10"
           >
             <van-icon
-              :size="rem"
-              name="gold-coin"
-              :color="$c.themeColor"
+              :name="cp.ico"
+              class-prefix="cy"
+              :color="cp.color"
+              :size=".8*rem"
             />
           </div>
           <template #title>

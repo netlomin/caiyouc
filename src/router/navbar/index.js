@@ -12,6 +12,14 @@ export default [{
       keepAlive: false
     }
   }, {
+    path: '/user/act-withdraw',
+    name: 'ActWithdraw',
+    component: () => import('@/views/user/act-withdraw'),
+    meta: {
+      title: '清账',
+      keepAlive: false
+    }
+  }, {
     path: '/user/act-details',
     name: 'ActDetails',
     component: () => import('@/views/user/act-details'),

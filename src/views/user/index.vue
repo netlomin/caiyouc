@@ -41,7 +41,10 @@
           <span class="m-l_2 light-grey">+</span>
           <span class="m-l_2 light-grey">{{cashAct.frozenAmt}}</span>
         </div>
-        <div class="sign-btn">清账</div>
+        <div
+          class="btn"
+          @click="navTo({name:'ActWithdraw'})"
+        >清账</div>
       </div>
     </div>
 
@@ -181,7 +184,7 @@
       font-size: $font-lg;
     }
 
-    .sign-btn {
+    .btn {
       width: 1.6rem;
       height: .6rem;
       line-height: .6rem;

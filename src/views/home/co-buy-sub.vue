@@ -5,6 +5,7 @@
       v-if="coBuy"
       class="app-container"
     >
+      {{void (cp=$c.cp[coBuy.cp])}}
       <van-cell-group :border="false">
         <van-cell>
           <div
@@ -12,9 +13,10 @@
             class="cell-body"
           >
             <van-icon
-              name="gold-coin"
-              :color="$c.themeColor"
-              :size="rem"
+              :name="cp.ico"
+              class-prefix="cy"
+              :color="cp.color"
+              :size=".8*rem"
             />
             <span class="m-l-8">
               <b>{{coBuy.cpName}}</b>

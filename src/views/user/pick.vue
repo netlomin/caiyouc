@@ -255,7 +255,8 @@
       },
       clickAddBtn() {
         if (this.index == null) {
-          this.cart.push(this.pick)
+          let pick = $cp.getPick(this.play)
+          this.cart.push(pick)
           this.$store.dispatch('setCart', this.cart)
           $cp.cleanPick(this.play)
         } else {

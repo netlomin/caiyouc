@@ -353,6 +353,44 @@ const mixin = {
   },
   navTo(params) {
     this.$router.push(params)
+  },
+  /**
+   * 限制输入小数
+   * decimal：限制小数位。0：不允许输入小数点；-1：不限制；默认不限制。
+   * maxLength：限制最大长度。包含小数位和负号。默认值255
+   * positive：正负数。-1: 负，0:不限制 1:正数
+   **/
+  fmtN(value, decimal = -1, maxLength = 255, positive = 0) {
+    if (!value) {
+      return value
+    }
+    if (value == '.' || value == '。') {
+      return ''
+    }
+    value = value.replace("。", '.')
+    //限制输入小数点
+    if (decimal == 0) {
+      value = value.replace(/[`~!@#$%^&*()_\+=<>?:"{}|,./;'\\[\]·~！@#￥%……&*（）——\+={}|《》？：“”【】、；‘’，。、]/g, '')
+        .replace(/\s/g, '').replace(/[a-zA-Z]+/, '')
+    } else {
+      value = value.replace(/[`~!@#$%^&*()_\+=<>?:"{}|,/;'\\[\]·~！@#￥%……&*（）——\+={}|《》？：“”【】、；‘’，。、]/g, '')
+        .replace(/\s/g, '').replace(/[a-zA-Z]+/, '')
+    }
+
+    if (positive == 1) {
+      value = value.replace(/-/g, '')
+    }
+
+    //限制小数位
+    if (decimal > 0) {
+      let regex = new RegExp(`^-?\\d+(?:\\.\\d{0,${decimal}})?`, "g")
+      value = (value && value.match(regex)[0]) || null
+    }
+    //限制长度
+    if (maxLength > 0 && value && value.length >= maxLength) {
+      value = value.slice(0, maxLength)
+    }
+    return value
   }
 }
 export default {
