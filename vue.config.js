@@ -97,7 +97,7 @@ module.exports = {
             'link-color': '#1DA57A',
             'border-radius-base': '2px',
             // vant
-            'blue': '#FF8888'
+            hack: `true; @import "plugin/vant.less";`
           },
           javascriptEnabled: true
         }
