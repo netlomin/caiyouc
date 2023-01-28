@@ -38,8 +38,6 @@
             size=".5rem"
           />
           <span class="m-l_2 red">{{cashAct.amt}}</span>
-          <span class="m-l_2 blue">+</span>
-          <span class="m-l_2 blue">{{cashAct.frozenAmt}}</span>
         </div>
         <div
           class="btn"

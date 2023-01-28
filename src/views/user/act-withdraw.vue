@@ -4,6 +4,7 @@
       left-icon="volume-o"
       text="提交清账后，店方会通过微信联系您转账。"
     />
+    
     <van-form @submit="submit">
       <van-field label="可清余额">
         <template #input>
