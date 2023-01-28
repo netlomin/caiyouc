@@ -127,7 +127,7 @@
             e.percent = Math.round((e.guardCnt + e.soldCnt) / e.totalCnt * 100)
             e.guardPercent = Math.round(e.guardCnt / e.totalCnt * 100)
             e.soldPercent = Math.round(e.soldCnt / e.totalCnt * 100)
-            e.remainTime = dayjs(e.stopTime).diff(dayjs())
+            e.remainTime = dayjs(e.endTime).diff(dayjs())
           })
           this.list = this.list.concat(vo)
 
