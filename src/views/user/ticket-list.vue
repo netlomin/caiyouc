@@ -59,7 +59,7 @@
           })"
         >
           <van-image
-            width="10rem"
+            width="6rem"
             height="8rem"
             fit="contain"
             :src="_ticket.originalImgUrl"
@@ -140,6 +140,6 @@
   scoped
 >
   .ticket-img {
-    border: 1px solid #EEE;
+    border: 1px solid #F88;
   }
 </style>
