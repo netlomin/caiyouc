@@ -11,14 +11,14 @@
         <div class="white">
           <b class="m-l_5 md">{{user.nickName}}</b>
           <div
-            class="shop-bar xs m-t_1 m-l_2"
+            class="shop-bar sm m-t_1 m-l_2"
             @click="navTo({name:'ShopSelect'})"
           >
             <van-icon
               class-prefix="cy"
               name="shops"
               class="green"
-              size=".20rem"
+              size=".2rem"
             />
             <span class="m-l_2">{{shop.name}}</span>
           </div>

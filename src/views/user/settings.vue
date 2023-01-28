@@ -5,21 +5,18 @@
         title="切换彩店"
         :to="{name:'ShopSelect'}"
         icon="home-o"
-        size="large"
         is-link
       />
       <van-cell
         title="设置密码"
         :to="{name:'Password'}"
         icon="lock"
-        size="large"
         is-link
       />
       <van-cell
         title="关于"
         :value="pkg.description+' v'+pkg.version"
         icon="shield-o"
-        size="large"
       />
     </div>
 
