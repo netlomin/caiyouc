@@ -6,8 +6,8 @@
         text="您可以微信联系店方转账预存金额"
       />
       <c-panel
-        margin="-2px 0 .28rem"
-        shadow="0 0 6px #F88"
+        margin="0 0 .28rem"
+        shadow="0 2px 5px #F88"
       >
         <van-row
           slot="head"
