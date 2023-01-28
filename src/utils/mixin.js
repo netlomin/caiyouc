@@ -312,25 +312,6 @@ const mixin = {
   firstChar(s) {
     return s && s.length ? s.charAt(0) : ''
   },
-  caught(obj) {
-    let type = typeof obj
-    let handler = (err) => {
-      if (type === 'function' && obj(err)) {
-        return
-      }
-      if (typeof err.msg == 'string') {
-        if (err.msg.length <= 4) {
-          Toast.fail(err.msg)
-        } else {
-          Toast({ message: err.msg })
-        }
-        return
-      }
-      console.log('未知错误', err)
-      Toast.fail('未知错误')
-    }
-    return type === 'undefined' || type === 'function' ? handler : handler(obj)
-  },
   fmtAmt(i) {
     return typeof(i) !== 'number' ? i : i.toLocaleString()
   },

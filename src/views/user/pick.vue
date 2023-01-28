@@ -275,10 +275,10 @@
         api.lot.issue(item.cp).then(vo => {
           vo.remainTime = dayjs(vo.stopTime).diff(dayjs())
           this.issue = vo
-        }).catch(this.caught)
+        }).catch(api.catch)
         api.lot.draws({ cp: item.cp, size: 1 }).then(vo => {
           this.draw = vo[0]
-        }).catch(this.caught)
+        }).catch(api.catch)
 
         api.lot.trend({ cp: item.cp, issues: 5 }).then(vo => {
           vo.datas.forEach((data, i) => {
@@ -290,7 +290,7 @@
             vo.datas[i] = obj
           })
           this.r5 = vo
-        }).catch(this.caught)
+        }).catch(api.catch)
 
         let play = _.cloneDeep(subItem)
         $cp.resolvePlay(play)
@@ -301,7 +301,7 @@
           vo = this.listTable(vo)[0]
           this.play.areas.forEach((area, i) => this.$set(area, 'omits', vo[i].datas[0]))
           this.pick = this.index == null ? null : this.cart[this.index]
-        }).catch(this.caught)
+        }).catch(api.catch)
       },
       loadPlays() {
         let play = this.cart.length ? this.cart[0].set.play : null
@@ -317,7 +317,7 @@
                 this.reload()
               }
             })
-          }).catch(this.caught)
+          }).catch(api.catch)
         })
       }
     }

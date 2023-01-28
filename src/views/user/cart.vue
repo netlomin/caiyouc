@@ -216,11 +216,11 @@
                   this.cart = []
                   this.$store.dispatch('setCart', this.cart)
                   this.$router.push({ name: 'BuyResult' })
-                }).catch(this.caught)
-              }).catch(this.caught)
+                }).catch(api.catch)
+              }).catch(api.catch)
             }).catch(() => {})
           }
-        }).catch(this.caught)
+        }).catch(api.catch)
       },
       code() {
         let sets = this.cart.map(pick => pick.set)

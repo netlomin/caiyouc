@@ -265,12 +265,21 @@
       },
       _subable() {
         return this.coBuy && this.coBuy.remainTime > 0 && this.coBuy.totalCnt > this.coBuy.soldCnt
+      },
+      _showPick(){
+        let userId = this.$store.getters.userId
+        if(!this.coBuy) return false
+        if(this.coBuy.userId == this.$store.getters.userId) return true
+        if(this.coBuy.visibility == 0) return true
+        if(dayjs(this.coBuy.stopTime).diff(dayjs())<=0) return true
+        if(this.coBuy.visibility == 1 && this.coBuy.subs.some(s=>s.userId==userId)) return true
+        return false
       }
     },
     created() {
       let id = this.$route.params.id
       api.cp.buy({ id }).then(vo => {
-        vo.remainTime = dayjs(vo.stopTime).diff(dayjs())
+        vo.remainTime = dayjs(vo.endTime).diff(dayjs())
         vo.percent = Math.round((vo.guardCnt + vo.soldCnt) / vo.totalCnt * 100)
         vo.guardPercent = Math.round(vo.guardCnt / vo.totalCnt * 100)
         vo.soldPercent = Math.round(vo.soldCnt / vo.totalCnt * 100)
@@ -289,7 +298,7 @@
             sub.amt = sub.cnt
           })
           this.$set(vo, 'subs', subs)
-        }).catch(this.caught)
+        }).catch(api.catch)
 
         api.lot.draws({ cp: vo.cp, endIssue: vo.issue, startIssue: vo.issue }).then(draws => {
           if (draws.length) {
@@ -299,15 +308,15 @@
             vo.draw(draw)
           }
           this.coBuy = vo
-        }).catch(this.caught)
-      }).catch(this.caught)
+        }).catch(api.catch)
+      }).catch(api.catch)
     },
     methods: {
       subBuy() {
         let amt = this.coBuy.unitAmt * this.cnt
         api.cp.subBuy({ buyId: this.coBuy.id, cnt: this.cnt, amt }).then(vo => {
           this.$router.push({ name: "SubBuyResult" })
-        }).catch(this.caught)
+        }).catch(api.catch)
       },
       showTicket() {
         this.$router.push({ name: "TicketList", params: { buyId: this.coBuy.id } })

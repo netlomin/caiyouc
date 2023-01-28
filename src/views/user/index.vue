@@ -18,7 +18,7 @@
               class-prefix="cy"
               name="shops"
               class="green"
-              size=".2rem"
+              size=".28rem"
             />
             <span class="m-l_2">{{shop.name}}</span>
           </div>
@@ -35,7 +35,7 @@
           <van-icon
             name="balance-o"
             color="#E88818"
-            size=".5rem"
+            size=".4rem"
           />
           <span class="m-l_2 red">{{cashAct.amt}}</span>
         </div>

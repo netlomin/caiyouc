@@ -1,14 +1,14 @@
 <template>
   <div>
     <van-sticky :offset-top="44">
-      <van-notice-bar
-        left-icon="volume-o"
-        text="您可以微信联系店方转账预存金额"
-      />
       <c-panel
         margin="0 0 .28rem"
         shadow="0 0 6px #F88"
       >
+        <van-notice-bar
+          left-icon="volume-o"
+          text="您可以微信联系店方转账预存金额"
+        />
         <van-row
           slot="head"
           type="flex"

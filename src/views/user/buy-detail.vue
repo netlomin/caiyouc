@@ -146,8 +146,8 @@
             vo.draw(draw)
           }
           this.buy = vo
-        }).catch(this.caught)
-      }).catch(this.caught)
+        }).catch(api.catch)
+      }).catch(api.catch)
     },
     methods: {
       clickCopyBtn() {
@@ -166,7 +166,7 @@
               this.$router.push({ name: 'Cart' })
             }
           })
-        }).catch(this.caught)
+        }).catch(api.catch)
       },
       showTicket() {
         this.$router.push({ name: "TicketList", params: { buyId: this.buy.id } })

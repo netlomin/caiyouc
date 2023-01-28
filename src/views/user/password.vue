@@ -45,7 +45,7 @@
         }
         api.ps.setPassword(params).then(vo => {
           this.$notify({ message: '设置密码成功！', background: '#11FF11' })
-        }).catch(this.caught)
+        }).catch(api.catch)
       }
     }
   }
