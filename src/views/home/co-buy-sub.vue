@@ -137,11 +137,7 @@
         </van-cell>
         <van-cell>
           <div
-            v-if="coBuy.visibility"
-            class="tips"
-          > {{coBuy.tips}}</div>
-          <div
-            v-else
+            v-if="_showPick"
             class="pick-sets"
           >
             <van-row
@@ -159,6 +155,12 @@
                 ></c-balls>
               </van-col>
             </van-row>
+          </div>
+          <div
+            v-else
+            class="tips"
+          > 
+            {{coBuy.tips}}
           </div>
         </van-cell>
       </van-cell-group>
