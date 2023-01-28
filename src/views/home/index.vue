@@ -116,8 +116,7 @@
     methods: {
       load() {
         let { cur, size } = this
-        let shopId = this.$store.getters.shopId
-        api.cp.coBuys({ cur, size, shopId, all: false }).then(vo => {
+        api.cp.coBuys({ cur, size }).then(vo => {
           if (this.refreshing) {
             this.list = []
             this.refreshing = false
