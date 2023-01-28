@@ -1,5 +1,9 @@
 <template>
   <div>
+    <van-notice-bar
+      left-icon="volume-o"
+      text="提交清账后，店方会通过微信联系您转账。"
+    />
     <van-form @submit="submit">
       <van-field label="可清余额">
         <template #input>
@@ -28,17 +32,6 @@
         </template>
       </van-field>
     </van-form>
-
-    <c-panel
-      margin=".5rem 0 .28rem"
-      shadow="0 0 3px #F88"
-    >
-      <div
-        slot="head"
-        class="red bold"
-      >清账说明</div>
-      <div class="grey">发起清账后，店方会通过微信联系您并转账。</div>
-    </c-panel>
   </div>
 </template>
 

@@ -21,6 +21,7 @@ import {
   ImagePreview,
   List,
   NavBar,
+  NoticeBar,
   Notify,
   Overlay,
   Popup,
@@ -54,6 +55,7 @@ Vue.use(Image)
 Vue.prototype.ImagePreview = ImagePreview
 Vue.use(List)
 Vue.use(NavBar)
+Vue.use(NoticeBar)
 Vue.use(Notify)
 Vue.use(Overlay)
 Vue.use(Popup)
