@@ -5,10 +5,7 @@
         left-icon="volume-o"
         text="您可以通过微信联系店方转账预存金额。"
       />
-      <c-panel
-        margin="0 0 .28rem"
-        shadow="0 2px 5px #F88"
-      >
+      <c-panel margin="0 0 .28rem">
         <van-row
           slot="head"
           type="flex"

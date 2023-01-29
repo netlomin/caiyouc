@@ -58,13 +58,13 @@
     box-sizing: border-box;
 
     &__head {
-      border-bottom: 1px solid #f8f8f8;
+      border-bottom: 1px solid #f1f6f8;
     }
 
     &__body {}
 
     &__foot {
-      border-top: 1px solid #f8f8f8;
+      border-top: 1px solid #f1f6f8;
     }
   }
 </style>
