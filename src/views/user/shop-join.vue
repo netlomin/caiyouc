@@ -77,8 +77,8 @@
             <van-swipe
               vertical
               :style="{
-                height: '1rem',
-                lineHeight: '1rem'
+                height: '.88rem',
+                lineHeight: '.88rem'
               }"
               :autoplay="3000"
               :show-indicators="false"
