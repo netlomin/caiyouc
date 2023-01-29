@@ -115,5 +115,13 @@ export default [{
       title: '扫码添加彩店',
       keepAlive: false
     }
+  }, {
+    path: '/user/shop',
+    name: 'Shop',
+    component: () => import('@/views/user/shop'),
+    meta: {
+      title: '彩店信息',
+      keepAlive: false
+    }
   }]
 }]

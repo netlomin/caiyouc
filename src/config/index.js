@@ -7,11 +7,13 @@ export default {
   cp: {
     SSQ: {
       ico: 'ssq',
-      color: '#FF6666'
+      color: '#FF8888',
+      maxMultiple: 99
     },
     KL8: {
       ico: 'kl8',
-      color: '#FF8888'
+      color: '#FF6666',
+      maxMultiple: 15
     }
   }
 }

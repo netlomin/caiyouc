@@ -19,22 +19,25 @@
         {{void (cp=$c.cp[item.cp])}}
         <van-cell :to="{ name: 'CoBuySub', params: { id: item.id }}">
           <div
-            class="cell-head"
+            class="cell-head flex row-between"
             slot="title"
           >
-            <van-icon
-              :name="cp.ico"
-              class-prefix="cy"
-              :color="cp.color"
-            />
-            <strong class="m-l-10">{{item.cpName}}</strong>
-            <span style="float: right;">
-              截止剩余：
+            <div class="flex col-center">
+              <van-icon
+                :name="cp.ico"
+                class-prefix="cy"
+                :color="cp.color"
+                :size=".6*rem"
+              />
+              <strong class="m-l_2">{{item.cpName}}</strong>
+            </div>
+            <div>
+              <span class="sm">截止剩余：</span>
               <van-count-down
                 :time="item.remainTime"
-                class="inline"
+                class="inline sm red"
               />
-            </span>
+            </div>
           </div>
           <template #label>
             <div class="cell-body">

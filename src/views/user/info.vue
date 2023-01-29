@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div>
     <div class="m-t_8 flex-col">
       <a-avatar
         :src="user.avatarUrl"
@@ -30,13 +30,6 @@
           name="nickName"
           label="昵称"
           placeholder="1-16个中英文字符"
-          maxlength="16"
-        />
-        <van-field
-          v-model.trim="user.wechat"
-          name="webchat"
-          label="微信"
-          placeholder="请输入微信号"
           maxlength="16"
         />
         <van-field label="手机">
@@ -106,8 +99,8 @@
         this.$set(this.user, 'avatarUrl', r.data.url)
       },
       submit() {
-        let { id, avatar, nickName, wechat } = this.user
-        api.user.save({ id, avatar, nickName, wechat }).then(vo => {
+        let { id, avatar, nickName } = this.user
+        api.user.save({ id, avatar, nickName }).then(vo => {
           this.$notify({ message: '保存成功！', background: '#11FF11' })
         }).catch(api.catch)
       }

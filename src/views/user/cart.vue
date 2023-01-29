@@ -76,7 +76,7 @@
           <van-stepper
             v-model="multiple"
             min="1"
-            max="99"
+            :max="$c.cp[play.cp].maxMultiple"
             :button-size=".5*rem"
           />
           <span>倍</span>
@@ -198,7 +198,7 @@
           } else {
             this.$dialog.confirm({
               title: '提示',
-              message: '购彩金额：' + amt + '元，确认提交订单！',
+              message: `购彩金额：<a class="red">${amt}</a> 元，确认提交订单！`,
             }).then((action) => {
               let cp = this.play.cp
               api.lot.issue(cp).then(vo => {

@@ -51,23 +51,23 @@ html, body, #app  {
 }
 
 @for $i from 1 through 20{
-  .p-#{$i} {margin: 1px*$i;}
-  .p-t-#{$i} {margin: 1px*$i 0 0 0;}
-  .p-r-#{$i} {margin: 0 1px*$i 0 0;}
-  .p-b-#{$i} {margin: 0 0 1px*$i 0;}
-  .p-l-#{$i} {margin: 0 0 0 1px*$i;}
-  .p-tb-#{$i} {margin: 1px*$i 0;}
-  .p-lr-#{$i} {margin: 0 1px*$i;}
+  .p-#{$i} {padding: 1px*$i;}
+  .p-t-#{$i} {padding-top: 1px*$i;}
+  .p-r-#{$i} {padding-right: 1px*$i;}
+  .p-b-#{$i} {padding-bottom: 1px*$i;}
+  .p-l-#{$i} {padding-left: 1px*$i;}
+  .p-tb-#{$i} {padding-top: 1px*$i;padding-bottom: 1px*$i; }
+  .p-lr-#{$i} {padding-left: 1px*$i;padding-right: 1px*$i;}
 }
 
 @for $i from 1 through 20{
   .p_#{$i} {padding: .1rem*$i;}
-  .p-t_#{$i} {padding: .1rem*$i 0 0 0;}
-  .p-r_#{$i} {padding: 0 .1rem*$i 0 0;}
-  .p-b_#{$i} {padding: 0 0 .1rem*$i 0;}
-  .p-l_#{$i} {padding: 0 0 0 .1rem*$i;}
-  .p-tb_#{$i} {padding: .1rem*$i 0;}
-  .p-lr_#{$i} {padding: 0 .1rem*$i;}
+  .p-t_#{$i} {padding-top: .1rem*$i;}
+  .p-r_#{$i} {padding-right: .1rem*$i;}
+  .p-b_#{$i} {padding-bottom: .1rem*$i;}
+  .p-l_#{$i} {padding-left: .1rem*$i;}
+  .p-tb_#{$i} {padding-top: .1rem*$i; padding-bottom: .1rem*$i;}
+  .p-lr_#{$i} {padding-left: .1rem*$i; padding-right: .1rem*$i;}
 }
 
 .red {
@@ -142,6 +142,56 @@ html, body, #app  {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.flex {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.col-top {
+	align-items: flex-start;
+}
+
+/* 垂直居中 */
+.col-center {
+	align-items: center;
+}
+
+/* 顶部对齐 */
+.col-top {
+	align-items: flex-start;
+}
+
+/* 底部对齐 */
+.col-bottom {
+	align-items: flex-end;
+}
+
+/* 左边对齐 */
+.row-left {
+	justify-content: flex-start;
+}
+
+/* 水平居中 */
+.row-center {
+	justify-content: center;
+}
+
+/* 右边对齐 */
+.row-right {
+	justify-content: flex-end;
+}
+
+/* 水平两端对齐，项目之间的间隔都相等 */
+.row-between {
+	justify-content: space-between;
+}
+
+/* 水平每个项目两侧的间隔相等，所以项目之间的间隔比项目与父元素两边的间隔大一倍 */
+.row-around {
+	justify-content: space-around;
 }
 
 .fixed-top {

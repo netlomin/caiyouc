@@ -9,10 +9,10 @@
     >
       <div
         slot="title"
-        class="flex-middle"
+        class="flex col-center"
       >
         <a-button @click="popup=!popup">
-          <b class="m-r-6">{{title}}</b>
+          <b class="m-r-6 red">{{title}}</b>
           <van-icon :name="'arrow-'+(popup?'up':'down')" />
         </a-button>
       </div>
@@ -33,15 +33,18 @@
 
     <div
       v-if="issue&&draw"
-      class="p_1 sm light-grey bg_white"
+      class="flex row-between p_1 p-tb_2 sm light-grey bg_white"
     >
-      <span>第{{issue.issue}}期</span>
-      <span class="m-l_2 red">奖池{{simNum(draw.poolAmt)}}</span>
-      <div class="bar-right">
+      <div>
+        <span>第{{issue.issue}}期</span>
+        <span class="m-l_2 red">奖池{{simNum(draw.poolAmt)}}</span>
+      </div>
+      <div>
         <span>投注截止：</span>
         <van-count-down
           :time="issue.remainTime"
           format="DD天HH时mm分ss秒"
+          class="sm red"
         />
       </div>
     </div>
@@ -53,7 +56,7 @@
       <van-collapse-item name="1">
         <div
           slot="title"
-          class="flex-middle"
+          class="flex col-center sm"
         >
           <span class="light-grey">上期开奖：</span>
           <div class="balls">
@@ -61,10 +64,13 @@
               :areas="r5.datas[4].set.areas"
               size="sm"
               type="none"
-            ></c-balls>
+            />
           </div>
         </div>
-        <template #value>点击展开历史开奖</template>
+        <div
+          slot="value"
+          class="light-grey sm"
+        >点击展开历史开奖</div>
         <a-table
           :data-source="r5.datas"
           size="small"
@@ -88,7 +94,7 @@
                   :areas="record.set.areas"
                   size="sm"
                   type="none"
-                ></c-balls>
+                />
               </div>
               <span
                 v-else
@@ -105,7 +111,7 @@
         v-for="(area, index) in play.areas"
         :area="area"
         class="m-t-8"
-      ></c-pick>
+      />
     </div>
 
     <div class="fixed-bottom p_2">
@@ -149,16 +155,14 @@
         </van-col>
         <van-col
           span="8"
-          class="flex-center"
+          class="flex-center p-lr_2"
         >
-          <div>
-            <a-button
-              type="primary"
-              block
-              :disabled="!_cnt"
-              @click="clickAddBtn"
-            >{{index!=null?'保存选号蓝':'加入选号篮'}}</a-button>
-          </div>
+          <a-button
+            type="primary"
+            block
+            :disabled="!_cnt"
+            @click="clickAddBtn"
+          >{{index!=null?'保存选号蓝':'加入选号篮'}}</a-button>
         </van-col>
       </van-row>
     </div>
@@ -366,12 +370,6 @@
 
   /deep/ .van-grid-item__content {
     padding: 0;
-  }
-
-  .bar-right {
-    display: inline-block;
-    position: absolute;
-    right: .1rem;
   }
 
   .balls {

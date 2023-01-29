@@ -12,7 +12,7 @@
           <b class="m-l_5 md">{{user.nickName}}</b>
           <div
             class="shop-bar sm m-t_1 m-l_2"
-            @click="navTo({name:'ShopSelect'})"
+            @click="navTo({name:'Shop'})"
           >
             <van-icon
               class-prefix="cy"
