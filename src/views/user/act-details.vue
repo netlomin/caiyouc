@@ -5,7 +5,11 @@
         left-icon="volume-o"
         text="您可以通过微信联系店方转账预存金额。"
       />
-      <c-panel margin="0 0 .28rem">
+      <c-panel
+        padding=".3rem .5rem"
+        margin="0 0 .28rem"
+        shadow="0 1px 1px #F1F6F8"
+      >
         <van-row
           slot="head"
           type="flex"
@@ -22,7 +26,10 @@
             <span class="m-r_1 red">{{cashAct.amt+cashAct.frozenAmt}}</span>元
           </van-col>
         </van-row>
-        <van-row type="flex">
+        <van-row
+          type="flex"
+          class="grey"
+        >
           <van-col
             span="12"
             class="left"
@@ -34,7 +41,10 @@
             <span class="m-r_1 red">{{cashAct.amt}}</span>元
           </van-col>
         </van-row>
-        <van-row type="flex">
+        <van-row
+          type="flex"
+          class="m-t_2 grey"
+        >
           <van-col
             span="12"
             class="left"
