@@ -20,6 +20,10 @@
       >
         <div slot="head">
           <div class="red p_2">店方信息</div>
+          <van-notice-bar
+            left-icon="info-o"
+            text="开启摄像头，扫一扫店方二维码可自动获取！"
+          />
         </div>
         <van-field
           v-model="shop.name"
@@ -65,7 +69,25 @@
         shadow="1px 1px 6px #F88"
       >
         <div slot="head">
-          <div class="red p_2">我方信息</div>
+          <div class="red p_2">身份信息</div>
+          <van-notice-bar
+            left-icon="info-o"
+            :scrollable="false"
+          >
+            <van-swipe
+              vertical
+              :style="{
+                height: '1rem',
+                lineHeight: '1rem'
+              }"
+              :autoplay="3000"
+              :show-indicators="false"
+            >
+              <van-swipe-item>身份信息是购彩、转账唯一凭证，请确保真实有效。</van-swipe-item>
+              <van-swipe-item>身份信息作为凭证，提交后不可修改！</van-swipe-item>
+              <van-swipe-item>身份信息关联到账号，添加彩店时共同使用！</van-swipe-item>
+            </van-swipe>
+          </van-notice-bar>
         </div>
         <van-field
           v-model.trim="ps.mobile"

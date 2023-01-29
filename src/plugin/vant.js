@@ -32,6 +32,8 @@ import {
   Stepper,
   Sticky,
   SubmitBar,
+  Swipe,
+  SwipeItem,
   Tab,
   Tabs,
   Tabbar,
@@ -64,6 +66,7 @@ Vue.use(RadioGroup).use(Radio)
 Vue.use(Stepper)
 Vue.use(Sticky)
 Vue.use(SubmitBar)
+Vue.use(Swipe).use(SwipeItem)
 Vue.use(Tabs).use(Tab)
 Vue.use(Tabbar).use(TabbarItem)
 Vue.use(Toast)

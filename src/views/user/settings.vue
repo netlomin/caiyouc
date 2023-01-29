@@ -4,20 +4,42 @@
       <van-cell
         title="切换彩店"
         :to="{name:'ShopSelect'}"
-        icon="home-o"
         is-link
-      />
+      >
+        <div slot="icon">
+          <van-icon
+            name="shops"
+            class-prefix="cy"
+            class="red m-r_2"
+          />
+        </div>
+      </van-cell>
       <van-cell
         title="设置密码"
         :to="{name:'Password'}"
         icon="lock"
         is-link
-      />
+      >
+        <div slot="icon">
+          <van-icon
+            slot="icon"
+            name="lock"
+            class="red m-r_2"
+          />
+        </div>
+      </van-cell>
       <van-cell
         title="关于"
         :value="pkg.description+' v'+pkg.version"
-        icon="shield-o"
-      />
+      >
+        <div slot="icon">
+          <van-icon
+            slot="icon"
+            name="shield-o"
+            class="red m-r_2"
+          />
+        </div>
+      </van-cell>
     </div>
 
     <div class="fixed-bottom p_2">

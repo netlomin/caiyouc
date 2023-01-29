@@ -17,7 +17,7 @@
             <van-icon
               name="home-o"
               class="green"
-              size=".3rem"
+              size=".28rem"
             />
             <span class="m-l_2">{{shop.name}}</span>
           </div>
