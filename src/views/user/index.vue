@@ -15,10 +15,9 @@
             @click="navTo({name:'Shop'})"
           >
             <van-icon
-              class-prefix="cy"
-              name="shops"
+              name="home-o"
               class="green"
-              size=".28rem"
+              size=".3rem"
             />
             <span class="m-l_2">{{shop.name}}</span>
           </div>
