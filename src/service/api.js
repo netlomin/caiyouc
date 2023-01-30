@@ -81,7 +81,7 @@ export default {
     submitAudit: (params) => apiInstance.post(`user/submit-audit`, params)
   },
   lot: {
-    issue: (cp) => apiInstance.post('lot/issue', { cp }),
+    issue: (params) => apiInstance.post('lot/issue', params),
     plays: (params) => apiInstance.post('lot/plays', params),
     trend: (params) => apiInstance.post('lot/trend', params),
     draws: (params) => apiInstance.post('lot/draws', params),

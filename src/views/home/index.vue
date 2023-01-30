@@ -109,7 +109,7 @@
         refreshing: false,
         finished: false,
         cur: 1,
-        size: 10,
+        size: 100,
         list: []
       }
     },

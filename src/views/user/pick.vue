@@ -214,7 +214,6 @@
       }
       this.loadPlays()
     },
-    mounted() {},
     computed: {
       _cnt() {
         if (!(this.play)) return 0
@@ -276,8 +275,11 @@
         let subItem = item.children.filter(i => this.activeId == i.id)[0]
         this.title = item.text + '-' + subItem.text
 
-        api.lot.issue(item.cp).then(vo => {
-          vo.remainTime = dayjs(vo.stopTime).diff(dayjs())
+        api.lot.issue({
+          cp: item.cp,
+          shopId: this.$store.getters.shopId
+        }).then(vo => {
+          vo.remainTime = dayjs(vo.endTime).diff(dayjs())
           this.issue = vo
         }).catch(api.catch)
         api.lot.draws({ cp: item.cp, size: 1 }).then(vo => {
