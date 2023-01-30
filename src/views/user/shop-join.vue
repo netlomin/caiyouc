@@ -85,8 +85,8 @@
             :show-indicators="false"
           >
             <van-swipe-item>身份信息是购彩、转账唯一凭证，请确保真实有效。</van-swipe-item>
-            <van-swipe-item>身份信息作为凭证，提交后不可修改！</van-swipe-item>
-            <van-swipe-item>身份信息关联到账号，添加彩店时共同使用！</van-swipe-item>
+            <van-swipe-item>身份信息作为凭证，提交后不可更改！</van-swipe-item>
+            <van-swipe-item>身份信息会保存到账号，再次添加彩店可直接使用！</van-swipe-item>
           </van-swipe>
         </van-notice-bar>
         <van-field
