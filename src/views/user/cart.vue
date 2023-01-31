@@ -201,7 +201,7 @@
               message: `购彩金额：<a class="red">${amt}</a> 元，确认提交订单！`,
             }).then((action) => {
               let cp = this.play.cp
-              api.lot.issue(cp).then(vo => {
+              api.lot.issue({ cp }).then(vo => {
                 let params = {
                   "issue": vo.issue,
                   "cp": cp,
