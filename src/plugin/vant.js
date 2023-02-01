@@ -34,6 +34,7 @@ import {
   SubmitBar,
   Swipe,
   SwipeItem,
+  Switch,
   Tab,
   Tabs,
   Tabbar,
@@ -67,6 +68,7 @@ Vue.use(Stepper)
 Vue.use(Sticky)
 Vue.use(SubmitBar)
 Vue.use(Swipe).use(SwipeItem)
+Vue.use(Switch)
 Vue.use(Tabs).use(Tab)
 Vue.use(Tabbar).use(TabbarItem)
 Vue.use(Toast)

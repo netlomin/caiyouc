@@ -110,6 +110,12 @@ html, body, #app  {
   background-color: white;
 }
 
+.grap {
+  width: 100%;
+  height: .1rem;
+  background: $bg-color;
+}
+
 .inline {
   display: inline-block !important;
 }

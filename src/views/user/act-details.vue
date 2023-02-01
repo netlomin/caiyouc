@@ -7,7 +7,7 @@
       />
       <c-panel
         padding=".3rem .5rem"
-        margin="0 0 .28rem"
+        margin="0"
         shadow="0 1px 1px #F1F6F8"
       >
         <van-row
@@ -18,7 +18,7 @@
           <van-col
             span="12"
             class="left"
-          >总余额</van-col>
+          >账户余额</van-col>
           <van-col
             span="12"
             class="right"
@@ -56,6 +56,29 @@
             <span class="m-r_1 blue">{{cashAct.frozenAmt}}</span>元
           </van-col>
         </van-row>
+      </c-panel>
+      <div class="grap"></div>
+      <c-panel
+        padding=".3rem .5rem"
+        margin="0 0 1px"
+        shadow="0 1px 1px #F1F6F8"
+      >
+        <div class="flex row-between">
+          <span class="bold">账单明细</span>
+          <div class="flex col-center">
+            <span :class="{
+                sm: true,
+                'm-r_1': true,
+                red: includeFrozen,
+                'light-grey': !includeFrozen
+            }">显示冻结</span>
+            <van-switch
+              v-model="includeFrozen"
+              size=".36rem"
+              @change="changeIncludeFrozen"
+            />
+          </div>
+        </div>
       </c-panel>
     </van-sticky>
 
@@ -109,6 +132,7 @@
     components: { cPanel },
     data() {
       return {
+        includeFrozen: false,
         cashAct: {},
         refreshing: false,
         loading: false,
@@ -135,6 +159,7 @@
         let { cur, size, cashAct } = this
         api.user.actDetails({
           actId: cashAct.id,
+          includeFrozen: this.includeFrozen,
           cur,
           size
         }).then(vo => {
@@ -156,6 +181,10 @@
         this.finished = false
         this.cur = 1
         this.load()
+      },
+      changeIncludeFrozen() {
+        this.refreshing = true
+        this.refresh()
       }
     }
   }

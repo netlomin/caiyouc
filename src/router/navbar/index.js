@@ -24,7 +24,7 @@ export default [{
     name: 'ActDetails',
     component: () => import('@/views/user/act-details'),
     meta: {
-      title: '账单明细',
+      title: '我的账本',
       keepAlive: false
     }
   }, {

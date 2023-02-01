@@ -74,7 +74,7 @@
         </div>
       </van-cell>
       <van-cell
-        title="账单明细"
+        title="我的账本"
         :to="{name:'ActDetails'}"
         is-link
       >
