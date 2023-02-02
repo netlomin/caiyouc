@@ -101,7 +101,7 @@
             <van-icon
               :size=".8*rem"
               :name="item.amt>0?'gold-coin':'gold-coin-o'"
-              :color="item.keepType>=200?'#66F':'#F66'"
+              :color="item.keepType>=100?'#66F':'#F66'"
             />
           </div>
           <template #title>
@@ -112,8 +112,8 @@
           </template>
           <div>
             <span :class="{
-              'red':item.keepType<200,
-              'blue':item.keepType>=200,
+              'red':item.keepType<100,
+              'blue':item.keepType>=100,
               'm-r_1':true
             }">{{item.amt}}</span>
             <span>元</span>
