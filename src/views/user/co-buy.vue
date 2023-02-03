@@ -167,12 +167,12 @@
           if (vo.amt < amt0) {
             this.$dialog.alert({
               title: '提示',
-              message: '余额不足，余额：' + vo.amt + '元！',
+              message: '余额不足，余额：<b class="red">' + vo.amt + '</b>元！',
             }).then(() => {})
           } else {
             this.$dialog.confirm({
               title: '提示',
-              message: '总支付金额：' + amt0 + '元，确认提交合买！',
+              message: '总支付金额：<b class="red">' + amt0 + '</b>元，确认提交合买！',
             }).then((action) => {
               let cp = this.play.cp
               api.lot.issue({ cp }).then(vo => {
