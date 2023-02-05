@@ -74,10 +74,7 @@
           </div>
         </van-cell>
       </van-list>
-      <van-empty
-        v-else
-        description="暂无合买"
-      />
+      <van-empty v-else />
     </van-pull-refresh>
   </div>
 </template>

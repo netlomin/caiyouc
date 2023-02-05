@@ -8,6 +8,7 @@
       v-if="list&&list.length"
       v-model="loading"
       :finished="finished"
+      finished-text="已经到底了～"
       @load="load"
     >
       <van-cell-group
@@ -92,12 +93,8 @@
           </template>
         </van-cell>
       </van-cell-group>
-      <van-divider>没有更多合买了</van-divider>
     </van-list>
-    <van-empty
-      v-else
-      description="暂无合买方案"
-    />
+    <van-empty v-else />
   </van-pull-refresh>
 </template>
 
