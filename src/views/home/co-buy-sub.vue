@@ -138,7 +138,7 @@
             <span>】</span>
           </div>
           <div
-            v-if="coBuy.showTicket"
+            v-if="_showTicket"
             slot="right-icon"
             class="cell-head grey"
             @click="showTicket"
@@ -279,7 +279,8 @@
         return this.cnt == 0
       },
       _subable() {
-        return this.coBuy && this.coBuy.remainTime > 0 && this.coBuy.totalCnt > this.coBuy.soldCnt
+        return this.coBuy && this.coBuy.status < 100 && this.coBuy.remainTime > 0 && this.coBuy.totalCnt > this.coBuy
+          .soldCnt
       },
       _showPick() {
         let userId = this.$store.getters.userId
@@ -289,6 +290,10 @@
         if (dayjs(this.coBuy.stopTime).diff(dayjs()) <= 0) return true
         if (this.coBuy.visibility == 1 && this.coBuy.subs.some(s => s.userId == userId)) return true
         return false
+      },
+      _showTicket() {
+        let userId = this.$store.getters.userId
+        return this.coBuy.showTicket && this._showPick
       }
     },
     created() {

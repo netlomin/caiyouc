@@ -64,11 +64,11 @@
             <div
               v-if="buy.status==130"
               class="red"
-            >奖金{{_.round(buy.awardAmt*buy.cnt/buy.totalCnt, 2)}}元</div>
+            >{{'奖金 '+_.round(buy.awardAmt, 2)+' 元'}}</div>
             <div
               v-if="buy.status==30"
               class="red"
-            >中奖{{_.round(buy.prizeAmt*buy.cnt/buy.totalCnt, 2)}}元</div>
+            >{{'中奖 '+_.round(buy.prizeAmt, 2)+' 元'}}</div>
             <div v-else>{{buy.statusDesc}}</div>
             <div>{{buy.amt+' 元'}}</div>
           </div>
