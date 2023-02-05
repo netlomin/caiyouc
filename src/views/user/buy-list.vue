@@ -64,9 +64,9 @@
             <div
               v-if="buy.status==130"
               class="red"
-            >{{'奖金 '+_.round(buy.awardAmt, 2)+' 元'}}</div>
+            >{{'派奖 '+_.round(buy.awardAmt, 2)+' 元'}}</div>
             <div
-              v-if="buy.status==30"
+              v-else-if="buy.status==30"
               class="red"
             >{{'中奖 '+_.round(buy.prizeAmt, 2)+' 元'}}</div>
             <div v-else>{{buy.statusDesc}}</div>
