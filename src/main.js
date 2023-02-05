@@ -37,7 +37,6 @@ Vue.config.productionTip = !currentEnv.DEBUG
 
 let JSONbig = require('json-bigint')({ storeAsString: true })
 window.JSON = JSONbig
-Vue.prototype.$notify.setDefaultOptions({ color: '#FFF', background: $c.themeColor })
 const rem = screen.width / 10
 const px = 10 / screen.width
 

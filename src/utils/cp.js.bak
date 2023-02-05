@@ -34,62 +34,66 @@ const CP = {
   FC3D: { ico: 'ssq', col: 5, color: '#FF88FF', colors: COLOR_FC3D }
 }
 
-const cpSetArea = (cp, code, index) => {
-  let o = {}
-  o.cp = cp, o.code = code, o.index = index
-  o.codesList = []
-  let arr = code.split(SIGN.caret)
-  if (arr.length == 2) {
-    o.codesList.push(arr[0].split(SIGN.comma))
-    o.codesList.push(arr[1].split(SIGN.comma))
-  } else {
-    o.codesList.push([])
-    o.codesList.push(arr[0].split(SIGN.comma))
+class CpSetArea {
+
+  constructor(cp, code, index) {
+    this.cp = cp, this.code = code, this.index = index
+    this.codesList = []
+    let arr = code.split(SIGN.caret)
+    if (arr.length == 2) {
+      this.codesList.push(arr[0].split(SIGN.comma))
+      this.codesList.push(arr[1].split(SIGN.comma))
+    } else {
+      this.codesList.push([])
+      this.codesList.push(arr[0].split(SIGN.comma))
+    }
   }
-  o.draw = (area) => {
-    _vm.$set(o, 'drawCodes', area.codesList[1])
+
+  draw(area) {
+    _vm.$set(this, 'drawCodes', area.codesList[1])
+    console.log(this)
   }
-  o.hit = (code) => {
-    return o.drawCodes && o.drawCodes.includes(code)
+
+  hit(code) {
+    return this.drawCodes && this.drawCodes.includes(code)
   }
-  o.color = (j) => {
-    return CP[o.cp].colors[o.index][j]
+
+  color(j) {
+    return CP[this.cp].colors[this.index][j]
   }
-  return o
 }
 
-const cpSet = (cp, code) => {
-  let o = {}
-  o.cp = cp, o.code = code
-  let arr = code.split(SIGN.star)
-  o.multiple = arr.length == 2 ? parseInt(arr[1]) : 1
-  arr = arr[0].split(SIGN.at)
-  o.play = arr.length == 2 ? parseInt(arr[1]) : 1
-  arr = arr[0].split(SIGN.bar)
-  o.areas = arr.map((c, i) => cpSetArea(cp, c, i))
-  o.draw = (set) => {
-    o.areas.forEach((v, i) => { v.draw(set.areas[i]) })
-  }
-  return o
-}
+class CpSet {
 
-const cpSets = (cp, code) => {
-  return code ? code.split(SIGN.and).map(c => cpSet(cp, c)) : []
+  constructor(cp, code) {
+    this.cp = cp, this.code = code
+    let arr = code.split(SIGN.star)
+    this.multiple = arr.length == 2 ? parseInt(arr[1]) : 1
+    arr = arr[0].split(SIGN.at)
+    this.play = arr.length == 2 ? parseInt(arr[1]) : 1
+    arr = arr[0].split(SIGN.bar)
+    this.areas = arr.map((c, i) => new CpSetArea(cp, c, i))
+  }
+
+  draw(set) {
+    this.areas.forEach((v, i) => { v.draw(set.areas[i]) })
+  }
 }
 
 const enhance = (o) => {
   if (!o || o.enhance) return
   o.enhance = true
+
   Object.defineProperties(o, {
-    sets: {
+    "sets": {
       get: function() {
         if (!this._sets) {
-          _vm.$set(this, '_sets', cpSets(this.cp, this.code))
+          _vm.$set(this, '_sets', new CpSet((this.cp, this.code))
         }
         return this._sets
       }
     },
-    set: {
+    "set": {
       get: function() {
         let sets = this.sets
         return sets && sets.length ? sets[0] : null

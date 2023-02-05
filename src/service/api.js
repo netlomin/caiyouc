@@ -83,6 +83,7 @@ export default {
   lot: {
     issue: (params) => apiInstance.post('lot/issue', params),
     plays: (params) => apiInstance.post('lot/plays', params),
+    play: (params) => apiInstance.post('lot/play', params),
     trend: (params) => apiInstance.post('lot/trend', params),
     draws: (params) => apiInstance.post('lot/draws', params),
     stat: (params) => apiInstance.post('lot/stat', params)

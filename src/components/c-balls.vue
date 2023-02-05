@@ -27,11 +27,6 @@
       areas: { type: Array, default: () => [] },
       size: { type: String, default: 'md' },
       type: { type: String, default: '' }
-    },
-    watch: {
-      areas(val, oVal) {
-        console.log(val)
-      }
     }
   }
 </script>

@@ -8,24 +8,34 @@
       <van-cell>
         <div
           slot="title"
-          class="cell-body"
+          class="cell-body flex col-center"
         >
           <van-icon
             :name="cp.ico"
             class-prefix="cy"
             :color="cp.color"
-            :size="rem"
+            :size=".88*rem"
           />
-          <span class="m-l-10">
-            <b>{{buy.cpName}}</b><br />
-            <span class="sm grey">第{{buy.issue}}期</span>
-          </span>
+          <div class="m-l-8">
+            <b>{{buy.cpName}}</b>
+            <div class="sm grey">第{{buy.issue}}期</div>
+          </div>
         </div>
         <div
           slot="right-icon"
           class="cell-body"
         >
-          <span class="grey">{{buy.statusDesc}}</span>
+          <div>
+            <div class="right grey">{{buy.statusDesc}}</div>
+            <div
+              v-if="buy.status==30"
+              class="right sm red"
+            >中奖{{_.round(buy.prizeAmt, 2)}}元</div>
+            <div
+              v-if="buy.status==130"
+              class="right sm red"
+            >奖金{{_.round(buy.awardAmt, 2)}}元</div>
+          </div>
         </div>
       </van-cell>
       <van-cell>
@@ -37,9 +47,12 @@
             >单号</van-col>
             <van-col
               span="22"
-              class="p-tb-4"
+              class="p-tb-4 flex row-between"
             >
               <b class="m-l-6">{{buy.id}}</b>
+              <div>
+                <a @click="cpBuyId">[复制]</a>
+              </div>
             </van-col>
           </van-row>
           <van-row>
@@ -76,10 +89,12 @@
     <van-cell-group :border="false">
       <van-cell :is-link="buy.showTicket">
         <div
-          class="cell-head"
           slot="title"
+          class="cell-head"
         >
-          <span class="grey">选号信息</span>
+          <b>玩法【</b>
+          <b class="red">{{play.name}}</b>
+          <b>】</b>
         </div>
         <div
           v-if="buy.showTicket"
@@ -131,13 +146,15 @@
     data() {
       return {
         buy: null,
-        draw: null
+        draw: null,
+        play: {}
       }
     },
     created() {
       let id = this.$route.params.id
       api.cp.buy({ id }).then(vo => {
         $cp.enhance(vo)
+        this.buy = vo
         api.lot.draws({ cp: vo.cp, endIssue: vo.issue, startIssue: vo.issue }).then(draws => {
           if (draws.length) {
             let draw = draws[0]
@@ -145,7 +162,10 @@
             this.draw = draw
             vo.draw(draw)
           }
-          this.buy = vo
+        }).catch(api.catch)
+
+        api.lot.play({ cp: vo.cp, issue: vo.issue, play: vo.play }).then(play => {
+          this.play = play
         }).catch(api.catch)
       }).catch(api.catch)
     },
@@ -170,6 +190,10 @@
       },
       showTicket() {
         this.$router.push({ name: "TicketList", params: { buyId: this.buy.id } })
+      },
+      cpBuyId() {
+        this.copyText(this.buy.id)
+        this.$notify({ message: '复制成功', type: 'success' })
       }
     }
   }
@@ -198,6 +222,7 @@
   .cell-body {
     padding: .2rem .4rem;
     border-bottom: 1px solid #EEE;
+    line-height: 1.5;
   }
 
   .cell-foot {
@@ -222,5 +247,11 @@
 
   .pick-set {
     padding: .16rem 0;
+  }
+</style>
+
+<style>
+  .van-notify {
+    top: 45px;
   }
 </style>

@@ -1,4 +1,3 @@
-<!-- home -->
 <template>
   <div>
     <div
@@ -10,24 +9,34 @@
         <van-cell>
           <div
             slot="title"
-            class="cell-body"
+            class="cell-body flex col-center"
           >
             <van-icon
               :name="cp.ico"
               class-prefix="cy"
               :color="cp.color"
-              :size=".8*rem"
+              :size=".88*rem"
             />
-            <span class="m-l-8">
+            <div class="m-l-8">
               <b>{{coBuy.cpName}}</b>
-              <span class="m-l-2 sm grey">第{{coBuy.issue}}期</span>
-            </span>
+              <div class="sm grey">第{{coBuy.issue}}期</div>
+            </div>
           </div>
           <div
             slot="right-icon"
             class="cell-body"
           >
-            <span class="grey">{{coBuy.statusDesc}}</span>
+            <div>
+              <div class="right grey">{{coBuy.statusDesc}}</div>
+              <div
+                v-if="coBuy.status==30"
+                class="right sm red"
+              >中奖{{_.round(coBuy.prizeAmt*coBuy.subCnt/coBuy.totalCnt, 2)}}元</div>
+              <div
+                v-if="coBuy.status==130"
+                class="right sm red"
+              >奖金{{_.round(coBuy.awardAmt*coBuy.subCnt/coBuy.totalCnt, 2)}}元</div>
+            </div>
           </div>
         </van-cell>
         <van-cell>
@@ -67,10 +76,8 @@
         <van-cell>
           <div
             slot="title"
-            class="cell-head"
-          >
-            <span class="grey">基本信息</span>
-          </div>
+            class="cell-head grey"
+          >订单信息</div>
         </van-cell>
         <van-cell>
           <div class="cell-head grey">
@@ -81,9 +88,12 @@
               >单号</van-col>
               <van-col
                 span="22"
-                class="p-tb-4"
+                class="p-tb-4 flex row-between"
               >
                 <b class="m-l-6">{{coBuy.id}}</b>
+                <div>
+                  <a @click="cpBuyId">[复制]</a>
+                </div>
               </van-col>
             </van-row>
             <van-row>
@@ -121,9 +131,11 @@
         <van-cell :is-link="coBuy.showTicket">
           <div
             slot="title"
-            class="cell-head"
+            class="cell-head grey"
           >
-            <span class="grey">选号信息</span>
+            <span>玩法：{{coBuy.cpName}}【</span>
+            <span class="red">{{play.name}}</span>
+            <span>】</span>
           </div>
           <div
             v-if="coBuy.showTicket"
@@ -159,7 +171,7 @@
           <div
             v-else
             class="tips"
-          > 
+          >
             {{coBuy.tips}}
           </div>
         </van-cell>
@@ -171,7 +183,7 @@
             class="cell-head"
             slot="title"
           >
-            <span class="grey">购买信息</span>
+            <span class="grey">认购信息</span>
           </div>
           <template #label>
             <div class="cell-body">
@@ -252,6 +264,7 @@
         ],
         coBuy: null,
         draw: null,
+        play: {},
         cnt: 0
       }
     },
@@ -268,13 +281,13 @@
       _subable() {
         return this.coBuy && this.coBuy.remainTime > 0 && this.coBuy.totalCnt > this.coBuy.soldCnt
       },
-      _showPick(){
+      _showPick() {
         let userId = this.$store.getters.userId
-        if(!this.coBuy) return false
-        if(this.coBuy.userId == this.$store.getters.userId) return true
-        if(this.coBuy.visibility == 0) return true
-        if(dayjs(this.coBuy.stopTime).diff(dayjs())<=0) return true
-        if(this.coBuy.visibility == 1 && this.coBuy.subs.some(s=>s.userId==userId)) return true
+        if (!this.coBuy) return false
+        if (this.coBuy.userId == this.$store.getters.userId) return true
+        if (this.coBuy.visibility == 0) return true
+        if (dayjs(this.coBuy.stopTime).diff(dayjs()) <= 0) return true
+        if (this.coBuy.visibility == 1 && this.coBuy.subs.some(s => s.userId == userId)) return true
         return false
       }
     },
@@ -293,6 +306,15 @@
         ]
         vo.tips = vo.visibility == 0 ? '' : vo.visibility == 1 ? '参与者可见' : '停售后可见'
         $cp.enhance(vo)
+        this.coBuy = vo
+
+        api.lot.play({
+          cp: vo.cp,
+          issue: vo.issue,
+          play: vo.play
+        }).then(play => {
+          this.play = play
+        }).catch(api.catch)
 
         api.cp.buySubs({ buyId: id }).then(subs => {
           subs.forEach(sub => {
@@ -300,6 +322,12 @@
             sub.amt = sub.cnt
           })
           this.$set(vo, 'subs', subs)
+
+          let userId = this.$store.getters.userId
+          this.$set(vo, 'subCnt', subs.reduce((prev, cur) => {
+            prev = prev.cnt ? prev.cnt : prev
+            return userId == cur.userId ? prev + cur.cnt : prev
+          }))
         }).catch(api.catch)
 
         api.lot.draws({ cp: vo.cp, endIssue: vo.issue, startIssue: vo.issue }).then(draws => {
@@ -309,7 +337,6 @@
             this.draw = draw
             vo.draw(draw)
           }
-          this.coBuy = vo
         }).catch(api.catch)
       }).catch(api.catch)
     },
@@ -322,6 +349,10 @@
       },
       showTicket() {
         this.$router.push({ name: "TicketList", params: { buyId: this.coBuy.id } })
+      },
+      cpBuyId() {
+        this.copyText(this.coBuy.id)
+        this.$notify({ message: '复制成功', type: 'success' })
       }
     }
   }
@@ -351,6 +382,7 @@
   .cell-body {
     padding: .2rem .4rem;
     border-bottom: 1px solid #EEE;
+    line-height: 1.5;
   }
 
   .cell-foot {
@@ -375,5 +407,11 @@
 
   .pick-set {
     padding: .16rem 0;
+  }
+</style>
+
+<style>
+  .van-notify {
+    top: 45px;
   }
 </style>
