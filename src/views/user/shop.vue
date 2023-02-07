@@ -42,7 +42,7 @@
                   name="phone-o"
                   :size=".5*rem"
                 />
-                <span class="grey">{{shop.mobile}}</span>
+                <u class="grey">{{shop.mobile}}</u>
               </a>
             </div>
             <div>
@@ -50,6 +50,7 @@
                   name="fuzhi"
                   class-prefix="cy"
                   :size=".5*rem"
+                  color="#1A8"
                   @click="clickCopy(shop.mobile)"
                 />
             </div>
@@ -65,9 +66,25 @@
           </template>
         </van-field>
         <van-field label="店主手机">
-          <template #input>
-            <span class="grey">{{shop.ownerMobile}}</span>
-          </template>
+          <div slot="input" class="w-10 flex row-between">
+            <div>
+              <a :href="'tel:'+shop.ownerMobile">
+                <van-icon
+                  name="phone-o"
+                  :size=".5*rem"
+                />
+                <u class="grey">{{shop.ownerMobile}}</u>
+              </a>
+            </div>
+            <div>
+                <van-icon
+                  name="fuzhi"
+                  class-prefix="cy"
+                  :size=".5*rem"
+                  color="#1A8"
+                  @click="clickCopy(shop.mobile)"
+                />
+            </div>
         </van-field>
         <van-field label="店主身份证">
           <template #input>
