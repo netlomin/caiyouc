@@ -23,7 +23,7 @@
           <div slot="input" class="flex row-between">
             <div class="grey">{{shop.wechat}}</div>
             <div>
-              <a href="weixin://dl/business/?ticket=ta428dhj739hg3efe6e">
+              <a href="wechat://">
                 <van-icon
                   name="weixin"
                   class-prefix="cy"
