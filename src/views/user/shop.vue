@@ -20,15 +20,15 @@
           </template>
         </van-field>
         <van-field label="微信">
-          <div slot="input" class="flex row-between">
+          <div slot="input" class="w-10 flex row-between">
             <div class="grey">{{shop.wechat}}</div>
             <div>
-              <a href="wechat://">
+              <a href="wechat://" @click="copyText(shop.wechat)">
                 <van-icon
                   name="weixin"
                   class-prefix="cy"
                   color="#1A1"
-                  :size=".28*rem"
+                  :size=".36*rem"
                 />
               </a>
             </div>
