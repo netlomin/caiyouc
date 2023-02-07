@@ -27,7 +27,7 @@
                 <van-icon
                   name="weixin"
                   class-prefix="cy"
-                  :color="#1A1"
+                  color="#1A1"
                   :size=".28*rem"
                 />
               </a>
