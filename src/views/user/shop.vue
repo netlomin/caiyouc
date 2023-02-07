@@ -36,24 +36,22 @@
         </van-field>
         <van-field label="联系方式">
           <div slot="input" class="w-10 flex row-between">
-            <div class="grey">
+            <div>
               <a :href="'tel:'+shop.mobile">
                 <van-icon
-                  name="phone-0"
-                  color="grey"
+                  name="phone-o"
                   :size=".5*rem"
                 />
-                <span>{{shop.mobile}}</span>
+                <span class="grey">{{shop.mobile}}</span>
               </a>
             </div>
             <div>
-              <a @click="clickCopy(shop.mobile)">
                 <van-icon
                   name="fuzhi"
                   class-prefix="cy"
                   :size=".5*rem"
+                  @click="clickCopy(shop.mobile)"
                 />
-              </a>
             </div>
         </van-field>
         <van-field label="地址">
