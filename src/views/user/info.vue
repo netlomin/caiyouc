@@ -5,7 +5,7 @@
         :src="user.avatarUrl"
         :size="2.6*rem"
         :style="css.avatar"
-      >{{firstChar(user.realName)}}</a-avatar>
+      >{{firstChar(user.nickName)}}</a-avatar>
       <a-upload
         class="m-t-8"
         list-type="picture"
