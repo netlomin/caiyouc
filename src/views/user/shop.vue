@@ -20,9 +20,19 @@
           </template>
         </van-field>
         <van-field label="微信">
-          <template #input>
-            <span class="grey">{{shop.wechat}}</span>
-          </template>
+          <div slot="input" class="flex row-between">
+            <div class="grey">{{shop.wechat}}</div>
+            <div>
+              <a href="weixin://dl/business/?ticket=ta428dhj739hg3efe6e">
+                <van-icon
+                  name="weixin"
+                  class-prefix="cy"
+                  :color="#1A1"
+                  :size=".28*rem"
+                />
+              </a>
+            </div>
+          </div>
         </van-field>
         <van-field label="联系方式">
           <template #input>

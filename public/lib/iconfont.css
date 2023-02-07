@@ -11,6 +11,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+.cy-weixin:before {
+  content: "\e8bb";
+}
+
+.cy-fuzhi:before {
+  content: "\e64b";
+}
+
 .cy-zhuanqian:before {
   content: "\e63d";
 }
