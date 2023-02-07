@@ -35,9 +35,26 @@
           </div>
         </van-field>
         <van-field label="联系方式">
-          <template #input>
-            <span class="grey">{{shop.mobile}}</span>
-          </template>
+          <div slot="input" class="w-10 flex row-between">
+            <div class="grey">
+              <a :href="'tel:'+shop.mobile">
+                <van-icon
+                  name="phone-0"
+                  color="grey"
+                  :size=".5*rem"
+                />
+                <span>{{shop.mobile}}</span>
+              </a>
+            </div>
+            <div>
+              <a @click="clickCopy(shop.mobile)">
+                <van-icon
+                  name="fuzhi"
+                  class-prefix="cy"
+                  :size=".5*rem"
+                />
+              </a>
+            </div>
         </van-field>
         <van-field label="地址">
           <template #input>
@@ -85,7 +102,17 @@
         api.user.shop({}).then(vo => {
           this.shop = vo
         }).catch(api.catch)
+      },
+      clickCopy(txt){
+        this.copyText(txt)
+        this.$notify({ message: '复制成功！', background: '#1F1' })
       }
     }
   }
 </script>
+
+<style>
+  .van-notify {
+    top: 45px;
+  }
+</style>
