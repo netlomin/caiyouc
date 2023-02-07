@@ -28,7 +28,7 @@
                   name="weixin"
                   class-prefix="cy"
                   color="#1A1"
-                  :size=".5*rem"
+                  :size=".4*rem"
                 />
               </a>
             </div>
@@ -40,7 +40,7 @@
               <a :href="'tel:'+shop.mobile">
                 <van-icon
                   name="phone-o"
-                  :size=".5*rem"
+                  :size=".4*rem"
                 />
                 <u class="grey">{{shop.mobile}}</u>
               </a>
@@ -49,7 +49,7 @@
                 <van-icon
                   name="fuzhi"
                   class-prefix="cy"
-                  :size=".5*rem"
+                  :size=".4*rem"
                   color="#1A8"
                   @click="clickCopy(shop.mobile)"
                 />
@@ -71,7 +71,7 @@
               <a :href="'tel:'+shop.ownerMobile">
                 <van-icon
                   name="phone-o"
-                  :size=".5*rem"
+                  :size=".4*rem"
                 />
                 <u class="grey">{{shop.ownerMobile}}</u>
               </a>
@@ -80,7 +80,7 @@
                 <van-icon
                   name="fuzhi"
                   class-prefix="cy"
-                  :size=".5*rem"
+                  :size=".4*rem"
                   color="#1A8"
                   @click="clickCopy(shop.mobile)"
                 />
