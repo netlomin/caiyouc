@@ -28,7 +28,7 @@
                   name="weixin"
                   class-prefix="cy"
                   color="#1A1"
-                  :size=".36*rem"
+                  :size=".5*rem"
                 />
               </a>
             </div>
