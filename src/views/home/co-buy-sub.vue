@@ -29,11 +29,11 @@
             <div>
               <div class="right grey">{{coBuy.statusDesc}}</div>
               <div
-                v-if="coBuy.status==30"
+                v-if="coBuy.status==30 && coBuy.subCnt"
                 class="right sm red"
               >中奖{{_.round(coBuy.prizeAmt*coBuy.subCnt/coBuy.totalCnt,2)}}元</div>
               <div
-                v-if="coBuy.status==130"
+                v-if="coBuy.status==130 && coBuy.subCnt"
                 class="right sm red"
               >奖金{{_.round(coBuy.awardAmt*coBuy.subCnt/coBuy.totalCnt,2)}}元</div>
             </div>
@@ -329,10 +329,7 @@
           this.$set(vo, 'subs', subs)
 
           let userId = this.$store.getters.userId
-          this.$set(vo, 'subCnt', subs.filter((e) => e.userId == userId).reduce((prev, cur) => {
-            prev = typeof prev == 'number' ? prev : 0
-            return prev + cur.cnt
-          }))
+          this.$set(vo, 'subCnt', subs.filter((e) => e.userId == userId).reduce((prev, cur) => prev + cur.cnt, 0))
         }).catch(api.catch)
 
         api.lot.draws({ cp: vo.cp, endIssue: vo.issue, startIssue: vo.issue }).then(draws => {
