@@ -10,7 +10,7 @@ import store from './store'
 import _ from 'lodash'
 import util from './utils/util'
 import dayjs from 'dayjs'
-import eruda from 'eruda'
+// import eruda from 'eruda'
 import mixin from './utils/mixin'
 import api from '@/service/api'
 
@@ -32,7 +32,7 @@ const currentEnv = _.cloneDeep(process.env)
 // if (currentEnv.DEBUG) {
 //   eruda.init()
 // }
-eruda.init()
+// eruda.init()
 Vue.config.devtools = currentEnv.DEBUG
 Vue.config.productionTip = !currentEnv.DEBUG
 

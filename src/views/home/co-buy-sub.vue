@@ -329,11 +329,10 @@
           this.$set(vo, 'subs', subs)
 
           let userId = this.$store.getters.userId
-          this.$set(vo, 'subCnt', subs.reduce((prev, cur) => {
-            prev = prev.cnt ? prev.cnt : prev
-            return userId == cur.userId ? prev + cur.cnt : prev
+          this.$set(vo, 'subCnt', subs.filter((e) => e.userId == userId).reduce((prev, cur) => {
+            prev = typeof prev == 'number' ? prev : 0
+            return prev + cur.cnt
           }))
-          console.log(vo)
         }).catch(api.catch)
 
         api.lot.draws({ cp: vo.cp, endIssue: vo.issue, startIssue: vo.issue }).then(draws => {
