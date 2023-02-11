@@ -31,11 +31,11 @@
               <div
                 v-if="coBuy.status==30"
                 class="right sm red"
-              >中奖{{_.round(coBuy.prizeAmt*coBuy.subCnt/coBuy.totalCnt,2)}}元</div>
+              >中奖{{_.round(coBuy.prizeAmt*coBuy.subCnt/coBuy.actualAmt/2,2)}}元</div>
               <div
                 v-if="coBuy.status==130"
                 class="right sm red"
-              >奖金{{_.round(coBuy.awardAmt*coBuy.subCnt/coBuy.totalCnt,2)}}元</div>
+              >奖金{{_.round(coBuy.awardAmt*coBuy.subCnt/coBuy.actualAmt/2,2)}}元</div>
             </div>
           </div>
         </van-cell>
@@ -329,7 +329,7 @@
           this.$set(vo, 'subs', subs)
 
           let userId = this.$store.getters.userId
-          this.$set(vo, 'subCnt', subs.reduce((prev, cur) => {
+          this.$set(vo, 'subAmt', subs.reduce((prev, cur) => {
             prev = prev.cnt ? prev.cnt : prev
             return userId == cur.userId ? prev + cur.cnt : prev
           }))
