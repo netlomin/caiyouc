@@ -27,11 +27,12 @@ import 'lib-flexible/flexible'
 import './filters'
 
 const currentEnv = _.cloneDeep(process.env)
-currentEnv.DEBUG = currentEnv.VUE_APP_DEBUG === 'true' || mixin.methods.urlParam('DEBUG')
 // 开发环境配置调试
-if (currentEnv.DEBUG) {
-  eruda.init()
-}
+// currentEnv.DEBUG = currentEnv.VUE_APP_DEBUG === 'true' || mixin.methods.urlParam('DEBUG')
+// if (currentEnv.DEBUG) {
+//   eruda.init()
+// }
+eruda.init()
 Vue.config.devtools = currentEnv.DEBUG
 Vue.config.productionTip = !currentEnv.DEBUG
 

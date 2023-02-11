@@ -50,7 +50,7 @@
                   v-model="check"
                   shape="square"
                 >
-                  <span class="grey">请勾选同意<a>《用户协议》</a></span>
+                  <span class="grey">请勾选同意<a class="red">《用户协议》</a></span>
                 </van-checkbox>
               </template>
             </van-field>
@@ -96,14 +96,14 @@
             </van-field>
             <van-field
               name="check"
-              :rules="[{ required: true, message: '请勾选同意《用户注册协议》' }]"
+              :rules="[{ required: true, message: '请勾选同意《用户协议》' }]"
             >
               <template #input>
                 <van-checkbox
                   v-model="check"
                   shape="square"
                 >
-                  <span class="grey">请勾选同意<a class="red">《用户注册协议》</a></span>
+                  <span class="grey">请勾选同意<a class="red">《用户协议》</a></span>
                 </van-checkbox>
               </template>
             </van-field>
