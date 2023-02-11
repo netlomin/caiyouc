@@ -333,6 +333,7 @@
             prev = prev.cnt ? prev.cnt : prev
             return userId == cur.userId ? prev + cur.cnt : prev
           }))
+          console.log(vo)
         }).catch(api.catch)
 
         api.lot.draws({ cp: vo.cp, endIssue: vo.issue, startIssue: vo.issue }).then(draws => {
