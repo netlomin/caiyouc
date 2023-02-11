@@ -54,6 +54,7 @@
                   @click="clickCopy(shop.mobile)"
                 />
             </div>
+          </div>
         </van-field>
         <van-field label="地址">
           <template #input>
@@ -85,6 +86,7 @@
                   @click="clickCopy(shop.mobile)"
                 />
             </div>
+          </div>
         </van-field>
         <van-field label="店主身份证">
           <template #input>

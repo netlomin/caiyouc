@@ -31,11 +31,11 @@
               <div
                 v-if="coBuy.status==30"
                 class="right sm red"
-              >中奖{{_.round(coBuy.prizeAmt*coBuy.subCnt/coBuy.totalCnt, 2)}}元</div>
+              >中奖{{_.round(coBuy.prizeAmt*coBuy.subCnt/coBuy.totalCnt,2)}}元</div>
               <div
                 v-if="coBuy.status==130"
                 class="right sm red"
-              >奖金{{_.round(coBuy.awardAmt*coBuy.subCnt/coBuy.totalCnt, 2)}}元</div>
+              >奖金{{_.round(coBuy.awardAmt*coBuy.subCnt/coBuy.totalCnt,2)}}元</div>
             </div>
           </div>
         </van-cell>
@@ -120,7 +120,7 @@
                   :areas="draw.set.areas"
                   size="sm"
                   type="solid"
-                ></c-balls>
+                />
               </van-col>
             </van-row>
           </div>
@@ -164,7 +164,7 @@
                 <c-balls
                   :areas="set.areas"
                   size="sm"
-                ></c-balls>
+                />
               </van-col>
             </van-row>
           </div>
