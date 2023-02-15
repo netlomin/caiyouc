@@ -44,7 +44,7 @@
             <van-field
               name="check"
               :rules="[{ required: true, message: '请勾选同意《用户协议》' }]"
-              @click="navTo('Agreement')"
+              @click="navTo({name:'Agreement'})"
             >
               <template #input>
                 <van-checkbox
@@ -98,7 +98,7 @@
             <van-field
               name="check"
               :rules="[{ required: true, message: '请勾选同意《用户协议》' }]"
-              @click="navTo('Agreement')"
+              @click="navTo({name:'Agreement'})"
             >
               <template #input>
                 <van-checkbox
