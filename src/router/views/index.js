@@ -15,6 +15,14 @@ export default [{
     keepAlive: false
   }
 }, {
+  path: '/user/agreement',
+  name: 'Agreement',
+  component: () => import('@/views/user/agreement'),
+  meta: {
+    title: '用户协议',
+    keepAlive: false
+  }
+},{
   path: '/user/pick',
   name: 'Pick',
   component: () => import('@/views/user/pick'),
