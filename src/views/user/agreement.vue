@@ -8,14 +8,14 @@
           <a-button
             type="default"
             block
-            @click="clickLogoutBtn"
+            @click="clickNo"
           >不同意</a-button>
         </van-col>
         <van-col span="16" class="p_2">
           <a-button
             type="primary"
             block
-            @click="clickLogoutBtn"
+            @click="clickYes"
           >我已阅读并同意</a-button>
         </van-col>
       </van-row>
@@ -28,8 +28,21 @@
     data() {
       return {}
     },
-    created() {},
-    methods: {}
+    methods: {
+      setAgreen(b) {
+        let pages = getCurrentPages()
+        let prevPage = pages[pages.length - 2]
+        if (prevPage && prevPage.$vm) {
+          prevPage.$vm.check = b
+        }
+      },
+      clickNo() {
+        this.setAgreen(false)
+      },
+      clickYes() {
+        this.setAgreen(true)
+      }
+    }
   }
 </script>
 <style lang="scss" scoped>
