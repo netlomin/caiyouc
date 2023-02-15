@@ -30,11 +30,11 @@
     },
     methods: {
       setAgreen(b) {
-        let pages = getCurrentPages()
-        let prevPage = pages[pages.length - 2]
-        if (prevPage && prevPage.$vm) {
-          prevPage.$vm.check = b
-        }
+        // let pages = getCurrentPages()
+        // let prevPage = pages[pages.length - 2]
+        // if (prevPage && prevPage.$vm) {
+        //   prevPage.$vm.check = b
+        // }
         this.$router.back()
       },
       clickNo() {
