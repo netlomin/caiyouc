@@ -35,6 +35,7 @@
         if (prevPage && prevPage.$vm) {
           prevPage.$vm.check = b
         }
+        this.$router.back()
       },
       clickNo() {
         this.setAgreen(false)
