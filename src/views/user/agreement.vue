@@ -4,14 +4,14 @@
 
     <div class="fixed-bottom">
       <van-row>
-        <van-col span="4">
+        <van-col span="8" class="p_2">
           <a-button
             type="default"
             block
             @click="clickLogoutBtn"
           >不同意</a-button>
         </van-col>
-        <van-col span="8">
+        <van-col span="16" class="p_2">
           <a-button
             type="primary"
             block
