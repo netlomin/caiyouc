@@ -11,7 +11,6 @@
 <script>
   export default {
     name: 'NavBarLayout',
-    components: {},
     data() {
       return {}
     },

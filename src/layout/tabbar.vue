@@ -29,7 +29,6 @@
 <script>
   export default {
     name: 'AppLayout',
-    components: {},
     data() {
       return {
         active: 0,
