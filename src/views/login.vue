@@ -19,7 +19,7 @@
     >
       <van-tabs
         v-model="active"
-        :line-width="2.5*rem"
+        :line-width="3*rem"
       >
         <van-tab title="密码登录">
           <van-form
