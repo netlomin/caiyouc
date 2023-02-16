@@ -50,9 +50,8 @@
                 <van-checkbox
                   v-model="check"
                   shape="square"
-                >
-                  <span class="grey">请勾选同意<a class="red">《用户协议》</a></span>
-                </van-checkbox>
+                />
+                <span class="grey m-l-8">请勾选同意<a class="red">《用户协议》</a></span>
               </template>
             </van-field>
             <van-field>
@@ -104,9 +103,8 @@
                 <van-checkbox
                   v-model="check"
                   shape="square"
-                >
-                  <span class="grey">请勾选同意<a class="red">《用户协议》</a></span>
-                </van-checkbox>
+                />
+                <span class="grey m-l-8">请勾选同意<a class="red">《用户协议》</a></span>
               </template>
             </van-field>
             <van-field>
@@ -140,6 +138,9 @@
         check: false,
         disabled: false
       }
+    },
+    created() {
+      this.$root.$on('agree', value => this.check = value)
     },
     methods: {
       login(params) {
