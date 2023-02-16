@@ -10,7 +10,7 @@ export default [{
     component: () => import('@/views/start'),
     meta: {
       title: '启动页',
-      keepAlive: false
+      keepAlive: true
     }
   }, {
     path: '/login',
@@ -18,7 +18,7 @@ export default [{
     component: () => import('@/views/login'),
     meta: {
       title: '注册登录',
-      keepAlive: false
+      keepAlive: true
     }
   }, {
     path: '/user/agreement',
@@ -26,7 +26,7 @@ export default [{
     component: () => import('@/views/user/agreement'),
     meta: {
       title: '用户协议',
-      keepAlive: false
+      keepAlive: true
     }
   }, {
     path: '/user/pick',
@@ -34,7 +34,7 @@ export default [{
     component: () => import('@/views/user/pick'),
     meta: {
       title: '选号',
-      keepAlive: false
+      keepAlive: true
     }
   }, {
     path: '/user/shop-select',
@@ -42,7 +42,7 @@ export default [{
     component: () => import('@/views/user/shop-select'),
     meta: {
       title: '选择彩店',
-      keepAlive: false
+      keepAlive: true
     }
   }]
 }]
