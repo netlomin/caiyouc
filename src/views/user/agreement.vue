@@ -2,7 +2,7 @@
   <div>
     <van-nav-bar :title="$route.meta.title" fixed placeholder safe-area-inset-top />
 
-    <div class="m_3 m-b_18">
+    <div class="m_5 app-container">
       <p>一、总则</p>
       <p>
         本用户注册协议（以下简称“本协议”）是注册用户（以下简称“用户”）（包括彩民用户、实体彩站用户）接受彩乐产品（包括彩乐圈、彩乐彩站版）和服务时适用的通用条款。因此，请您在注册成为彩乐用户前或使用彩乐的产品和服务前仔细阅读本协议的所有内容。
