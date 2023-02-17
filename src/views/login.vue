@@ -43,7 +43,7 @@
             />
             <van-field
               name="check"
-              :rules="[{ required: true, message: '请勾选同意《用户协议》' }]"
+              :rules="[{ required: true, message: '请阅读并同意《用户协议》' }]"
               @click="navTo({name:'Agreement'})"
             >
               <template #input>
@@ -51,7 +51,7 @@
                   v-model="check"
                   shape="square"
                 />
-                <span class="grey m-l-8">请勾选同意<a class="red">《用户协议》</a></span>
+                <span class="grey m-l-8">请阅读并同意<a class="red">《用户协议》</a></span>
               </template>
             </van-field>
             <van-field>
@@ -96,7 +96,7 @@
             </van-field>
             <van-field
               name="check"
-              :rules="[{ required: true, message: '请勾选同意《用户协议》' }]"
+              :rules="[{ required: true, message: '请阅读并同意《用户协议》' }]"
               @click="navTo({name:'Agreement'})"
             >
               <template #input>
@@ -104,7 +104,7 @@
                   v-model="check"
                   shape="square"
                 />
-                <span class="grey m-l-8">请勾选同意<a class="red">《用户协议》</a></span>
+                <span class="grey m-l-8">请阅读并同意<a class="red">《用户协议》</a></span>
               </template>
             </van-field>
             <van-field>
