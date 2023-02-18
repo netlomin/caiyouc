@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg">
     <van-nav-bar
       v-if="$route.meta.nav"
       :title="$route.meta.title"
@@ -37,3 +37,10 @@
     }
   }
 </script>
+
+<style scoped>
+  .bg {
+    width: 100%;
+    height: 100%;
+  }
+</style>
