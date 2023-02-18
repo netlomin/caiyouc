@@ -3,13 +3,56 @@ import Layout from '@/layout/navbar'
 export default [{
   path: '/',
   component: Layout,
+  redirect: '/start',
   children: [{
+    path: '/start',
+    name: 'Start',
+    component: () => import('@/views/start'),
+    meta: {
+      title: '启动页',
+      keepAlive: true
+    }
+  }, {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/login'),
+    meta: {
+      title: '注册登录',
+      keepAlive: true
+    }
+  }, {
+    path: '/user/pick',
+    name: 'Pick',
+    component: () => import('@/views/user/pick'),
+    meta: {
+      title: '选号',
+      keepAlive: true
+    }
+  }, {
+    path: '/user/shop-select',
+    name: 'ShopSelect',
+    component: () => import('@/views/user/shop-select'),
+    meta: {
+      title: '选择彩站',
+      keepAlive: true
+    }
+  }, {
+    path: '/user/agreement',
+    name: 'Agreement',
+    component: () => import('@/views/user/agreement'),
+    meta: {
+      title: '用户协议',
+      keepAlive: true,
+      nav: true
+    }
+  }, {
     path: '/user/info',
     name: 'UserInfo',
     component: () => import('@/views/user/info'),
     meta: {
       title: '个人信息',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/user/act-withdraw',
@@ -17,7 +60,8 @@ export default [{
     component: () => import('@/views/user/act-withdraw'),
     meta: {
       title: '清账',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/user/act-details',
@@ -25,7 +69,8 @@ export default [{
     component: () => import('@/views/user/act-details'),
     meta: {
       title: '我的账本',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/home/co-buy-sub/:id',
@@ -33,7 +78,8 @@ export default [{
     component: () => import('@/views/home/co-buy-sub'),
     meta: {
       title: '合买详情',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/home/sub-buy-result',
@@ -41,7 +87,8 @@ export default [{
     component: () => import('@/views/home/sub-buy-result'),
     meta: {
       title: '认购结果',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/user/co-buy',
@@ -49,7 +96,8 @@ export default [{
     component: () => import('@/views/user/co-buy'),
     meta: {
       title: '发起合买',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/home/buy-result',
@@ -57,7 +105,8 @@ export default [{
     component: () => import('@/views/user/buy-result'),
     meta: {
       title: '提交结果',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/user/buy-list',
@@ -65,7 +114,8 @@ export default [{
     component: () => import('@/views/user/buy-list'),
     meta: {
       title: '我的彩单',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/user/ticket-list/:buyId',
@@ -73,7 +123,8 @@ export default [{
     component: () => import('@/views/user/ticket-list'),
     meta: {
       title: '彩票列表',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/user/buy-detail/:id',
@@ -81,7 +132,8 @@ export default [{
     component: () => import('@/views/user/buy-detail'),
     meta: {
       title: '自购详情',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/user/cart',
@@ -89,7 +141,8 @@ export default [{
     component: () => import('@/views/user/cart'),
     meta: {
       title: '选号篮',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/user/settings',
@@ -97,7 +150,8 @@ export default [{
     component: () => import('@/views/user/settings'),
     meta: {
       title: '系统',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/user/password',
@@ -105,7 +159,8 @@ export default [{
     component: () => import('@/views/user/password'),
     meta: {
       title: '设置密码',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/user/shop-join',
@@ -113,7 +168,8 @@ export default [{
     component: () => import('@/views/user/shop-join'),
     meta: {
       title: '扫码添加彩站',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }, {
     path: '/user/shop',
@@ -121,7 +177,8 @@ export default [{
     component: () => import('@/views/user/shop'),
     meta: {
       title: '彩站信息',
-      keepAlive: false
+      keepAlive: false,
+      nav: true
     }
   }]
 }]

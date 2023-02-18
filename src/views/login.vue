@@ -66,7 +66,7 @@
           </van-form>
         </van-tab>
 
-        <van-tab title="短信登录">
+        <van-tab title="注册登录">
           <van-form
             @submit="login"
             class="m-t_8"
@@ -84,6 +84,7 @@
               center
               clearable
               placeholder="验证码"
+              :rules="[{ required: true, message: '请输入验证码' }]"
             >
               <template #button>
                 <a-button

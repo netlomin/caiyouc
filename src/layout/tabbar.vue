@@ -18,9 +18,7 @@
           :to="tab.to"
           :icon="tab.icon"
           :key="index"
-        >
-          {{ tab.title }}
-        </van-tabbar-item>
+        >{{ tab.title }}</van-tabbar-item>
       </van-tabbar>
     </div>
   </div>
