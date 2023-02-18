@@ -39,7 +39,7 @@
         this.$router.replace({ name: 'BuyList' })
         // if (!navigator.share) {
         //   this.copyText(text)
-        //   this.$toast({ message: '已复制申购信息，请前往微信联系店主！', position: 'top' })
+        //   this.$toast({ message: '已复制申购信息，请前往微信联系站长！', position: 'top' })
         // } else {
         //   let options = {
         //     url: 'http://www.baidu.com', // 获取当前网站

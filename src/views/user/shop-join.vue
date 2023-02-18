@@ -50,15 +50,15 @@
         <van-field
           v-model="shop.ownerRealName"
           name="ownerRealName"
-          label="店主名"
-          placeholder="店主姓名"
+          label="站长名"
+          placeholder="站长姓名"
           readonly
         />
         <van-field
           v-model="shop.ownerIdCard"
           name="ownerIdCard"
           label="身份证"
-          placeholder="店主身份证"
+          placeholder="站长身份证"
           readonly
         />
       </c-panel>

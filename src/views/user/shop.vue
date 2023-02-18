@@ -61,12 +61,12 @@
             <span class="grey">{{shop.address}}</span>
           </template>
         </van-field>
-        <van-field label="店主姓名">
+        <van-field label="站长姓名">
           <template #input>
             <span class="grey">{{shop.ownerRealName}}</span>
           </template>
         </van-field>
-        <van-field label="店主手机">
+        <van-field label="站长手机">
           <div slot="input" class="w-10 flex row-between">
             <div>
               <a :href="'tel:'+shop.ownerMobile">
@@ -88,7 +88,7 @@
             </div>
           </div>
         </van-field>
-        <van-field label="店主身份证">
+        <van-field label="站长身份证">
           <template #input>
             <span class="grey">{{shop.ownerIdCard}}</span>
           </template>
