@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-nav-bar
-      title="选择彩店"
+      title="选择彩站"
       right-text="前往添加"
       fixed
       placeholder
@@ -55,7 +55,7 @@
           type="primary"
           block
           @click="$router.push({ name: 'JoinShop' })"
-        >前往添加彩店</a-button>
+        >前往添加彩站</a-button>
       </van-empty>
     </van-pull-refresh>
   </div>

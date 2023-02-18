@@ -80,7 +80,7 @@ export default [{
     name: 'BuyDetail',
     component: () => import('@/views/user/buy-detail'),
     meta: {
-      title: '单购详情',
+      title: '自购详情',
       keepAlive: false
     }
   }, {
@@ -112,7 +112,7 @@ export default [{
     name: 'JoinShop',
     component: () => import('@/views/user/shop-join'),
     meta: {
-      title: '扫码添加彩店',
+      title: '扫码添加彩站',
       keepAlive: false
     }
   }, {
@@ -120,7 +120,7 @@ export default [{
     name: 'Shop',
     component: () => import('@/views/user/shop'),
     meta: {
-      title: '彩店信息',
+      title: '彩站信息',
       keepAlive: false
     }
   }]

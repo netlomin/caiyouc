@@ -11,7 +11,7 @@
           name=""
         ></van-tab>
         <van-tab
-          title="单购"
+          title="自购"
           name="1"
         ></van-tab>
         <van-tab

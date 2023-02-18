@@ -2,7 +2,7 @@
   <div>
     <div class="m-t-8">
       <van-cell
-        title="切换彩店"
+        title="切换彩站"
         :to="{name:'ShopSelect'}"
         is-link
       >

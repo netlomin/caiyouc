@@ -41,7 +41,7 @@ export default [{
     name: 'ShopSelect',
     component: () => import('@/views/user/shop-select'),
     meta: {
-      title: '选择彩店',
+      title: '选择彩站',
       keepAlive: true
     }
   }]

@@ -28,8 +28,8 @@
         <van-field
           v-model="shop.name"
           name="name"
-          label="彩店名"
-          placeholder="彩店名"
+          label="彩站名"
+          placeholder="彩站名"
           readonly
           :rules="[{ required: true, message: '请扫一扫店方二维码' }]"
         />
@@ -37,14 +37,14 @@
           v-model="shop.wechat"
           name="wechat"
           label="微信号"
-          placeholder="彩店微信号"
+          placeholder="彩站微信号"
           readonly
         />
         <van-field
           v-model="shop.mobile"
           name="shop.mobile"
           label="手机号"
-          placeholder="彩店联系方式"
+          placeholder="彩站联系方式"
           readonly
         />
         <van-field
@@ -86,7 +86,7 @@
           >
             <van-swipe-item>身份信息是购彩、转账唯一凭证，请确保真实有效。</van-swipe-item>
             <van-swipe-item>身份信息作为凭证，提交后不可更改！</van-swipe-item>
-            <van-swipe-item>身份信息会保存到账号，再次添加彩店可直接使用！</van-swipe-item>
+            <van-swipe-item>身份信息会保存到账号，再次添加彩站可直接使用！</van-swipe-item>
           </van-swipe>
         </van-notice-bar>
         <van-field
@@ -196,10 +196,10 @@
         api.ps.joinShop({
           shopId: this.shop.id,
         }).then(vo => {
-          this.$notify({ message: '添加彩店成功！', background: '#11FF11' })
+          this.$notify({ message: '添加彩站成功！', background: '#11FF11' })
         }).catch(api.catch(e => {
           if (e.code == '606') {
-            this.$dialog.alert({ title: '提示', message: '你已添加过该彩店！' })
+            this.$dialog.alert({ title: '提示', message: '你已添加过该彩站！' })
             return true
           }
           return false
