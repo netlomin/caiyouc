@@ -80,7 +80,7 @@
     },
     created() {
       this.refresh()
-      this.$root.$on('refreshShops')
+      this.$root.$on('refreshShops', this.refresh)
     },
     methods: {
       clickLeft() {
