@@ -197,6 +197,7 @@
           shopId: this.shop.id,
         }).then(vo => {
           this.$notify({ message: '添加彩站成功！', background: '#11FF11' })
+          this.$root.$emit('refreshShops')
           this.$router.back()
         }).catch(api.catch(e => {
           if (e.code == '606') {

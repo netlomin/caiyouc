@@ -2,7 +2,7 @@
   <div>
     <van-nav-bar
       title="选择彩站"
-      right-text="前往添加"
+      right-text="添加彩站"
       fixed
       placeholder
       safe-area-inset-top
@@ -55,7 +55,7 @@
           type="primary"
           block
           @click="$router.push({ name: 'JoinShop' })"
-        >前往添加彩站</a-button>
+        >添加彩站</a-button>
       </van-empty>
     </van-pull-refresh>
   </div>
@@ -80,6 +80,7 @@
     },
     created() {
       this.refresh()
+      this.$root.$on('refreshShops')
     },
     methods: {
       clickLeft() {
