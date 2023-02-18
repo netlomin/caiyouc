@@ -117,7 +117,6 @@
             this.list = []
             this.refreshing = false
           }
-          console.log(this.list)
           let shopId = this.$store.getters.shopId
           vo.forEach(e => e.checked = e.id == shopId)
           this.list = this.list.concat(vo)
@@ -133,6 +132,7 @@
         this.loading = true
         this.finished = false
         this.cur = 1
+        this.refreshing = true
         this.load()
       }
     }
