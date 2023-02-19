@@ -3,7 +3,7 @@
     <van-sticky :offset-top="45">
       <van-notice-bar
         left-icon="volume-o"
-        text="您可以通过微信联系店方转账预存金额。"
+        text="您可以通过微信联系彩站转账预存金额。"
       />
       <c-panel
         padding=".3rem .5rem"

@@ -9,9 +9,9 @@
           @click="navTo({name:'UserInfo'})"
         >{{firstChar(user.nickName)}}</a-avatar>
         <div class="white">
-          <b class="m-l_5 md">{{user.nickName}}</b>
+          <b class="m-l_3 md">{{user.nickName}}</b>
           <div
-            class="shop-bar sm m-t_1 m-l_2"
+            class="shop-bar m-t_1 m-l_2 sm"
             @click="navTo({name:'Shop'})"
           >
             <van-icon
@@ -50,7 +50,7 @@
       :radius="6"
     >
       <van-cell
-        title="选号下单"
+        title="选号预约"
         :to="{name:'Pick'}"
         is-link
       >

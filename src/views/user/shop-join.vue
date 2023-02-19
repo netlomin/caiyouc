@@ -19,11 +19,11 @@
         shadow="1px 1px 6px #F88"
       >
         <div slot="head">
-          <div class="red p_2">店方信息</div>
+          <div class="red p_2">彩站信息</div>
         </div>
         <van-notice-bar
           left-icon="info-o"
-          text="开启摄像头，扫一扫店方二维码可自动获取！"
+          text="开启摄像头，扫一扫彩站二维码可自动获取！"
         />
         <van-field
           v-model="shop.name"
@@ -31,7 +31,7 @@
           label="彩站名"
           placeholder="彩站名"
           readonly
-          :rules="[{ required: true, message: '请扫一扫店方二维码' }]"
+          :rules="[{ required: true, message: '请扫一扫彩站二维码' }]"
         />
         <van-field
           v-model="shop.wechat"

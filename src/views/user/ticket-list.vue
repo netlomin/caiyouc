@@ -13,8 +13,8 @@
         :autoplay="5000"
         :show-indicators="false"
       >
-        <van-swipe-item>请仔细核对彩票，发现问题请及时微信联系店方补票！</van-swipe-item>
-        <van-swipe-item>中奖金额由选号内容计算，店方按照彩票兑奖（税后）金额派奖！</van-swipe-item>
+        <van-swipe-item>请仔细核对彩票，发现问题请及时微信联系彩站补票！</van-swipe-item>
+        <van-swipe-item>中奖金额由选号计算，彩站按照实际出票兑奖金额派奖！</van-swipe-item>
       </van-swipe>
     </van-notice-bar>
     <c-panel v-if="_ticket&&buy">

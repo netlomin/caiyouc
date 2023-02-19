@@ -20,10 +20,16 @@
           </template>
         </van-field>
         <van-field label="微信">
-          <div slot="input" class="w-10 flex row-between">
+          <div
+            slot="input"
+            class="w-10 flex row-between"
+          >
             <div class="grey">{{shop.wechat}}</div>
             <div>
-              <a href="wechat://" @click="copyText(shop.wechat)">
+              <a
+                href="wechat://"
+                @click="copyText(shop.wechat)"
+              >
                 <van-icon
                   name="weixin"
                   class-prefix="cy"
@@ -35,7 +41,10 @@
           </div>
         </van-field>
         <van-field label="联系方式">
-          <div slot="input" class="w-10 flex row-between">
+          <div
+            slot="input"
+            class="w-10 flex row-between"
+          >
             <div>
               <a :href="'tel:'+shop.mobile">
                 <van-icon
@@ -46,13 +55,13 @@
               </a>
             </div>
             <div>
-                <van-icon
-                  name="fuzhi"
-                  class-prefix="cy"
-                  :size=".4*rem"
-                  color="#1A8"
-                  @click="clickCopy(shop.mobile)"
-                />
+              <van-icon
+                name="fuzhi"
+                class-prefix="cy"
+                :size=".4*rem"
+                color="#1A8"
+                @click="clickCopy(shop.mobile)"
+              />
             </div>
           </div>
         </van-field>
@@ -67,7 +76,10 @@
           </template>
         </van-field>
         <van-field label="站长手机">
-          <div slot="input" class="w-10 flex row-between">
+          <div
+            slot="input"
+            class="w-10 flex row-between"
+          >
             <div>
               <a :href="'tel:'+shop.ownerMobile">
                 <van-icon
@@ -78,19 +90,43 @@
               </a>
             </div>
             <div>
-                <van-icon
-                  name="fuzhi"
-                  class-prefix="cy"
-                  :size=".4*rem"
-                  color="#1A8"
-                  @click="clickCopy(shop.mobile)"
-                />
+              <van-icon
+                name="fuzhi"
+                class-prefix="cy"
+                :size=".4*rem"
+                color="#1A8"
+                @click="clickCopy(shop.mobile)"
+              />
             </div>
           </div>
         </van-field>
         <van-field label="站长身份证">
           <template #input>
             <span class="grey">{{shop.ownerIdCard}}</span>
+          </template>
+        </van-field>
+        </van-field>
+        <van-field v-if="shop && shop.fileContractUrls">
+          <template #input>
+            <div>
+              <font>营业执照</font>
+              <div
+                class="flex-center m-t_5"
+                @click="ImagePreview({
+                images: shop.fileContractUrls
+              })"
+              >
+                <van-image
+                  v-for="(item, index) in shop.fileContractUrls"
+                  :key="'img_'+index"
+                  width="3rem"
+                  height="3rem"
+                  fit="contain"
+                  :src="item"
+                  class="ticket-img"
+                />
+              </div>
+            </div>
           </template>
         </van-field>
       </c-panel>
@@ -120,7 +156,7 @@
           this.shop = vo
         }).catch(api.catch)
       },
-      clickCopy(txt){
+      clickCopy(txt) {
         this.copyText(txt)
         this.$notify({ message: '复制成功！', background: '#1F1' })
       }
