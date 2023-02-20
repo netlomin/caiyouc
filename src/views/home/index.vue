@@ -31,7 +31,7 @@
         :autoplay="5000"
         :show-indicators="false"
       >
-        <van-swipe-item>选择附近的实体‘彩’站售彩出票，托管彩票，管理资金。</van-swipe-item>
+        <van-swipe-item>选择熟悉的实体‘彩’站售彩出票，托管彩票，管理资金。</van-swipe-item>
         <van-swipe-item>出票后请认真查验彩票，发现错票请尽快联系彩站处理！</van-swipe-item>
       </van-swipe>
     </van-notice-bar>
@@ -41,7 +41,7 @@
         slot="head"
         class="m-t_1"
       >
-        <div class="p_2 red bg_white">合买列表</div>
+        <div class="p_2 p-tb_4 red bg_white">合买列表</div>
       </div>
       <van-pull-refresh
         v-model="refreshing"
