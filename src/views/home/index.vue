@@ -41,7 +41,7 @@
         slot="head"
         class="m-t_1"
       >
-        <div class="p_2 red bg_white">合买列表</div>
+        <div class="p_2 p-tb_5 red bg_white">合买列表</div>
       </div>
       <van-pull-refresh
         v-model="refreshing"
