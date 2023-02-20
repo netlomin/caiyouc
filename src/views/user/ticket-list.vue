@@ -99,7 +99,7 @@
           </div>
           <van-empty
             v-else
-            description="待出票"
+            :description="_ticket.statusDesc"
           />
         </van-cell>
       </van-cell-group>
