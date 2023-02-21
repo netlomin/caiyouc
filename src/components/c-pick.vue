@@ -47,7 +47,10 @@
               slot="text"
               class="sm center"
             >
-              <div class="light-grey">{{belowText(i)}}</div>
+              <div :class="{
+                'light-grey':area.picks[i]!=2,
+                'dark-red':area.picks[i]==2
+              }">{{belowText(i)}}</div>
             </div>
           </van-grid-item>
         </van-grid>
