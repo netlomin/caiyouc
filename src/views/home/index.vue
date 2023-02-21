@@ -39,9 +39,9 @@
     <c-panel>
       <div
         slot="head"
-        class="m-t_1"
+        class="m-t_1 p_2 p-tb_4 red bg_white"
       >
-        <div class="p_2 p-tb_4 red bg_white">合买列表</div>
+        <b>合买列表</b>
       </div>
       <van-pull-refresh
         v-model="refreshing"
