@@ -12,7 +12,7 @@
       <c-panel
         margin=".5rem .6rem"
         :radius="6"
-        shadow="1px 1px 6px #F88"
+        shadow="1px 1px 6px #F66"
       >
         <van-field label="名称">
           <template #input>

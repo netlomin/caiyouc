@@ -11,7 +11,7 @@
     props: {
       code: { type: [Number, String], default: '0' },
       size: { type: String, default: 'md' },
-      color: { type: String, default: '#FF8888' },
+      color: { type: String, default: '#F66' },
       type: { type: String, default: 'solid' }
     },
     data() { return {} },

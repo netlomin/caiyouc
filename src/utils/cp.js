@@ -23,15 +23,15 @@ const SIGN = {
   percent: '%'
 }
 const COLORS = [
-  ['#880000', '#FF8888'],
-  ['#000088', '#8888FF']
+  ['#800', '#F66'],
+  ['#008', '#66F']
 ]
 const COLOR_FC3D = [COLORS[0], COLORS[0], COLORS[0]]
 const CP = {
-  SSQ: { ico: 'ssq', col: 7, color: '#FF8888', colors: COLORS },
-  KL8: { ico: 'ssq', col: 7, color: '#FF6666', colors: COLORS },
-  QLC: { ico: 'ssq', col: 7, color: '#8888FF', colors: COLORS },
-  FC3D: { ico: 'ssq', col: 5, color: '#FF88FF', colors: COLOR_FC3D }
+  SSQ: { ico: 'ssq', col: 7, color: '#F88', colors: COLORS },
+  KL8: { ico: 'ssq', col: 7, color: '#F66', colors: COLORS },
+  QLC: { ico: 'ssq', col: 7, color: '#88F', colors: COLORS },
+  FC3D: { ico: 'ssq', col: 5, color: '#F8F', colors: COLOR_FC3D }
 }
 
 const cpSetArea = (cp, code, index) => {

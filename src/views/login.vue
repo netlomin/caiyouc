@@ -15,7 +15,7 @@
     <c-panel
       margin=".8rem 1.2rem"
       :radius="8"
-      shadow="1px 1px 6px #F88"
+      shadow="1px 1px 6px #F66"
     >
       <van-tabs
         v-model="active"
@@ -187,6 +187,6 @@
 <style>
   .logo {
     background: rgba(256, 118, 118, 1);
-    box-shadow: 0 1px 8px 2px #F88;
+    box-shadow: 0 1px 8px 2px #F66;
   }
 </style>

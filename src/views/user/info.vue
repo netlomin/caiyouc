@@ -23,7 +23,7 @@
       <c-panel
         margin=".5rem"
         :radius="6"
-        shadow="1px 1px 6px #F88"
+        shadow="1px 1px 6px #F66"
       >
         <van-field
           v-model.trim="user.nickName"
