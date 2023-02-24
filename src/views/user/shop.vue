@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <div class="m-t_8 flex-col">
       <a-avatar
         :src="shop.avatarUrl"
