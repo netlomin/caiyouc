@@ -47,7 +47,10 @@
               slot="text"
               class="sm center"
             >
-              <div class="light-grey">{{area.omits[i]}}</div>
+              <div :class="{
+                'light-grey':area.picks[i]!=2,
+                'dark-red':area.picks[i]==2
+              }">{{belowText(i)}}</div>
             </div>
           </van-grid-item>
         </van-grid>
@@ -95,6 +98,10 @@
       ballColor(i) {
         let picks = this.area.picks
         return this.area.colors[picks[i] == 0 ? 1 : 2 - picks[i]]
+      },
+      belowText(i) {
+        let picks = this.area.picks
+        return picks[i] == 2 ? '胆': this.area.omits[i]
       },
       gallEnabled() {
         return this.area.gallEnabled && this.area.picks.filter(p => p == 2).length <= this.area.cnt - 2

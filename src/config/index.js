@@ -1,18 +1,18 @@
 export default {
-  themeColorVal: 'FF8888',
-  themeColor: '#FF8888',
-  colors: { blue: '#6666FF' },
+  themeColorVal: 'F66',
+  themeColor: '#F66',
+  colors: { blue: '#66F' },
   baseUrl: 'https://ngvv7bsh3.neiwangyun.net/caiyou',
   key: '2c4e9851-32ac-40f1-b075-c33fade9acf6',
   cp: {
     SSQ: {
       ico: 'ssq',
-      color: '#FF8888',
+      color: '#F88',
       maxMultiple: 99
     },
     KL8: {
       ico: 'kl8',
-      color: '#FF6666',
+      color: '#F66',
       maxMultiple: 15
     }
   }

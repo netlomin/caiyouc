@@ -198,6 +198,6 @@
   scoped
 >
   .ticket-img {
-    border: 1px solid #F88;
+    border: 1px solid #F66;
   }
 </style>

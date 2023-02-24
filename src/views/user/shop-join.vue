@@ -66,7 +66,7 @@
       <c-panel
         margin=".5rem"
         :radius="6"
-        shadow="1px 1px 6px #F88"
+        shadow="1px 1px 6px #F66"
       >
         <div slot="head">
           <div class="red p_2">身份信息</div>
