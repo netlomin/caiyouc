@@ -51,7 +51,7 @@
           <c-balls
             :areas="set.areas"
             type="none"
-          ></c-balls>
+          />
         </div>
       </van-cell>
     </div>
