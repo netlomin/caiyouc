@@ -148,7 +148,7 @@
     data() {
       return {
         images: [
-          'https://img0.baidu.com/it/u=1296559934,2566551782&fm=253&fmt=auto&app=138&f=JPEG?w=720&h=266',
+          'static/img/carousel.png',
         ],
         loading: false,
         refreshing: false,
