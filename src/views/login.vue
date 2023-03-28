@@ -44,14 +44,20 @@
             <van-field
               name="check"
               :rules="[{ required: true, message: '请阅读并同意《用户协议》' }]"
-              @click="navTo({name:'Agreement'})"
             >
               <template #input>
                 <van-checkbox
                   v-model="check"
                   shape="square"
                 />
-                <span class="grey m-l-8">请阅读并同意<a class="red">《用户协议》</a></span>
+                <span class="grey m-l-8">
+                  请阅读并同意
+                  <a 
+                    class="red" 
+                    @click="navTo({name:'Agreement'})">
+                    《用户协议》
+                  </a>
+                </span>
               </template>
             </van-field>
             <van-field>
@@ -107,7 +113,7 @@
                 <span class="grey m-l-8">
                   请阅读并同意
                   <a
-                    class="red" 
+                    class="red"
                     @click="navTo({name:'Agreement'})">
                     《用户协议》
                   </a>
