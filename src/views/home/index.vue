@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 轮播 -->
     <van-swipe
       :autoplay="5000"
       indicator-color="white"
@@ -17,10 +18,11 @@
         />
       </van-swipe-item>
     </van-swipe>
-
+    <!-- 通知栏 -->
     <van-notice-bar
       left-icon="volume-o"
       :scrollable="false"
+      class="m-tb-2"
     >
       <van-swipe
         vertical
@@ -28,20 +30,15 @@
           height: '.88rem',
           lineHeight: '.88rem'
         }"
-        :autoplay="5000"
+        :autoplay="10000"
         :show-indicators="false"
       >
-        <van-swipe-item>选择熟悉的实体‘彩’站售彩出票，托管彩票，管理资金。</van-swipe-item>
-        <van-swipe-item>出票后请认真查验彩票，发现错票请尽快联系彩站处理！</van-swipe-item>
+        <van-swipe-item>请选择附近熟悉的实体‘彩’站，切勿轻信网络‘彩’站！</van-swipe-item>
+        <van-swipe-item>出票后应认真查验彩票，发现错票请联系彩站处理。</van-swipe-item>
       </van-swipe>
     </van-notice-bar>
-
-    <div
-      slot="head"
-      class="m-t_1 p_2 p-tb_4 red bg_white"
-    >
-      <b>合买列表</b>
-    </div>
+    <!--列表-->
+    <div class="p_2 p-tb_3 red bg_white bold">合买列表</div>
     <van-pull-refresh
       v-model="refreshing"
       @refresh="refresh"
@@ -60,7 +57,7 @@
           inset
         >
           {{void (cp=$c.cp[item.cp])}}
-          <van-cell :to="{ name: 'CoBuySub', params: { id: item.id }}">
+          <van-cell :to="{name:'CoBuySub',params:{id:item.id}}">
             <div
               class="cell-head flex row-between"
               slot="title"
