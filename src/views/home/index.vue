@@ -36,110 +36,108 @@
       </van-swipe>
     </van-notice-bar>
 
-    <c-panel>
-      <div
-        slot="head"
-        class="m-t_1 p_2 p-tb_4 red bg_white"
+    <div
+      slot="head"
+      class="m-t_1 p_2 p-tb_4 red bg_white"
+    >
+      <b>合买列表</b>
+    </div>
+    <van-pull-refresh
+      v-model="refreshing"
+      @refresh="refresh"
+    >
+      <van-list
+        v-if="list&&list.length"
+        v-model="loading"
+        :finished="finished"
+        finished-text="已经到底了～"
+        @load="load"
       >
-        <b>合买列表</b>
-      </div>
-      <van-pull-refresh
-        v-model="refreshing"
-        @refresh="refresh"
-      >
-        <van-list
-          v-if="list&&list.length"
-          v-model="loading"
-          :finished="finished"
-          finished-text="已经到底了～"
-          @load="load"
+        <van-cell-group
+          v-for="item in list"
+          :key="item.id"
+          :border="false"
+          inset
         >
-          <van-cell-group
-            v-for="item in list"
-            :key="item.id"
-            :border="false"
-            inset
-          >
-            {{void (cp=$c.cp[item.cp])}}
-            <van-cell :to="{ name: 'CoBuySub', params: { id: item.id }}">
-              <div
-                class="cell-head flex row-between"
-                slot="title"
-              >
-                <div class="flex col-center">
-                  <van-icon
-                    :name="cp.ico"
-                    class-prefix="cy"
-                    :color="cp.color"
-                    :size=".6*rem"
-                  />
-                  <strong class="m-l_2">{{item.cpName}}</strong>
-                </div>
-                <div>
-                  <span class="sm">截止剩余：</span>
-                  <van-count-down
-                    :time="item.remainTime"
-                    class="inline sm red"
-                  />
-                </div>
+          {{void (cp=$c.cp[item.cp])}}
+          <van-cell :to="{ name: 'CoBuySub', params: { id: item.id }}">
+            <div
+              class="cell-head flex row-between"
+              slot="title"
+            >
+              <div class="flex col-center">
+                <van-icon
+                  :name="cp.ico"
+                  class-prefix="cy"
+                  :color="cp.color"
+                  :size=".6*rem"
+                />
+                <strong class="m-l_2">{{item.cpName}}</strong>
               </div>
-              <template #label>
-                <div class="cell-body">
-                  <a-progress
-                    :width="1.6*rem"
-                    :percent="item.percent"
-                    :success-percent="item.soldPercent"
-                    type="circle"
+              <div>
+                <span class="sm">截止剩余：</span>
+                <van-count-down
+                  :time="item.remainTime"
+                  class="inline sm red"
+                />
+              </div>
+            </div>
+            <template #label>
+              <div class="cell-body">
+                <a-progress
+                  :width="1.6*rem"
+                  :percent="item.percent"
+                  :success-percent="item.soldPercent"
+                  type="circle"
+                >
+                  <template #format="percent">
+                    <div class="sm bold">{{item.soldPercent}}%</div>
+                    <div class="xs grey">保底{{item.guardPercent}}%</div>
+                  </template>
+                </a-progress>
+                <span class="m-l-10">
+                  <h6 class="md">{{item.userNickName}}</h6>
+                  <span class="sm inline w_6 van-ellipsis">{{item.title}}</span>
+                </span>
+              </div>
+              <div class="cell-foot">
+                <van-row>
+                  <van-col
+                    span="6"
+                    class="center"
                   >
-                    <template #format="percent">
-                      <div class="sm bold">{{item.soldPercent}}%</div>
-                      <div class="xs grey">保底{{item.guardPercent}}%</div>
-                    </template>
-                  </a-progress>
-                  <span class="m-l-10">
-                    <h6 class="md">{{item.userNickName}}</h6>
-                    <span class="sm inline w_6 van-ellipsis">{{item.title}}</span>
-                  </span>
-                </div>
-                <div class="cell-foot">
-                  <van-row>
-                    <van-col
-                      span="6"
-                      class="center"
-                    >
-                      <h6 class="sm red">{{item.totalCnt}}</h6>
-                      <span class="sm grey">总金额</span>
-                    </van-col>
-                    <van-col
-                      span="6"
-                      class="center"
-                    >
-                      <h6 class="sm red">{{item.unitAmt}}</h6>
-                      <span class="sm grey">单份金额</span>
-                    </van-col>
-                    <van-col
-                      span="6"
-                      class="center"
-                    >
-                      <h6 class="sm red">{{item.totalCnt}}</h6>
-                      <span class="sm grey">总份数</span>
-                    </van-col>
-                    <van-col
-                      span="6"
-                      class="center"
-                    >
-                      <h6 class="sm red">{{item.totalCnt-item.soldCnt}}</h6>
-                      <span class="sm grey">剩余份数</span>
-                    </van-col>
-                  </van-row>
-                </div>
-              </template>
-            </van-cell>
-          </van-cell-group>
-        </van-list>
-        <van-empty v-else />
-      </van-pull-refresh>
-    </c-panel>
+                    <h6 class="sm red">{{item.totalCnt}}</h6>
+                    <span class="sm grey">总金额</span>
+                  </van-col>
+                  <van-col
+                    span="6"
+                    class="center"
+                  >
+                    <h6 class="sm red">{{item.unitAmt}}</h6>
+                    <span class="sm grey">单份金额</span>
+                  </van-col>
+                  <van-col
+                    span="6"
+                    class="center"
+                  >
+                    <h6 class="sm red">{{item.totalCnt}}</h6>
+                    <span class="sm grey">总份数</span>
+                  </van-col>
+                  <van-col
+                    span="6"
+                    class="center"
+                  >
+                    <h6 class="sm red">{{item.totalCnt-item.soldCnt}}</h6>
+                    <span class="sm grey">剩余份数</span>
+                  </van-col>
+                </van-row>
+              </div>
+            </template>
+          </van-cell>
+        </van-cell-group>
+      </van-list>
+      <van-empty v-else />
+    </van-pull-refresh>
   </div>
 </template>
 
