@@ -28,9 +28,7 @@ html, body, #app  {
   .m-l-#{$i} {margin-left: 1px*$i;}
   .m-tb-#{$i} {margin-top: 1px*$i;margin-bottom: 1px*$i;}
   .m-lr-#{$i} {margin-left: 1px*$i;margin-right: 1px*$i;}
-}
 
-@for $i from 1 through 20{
   .m_#{$i} {margin: .1rem*$i;}
   .m-t_#{$i} {margin-top: .1rem*$i;}
   .m-r_#{$i} {margin-right: .1rem*$i;}
@@ -38,19 +36,7 @@ html, body, #app  {
   .m-l_#{$i} {margin-left: .1rem*$i;}
   .m-tb_#{$i} {margin-top: .1rem*$i 0;margin-bottom: .1rem*$i;}
   .m-lr_#{$i}  {margin-left: .1rem*$i;margin-right: .1rem*$i;}
-}
 
-@for $i from 1 through 10{
-  .w_#{$i} {width: 1rem*$i;}
-  .h_#{$i} {height: 1rem*$i;}
-}
-
-@for $i from 1 through 10{
-  .w-#{$i} {width: 10%*$i;}
-  .h-#{$i} {height: 10%*$i;}
-}
-
-@for $i from 1 through 20{
   .p-#{$i} {padding: 1px*$i;}
   .p-t-#{$i} {padding-top: 1px*$i;}
   .p-r-#{$i} {padding-right: 1px*$i;}
@@ -58,9 +44,7 @@ html, body, #app  {
   .p-l-#{$i} {padding-left: 1px*$i;}
   .p-tb-#{$i} {padding-top: 1px*$i;padding-bottom: 1px*$i; }
   .p-lr-#{$i} {padding-left: 1px*$i;padding-right: 1px*$i;}
-}
 
-@for $i from 1 through 20{
   .p_#{$i} {padding: .1rem*$i;}
   .p-t_#{$i} {padding-top: .1rem*$i;}
   .p-r_#{$i} {padding-right: .1rem*$i;}
@@ -68,6 +52,14 @@ html, body, #app  {
   .p-l_#{$i} {padding-left: .1rem*$i;}
   .p-tb_#{$i} {padding-top: .1rem*$i; padding-bottom: .1rem*$i;}
   .p-lr_#{$i} {padding-left: .1rem*$i; padding-right: .1rem*$i;}
+}
+
+@for $i from 1 through 10{
+  .w_#{$i} {width: 1rem*$i;}
+  .h_#{$i} {height: 1rem*$i;}
+
+  .w-#{$i} {width: 10%*$i;}
+  .h-#{$i} {height: 10%*$i;}
 }
 
 .red {
@@ -78,7 +70,7 @@ html, body, #app  {
   color: nth($colors, 7) !important;
 }
 
-.green{
+.green {
   color: nth($colors, 2) !important;
 }
 
@@ -102,7 +94,7 @@ html, body, #app  {
   color: nth($colors, 11) !important;
 }
 
-.white{
+.white {
   color: #FFF;
 }
 
@@ -124,11 +116,11 @@ html, body, #app  {
   font-weight: bold !important;
 }
 
-.center{
+.center {
   text-align: center !important;
 }
 
-.right{
+.right {
   text-align: right !important;
 }
 
