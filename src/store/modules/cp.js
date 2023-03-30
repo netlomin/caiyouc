@@ -2,6 +2,7 @@ const state = {
   cart: [],
   play: null
 }
+
 const mutations = {
   SET_CART(state, cart) {
     state.cart = cart.map(p => {
@@ -13,6 +14,7 @@ const mutations = {
     state.play = play
   }
 }
+
 const actions = {
   setCart({ commit }, cart) {
     commit('SET_CART', cart)
@@ -21,6 +23,7 @@ const actions = {
     commit('SET_PLAY', play)
   }
 }
+
 export default {
   state,
   mutations,

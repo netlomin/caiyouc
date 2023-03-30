@@ -7,6 +7,7 @@ const state = {
   userId: '',
   shopId: ''
 }
+
 const mutations = {
   LOGIN(state, token) {
     state.token = token
@@ -20,6 +21,7 @@ const mutations = {
     state.token = ''
   }
 }
+
 const actions = {
   checkLogin({ commit, dispatch }, params) {
     api.ps.checkLogin().then(vo => {

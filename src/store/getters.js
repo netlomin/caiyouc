@@ -1,5 +1,3 @@
-import $cp from '@/utils/cp'
-
 const getters = {
   token: state => state.app.token,
   userId: state => state.app.userId,
@@ -8,4 +6,5 @@ const getters = {
   cart: state => _.cloneDeep(state.cp.cart),
   play: state => state.cp.play
 }
+
 export default getters
