@@ -5,7 +5,8 @@ const state = {
   token: '',
   passportId: '',
   userId: '',
-  shopId: ''
+  shopId: '',
+  userType: ''
 }
 
 const mutations = {

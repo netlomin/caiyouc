@@ -11,7 +11,6 @@
         fixed
         route
         v-model="active"
-        @change="changeTab"
       >
         <van-tabbar-item
           v-for="(tab, index) in tabs"
@@ -40,11 +39,6 @@
             icon: 'user-o'
           }
         ]
-      }
-    },
-    methods: {
-      changeTab(v) {
-        console.log('tab value:', v)
       }
     }
   }
