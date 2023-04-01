@@ -63,7 +63,7 @@ export default {
     passport: () => apiInstance.post(`ps/passport`),
     login: (params) => apiInstance.post(`ps/login`, params),
     codeLogin: (params) => apiInstance.post(`ps/code-login`, params),
-    user: () => apiInstance.post(`ps/user`),
+    user: (params) => apiInstance.post(`ps/user`, params),
     shops: (params) => apiInstance.post(`ps/shops`, params),
     joinShop: (params) => apiInstance.post(`ps/join-shop`, params),
     selectShop: (params) => apiInstance.post(`ps/select-shop`, params),

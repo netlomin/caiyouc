@@ -9,11 +9,8 @@
 
 <script>
   export default {
-    data() {
-      return {}
-    },
     mounted() {
-      this.$store.dispatch('checkLogin')
+      this.$store.dispatch('loadUser')
     }
   }
 </script>

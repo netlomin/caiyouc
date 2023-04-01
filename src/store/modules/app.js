@@ -17,6 +17,7 @@ const mutations = {
     state.passportId = user.passportId
     state.userId = user.userId
     state.shopId = user.shopId
+    state.userType = user.userType
   },
   LOGOUT(state, token) {
     state.token = ''
@@ -24,51 +25,29 @@ const mutations = {
 }
 
 const actions = {
-  checkLogin({ commit, dispatch }, params) {
-    api.ps.checkLogin().then(vo => {
-      return dispatch(vo ? 'loadUser' : 'toLogin')
-    }).catch(api.catch)
-  },
   loadUser({ commit, dispatch }, params) {
-    api.ps.user().then(user => {
-      let userId = this.state.userId
-      let passportId = this.state.passportId
-      let shopId = this.state.shopId
-
-      if (user.passportId == passportId && userId && userId != user.userId) {
-        api.ps.selectShop({ shopId, save: false }).then(vo => {
-          user.userId = userId
-          user.shopId = shopId
-          dispatch("forward", user)
-        }).catch(api.catch((err) => {
-          dispatch("forward", user)
-        }))
-      } else {
-        dispatch("forward", user)
-      }
+    let { passportId, userId, shopId } = this.state
+    api.ps.user({ passportId, userId, shopId }).then(vo => {
+      if (!vo.passportId) dispatch('toLogin')
+      if (!vo.shopId) router.push({ name: 'ShopSelect' })
+      router.replace({ name: 'Home' })
     }).catch(api.catch)
   },
-  forward({ commit, dispatch }, user) {
-    dispatch("user", user)
-
-    if (!user.shopId) {
-      return router.push({ name: 'ShopSelect' })
-    }
-    return router.replace({ name: 'Home' })
-  },
-  toLogin({ commit, dispatch }, params) {
+  toLogin({ commit }, params) {
     commit('LOGOUT')
     router.push({ name: "Login" })
   },
-  login({ commit }, params) {
+  login({ commit, dispatch }, params) {
     let method = 'login'
     if (params.code) {
       method = 'codeLogin'
     } else {
       params.passWord = md5(params.passWord)
     }
-    return api.ps[method](params)
-      .then(vo => commit('LOGIN', vo.token))
+    return api.ps[method](params).then(vo => {
+      commit('LOGIN', vo.token)
+      dispatch('loadUser')
+    })
   },
   user({ commit }, user) {
     commit('SET_USER', user)

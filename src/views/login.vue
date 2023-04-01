@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="h_1"></div>
+    <div class="h_1" />
 
     <div class="center">
       <van-image
@@ -52,11 +52,10 @@
                 />
                 <span class="grey m-l-8">
                   请阅读并同意
-                  <a 
-                    class="red" 
-                    @click="navTo({name:'Agreement'})">
-                    《用户协议》
-                  </a>
+                  <a
+                    class="red"
+                    @click="navTo({name:'Agreement'})"
+                  >《用户协议》</a>
                 </span>
               </template>
             </van-field>
@@ -114,9 +113,8 @@
                   请阅读并同意
                   <a
                     class="red"
-                    @click="navTo({name:'Agreement'})">
-                    《用户协议》
-                  </a>
+                    @click="navTo({name:'Agreement'})"
+                  >《用户协议》</a>
                 </span>
               </template>
             </van-field>
@@ -157,9 +155,7 @@
     },
     methods: {
       login(params) {
-        this.$store.dispatch('login', params).then(vo => {
-          this.$store.dispatch('loadUser')
-        }).catch(api.catch(err => {
+        this.$store.dispatch('login', params).catch(api.catch(err => {
           if (err.msg) {
             this.$notify({ message: err.msg })
             return true
