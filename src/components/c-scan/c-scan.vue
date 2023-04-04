@@ -8,7 +8,7 @@
       <canvas
         ref="canvas"
         class="canvas"
-      ></canvas>
+      />
     </van-overlay>
   </div>
 </template>

@@ -89,6 +89,7 @@ export default {
     stat: (params) => apiInstance.post('lot/stat', params)
   },
   cp: {
+    latestDraws: () => apiInstance.post('cp/latest-draws'),
     startBuy: (params) => apiInstance.post('cp/start-buy', params),
     buy: (params) => apiInstance.post('cp/buy', params),
     buys: (params) => apiInstance.post('cp/buys', params),

@@ -1,6 +1,5 @@
-<!-- home -->
 <template>
-  <div>
+  <div class="m-t-8">
     <van-form @submit="submitPassWord">
       <van-field
         v-model.trim="passWord"

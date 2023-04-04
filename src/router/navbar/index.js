@@ -64,11 +64,29 @@ export default [{
       nav: true
     }
   }, {
+    path: '/user/act-extract',
+    name: 'ActExtract',
+    component: () => import('@/views/user/act-extract'),
+    meta: {
+      title: '提取收益',
+      keepAlive: false,
+      nav: true
+    }
+  }, {
     path: '/user/act-details',
     name: 'ActDetails',
     component: () => import('@/views/user/act-details'),
     meta: {
       title: '我的账本',
+      keepAlive: false,
+      nav: true
+    }
+  }, {
+    path: '/user/act-profits',
+    name: 'ActProfits',
+    component: () => import('@/views/user/act-profits'),
+    meta: {
+      title: '收益明细',
       keepAlive: false,
       nav: true
     }
@@ -177,6 +195,15 @@ export default [{
     component: () => import('@/views/user/shop'),
     meta: {
       title: '彩站信息',
+      keepAlive: false,
+      nav: true
+    }
+  }, {
+    path: '/user/invite',
+    name: 'Invite',
+    component: () => import('@/views/user/invite'),
+    meta: {
+      title: '推广邀请',
       keepAlive: false,
       nav: true
     }

@@ -372,6 +372,10 @@ const mixin = {
       value = value.slice(0, maxLength)
     }
     return value
+  },
+  week(i) {
+    const WEEKS = ['日', '一', '二', '三', '四', '五', '六']
+    return '周' + (typeof(i) !== 'number' ? i : WEEKS[i - 1])
   }
 }
 export default {

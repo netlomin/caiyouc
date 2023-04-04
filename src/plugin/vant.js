@@ -39,6 +39,7 @@ import {
   Tabs,
   Tabbar,
   TabbarItem,
+  Tag,
   Toast,
   TreeSelect
 } from 'vant'
@@ -71,5 +72,6 @@ Vue.use(Swipe).use(SwipeItem)
 Vue.use(Switch)
 Vue.use(Tabs).use(Tab)
 Vue.use(Tabbar).use(TabbarItem)
+Vue.use(Tag)
 Vue.use(Toast)
 Vue.use(TreeSelect)

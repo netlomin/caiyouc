@@ -34,7 +34,7 @@ html, body, #app  {
   .m-r_#{$i} {margin-right: .1rem*$i;}
   .m-b_#{$i} {margin-bottom: .1rem*$i;}
   .m-l_#{$i} {margin-left: .1rem*$i;}
-  .m-tb_#{$i} {margin-top: .1rem*$i 0;margin-bottom: .1rem*$i;}
+  .m-tb_#{$i} {margin-top: .1rem*$i;margin-bottom: .1rem*$i;}
   .m-lr_#{$i}  {margin-left: .1rem*$i;margin-right: .1rem*$i;}
 
   .p-#{$i} {padding: 1px*$i;}

@@ -14,10 +14,10 @@ const mutations = {
     state.token = token
   },
   SET_USER(state, user) {
+    state.userId = user.id
     state.passportId = user.passportId
-    state.userId = user.userId
     state.shopId = user.shopId
-    state.userType = user.userType
+    state.userType = user.type
   },
   LOGOUT(state, token) {
     state.token = ''
@@ -28,6 +28,7 @@ const actions = {
   loadUser({ commit, dispatch }, params) {
     let { passportId, userId, shopId } = this.state
     api.ps.user({ passportId, userId, shopId }).then(vo => {
+      commit('SET_USER', vo)
       if (!vo.passportId) dispatch('toLogin')
       if (!vo.shopId) router.push({ name: 'ShopSelect' })
       router.replace({ name: 'Home' })

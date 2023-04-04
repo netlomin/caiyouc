@@ -24,14 +24,18 @@ const SIGN = {
 }
 const COLORS = [
   ['#800', '#F66'],
-  ['#008', '#66F']
+  ['#008', '#66F'],
+  ['#080', '#6C6'],
+  ['#880', '#DD6'],
+  ['#808', '#F6F'],
+  ['#088', '#6CC'],
+  ['#888', '#CCC']
 ]
-const COLOR_FC3D = [COLORS[0], COLORS[0], COLORS[0]]
 const CP = {
   SSQ: { ico: 'ssq', col: 7, color: '#F88', colors: COLORS },
-  KL8: { ico: 'ssq', col: 7, color: '#F66', colors: COLORS },
-  QLC: { ico: 'ssq', col: 7, color: '#88F', colors: COLORS },
-  FC3D: { ico: 'ssq', col: 5, color: '#F8F', colors: COLOR_FC3D }
+  KL8: { ico: 'kl8', col: 7, color: '#F66', colors: COLORS },
+  QLC: { ico: 'qlc', col: 7, color: '#FF6', colors: COLORS },
+  FC3D: { ico: 'fc3d', col: 5, color: '#66F', colors: COLORS }
 }
 
 const cpSetArea = (cp, code, index) => {

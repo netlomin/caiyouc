@@ -36,12 +36,12 @@
             color="#E88818"
             size=".4rem"
           />
-          <span class="m-l_2 red">{{cashAct.amt}}</span>
+          <span class="m-l_2 red">{{act.amt}}</span>
         </div>
         <div
           class="btn"
-          @click="navTo({name:'ActWithdraw'})"
-        >清账</div>
+          @click="navTo({name:'ActExtract'})"
+        >提取</div>
       </div>
     </div>
 
@@ -50,32 +50,20 @@
       :radius="6"
     >
       <van-cell
-        title="选号预约"
-        :to="{name:'Pick'}"
+        title="推广邀请"
+        :to="{name:'Invite'}"
         is-link
       >
         <div slot="icon">
           <van-icon
-            name="add-o"
+            name="qr"
             class="red m-r_2"
           />
         </div>
       </van-cell>
       <van-cell
-        title="我的彩单"
-        :to="{name:'BuyList'}"
-        is-link
-      >
-        <div slot="icon">
-          <van-icon
-            name="orders-o"
-            class="red m-r_2"
-          />
-        </div>
-      </van-cell>
-      <van-cell
-        title="我的账本"
-        :to="{name:'ActDetails'}"
+        title="收益明细"
+        :to="{name:'ActProfits'}"
         is-link
       >
         <div slot="icon">
@@ -114,7 +102,7 @@
         },
         user: {},
         shop: {},
-        cashAct: {}
+        act: {}
       }
     },
     created() {
@@ -126,8 +114,8 @@
       api.user.shop({}).then(vo => {
         this.shop = vo
       }).catch(api.catch)
-      api.user.act({ actType: 'CASH' }).then(vo => {
-        this.cashAct = vo
+      api.user.act({ actType: 'PROFIT' }).then(vo => {
+        this.act = vo
       }).catch(api.catch)
     }
   }

@@ -13,7 +13,7 @@
         v-model="active"
       >
         <van-tabbar-item
-          v-for="(tab, index) in tabs"
+          v-for="(tab, index) in _tabs"
           :to="tab.to"
           :icon="tab.icon"
           :key="index"
@@ -28,8 +28,19 @@
     data() {
       return {
         active: 0,
-        tabs: [{
+        tabs1: [{
             title: '大厅',
+            to: { name: 'Home' },
+            icon: 'home-o'
+          },
+          {
+            title: '我的',
+            to: { name: 'User' },
+            icon: 'user-o'
+          }
+        ],
+        tabs2: [{
+            title: '首页',
             to: { name: 'Home' },
             icon: 'home-o'
           },
@@ -39,6 +50,12 @@
             icon: 'user-o'
           }
         ]
+      }
+    },
+    computed: {
+      _tabs() {
+        let t = this.$store.getters.userType
+        return t && t >= 80 ? this.tabs2 : this.tabs1
       }
     }
   }

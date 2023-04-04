@@ -4,17 +4,17 @@ export default [{
   path: '/',
   component: Layout,
   children: [{
-    path: '/home',
+    path: '/home/index',
     name: 'Home',
-    component: () => import('@/views/home/'),
+    component: () => import('@/views/common/user-view'),
     meta: {
       title: '大厅',
       keepAlive: false
     }
   }, {
-    path: '/user',
+    path: '/user/index',
     name: 'User',
-    component: () => import('@/views/user/'),
+    component: () => import('@/views/common/user-view'),
     meta: {
       title: '我的',
       keepAlive: false
