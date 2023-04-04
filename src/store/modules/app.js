@@ -29,8 +29,14 @@ const actions = {
     let { passportId, userId, shopId } = this.state
     api.ps.user({ passportId, userId, shopId }).then(vo => {
       commit('SET_USER', vo)
-      if (!vo.passportId) dispatch('toLogin')
-      if (!vo.shopId) router.push({ name: 'ShopSelect' })
+      if (!vo.passportId) {
+        dispatch('toLogin')
+        return
+      }
+      if (!vo.shopId) {
+        router.push({ name: 'ShopSelect' })
+        return
+      }
       router.replace({ name: 'Home' })
     }).catch(api.catch)
   },
