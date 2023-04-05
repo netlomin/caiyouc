@@ -118,7 +118,7 @@
       <c-scan
         ref="scaner"
         @result="onScanResult"
-      ></c-scan>
+      />
 
       <div class="fixed-bottom">
         <van-field>
