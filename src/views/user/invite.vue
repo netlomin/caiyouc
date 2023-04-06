@@ -71,7 +71,7 @@
     },
     created() {
       api.user.info({}).then(vo => {
-        this.url = 'https://ngvv7bsh3.neiwangyun.net/'
+        this.url = 'https://q5nc9bsh3.neiwangyun.net/'
       }).catch(api.catch)
     },
     methods: {}
