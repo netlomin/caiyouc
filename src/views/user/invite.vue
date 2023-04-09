@@ -72,7 +72,7 @@
     created() {
       api.user.info({}).then(vo => {
         let url = 'https://q5nc9bsh3.neiwangyun.net/x/#/pages/open/register?'
-        this.url = url + 'p=' + vo.passportId + '&s=' + vo.shopId
+        this.url = url + 'p=' + vo.passportId
       }).catch(api.catch)
     }
   }

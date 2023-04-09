@@ -167,12 +167,12 @@
           this.$notify('未知二维码！')
           return
         }
-        let { shopId } = qs.parse(ret.split('?')[1], { ignoreQueryPrefix: true })
-        if (!shopId) {
+        let { s } = qs.parse(ret.split('?')[1], { ignoreQueryPrefix: true })
+        if (!s) {
           this.$notify('未知二维码！')
           return
         }
-        api.user.shop({ id: shopId }).then(vo => {
+        api.user.shop({ id: s }).then(vo => {
           this.shop = vo
         }).catch(api.catch)
       },
