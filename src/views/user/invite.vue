@@ -57,15 +57,15 @@
           { title: '分成比例', dataIndex: 'ratio', key: 'ratio' }
         ],
         data: [
-          { key: 1, level: 1, count: '1~2', ratio: '10%' },
-          { key: 2, level: 2, count: '3~4', ratio: '15%' },
-          { key: 3, level: 3, count: '5~6', ratio: '20%' },
-          { key: 4, level: 4, count: '7~8', ratio: '25%' },
-          { key: 5, level: 5, count: '9~10', ratio: '30%' },
-          { key: 6, level: 6, count: '11-12', ratio: '35%' },
-          { key: 7, level: 7, count: '13-14', ratio: '40%' },
-          { key: 8, level: 8, count: '15-16', ratio: '45%' },
-          { key: 9, level: 9, count: '17-18', ratio: '50%' }
+          { key: 1, level: 1, count: '1', ratio: '10%' },
+          { key: 2, level: 2, count: '2~4', ratio: '15%' },
+          { key: 3, level: 3, count: '5~8', ratio: '20%' },
+          { key: 4, level: 4, count: '9~16', ratio: '25%' },
+          { key: 5, level: 5, count: '17~32', ratio: '30%' },
+          { key: 6, level: 6, count: '33~64', ratio: '35%' },
+          { key: 7, level: 7, count: '65~128', ratio: '40%' },
+          { key: 8, level: 8, count: '129~256', ratio: '45%' },
+          { key: 9, level: 9, count: '>256', ratio: '50%' }
         ]
       }
     },
