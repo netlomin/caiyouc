@@ -9,7 +9,7 @@
       left-arrow
       @click-left="clickLeft"
       @click-right="clickRight"
-    ></van-nav-bar>
+    />
 
     <van-pull-refresh
       class="m-t-8"
@@ -46,7 +46,7 @@
             <van-checkbox
               v-model="item.checked"
               @click="clickCheckbox(index)"
-            ></van-checkbox>
+            />
           </template>
         </van-cell>
       </van-list>
