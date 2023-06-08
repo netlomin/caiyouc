@@ -33,8 +33,8 @@
         :autoplay="10000"
         :show-indicators="false"
       >
-        <van-swipe-item>请选择附近熟悉的实体‘彩’站，切勿轻信网络‘彩’站！</van-swipe-item>
-        <van-swipe-item>出票后应认真查验彩票，发现错票请联系彩站处理。</van-swipe-item>
+        <van-swipe-item>请选择附近熟悉的实体‘彩’站，不要轻信网络‘彩’站！</van-swipe-item>
+        <van-swipe-item>出票后应认真查验彩票，发现错票及时联系彩站处理。</van-swipe-item>
       </van-swipe>
     </van-notice-bar>
     <!--列表-->
@@ -133,7 +133,13 @@
           </van-cell>
         </van-cell-group>
       </van-list>
-      <van-empty v-else />
+      <van-empty v-else>
+        <a-button
+          type="primary"
+          shape="round"
+          @click="navTo({name:'Pick'})"
+        >发起合买</a-button>
+      </van-empty>
     </van-pull-refresh>
   </div>
 </template>
@@ -142,9 +148,7 @@
   export default {
     data() {
       return {
-        images: [
-          'static/img/carousel.png',
-        ],
+        images: ['static/img/carousel.png'],
         loading: false,
         refreshing: false,
         finished: false,

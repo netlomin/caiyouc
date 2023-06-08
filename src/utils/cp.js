@@ -130,7 +130,8 @@ const resolvePlay = (play) => {
     area.minCnt = area.cnt
     area.rndCnt = area.cnt
     // 是否支持胆拖
-    area.gallEnabled = area.cnt >= 2
+    arr = arr[0].split(SIGN.caret)
+    area.gallable = arr.length == 2 ? parseInt(arr[1]) : 1
     // 号码
     area.codes = arr[0].split(SIGN.comma)
     area.maxCnt = area.codes.length

@@ -41,11 +41,11 @@
                 :type="ballType(i)"
                 :color="ballColor(i)"
                 size="md"
-              ></c-ball>
+              />
             </template>
             <div
               slot="text"
-              class="sm center"
+              class="sm center m-t_1"
             >
               <div :class="{
                 'light-grey':area.picks[i]!=2,
@@ -101,7 +101,7 @@
       },
       belowText(i) {
         let picks = this.area.picks
-        return picks[i] == 2 ? '胆': this.area.omits[i]
+        return picks[i] == 2 ? '胆' : this.area.omits[i]
       },
       gallEnabled() {
         return this.area.gallEnabled && this.area.picks.filter(p => p == 2).length <= this.area.cnt - 2

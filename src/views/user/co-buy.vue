@@ -2,9 +2,7 @@
   <div>
     <van-form>
       <van-field>
-        <template #label>
-          方案金额
-        </template>
+        <template #label>方案金额</template>
         <template #input>
           <span class="red">{{_amt}}</span>
         </template>
@@ -13,9 +11,7 @@
         </template>
       </van-field>
       <van-field>
-        <template #label>
-          每份金额
-        </template>
+        <template #label>每份金额</template>
         <template #input>
           <span class="red">{{unitAmt}}</span>
         </template>

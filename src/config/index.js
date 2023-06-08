@@ -14,6 +14,11 @@ export default {
       ico: 'kl8',
       color: '#F66',
       maxMultiple: 15
+    },
+    FC3D: {
+      ico: 'fc3d',
+      color: '#68F',
+      maxMultiple: 99
     }
   }
 }

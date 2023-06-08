@@ -186,7 +186,8 @@
         activeId: 1,
         items: [
           { cp: 'SSQ', text: '双色球', children: [{ id: 1, text: '普通' }] },
-          { cp: 'KL8', text: '快乐8', children: [{ id: 2, text: '选十' }] }
+          { cp: 'KL8', text: '快乐8', children: [{ id: 2, text: '选十' }] },
+          { cp: 'FC3D', text: '3D', children: [{ id: 12, text: '直选' }] }
         ],
         issue: null,
         draw: null,
@@ -303,7 +304,7 @@
         this.play = play
         this.$store.dispatch('setPlay', this.play)
 
-        api.lot.stat({ cp: item.cp, stat: 'OMIT' }).then(vo => {
+        api.lot.stat({ cp: item.cp, stat: 'OMIT', play: this.play.play }).then(vo => {
           vo = this.listTable(vo)[0]
           this.play.areas.forEach((area, i) => this.$set(area, 'omits', vo[i].datas[0]))
           this.pick = this.index == null ? null : this.cart[this.index]
