@@ -120,6 +120,7 @@
                   :areas="draw.set.areas"
                   size="sm"
                   type="solid"
+                  :margin="3"
                 />
               </van-col>
             </van-row>
@@ -164,6 +165,7 @@
                 <c-balls
                   :areas="set.areas"
                   size="sm"
+                  :margin="3"
                 />
               </van-col>
             </van-row>
@@ -329,12 +331,12 @@
           this.$set(vo, 'subs', subs)
 
           let userId = this.$store.getters.userId
-          this.$set(vo, 'subCnt', subs.filter((e) => e.userId == userId).reduce((prev, cur) => prev + cur.cnt, 0))
+          this.$set(vo, 'subCnt', subs.filter((e) => e.userId == userId).reduce((prev, cur) => prev + cur.cnt,
+            0))
         }).catch(api.catch)
 
-        api.lot.draws({ cp: vo.cp, endIssue: vo.issue, startIssue: vo.issue }).then(draws => {
-          if (draws.length) {
-            let draw = draws[0]
+        api.cp.draw({ cp: vo.cp, play: vo.play, issue: vo.issue }).then(draw => {
+          if (draw) {
             $cp.enhance(draw)
             this.draw = draw
             vo.draw(draw)

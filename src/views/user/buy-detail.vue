@@ -79,7 +79,8 @@
                 :areas="draw.set.areas"
                 size="sm"
                 type="solid"
-              ></c-balls>
+                :margin="3"
+              />
             </van-col>
           </van-row>
         </div>
@@ -120,7 +121,8 @@
               <c-balls
                 :areas="set.areas"
                 size="sm"
-              ></c-balls>
+                :margin="3"
+              />
             </van-col>
           </van-row>
         </div>
@@ -155,9 +157,9 @@
       api.cp.buy({ id }).then(vo => {
         $cp.enhance(vo)
         this.buy = vo
-        api.lot.draws({ cp: vo.cp, endIssue: vo.issue, startIssue: vo.issue }).then(draws => {
-          if (draws.length) {
-            let draw = draws[0]
+
+        api.cp.draw({ cp: vo.cp, play: vo.play, issue: vo.issue }).then(draw => {
+          if (draw) {
             $cp.enhance(draw)
             this.draw = draw
             vo.draw(draw)
@@ -198,6 +200,7 @@
     }
   }
 </script>
+
 <style
   lang="scss"
   scoped

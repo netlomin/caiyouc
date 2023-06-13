@@ -93,6 +93,7 @@ export default {
     startBuy: (params) => apiInstance.post('cp/start-buy', params),
     buy: (params) => apiInstance.post('cp/buy', params),
     buys: (params) => apiInstance.post('cp/buys', params),
+    draw: (params) => apiInstance.post('cp/draw', params),
     subBuy: (params) => apiInstance.post('cp/sub-buy', params),
     coBuys: (params) => apiInstance.post('cp/co-buys', params),
     buySubs: (params) => apiInstance.post('cp/buy-subs', params),

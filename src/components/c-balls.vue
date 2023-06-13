@@ -7,7 +7,7 @@
             :code="code"
             :size="size"
             :type="type?type:(area.hit(code)?'solid':'plain')"
-            :class="'m_'+margin"
+            :class="'m-'+margin"
             :color="area.color(j)"
           >
           </c-ball>
@@ -27,7 +27,7 @@
       areas: { type: Array, default: () => [] },
       size: { type: String, default: 'md' },
       type: { type: String, default: '' },
-      margin: { type: Number, default: 1 }
+      margin: { type: Number, default: 2 }
     }
   }
 </script>
