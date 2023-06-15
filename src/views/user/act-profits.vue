@@ -3,7 +3,7 @@
     <van-sticky :offset-top="45">
       <van-notice-bar
         left-icon="volume-o"
-        text="推广邀请彩站入驻，可以每月获取收益。"
+        text="邀请彩站入驻平台，可以每月获取收益。"
       />
       <c-panel
         padding=".3rem .5rem"

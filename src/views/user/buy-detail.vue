@@ -79,7 +79,7 @@
                 :areas="draw.set.areas"
                 size="sm"
                 type="solid"
-                :margin="3"
+                margin=".08rem"
               />
             </van-col>
           </van-row>
@@ -121,7 +121,7 @@
               <c-balls
                 :areas="set.areas"
                 size="sm"
-                :margin="3"
+                margin=".08rem"
               />
             </van-col>
           </van-row>

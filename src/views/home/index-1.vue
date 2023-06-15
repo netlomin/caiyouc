@@ -64,6 +64,7 @@
           :areas="item.set.areas"
           size="sm"
           type="solid"
+          margin=".1rem"
         />
       </div>
     </c-panel>
