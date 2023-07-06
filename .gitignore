@@ -1,19 +1,24 @@
-# Mac
 .DS_Store
-**/.DS_Store
-
-# vim/vi
-*.swp
-
-# JavaScript
-node_modules/
-.node_modules/
-.eslintcache
-unpackage/dist/build/
-unpackage/dist/dev/
-
-# python
-*.pyc
-
 node_modules
+/dist
+/docs
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
 package-lock.json
+yarn.lock

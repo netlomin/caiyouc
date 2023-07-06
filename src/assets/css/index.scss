@@ -1,0 +1,219 @@
+@import './variables.scss';
+@import './mixin.scss';
+
+html, body, #app  {
+  color: $color;
+  font-family: Avenir, Kefa, monospace, Courier, Courier New, Menlo, Mono;
+  font-size: $font-md;
+  background: $bg-color;
+  height: 100%;
+}
+
+.app-container {
+  padding-bottom: 2.5rem;
+}
+
+@each $size in $sizes {
+  $i: index($sizes, $size);
+  .#{$size} {
+    font-size: nth($font-sizes, $i) !important;
+  }
+}
+
+@for $i from 1 through 20{
+  .m-#{$i} {margin: 1px*$i;}
+  .m-t-#{$i} {margin-top: 1px*$i;}
+  .m-r-#{$i} {margin-right: 1px*$i;}
+  .m-b-#{$i} {margin-bottom: 1px*$i;}
+  .m-l-#{$i} {margin-left: 1px*$i;}
+  .m-tb-#{$i} {margin-top: 1px*$i;margin-bottom: 1px*$i;}
+  .m-lr-#{$i} {margin-left: 1px*$i;margin-right: 1px*$i;}
+
+  .m_#{$i} {margin: .1rem*$i;}
+  .m-t_#{$i} {margin-top: .1rem*$i;}
+  .m-r_#{$i} {margin-right: .1rem*$i;}
+  .m-b_#{$i} {margin-bottom: .1rem*$i;}
+  .m-l_#{$i} {margin-left: .1rem*$i;}
+  .m-tb_#{$i} {margin-top: .1rem*$i;margin-bottom: .1rem*$i;}
+  .m-lr_#{$i}  {margin-left: .1rem*$i;margin-right: .1rem*$i;}
+
+  .p-#{$i} {padding: 1px*$i;}
+  .p-t-#{$i} {padding-top: 1px*$i;}
+  .p-r-#{$i} {padding-right: 1px*$i;}
+  .p-b-#{$i} {padding-bottom: 1px*$i;}
+  .p-l-#{$i} {padding-left: 1px*$i;}
+  .p-tb-#{$i} {padding-top: 1px*$i;padding-bottom: 1px*$i; }
+  .p-lr-#{$i} {padding-left: 1px*$i;padding-right: 1px*$i;}
+
+  .p_#{$i} {padding: .1rem*$i;}
+  .p-t_#{$i} {padding-top: .1rem*$i;}
+  .p-r_#{$i} {padding-right: .1rem*$i;}
+  .p-b_#{$i} {padding-bottom: .1rem*$i;}
+  .p-l_#{$i} {padding-left: .1rem*$i;}
+  .p-tb_#{$i} {padding-top: .1rem*$i; padding-bottom: .1rem*$i;}
+  .p-lr_#{$i} {padding-left: .1rem*$i; padding-right: .1rem*$i;}
+}
+
+@for $i from 1 through 10{
+  .w_#{$i} {width: 1rem*$i;}
+  .h_#{$i} {height: 1rem*$i;}
+
+  .w-#{$i} {width: 10%*$i;}
+  .h-#{$i} {height: 10%*$i;}
+}
+
+.red {
+  color: nth($colors, 1) !important;
+}
+
+.dark-red {
+  color: nth($colors, 7) !important;
+}
+
+.green {
+  color: nth($colors, 2) !important;
+}
+
+.dark-green{
+  color: nth($colors, 8) !important;
+}
+
+.blue {
+  color: nth($colors, 3) !important;
+}
+
+.dark-blue {
+  color: nth($colors, 9) !important;
+}
+
+.grey {
+  color: nth($colors, 10) !important;
+}
+
+.light-grey {
+  color: nth($colors, 11) !important;
+}
+
+.white {
+  color: #FFF;
+}
+
+.bg_white {
+  background-color: white;
+}
+
+.grap {
+  width: 100%;
+  height: .1rem;
+  background: $bg-color;
+}
+
+.inline {
+  display: inline-block !important;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.center {
+  text-align: center !important;
+}
+
+.right {
+  text-align: right !important;
+}
+
+.flex-middle {
+  display: flex;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flex {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.col-top {
+	align-items: flex-start;
+}
+
+/* 垂直居中 */
+.col-center {
+	align-items: center;
+}
+
+/* 顶部对齐 */
+.col-top {
+	align-items: flex-start;
+}
+
+/* 底部对齐 */
+.col-bottom {
+	align-items: flex-end;
+}
+
+/* 左边对齐 */
+.row-left {
+	justify-content: flex-start;
+}
+
+/* 水平居中 */
+.row-center {
+	justify-content: center;
+}
+
+/* 右边对齐 */
+.row-right {
+	justify-content: flex-end;
+}
+
+/* 水平两端对齐，项目之间的间隔都相等 */
+.row-between {
+	justify-content: space-between;
+}
+
+/* 水平每个项目两侧的间隔相等，所以项目之间的间隔比项目与父元素两边的间隔大一倍 */
+.row-around {
+	justify-content: space-around;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: #FFF;
+  border-top: 1px solid #F8F8F8;
+}
+
+.fixed-bottom_1 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+}

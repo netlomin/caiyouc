@@ -1,0 +1,224 @@
+import Vue from 'vue'
+import _ from 'lodash'
+
+const _vm = Vue.prototype
+
+const SIGN = {
+  hash: '#',
+  and: '&',
+  star: '*',
+  at: '@',
+  bar: '|',
+  caret: '^',
+  comma: ',',
+  tilde: '~',
+  plus: '+',
+  dash: '-',
+  exclamation: '!',
+  dot: '.',
+  colon: ':',
+  dollar: '$',
+  semicolon: ';',
+  equal: '=',
+  percent: '%'
+}
+const COLORS = [
+  ['#880000', '#FF8888'],
+  ['#000088', '#8888FF']
+]
+const COLOR_FC3D = [COLORS[0], COLORS[0], COLORS[0]]
+const CP = {
+  SSQ: { ico: 'ssq', col: 7, color: '#FF8888', colors: COLORS },
+  KL8: { ico: 'ssq', col: 7, color: '#FF6666', colors: COLORS },
+  QLC: { ico: 'ssq', col: 7, color: '#8888FF', colors: COLORS },
+  FC3D: { ico: 'ssq', col: 5, color: '#FF88FF', colors: COLOR_FC3D }
+}
+
+class CpSetArea {
+
+  constructor(cp, code, index) {
+    this.cp = cp, this.code = code, this.index = index
+    this.codesList = []
+    let arr = code.split(SIGN.caret)
+    if (arr.length == 2) {
+      this.codesList.push(arr[0].split(SIGN.comma))
+      this.codesList.push(arr[1].split(SIGN.comma))
+    } else {
+      this.codesList.push([])
+      this.codesList.push(arr[0].split(SIGN.comma))
+    }
+  }
+
+  draw(area) {
+    _vm.$set(this, 'drawCodes', area.codesList[1])
+    console.log(this)
+  }
+
+  hit(code) {
+    return this.drawCodes && this.drawCodes.includes(code)
+  }
+
+  color(j) {
+    return CP[this.cp].colors[this.index][j]
+  }
+}
+
+class CpSet {
+
+  constructor(cp, code) {
+    this.cp = cp, this.code = code
+    let arr = code.split(SIGN.star)
+    this.multiple = arr.length == 2 ? parseInt(arr[1]) : 1
+    arr = arr[0].split(SIGN.at)
+    this.play = arr.length == 2 ? parseInt(arr[1]) : 1
+    arr = arr[0].split(SIGN.bar)
+    this.areas = arr.map((c, i) => new CpSetArea(cp, c, i))
+  }
+
+  draw(set) {
+    this.areas.forEach((v, i) => { v.draw(set.areas[i]) })
+  }
+}
+
+const enhance = (o) => {
+  if (!o || o.enhance) return
+  o.enhance = true
+
+  Object.defineProperties(o, {
+    "sets": {
+      get: function() {
+        if (!this._sets) {
+          _vm.$set(this, '_sets', new CpSet((this.cp, this.code))
+        }
+        return this._sets
+      }
+    },
+    "set": {
+      get: function() {
+        let sets = this.sets
+        return sets && sets.length ? sets[0] : null
+      }
+    }
+  })
+
+  o.draw = (draw) => {
+    if (draw && draw.code) {
+      enhance(draw)
+      o.sets.forEach(set => set.draw(draw.set))
+    }
+  }
+}
+
+const resolvePlay = (play) => {
+  play.areas = []
+  let conf = CP[play.cp]
+  play.code && play.code.split(SIGN.bar).forEach(code => {
+    let area = {}
+    play.areas.push(area)
+    // 选号区显示列
+    area.col = conf.col
+    // 选号区编号
+    let arr = code.split(SIGN.hash)
+    area.no = arr.length == 2 ? parseInt(arr[1]) : 1
+    area.colors = conf.colors[area.no - 1]
+    // 选号区标题
+    arr = arr[0].split(SIGN.tilde)
+    area.desc = arr.length == 2 ? arr[1] : '选号'
+    // 选号数
+    arr = arr[0].split(SIGN.exclamation)
+    area.cnt = arr.length == 2 ? parseInt(arr[1]) : 1
+    area.minCnt = area.cnt
+    area.rndCnt = area.cnt
+    // 是否支持胆拖
+    area.gallEnabled = area.cnt >= 2
+    // 号码
+    area.codes = arr[0].split(SIGN.comma)
+    area.maxCnt = area.codes.length
+  })
+}
+
+const randPick = (play, opts) => {
+  let areas = play.areas
+  let arrays = []
+  areas.forEach(area => {
+    let codes = area.codes
+    let picks = area.picks
+    let galls = codes.filter((code, i) => picks[i] == 2)
+    codes = codes.filter((code, i) => picks[i] != 2)
+    codes = _.shuffle(codes).slice(0, area.rndCnt - galls.length).sort()
+    arrays.push([galls, codes])
+  })
+  let codes = arrays.map(array => {
+    let code = '';
+    if (array[0].length) {
+      code += array[0].join(',')
+      code += '^'
+    }
+    code += array[1].join(',')
+    return code
+  })
+  let pick = { cp: play.cp, code: codes.join('|') + '@' + play.play }
+  enhance(pick)
+  return pick
+}
+
+const showPick = (play, pick) => {
+  let areas = play.areas
+  pick.set.areas.forEach((p, i) => {
+    let area = areas[i]
+    let codes = area.codes
+    let picks = area.picks
+    _.fill(picks, 0)
+    codes.forEach((c, j) => {
+      if (p.codesList[0].includes(c)) {
+        picks.splice(j, 1, 2)
+        return
+      }
+      if (p.codesList[1].includes(c)) {
+        picks.splice(j, 1, 1)
+        return
+      }
+    })
+  })
+}
+
+const cleanPick = (play) => {
+  play.areas.forEach((area, i) => {
+    let picks = area.picks
+    _.fill(picks, 0)
+    picks.splice(0, 1, 0)
+  })
+}
+
+const getPick = (play) => {
+  let areas = play.areas
+  let arrays = []
+  areas.forEach(area => {
+    let codes = area.codes
+    let picks = area.picks
+    let galls = codes.filter((code, i) => picks[i] == 2)
+    codes = codes.filter((code, i) => picks[i] == 1)
+    arrays.push([galls, codes])
+  })
+  let codes = arrays.map(array => {
+    let code = '';
+    if (array[0].length) {
+      code += array[0].join(',')
+      code += '^'
+    }
+    code += array[1].join(',')
+    return code
+  })
+  let pick = { cp: play.cp, code: codes.join('|') + '@' + play.play }
+  enhance(pick)
+  return pick
+}
+
+export default {
+  enhance,
+  resolvePlay,
+  randPick,
+  showPick,
+  cleanPick,
+  getPick
+}
