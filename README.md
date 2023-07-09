@@ -5,7 +5,7 @@
 ## 在线体验
 | 用户端 | 彩店端 |
 | :------: | :------: |
-| ![用户端](/screenshot/c.jpg) | ![彩店端](/screenshot/b.jpg) |
+| ![用户端](/screenshot/c.jpeg) | ![彩店端](/screenshot/b.jpeg) |
 
 #### 开发说明
 --- 
