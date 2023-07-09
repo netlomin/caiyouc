@@ -7,7 +7,21 @@
 | :------: | :------: |
 | ![用户端](/screenshot/c.jpeg) | ![彩店端](/screenshot/b.jpeg) |
 
-#### 开发说明
+## 用户端主要功能
+| 首页 | 我的 | 选号区 |
+| :------: | :------: | :------: |
+| ![首页](/screenshot/1.jpeg) | ![我的](/screenshot/2.jpeg) | ![选号区](/screenshot/3.jpeg) |
+
+| 选号蓝 | 合买 | 彩单 |
+| :------: | :------: | :------: |
+| ![选号蓝](/screenshot/4.jpeg) | ![合买](/screenshot/5.jpeg) | ![彩单](/screenshot/6.jpeg) |
+
+| 彩单详情 | 我的账本 | 系统 |
+| :------: | :------: | :------: |
+| ![彩单详情](/screenshot/7.jpeg) | ![我的账本](/screenshot/8.jpeg) | ![系统](/screenshot/9.jpeg) |
+
+
+## 开发说明
 --- 
 ##### 环境安装
 - nodejs:  v16.15.0
