@@ -34,6 +34,7 @@
             v-for="(code, i) in area.codes"
             :key="code"
             @click="clickBall(i)"
+            class="m-t_1"
           >
             <template #icon>
               <c-ball
@@ -45,7 +46,7 @@
             </template>
             <div
               slot="text"
-              class="sm center m-t_1"
+              class="sm center m-t_2"
             >
               <div :class="{
                 'light-grey':area.picks[i]!=2,

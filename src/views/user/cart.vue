@@ -96,8 +96,7 @@
         <van-col
           span="1"
           class="flex-center grey"
-        >
-        </van-col>
+        />
         <van-col
           span="15"
           class="flex-center"
@@ -151,7 +150,6 @@
       this.cart.forEach(pick => $cp.enhance(pick))
       this.play = this.$store.getters.play
     },
-    mounted() {},
     methods: {
       customBack() {
         this.$router.push({ name: 'Pick' })

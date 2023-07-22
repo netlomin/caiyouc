@@ -198,23 +198,6 @@
         cart: []
       }
     },
-    created() {
-      this.cart = this.$store.getters.cart
-      this.cart.forEach(pick => $cp.enhance(pick))
-      if (this.cart.length) {
-        let pick = this.cart[0]
-        this.items.forEach((item, i) => {
-          if (item.cp == pick.cp) {
-            this.activeIndex = i
-          }
-        })
-      }
-      let index = this.$route.query.index
-      if ((index || index == 0) && index < this.cart.length) {
-        this.index = index
-      }
-      this.loadPlays()
-    },
     computed: {
       _cnt() {
         if (!(this.play)) return 0
@@ -231,6 +214,12 @@
         return Math.trunc(cnt)
       }
     },
+    created() {
+      this.init()
+    },
+    beforeRouteEnter(to, from, next) {
+      next(vm => from.name != 'Cart' || vm.init() || 1)
+    },
     watch: {
       pick(val, old) {
         if (val == null) {
@@ -241,6 +230,23 @@
       }
     },
     methods: {
+      init() {
+        this.cart = this.$store.getters.cart
+        this.cart.forEach(pick => $cp.enhance(pick))
+        if (this.cart.length) {
+          let pick = this.cart[0]
+          this.items.forEach((item, i) => {
+            if (item.cp == pick.cp) {
+              this.activeIndex = i
+            }
+          })
+        }
+        let index = this.$route.query.index
+        if ((index || index == 0) && index < this.cart.length) {
+          this.index = index
+        }
+        this.loadPlays()
+      },
       back() {
         this.$router.replace({ name: 'User' })
       },
