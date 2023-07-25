@@ -106,7 +106,7 @@
             block
             @click="clickBuyBtn"
             :disabled="!_cnt"
-          >提交订单</a-button>
+          >提交预约</a-button>
         </van-col>
       </van-row>
     </div>
@@ -191,12 +191,12 @@
           if (vo.amt < amt) {
             this.$dialog.alert({
               title: '提示',
-              message: '购彩金额不足，余额：' + vo.amt + '元！',
+              message: '余额不足！',
             }).then(() => {})
           } else {
             this.$dialog.confirm({
               title: '提示',
-              message: `购彩金额：<a class="red">${amt}</a> 元，确认提交订单！`,
+              message: `预约彩票金额：<a class="red">${amt}</a> 元，确认提交！`,
             }).then((action) => {
               let cp = this.play.cp
               api.lot.issue({ cp }).then(vo => {
