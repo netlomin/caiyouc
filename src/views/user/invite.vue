@@ -71,7 +71,7 @@
     },
     created() {
       api.user.info({}).then(vo => {
-        let url = 'https://7f94b9cd.r15.vip.cpolar.cn/x/#/pages/open/register?'
+        let url = 'https://12f880e9.r11.vip.cpolar.cn/x/#/pages/open/register?'
         this.url = url + 'p=' + vo.passportId
       }).catch(api.catch)
     }
