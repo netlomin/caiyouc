@@ -71,7 +71,7 @@
     },
     created() {
       api.user.info({}).then(vo => {
-        let url = 'https://6m6a2xsh3.neiwangyun.net/x/#/pages/open/register?'
+        let url = 'https://7f94b9cd.r15.vip.cpolar.cn/x/#/pages/open/register?'
         this.url = url + 'p=' + vo.passportId
       }).catch(api.catch)
     }
