@@ -71,7 +71,7 @@
     },
     created() {
       api.user.info({}).then(vo => {
-        let url = 'https://1688.cpolar.cn/x/#/pages/open/register?'
+        let url = 'https://6.lmwin.top/x/#/pages/open/register?'
         this.url = url + 'p=' + vo.passportId
       }).catch(api.catch)
     }
