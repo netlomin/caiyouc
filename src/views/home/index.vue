@@ -33,7 +33,7 @@
         :autoplay="10000"
         :show-indicators="false"
       >
-        <van-swipe-item>请选择附近熟悉的实体‘彩’站，不要轻信网络‘彩’站！</van-swipe-item>
+        <van-swipe-item>请选择附近熟悉的实体‘彩’站，不要轻信网络‘彩’店！</van-swipe-item>
         <van-swipe-item>出票后应认真查验彩票，发现错票及时联系彩站处理。</van-swipe-item>
       </van-swipe>
     </van-notice-bar>
