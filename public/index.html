@@ -23,7 +23,6 @@
     <link rel="apple-touch-icon-precomposed" href="static/img/logo.png" />
     <!-- 高光效果图标 -->
     <link rel="apple-touch-icon" href="static/img/logo.png" />
-    <link rel="manifest" href="static/web.webmanifest">
     <% for (var i in htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
     <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="preload" as="style" />
     <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
