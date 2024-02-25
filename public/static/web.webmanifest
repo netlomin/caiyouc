@@ -1,0 +1,36 @@
+{
+    "short_name": "彩乐圈",
+    "start_url": "/c/",
+    "scope":"/c/",
+    "display": "fullscreen",
+	"orientation": "portrait",
+    "theme_color": "#E85858",
+    "background_color": "#E85858",
+    "icons": [
+        {
+            "src": "icons/c-188.png",
+			"sizes": "188x188",
+            "type": "image/png"
+        },
+		{
+		    "src": "icons/c-168.png",
+			"sizes": "168x168",
+		    "type": "image/png"
+		},
+		{
+		    "src": "icons/c-88.png",
+			"sizes": "88x88",
+		    "type": "image/png"
+		},
+		{
+		    "src": "icons/c-68.png",
+			"sizes": "68x68",
+		    "type": "image/png"
+		},
+		{
+		    "src": "icons/c-48.png",
+			"sizes": "48x48",
+		    "type": "image/png"
+		}
+    ]
+}
